@@ -1,3 +1,5 @@
+"use strict";
+
 //string conversion
 //Mal por llamar cadena a un booleano
 let cadena = true;
