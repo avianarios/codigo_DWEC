@@ -17,13 +17,14 @@ if ( anyos>18 ){
     }
 }
 
+
+/*? operator works as an if. It is shorter and appealing, but less readable.
+ Be carefull, it's not very intuitive when nesting*/
+
 //Equivalent to the first if
-//? operator works as an if. Be carefull, it's not very intuitive when nesting
 ( anyos>18 ) ? console.log("eres mayor de edad") : console.log("eres menor de edad");
 
-
 //Equivalent to the second if
-//? operator works as an if. Be carefull, it's not very intuitive when nesting
 ( anyos>18 ) ? console.log("eres mayor de edad") :
     (anyos<10) ? console.log("te falta mucho aún") :
         console.log("Ya te falta menos");

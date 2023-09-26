@@ -56,3 +56,32 @@ c=n--;  //first n value is returned and then n value is decremented
 console.log(c);
 c=--n;  //first n value is decremented and then n value is returned
 console.log(c);
+
+
+//logical operators
+let a=d=true,
+    b=c=false;  //remember that 0, empty string, Null or NaN are false, 1 or higher are true
+
+//or operator ||
+console.log ( a || b, b || c );
+console.log( a || b || c); //should any operand be true, evaluation is stopped and true is returned
+if ( a || b ){
+    console.log("alguno de los dos es verdadero");
+}else{
+    console.log("alguno de los dos es falso");
+}
+
+//or processes values until first true valor is found, returning the argument and leaving the unexplored
+console.log (a||b||c||"ninguno");
+//should c be false, texto would shown up
+c || console.log("texto");
+
+//and operator (&&)
+console.log ( a && b, b && c );
+console.log( a && b && c);  //should any operand be false, evaluation is stopped and false is returned
+(a&&d) ? console.log("ambos son verdaderos") : console.log("ambos son falsos");
+a && console.log("texto");
+(a>0) && console.log("a es mayor que cero");    //no recomendable: poco legible
+
+//not operator (!)
+console.log(!(c||d)&&(a||b));
