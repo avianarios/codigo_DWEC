@@ -9,6 +9,17 @@
 //las variables se deben definir con let. var está anticuado
 //Es recomendable que los nombres de las variables sean lo más descriptivos posible
 
+let numero=5,
+    numero2=6;
+let userName="pepe";  //stick to your decisions. be consistent
+let userAdress="calle pez";
+let clientSurname; //NOOOOOOOOOOOOOOOOOO
+const ROJO="#FF0000"; //constante cuyo valor no cambiará nunca
+const azul; //constantes cuyo valor no cambie nunca, pero aún no lo sé, lo calcularé
+
+
+let numero3=numero4=7; //no recomendada
+console.log("el numero 3 vale", numero3);
 
 //Ejemplos de mala sintaxis y malas prácticas. Funciona, pero no está recomendado
 let numero1=5, numero2=10, cadena="hola don pepito";
