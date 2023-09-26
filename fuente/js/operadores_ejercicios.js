@@ -44,28 +44,14 @@ null == "\n0\n"
 null === +"\n0\n"
 
 
-What's the result of OR?
-What is the code below going to output?
+//What is the code below going to output?
 alert( null || 2 || undefined );
-
-What's the result of OR'ed alerts?
-What will the code below output?
 alert( alert(1) || 2 || alert(3) );
-
-What is the result of AND?
-What is this code going to show?
 alert( 1 && null && 2 );
-
-What is the result of AND'ed alerts?
-What will this code show?
 alert( alert(1) && alert(2) );
-
-The result of OR AND OR
-What will the result be?
 alert( null || 2 && 3 || 4 );
 
-
-Check the range between
+/*Check the range between
 Write an if condition to check that age is between 14 and 90 inclusively.
 “Inclusively” means that age can reach the edges 14 or 90.
 
@@ -92,4 +78,4 @@ The password is checked as follows:
     For an empty string or cancelled input, show “Canceled”
 
 Please use nested if blocks. Mind the overall readability of the code.
-Hint: passing an empty input to a prompt returns an empty string ''. Pressing ESC during a prompt returns null.
+Hint: passing an empty input to a prompt returns an empty string ''. Pressing ESC during a prompt returns null.*/
