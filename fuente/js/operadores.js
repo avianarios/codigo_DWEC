@@ -68,7 +68,7 @@ console.log( a || b || c); //should any operand be true, evaluation is stopped a
 if ( a || b ){
     console.log("alguno de los dos es verdadero");
 }else{
-    console.log("alguno de los dos es falso");
+    console.log("los dos son falsos");
 }
 
 //or processes values until first true valor is found, returning the argument and leaving the unexplored
@@ -79,9 +79,20 @@ c || console.log("texto");
 //and operator (&&)
 console.log ( a && b, b && c );
 console.log( a && b && c);  //should any operand be false, evaluation is stopped and false is returned
-(a&&d) ? console.log("ambos son verdaderos") : console.log("ambos son falsos");
+(a&&d) ? console.log("ambos son verdaderos") : console.log("alguno, o ambos, son falsos");
 a && console.log("texto");
 (a>0) && console.log("a es mayor que cero");    //no recomendable: poco legible
 
 //not operator (!)
 console.log(!(c||d)&&(a||b));
+
+
+//nulish operator
+//?? returns the first argument that is not null nor undefined
+// || do not distinguish, 0, empty string "", and null/undefined, they are all "false" values
+// when using with ?? or ||, parenthesis must be used
+let height = 0; // altura cero
+
+//useful to assing default values to variables
+console.log(height || 100); 
+console.log(height ?? 100); 
