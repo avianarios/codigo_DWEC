@@ -47,3 +47,16 @@ Make two variants of checkAge:
 
 //Write a function min(a,b) which returns the least of two numbers a and b.
 //Write a function pow(x,n) that returns x in power n. Or, in other words, multiplies x by itself n times and returns the result. Create a web-page that prompts for x and n, and then shows the result of pow(x,n).
+
+
+//Replace Function Expressions with arrow functions in the code below:
+function ask(question, yes, no) {
+  if (confirm(question)) yes();
+  else no();
+}
+
+ask(
+  "Do you agree?",
+  function() { alert("You agreed."); },
+  function() { alert("You canceled the execution."); }
+);

@@ -69,7 +69,7 @@ function compruebaEdad(edad) {
     }
   }
 
-function consultaEdad(nombre)) {
+function consultaEdad(nombre) {
     if ( !compruebaEdad(usuario.edad) ) {
       return;       //exits the function returning "undefined". possible but not recommended. Better if, else
     }
@@ -85,3 +85,126 @@ function consultaEdad(nombre)) {
 }
 
 consultaEdad(usuario.nombre);
+
+
+////////////FUNCTIONS AS EXPRESSIONS////////////////
+//a function can be seen as an expression. 
+let showMessage = function(){
+  console.log("hola");
+};
+showMessage();
+
+
+//as a function can be assigned to a variable, it can be copied
+let sayHi=function sayHi() {
+  console.log( "Hello" );
+};  //semicolon at the end. It's an expression assigned to a variable
+let func=sayHi;  //no parenthesis when assigning, they are variables
+func(); 
+sayHi(); 
+
+
+//It can't be used in code until it's created
+//traditional functions can be used anywhere even in code declared before it was created
+
+
+///////////CALLBACK FUNCTIONS (funciones de retorno)//////////////
+function ask(question, yes, no) {
+  if (confirm(question)) yes()  //confirm shows up a window asking accept or cancel
+  else no();
+}
+
+//showOk and showCancel are called callback functions
+function showOk() {
+  console.log( "You agreed." );
+}
+
+function showCancel() {
+  console.log( "You canceled the execution." );
+}
+
+// usage: functions showOk, showCancel are passed as arguments to ask
+ask("Do you agree?", showOk, showCancel);
+
+
+
+//Another way to express the last code (not recommended tough)
+function pregunta(question, yes, no) {
+  if (confirm(question)) yes()  //confirm shows up a window asking accept or cancel
+  else no();
+}
+
+pregunta(
+  "Agree?",
+  function() {console.log("estás de acuerdo");},
+  function () { console.log ("no estás de acuerdo");}
+);
+
+
+//difference num 1 between function declaration and function expressions
+//Function expressions (expresión de función) can't be used in code until the point they are created
+//Function declaration (declaración de función) can be used anywhere even in code declared before it was created
+saluda("pepe");
+function saluda(nombre){
+  console.log("hola "+nombre);
+}
+
+saluda("pepe");
+let diHola=function(nombre){
+  console.log ("hola "+nombre);
+};
+
+
+//difference num 2 between function declaration and function expressions
+//when using strict mode...
+//function expressions (expresión de función) can be used even outside the scope they were declared at
+//function declaration (declaración de función) can only be used within the scope they were declared at
+"use strict"
+if (1){
+  function saluda(nombre){
+    console.log("hola "+nombre);
+  }
+}else{
+  function despidete(nombre){
+    console.log("adiós "+nombre);
+  }
+}
+saluda("pepe");
+
+
+
+"use strict";
+//this is the key. I define the variable outside the scope and, assign to the function inside
+let saluda, despidete2;
+if (1){
+  saluda=function(nombre){
+    console.log("hola "+nombre);
+  }
+}else{
+  despidete2=function(nombre){
+    console.log("adiós "+nombre);
+  }
+}
+
+saluda("pepe");
+
+
+////////////ARROW FUNCTIONS//////////
+//similar to function expressions, but specifying the returning value
+let suma=(a,b) => a+b;
+let saluda=(nombre)=> console.log("yo te saludo "+nombre);
+let despidete=()=>console.log("adiós");
+
+let edad=prompt("¿cuál es tu edad?");
+let vasPreso=(edad<=18) ?
+  () => console.log("vas preso") :
+  () => console.log("al correccional");
+
+vasPreso(12);
+
+//for multiline functions, curly brace and return statement must be used
+let resta=(a,b)=>{
+  let resultado=a-b;
+  return (resultado); //could've been done in a single line, but for demonstration purposes
+}
+console.log (resta(4,2));

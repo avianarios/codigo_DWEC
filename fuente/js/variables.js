@@ -40,3 +40,25 @@ let numero6=4;
 let numero7=5;
 let asignaturas=["Desarrollo web en entorno cliente", "Diseño de interfaces web"];  //matriz
 let persona= {nombre:"procopio", apellido: "Maximus"};  //objeto
+
+
+"use strict";
+
+let numero=5,
+    numero2=6,
+    numero3=6.2;
+let userName="pepe";  //stick to your decisions. be consistent
+let userAdress='calle pez';
+let clientSurname; //NOOOOOOOOOOOOOOOOOO
+const ROJO="#FF0000"; //constante cuyo valor no cambiará nunca
+const azul=""; //constantes cuyo valor no cambie nunca, pero aún no lo sé, lo calcularé
+let persona= {nombre:"procopio", apellido: "Maximus"};  //objeto
+let matriz=["rojo","verde","azul"];
+let z;
+
+console.log(z);
+let numero5=numero4=7; //no recomendada
+console.log ("el numero 3 vale", numero3);
+console.log ('esto es un texto');
+console.log (`La variable userName vale....\t ${userName}\n`);
+console.log (persona.nombre, matriz[2]);
