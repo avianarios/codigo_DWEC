@@ -1,4 +1,5 @@
 //while
+//code inside the loop is executed only if the condition is true
 let i = 0;
 while (i < 3) {
   console.log( i++ ); //it outputs i value and then increment it
@@ -14,11 +15,20 @@ while (k) { //elegant way to write k>0
   console.log( k-- ); 
 }
 
+while (1){ //infinite loop
+  //something
+}
+
 //do...while
+//Code inside the loop is executed, at least, 1 time before checking condition
 let l = 0;
 do {
   console.log( l++ );
 } while (l <= 3);
+
+do{
+  //something
+} while (1);  //infinite loop
 
 //for
 let asignaturas=["Desarrollo web en entorno cliente",
@@ -42,7 +52,6 @@ for (;;){
 
 //you can use break to exit the loop, while it is not recommended. 
 //The best way to leave it is the condition
-
 let suma=0;
 //bad coding
 while (1){  //will repeat forever, 
@@ -58,7 +67,7 @@ while (suma<5){
 
 //much better
 for (suma=0;suma<5;suma++);
-console.log(suma);
+
 
 //continue will finish the actual iteration and move on to the next one
 for (i = 0; i < 10; i++) {
@@ -76,3 +85,17 @@ for (i = 0; i < 10; i++) {
 //break/continue can't be used with ?
 i=0;
 (i<10) ? i++ : continue;
+
+
+//break only stops one loop so, in order to stop two or more, labels have to be used
+salida: for (let i = 0; i < 3; i++) {
+  for (let j = 0; j < 3; j++) {
+
+    let input = prompt(`Value at coords (${i},${j})`, '');
+
+    // if an empty string or canceled, then break out of both loops
+    if (!input) break salida; 
+
+    console.log(`you have chosen ${i}${j}`);
+  }
+}
