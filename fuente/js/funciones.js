@@ -87,6 +87,28 @@ function consultaEdad(nombre) {
 consultaEdad(usuario.nombre);
 
 
+
+//////another example//////
+let usuario={nombre:"perico", edad:25};
+function compruebaMayoriaEdad(usuario){
+  return (usuario.edad>=18);
+  //(usuario.edad>=18)?return true : return false;
+  /*if (usuario.edad>=18){
+    return true;
+  }else{
+    return false;
+  }*/
+}
+
+function garantizaAcceso(usuario){
+   if (compruebaMayoriaEdad(usuario)){
+    console.log(`acceso garantizado a ${usuario.nombre}`);
+  }else{
+    console.log(`acceso prohibido a ${usuario.nombre}`);
+  }
+}
+
+
 ////////////FUNCTIONS AS EXPRESSIONS////////////////
 //a function can be seen as an expression. 
 let showMessage = function(){
