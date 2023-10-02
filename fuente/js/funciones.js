@@ -108,6 +108,9 @@ function garantizaAcceso(usuario){
   }
 }
 
+compruebaMayoriaEdad(usuario);
+garantizaAcceso(usuario);
+
 
 ////////////FUNCTIONS AS EXPRESSIONS////////////////
 //a function can be seen as an expression. 
