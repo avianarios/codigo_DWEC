@@ -232,4 +232,10 @@ let resta=(a,b)=>{
   let resultado=a-b;
   return (resultado); //could've been done in a single line, but for demonstration purposes
 }
+
+let suma=(a,b)=>{
+  return (a+b); //could've been done in a single line, but for demonstration purposes
+}
+
 console.log (resta(4,2));
+console.log(suma(4,2));
