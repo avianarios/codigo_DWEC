@@ -40,7 +40,6 @@ for (let i=0; i<nombres.length; i++)
   muestraCliente2(nombres[i]);    //when missing an argument, its default value is used (defined in the function)
 
 
-
 /*It is also possible to provide a function as a default value for a parameter*/
 function muestraCliente3(nombre, apellido=buscaApellido(nombre)) { //default value for arguments
     nombre="el inconfundible "+nombre;
@@ -61,55 +60,34 @@ muestraCliente3("procopio");
 
 ///////////RETURNING VALUES/////////////
 let usuario={nombre:"pepe",edad:"17"};
-function compruebaEdad(edad) {
+function compruebaMayoriaEdad(edad) {
     if (edad >= 18) {
       return true;
     } else {
       return false;
     }
-  }
 
-function consultaEdad(nombre) {
-    if ( !compruebaEdad(usuario.edad) ) {
-      return;       //exits the function returning "undefined". possible but not recommended. Better if, else
-    }
-    console.log("Access granted to "+nombre);
+    //alternative #1 (BEST)
+    //return (usuario.edad>=18);
 
-    /*better code:
-    if ( compruebaEdad(nombre) ) {
-        console.log("Access granted");
-    }else{
-        console.log("Access denied");
-    }
-    */
-}
-
-consultaEdad(usuario.nombre);
-
-
-
-//////another example//////
-let usuario={nombre:"perico", edad:25};
-function compruebaMayoriaEdad(usuario){
-  return (usuario.edad>=18);
-  //(usuario.edad>=18)?return true : return false;
-  /*if (usuario.edad>=18){
-    return true;
-  }else{
-    return false;
-  }*/
+    //alternative #2
+    //(usuario.edad>=18) ? return true : return false;
 }
 
 function garantizaAcceso(usuario){
-   if (compruebaMayoriaEdad(usuario)){
-    console.log(`acceso garantizado a ${usuario.nombre}`);
-  }else{
-    console.log(`acceso prohibido a ${usuario.nombre}`);
-  }
+  if (compruebaMayoriaEdad(usuario)){
+   return(`acceso garantizado a ${usuario.nombre}`);
+ }else{
+   return(`acceso denegado a ${usuario.nombre}`);
+ }
+
+ //alternative
+ /*let accion;
+ compruebaMayoriaEdad(usuario) ? accion="garantizado" : accion="denegado";
+ return (`Acceso a ${usuario.nombre} ${accion}`);*/
 }
 
-compruebaMayoriaEdad(usuario);
-garantizaAcceso(usuario);
+console.log(garantizaAcceso(usuario));
 
 
 ////////////FUNCTIONS AS EXPRESSIONS////////////////
@@ -121,60 +99,33 @@ showMessage();
 
 
 //as a function can be assigned to a variable, it can be copied
-let sayHi=function sayHi() {
-  console.log( "Hello" );
+let diHola=function () {   //no need to specify function name
+  console.log( "Hola" );
 };  //semicolon at the end. It's an expression assigned to a variable
-let func=sayHi;  //no parenthesis when assigning, they are variables
+let func=diHola;  //no parenthesis when assigning, they are variables
 func(); 
-sayHi(); 
+diHola(); 
 
+//Another example
+// program to find the square of a number
+// function is declared inside the variable
+let x = function (num) { return num * num };
+console.log(x(4));
 
-//It can't be used in code until it's created
-//traditional functions can be used anywhere even in code declared before it was created
-
-
-///////////CALLBACK FUNCTIONS (funciones de retorno)//////////////
-function ask(question, yes, no) {
-  if (confirm(question)) yes()  //confirm shows up a window asking accept or cancel
-  else no();
-}
-
-//showOk and showCancel are called callback functions
-function showOk() {
-  console.log( "You agreed." );
-}
-
-function showCancel() {
-  console.log( "You canceled the execution." );
-}
-
-// usage: functions showOk, showCancel are passed as arguments to ask
-ask("Do you agree?", showOk, showCancel);
-
-
-
-//Another way to express the last code (not recommended tough)
-function pregunta(question, yes, no) {
-  if (confirm(question)) yes()  //confirm shows up a window asking accept or cancel
-  else no();
-}
-
-pregunta(
-  "Agree?",
-  function() {console.log("estás de acuerdo");},
-  function () { console.log ("no estás de acuerdo");}
-);
+// function can be used as variable value for other variables
+let y = x(3);
+console.log(y);
 
 
 //difference num 1 between function declaration and function expressions
-//Function expressions (expresión de función) can't be used in code until the point they are created
 //Function declaration (declaración de función) can be used anywhere even in code declared before it was created
-saluda("pepe");
+//Function expressions (expresión de función) can't be used in code until the point they are created
+saluda("Procopio");
 function saluda(nombre){
   console.log("hola "+nombre);
 }
 
-saluda("pepe");
+diHola("Higinio");
 let diHola=function(nombre){
   console.log ("hola "+nombre);
 };
@@ -212,7 +163,6 @@ if (1){
 }
 
 saluda("pepe");
-
 
 ////////////ARROW FUNCTIONS//////////
 //similar to function expressions, but specifying the returning value
