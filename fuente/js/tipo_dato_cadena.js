@@ -49,3 +49,16 @@ if (cad3.indexOf(buscar) != -1){
 
 //return true if found
 console.log (cad3.includes("ed"), cad3.includes("esto no está"));
+//no need for comments...
+console.log(cad3.startsWith("SOME"), cad3.endsWith("hola"));
+
+//getting a substring
+console.log (cad3.slice(2,10));     //returns substring from position 2 to 9
+console.log (cad3.slice(15, cad3.length-10));    //returns substring from position 15 until 11 to the end
+console.log (cad3.slice(25));  //returns substring from position 25 to the end
+console.log (cad3.slice(-10,-5));  //returns substring from position 10 from the right to 5th to the right
+
+//comparing strings
+//lowercase first
+//JavaScript encodes in UTF-16. each character has a numeric code that can be got with str.codePointAt(pos)
+console.log ("texto".localeCompare("texto2"));
