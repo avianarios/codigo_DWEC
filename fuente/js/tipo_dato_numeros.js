@@ -34,7 +34,7 @@ console.log (Math.floor(real), Math.ceil(real), Math.round(real), Math.trunc(rea
 console.log (Math.floor(real2), Math.ceil(real2), Math.round(real2), Math.trunc(real2));
 
 
-//Imprecise calculations
+//IMPRECISE CALCULATIONS
 //Javascript uses IEEE754 DP to storage real numbers: 1 bit for sign, 52 for number and 11 for exponent
 //some numbers don't have enough bits while others have infinite decimals
 
@@ -42,7 +42,9 @@ console.log (1e500); //not enough room for storing such a big number. Returns In
 
 let sum = 0.1 + 0.2;  //0.1 and 0.2 can't be stored precisely
 console.log ( sum == 0.3 ); // false
-console.log( sum.toFixed(2)==0.3 ); // true
+
+//toFixed rounds the result using n digits after the point and returns it as a string
+console.log( sum.toFixed(2)==0.3 ); // true 
 
 console.log(9999999999999999);  //returns 10000000000000000
 
@@ -56,7 +58,7 @@ console.log (isNaN(decimal),
             isNaN("Pepito piscinas"));
 
 //Math.isNaN is a more strict version of isNaN(argument). 
-//It checks if its argument belongs to number, but it doesn't convert to number
+//It checks if its argument belongs to number, but it doesn't convert it to number
 console.log (Number.isNaN(decimal),
             Number.isNaN(Infinity),
             Number.isNaN(NaN),
@@ -97,4 +99,10 @@ console.log(parseInt('100px'), // 100
 
 //
 
+//returns a number between 0 and 1 (not included)
+console.log(Math.random());
 
+//Returns maximum and minimum number and a number raised to another
+console.log (Math.max(3, 7,-10, 1.2));
+console.log (Math.min(1,3,12, 0.2));
+console.log (Math.pow(2,5));

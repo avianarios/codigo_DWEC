@@ -172,10 +172,10 @@ let despidete=()=>console.log("adiós");
 
 let edad=prompt("¿cuál es tu edad?");
 let vasPreso=(edad<=18) ?
-  () => console.log("vas preso") :
+  () => console.log("vas preso") :  //no arguments, so empty parenthesis must be present
   () => console.log("al correccional");
 
-vasPreso(12);
+vasPreso(edad);
 
 //for multiline functions, curly brace and return statement must be used
 let resta=(a,b)=>{
