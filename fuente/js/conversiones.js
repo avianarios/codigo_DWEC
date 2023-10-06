@@ -9,7 +9,8 @@ cadena = String(cadena) // now value is a string "true"
 console.log (typeof cadena); // string
 
 //Integer conversion
-console.log ( "4"/"2" );
+console.log ( "4"/"2" );    //there's no "/" operator working with strings, so it is converted into integers
+console.log (12+"2"); //string concat has preference over integer addition, so the result is a string
 let cadena2="123";
 
 console.log (typeof(cadena2));
