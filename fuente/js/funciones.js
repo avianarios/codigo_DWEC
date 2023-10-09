@@ -183,9 +183,13 @@ let resta=(a,b)=>{
   return (resultado); //could've been done in a single line, but for demonstration purposes
 }
 
+//curly brace are not needed
 let suma=(a,b)=>{
   return (a+b); //could've been done in a single line, but for demonstration purposes
 }
+
+//same as before but more concise
+let suma=(a,b)=>(a+b);
 
 console.log (resta(4,2));
 console.log(suma(4,2));
