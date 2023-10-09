@@ -53,15 +53,15 @@ console.log(matrizFrutas.toString());
 
 /////////MULTIDIMENSIONAL ARRAYS///////
 let matrizComida=[
-    ["chirimoya", "mango", "aguacate"],
-    ["tomate", "pepino", "pimiento"],
-    ["leche", "yougur", "requesón"]
+    ["chirimoya", "mango", "aguacate", "guayaba"],
+    ["tomate", "pepino", "pimiento", "berenjena"],
+    ["leche", "yougur", "requesón", "queso"]
 ];
 
 let matrizComida2=[
-    ["chirimoya", "mango", "aguacate"],
-    ["tomate", "pepino", "pimiento"],
-    ["leche", "yougur", "requesón"]
+    ["chirimoya", "mango", "aguacate", "guayaba"],
+    ["tomate", "pepino", "pimiento", "berenjena"],
+    ["leche", "yougur", "requesón", "queso"]
 ];
 
 
@@ -84,11 +84,76 @@ console.log (matrizComida);
 //both arrays are different objects, so == is always false.
 //you have to compare them item by item
 console.log (matrizComida==matrizAlimentos);    //both of them point to the same memory area
-console.log (matrizComida==matrizComida2);      //each one has his own memory area
+console.log (matrizComida==matrizComida2);      //both have the same elements, but are different objects, meaning each one has his own memory area
+
+//SLICE returns subarray, but without changing original array
+matrizFrutas.slice(1,2);   //starting from position 1, remove 2 elements
+console.log (matrizFrutas);
+let a=matrizComida[1].slice(1);  //remove from the 1st until the last element of first subarray
+console.log (a);
+console.log (matrizComida);
 
 
-//remove elements
+//SPLICE returns subarray, but removing it from original array
 matrizFrutas.splice(1,2);   //starting from position 1, remove 2 elements
 console.log (matrizFrutas);
-matrizComida[1].splice(1,1);
+let a=matrizComida[1].splice(1);  //remove from the 1st until the last element of first subarray
+console.log (a);
 console.log (matrizComida);
+matrizComida[2].splice(1,3,"queso", "requesón", "yogur");   //replaces elements 1 to 3 with the following values
+matrizComida[2].splice(1,0,"kéfir", "flan");   //inserts 2 elements at position 1
+console.log (matrizComida);
+
+//CONCAT creates a new array that includes values from other arrays and additional items.
+console.log(matrizFrutas.concat(matrizComida[1],"otra fruta"));
+
+//FOREACH method allows to run a function for every element of the array.
+matrizFrutas.forEach((elemento,indice,matriz) =>{
+    console.log (`El elemento ${elemento} está en la posición ${indice} de la matriz \'${matriz}\'`);
+});
+
+matrizComida[1].forEach(comida=>console.log(comida));
+
+/*Less elegant and slower alternative
+for (let i=0; i<matrizComida[1].lenght; i++){
+    console.log (matrizComida[1][i]);
+}
+*/
+
+//Get position of an element in an array
+console.log (matrizFrutas.indexOf("mango"), matrizFrutas.indexOf("esta no existe"));
+
+//returns if an element exists in an array
+console.log (matrizFrutas.includes("mango"), matrizFrutas.includes("esta no existe"));
+
+//get the position of the last element (in case they are repeated)
+console.log (matrizFrutas.lastIndexOf("mango"));
+
+
+let inventario=[
+    { nombre: "manzanas", cantidad: 2 },
+    { nombre: "plátanos", cantidad: 0 },
+    { nombre: "cerezas", cantidad: 5 },
+  ];
+
+//returns the index of the firts element that matches, -1 otherwise
+console.log (matrizFrutas.findIndex(elemento=>elemento=="aguacate"));
+
+//returns the index of the last element that matches, -1 otherwise
+console.log (matrizFrutas.findLastIndex(elemento=>elemento=="aguacate"));
+
+//returns the first element that matches, undefined otherwise
+console.log (matrizFrutas.find(elemento=>elemento=="aguacate"));
+
+//find object and get one of its properties
+let elemento=inventario.find(elemento=>elemento.nombre=="manzanas");
+(elemento!==undefined) ? 
+    console.log (`he encontrado ${elemento.cantidad} unidades`):
+    console.log ("no hay");
+
+//Alternative to previous line: define function outside
+let esFruta=(fruta)=> fruta.nombre=="cerezas"; //arrow function
+console.log (inventario.find(esFruta));
+
+//Filter returns an array of all matching elements
+let elementos = inventario.filter(item => item.cantidad < 3);
