@@ -155,5 +155,18 @@ let elemento=inventario.find(elemento=>elemento.nombre=="manzanas");
 let esFruta=(fruta)=> fruta.nombre=="cerezas"; //arrow function
 console.log (inventario.find(esFruta));
 
-//Filter returns an array of all matching elements
+//1.- Filter returns an array of all matching elements
 let elementos = inventario.filter(item => item.cantidad < 3);
+console.log (elementos);
+//2.- Iterate over results
+let listado = (elemento) => 
+    console.log (`El elemento ${elemento.nombre} tiene ${elemento.cantidad} unidades`);
+elementos.forEach(listado);
+
+//map creates a new array as the result to apply some function to an existing one
+let numeros=[7,13,2,5];
+
+//map creates a new array as the result to apply some function to an existing one
+numeros.map(x=>x*2);
+//sort returns a sorted array
+numeros.sort();  //doesn't work properly with numeros. It converts to strings
