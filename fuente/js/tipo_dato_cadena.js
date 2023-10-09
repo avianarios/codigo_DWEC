@@ -58,6 +58,9 @@ console.log (cad3.slice(15, cad3.length-10));    //returns substring from positi
 console.log (cad3.slice(25));  //returns substring from position 25 to the end
 console.log (cad3.slice(-10,-5));  //returns substring from position 10 from the right to 5th to the right
 
+//returns an array of substrings separated by the argument. It doesn't change original
+console.log (cad3.splice(" "));
+
 //comparing strings
 //lowercase first
 //JavaScript encodes in UTF-16. each character has a numeric code that can be got with str.codePointAt(pos)
