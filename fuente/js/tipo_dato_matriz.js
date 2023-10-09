@@ -19,7 +19,7 @@ console.log (matrizFrutas[matrizFrutas.at(-1)]);    //may not work on old browse
 
 ////////////ITERATE/////////////
 //option #1. Needs to define a function
-let funcion = (elemento, indice) => console.log (elemento);
+let funcion = (elemento) => console.log (elemento);
 matrizFrutas.forEach(funcion);
 
 //option #2
@@ -32,6 +32,22 @@ for (let i=0; i<matrizFrutas.length; i++){
     console.log (matrizFrutas[i]);
 }
 
+
+//Iterate over the bidimensional array
+//option #1
+let funcion2=(elemento)=>{
+    for (let subelemento of elemento){
+      console.log (subelemento);
+    } 
+  }
+  matrizComidas.forEach(funcion2);
+
+//option #2
+matrizComidas.forEach(fila=>{
+    fila.forEach(i=>{
+        console.log(i);
+      });
+    });
 
 ///////////STACKS AND QUEUES//////////
 //arrays can act as stacks, queues and, of course, arrays
@@ -89,8 +105,8 @@ console.log (matrizComida==matrizComida2);      //both have the same elements, b
 //SLICE returns subarray, but without changing original array
 matrizFrutas.slice(1,2);   //starting from position 1, remove 2 elements
 console.log (matrizFrutas);
-let a=matrizComida[1].slice(1);  //remove from the 1st until the last element of first subarray
-console.log (a);
+let b=matrizComida[1].slice(1);  //remove from the 1st until the last element of first subarray
+console.log (b);
 console.log (matrizComida);
 
 
