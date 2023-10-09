@@ -168,5 +168,21 @@ let numeros=[7,13,2,5];
 
 //map creates a new array as the result to apply some function to an existing one
 numeros.map(x=>x*2);
-//sort returns a sorted array
-numeros.sort();  //doesn't work properly with numeros. It converts to strings
+//sort converts to strings before sorting, so 15<2 (as 1<2)
+numeros.sort();
+
+//In order to sort numbers properly, a function has to be provided
+let ordenaNumeros=(a,b)=>{
+    /* it doesn't work. ? does not support return statement
+    (a>b) ? (return 1) :
+            (a==b) ? return 0 :
+            return -1;*/
+    if (a>b){
+      return 1;
+    }else if (a==b){
+      return 0;
+    }return -1;
+}
+
+console.log(numeros.sort(ordenaNumeros));
+
