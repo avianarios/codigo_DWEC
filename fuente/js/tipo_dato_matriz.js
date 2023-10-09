@@ -155,7 +155,7 @@ let elemento=inventario.find(elemento=>elemento.nombre=="manzanas");
 let esFruta=(fruta)=> fruta.nombre=="cerezas"; //arrow function
 console.log (inventario.find(esFruta));
 
-//1.- Filter returns an array of all matching elements
+//1.- FILTER returns an array of all matching elements
 let elementos = inventario.filter(item => item.cantidad < 3);
 console.log (elementos);
 //2.- Iterate over results
@@ -163,17 +163,20 @@ let listado = (elemento) =>
     console.log (`El elemento ${elemento.nombre} tiene ${elemento.cantidad} unidades`);
 elementos.forEach(listado);
 
-//map creates a new array as the result to apply some function to an existing one
+//MAP creates a new array as the result to apply some function to an existing one
 let numeros=[7,13,2,5];
-
-//map creates a new array as the result to apply some function to an existing one
 numeros.map(x=>x*2);
-//sort converts to strings before sorting, so 15<2 (as 1<2)
+
+//SORT converts to strings before sorting, so 15<2 (as 1<2)
 numeros.sort();
 
 //In order to sort numbers properly, a function has to be provided
+//numbers a,b are sorted depending on what is returned by this function:
+//   <0, then a is ordered first
+//   0, then there is no change between a and b
+//   >0 ,then b is ordered first
 let ordenaNumeros=(a,b)=>{
-    /* it doesn't work. ? does not support return statement
+    /*it can't be expressed with ?, as it does not support return statement
     (a>b) ? (return 1) :
             (a==b) ? return 0 :
             return -1;*/
@@ -186,3 +189,8 @@ let ordenaNumeros=(a,b)=>{
 
 console.log(numeros.sort(ordenaNumeros));
 
+//a shorter version
+numeros.sort((a,b)=>a-b);
+
+//REVERSE do as its name suggests in an array
+numeros.reverse();
