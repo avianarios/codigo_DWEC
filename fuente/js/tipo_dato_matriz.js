@@ -183,8 +183,34 @@ elementos.forEach(listado);
 let numeros=[7,13,2,5];
 numeros.map(x=>x*2);
 
+//REVERSE do as its name suggests in an array. it modifies the array
+numeros.reverse();
+console.log (numeros);
+
+
+//JOIN does the opposite to string.split. It returns a string made of concatenating the elements of an array
+let nombres=['Purificación', 'Procopio', 'Patrocinio', 'Apolinar'];
+let cad=nombres.join();
+console.log (cad,typeof(cad));
+
+//REDUCE
+//When we need to iterate over an array – we can use forEach, for or for..of.
+//When we need to iterate and return the data for each element – we can use map.
+//When we need to iterate and return a single value calculated by using the whole array, we can use reduce
+//if numeros is empty add a zero, => sum + current, 0);
+let result = numeros.reduce((sum, current) => sum + current);
+console.log( result );
+
 //SORT converts to strings before sorting, so 15<2 (as 1<2)
+//it changes the original array and returns it
 numeros.sort();
+
+let numeros2=Array.from(numeros);
+//SORT converts to strings before sorting, so 15<2 (as 1<2)
+//it changes the original array and returns it
+numeros2.sort();
+console.log (numeros2)
+numeros2=Array.from(numeros);   //copy numeros values into numeros2. If we use =, a reference is created
 
 //In order to sort numbers properly, a function has to be provided
 //numbers a,b are sorted depending on what is returned by this function:
@@ -202,11 +228,13 @@ let ordenaNumeros=(a,b)=>{
       return 0;
     }return -1;
 }
+console.log(numeros2.sort(ordenaNumeros));
+console.log (numeros2, numeros);
+numeros2=Array.from(numeros);
 
-console.log(numeros.sort(ordenaNumeros));
-
-//a shorter version
+//a shorter adn much more elegant version
 numeros.sort((a,b)=>a-b);
 
-//REVERSE do as its name suggests in an array
-numeros.reverse();
+//Array.isArray() is the only way to know if something is an array
+console.log (typeof(numeros));  //object
+console.log(Array.isArray(numeros));  //true
