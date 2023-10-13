@@ -52,16 +52,19 @@ matrizComidas.forEach(fila=>{
 ///////////STACKS AND QUEUES//////////
 //arrays can act as stacks, queues and, of course, arrays
 //array as stack: pop and push
-console.log(matrizFrutas.pop()); // remove "aguacate" and show matrizFrutas
+matrizFrutas.pop(); // remove "aguacate" from the top position (the end)
 console.log (matrizFrutas);
-matrizFrutas.push ("piña");
+matrizFrutas.push ("piña"); //adds "piña" to the top position (the end)
 console.log (matrizFrutas);
 
-//array as a queue: shift and unshift
-matrizFrutas.shift();
+//array as a queue: shift and push
+matrizFrutas.shift();   //gets an element fro the beginning
 console.log(matrizFrutas);
+matrizFrutas.push ("piña"); //adds "piña" to the last position
+console.log(matrizFrutas);
+
+//unshift adds an element to the beginning of array
 matrizFrutas.unshift("guayaba");
-console.log(matrizFrutas);
 
 ////////CONVERSION TO STRING//////////
 console.log(matrizFrutas.toString());
@@ -96,11 +99,11 @@ matrizAlimentos[2][2]="puerro";
 console.log (matrizComida);
 
 
-//Arrays can't be compared using == nor ===
+//Arrays comparison with == or === is tricky
 //both arrays are different objects, so == is always false.
 //you have to compare them item by item
-console.log (matrizComida==matrizAlimentos);    //both of them point to the same memory area
-console.log (matrizComida==matrizComida2);      //both have the same elements, but are different objects, meaning each one has his own memory area
+console.log (matrizComida==matrizAlimentos);    //True. both of them point to the same memory area
+console.log (matrizComida==matrizComida2);      //False. both have the same elements, but are different objects, meaning each one has his own memory area
 
 //SLICE returns subarray, but without changing original array
 matrizFrutas.slice(1,2);   //starting from position 1, remove 2 elements
@@ -153,13 +156,13 @@ let inventario=[
   ];
 
 //returns the index of the firts element that matches, -1 otherwise
-console.log (matrizFrutas.findIndex(elemento=>elemento=="aguacate"));
+console.log (matrizFrutas.findIndex(elemento=>elemento.nombre=="aguacate"));
 
 //returns the index of the last element that matches, -1 otherwise
-console.log (matrizFrutas.findLastIndex(elemento=>elemento=="aguacate"));
+console.log (matrizFrutas.findLastIndex(elemento=>elemento.nombre=="aguacate"));
 
 //returns the first element that matches, undefined otherwise
-console.log (matrizFrutas.find(elemento=>elemento=="aguacate"));
+console.log (matrizFrutas.find(elemento=>elemento.nombre=="aguacate"));
 
 //find object and get one of its properties
 let elemento=inventario.find(elemento=>elemento.nombre=="manzanas");
