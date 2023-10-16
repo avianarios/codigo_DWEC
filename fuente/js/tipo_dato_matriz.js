@@ -181,6 +181,18 @@ console.log (inventario.find(esFruta));
 //1.- FILTER returns an array of all matching elements
 let elementos = inventario.filter(item => item.cantidad < 3);
 console.log (elementos);
+
+let razasAnimales=[
+    {animal: "perro", raza:"salchicha", pacientes:5},
+    {animal: "perro", raza:"chihuahua", pacientes:7},
+    {animal: "gato", raza:"angora", pacientes:2},
+    {animal: "gato", raza:"romano", pacientes:1},
+  ];
+razasAnimales.filter(elemento=>(elemento.animal=="perro") && (elemento.pacientes>6));
+
+let razas=["perro 1", "perro 2", "gato 1"];
+let perros2=razas.filter(elemento=>elemento.startsWith("perro"));
+
 //2.- Iterate over results
 let listado = (elemento) => 
     console.log (`El elemento ${elemento.nombre} tiene ${elemento.cantidad} unidades`);
@@ -193,20 +205,6 @@ numeros.map(x=>x*2);
 let razasPerro=["salchicha", "podenco", "chucho"];
 razasPerro.map(x=>"perro "+x);
 
-//REVERSE do as its name suggests in an array. it modifies the array
-numeros.reverse();
-console.log (numeros);
-
-
-//JOIN does the opposite to string.split. It returns a string made of concatenating the elements of an array
-let nombres=['Purificación', 'Procopio', 'Patrocinio', 'Apolinar'];
-let cad=nombres.join();
-console.log (cad,typeof(cad));
-
-let razasGato="pelo corto, pelo largo, angora, callejero";
-let matrizRazasGato=razasGato.split(",");
-console.log (matrizRazasGato);
-
 //REDUCE
 //When we need to iterate over an array – we can use forEach, for or for..of.
 //When we need to iterate and return the data for each element – we can use map.
@@ -216,6 +214,15 @@ let result = numeros.reduce((sum, current) => sum + current);
 console.log( result );
 
 console.log(matrizRazasGato.reduce((total, actual)=>total+actual));     //concatenates strings
+
+//JOIN does the opposite to string.split. It returns a string made of concatenating the elements of an array
+let nombres=['Purificación', 'Procopio', 'Patrocinio', 'Apolinar'];
+let cad=nombres.join();
+console.log (cad,typeof(cad));
+
+let razasGato="pelo corto, pelo largo, angora, callejero";
+let matrizRazasGato=razasGato.split(",");
+console.log (matrizRazasGato);
 
 //SORT sorts the original array and returns it
 let numeros2=Array.from(numeros);   //copy numeros values into numeros2. If we use =, a reference is created and both are the same object
@@ -244,6 +251,10 @@ numeros2=Array.from(numeros);
 
 //a shorter adn much more elegant version
 numeros.sort((a,b)=>a-b);
+
+//REVERSE do as its name suggests in an array. it modifies the array
+numeros.reverse();
+console.log (numeros);
 
 //Array.isArray() is the only way to know if something is an array
 console.log (typeof(numeros));  //object

@@ -69,6 +69,22 @@ let objeto3={
     profesion: "fontanero"
 };
 
+//object references and copy
+let aux="hola";
+let aux2=aux;   //aux value is copied into aux2 value. Both point to a different memory location
+
+aux2="adios";   //if I modify aux2, aux still holds its original value
+console.log(aux, aux2);
+
+//when copying objects (array are objects as well), they both point to the same memory location
+let usuario={ nombre:"pepe" };
+let usuario2=usuario;   //usuario2 and usuario point to the same memory location. they are the same object
+let usuario3={ nombre:"pepe" };
+
+usuario.nombre="fede";
+console.log(usuario2.nombre);
+
+//Objects comparison with == or === is tricky
 console.log (objeto1==objeto2); //true. They are both the same object
 console.log (objeto1==objeto3); //false. They are different objects (although they have the same information)
 
