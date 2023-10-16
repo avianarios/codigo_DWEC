@@ -131,6 +131,10 @@ matrizFrutas.forEach((elemento,indice,matriz) =>{
     console.log (`El elemento ${elemento} está en la posición ${indice} de la matriz \'${matriz}\'`);
 });
 
+matrizFrutas.forEach((elemento) =>{
+    console.log (elemento);
+});
+
 matrizComida[1].forEach(comida=>console.log(comida));
 
 /*Less elegant and slower alternative
@@ -186,6 +190,9 @@ elementos.forEach(listado);
 let numeros=[7,13,2,5];
 numeros.map(x=>x*2);
 
+let razasPerro=["salchicha", "podenco", "chucho"];
+razasPerro.map(x=>"perro "+x);
+
 //REVERSE do as its name suggests in an array. it modifies the array
 numeros.reverse();
 console.log (numeros);
@@ -196,6 +203,10 @@ let nombres=['Purificación', 'Procopio', 'Patrocinio', 'Apolinar'];
 let cad=nombres.join();
 console.log (cad,typeof(cad));
 
+let razasGato="pelo corto, pelo largo, angora, callejero";
+let matrizRazasGato=razasGato.split(",");
+console.log (matrizRazasGato);
+
 //REDUCE
 //When we need to iterate over an array – we can use forEach, for or for..of.
 //When we need to iterate and return the data for each element – we can use map.
@@ -204,16 +215,12 @@ console.log (cad,typeof(cad));
 let result = numeros.reduce((sum, current) => sum + current);
 console.log( result );
 
-//SORT converts to strings before sorting, so 15<2 (as 1<2)
-//it changes the original array and returns it
-numeros.sort();
+console.log(matrizRazasGato.reduce((total, actual)=>total+actual));     //concatenates strings
 
-let numeros2=Array.from(numeros);
-//SORT converts to strings before sorting, so 15<2 (as 1<2)
-//it changes the original array and returns it
-numeros2.sort();
-console.log (numeros2)
-numeros2=Array.from(numeros);   //copy numeros values into numeros2. If we use =, a reference is created
+//SORT sorts the original array and returns it
+let numeros2=Array.from(numeros);   //copy numeros values into numeros2. If we use =, a reference is created and both are the same object
+numeros2.sort();    //numeros2 has been ordered converting numbers to strings, so 15<2 as 1<2
+console.log (numeros);
 
 //In order to sort numbers properly, a function has to be provided
 //numbers a,b are sorted depending on what is returned by this function:
@@ -231,8 +238,8 @@ let ordenaNumeros=(a,b)=>{
       return 0;
     }return -1;
 }
-console.log(numeros2.sort(ordenaNumeros));
-console.log (numeros2, numeros);
+numeros2.sort(ordenaNumeros);
+console.log (numeros2, numeros);    //numeros2 has changed
 numeros2=Array.from(numeros);
 
 //a shorter adn much more elegant version
