@@ -103,15 +103,16 @@ let objeto2={
 let objeto4=(Object.assign({}, objeto1, objeto2));  //copy objeto1 and objeto2 into objeto4. Overwrite if exist
 console.log(objeto4);
 
-//nested cloning and copying
+//nested cloning and copying. structuredclone zzzzzz
 objeto1={
     nombre:"pepe",
     profesion: "fontanero",
-    medidas={
-        alto:180,
+    medidas: {
+        altura:180,
         pecho: 100,
         cadera: 80,
         cintura: 100
     };
 };
 
+let objeto2=Object.assign({}, objeto1); //
