@@ -62,3 +62,10 @@ console.log ("el numero 3 vale", numero3);
 console.log ('esto es un texto');
 console.log (`La variable userName vale....\t ${userName}\n`);
 console.log (persona.nombre, matriz[2]);
+
+//variables' value are copied.
+let aux="hola";
+let aux2=aux;   //aux value is copied into aux2 value. Both point to a different memory location
+
+aux2="adios";   //if I modify aux2, aux still holds its original value
+console.log(aux, aux2);
