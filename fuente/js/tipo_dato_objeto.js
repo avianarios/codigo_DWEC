@@ -56,3 +56,46 @@ for (llave in usuario){
     console.log (usuario.llave);  //it doesn't work
     console.log (usuario[llave]);  //it works
 }
+
+//Comparison
+//as it occurs with arrays, two objects can't be compared with ==
+let objeto1=objeto2={
+    nombre:"pepe",
+    profesion: "fontanero"
+};
+
+let objeto3={
+    nombre:"pepe",
+    profesion: "fontanero"
+};
+
+console.log (objeto1==objeto2); //true. They are both the same object
+console.log (objeto1==objeto3); //false. They are different objects (although they have the same information)
+
+//Cloning and copying
+//Object.assign copy one ore more objects into another (to create two different objects with the same values)
+let objeto1={
+    nombre:"pepe",
+    profesion: "fontanero"
+};
+objeto1.edad=33;
+
+let objeto2={
+    nacionalidad:"Española"
+}
+
+let objeto4=(Object.assign({}, objeto1, objeto2));  //copy objeto1 and objeto2 into objeto4. Overwrite if exist
+console.log(objeto4);
+
+//nested cloning and copying
+objeto1={
+    nombre:"pepe",
+    profesion: "fontanero",
+    medidas={
+        alto:180,
+        pecho: 100,
+        cadera: 80,
+        cintura: 100
+    };
+};
+
