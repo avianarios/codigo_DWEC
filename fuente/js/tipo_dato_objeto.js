@@ -88,6 +88,22 @@ console.log(usuario2.nombre);
 console.log (objeto1==objeto2); //true. They are both the same object
 console.log (objeto1==objeto3); //false. They are different objects (although they have the same information)
 
+
+//Adding and removing properties
+persona1={
+    nombre:"pepe",
+    profesion: "fontanero",
+    medidas: {
+        altura:180,
+        pecho: 100,
+    },
+};
+
+persona1.edad=37;
+delete(persona1.medidas);
+console.log (persona1);
+
+
 //Cloning and copying
 //Object.assign copy one ore more objects into another (to create two different objects with the same values)
 let objeto1={
@@ -103,16 +119,147 @@ let objeto2={
 let objeto4=(Object.assign({}, objeto1, objeto2));  //copy objeto1 and objeto2 into objeto4. Overwrite if exist
 console.log(objeto4);
 
-//nested cloning and copying. structuredclone zzzzzz
-objeto1={
+//nested cloning and copying. structuredclone allows objects inside objects to be copied as well
+//should not be used, object inside object would be copied by reference
+persona1={
     nombre:"pepe",
     profesion: "fontanero",
     medidas: {
         altura:180,
         pecho: 100,
-        cadera: 80,
-        cintura: 100
-    };
+    }
 };
 
-let objeto2=Object.assign({}, objeto1); //
+let persona2=Object.assign({}, persona);
+persona2.nombre="juan";
+persona1.medidas.altura=170;
+console.log(persona1, persona2);
+persona2=structuredClone(persona1);   //persona2 is now copied by value, not by reference
+persona1.medidas.altura=200;
+console.log(persona1.medidas.altura, persona2.medidas.altura);
+
+
+
+//THIS usage. Example 1
+usuario={nombre:"pepe"}
+usuario2={nombre:"juan"}
+
+//create a function that makes usage of this (Arrow functions don't work here)
+diHola=function (){
+    console.log(this.nombre);
+}
+
+//assign function to object property
+usuario.saluda=diHola;
+usuario2.saluda=diHola;
+
+usuario.saluda();
+usuario2.saluda();
+
+
+//THIS only works with methods and ref1 is not
+"use strict";
+let persona={
+      nombre:"pepe",
+      ref1: this,
+      ref2(){
+        return this;
+      }
+}
+
+console.log(persona.ref1.nombre);    //doesn't work. This is only for methods
+console.log(persona.ref2().nombre);  //works
+
+/* 
+function creaUsuario(){
+  return {
+      nombre:"pepe",
+      ref:this
+  };
+}    
+let usuario=creaUsuario();
+ console.log (usuario.ref.nombre);*/
+
+
+//Usage of "this"
+persona1={
+    nombre:"pepe",
+    profesion: "fontanero",
+    medidas: {
+        altura:180,
+        pecho: 100,
+    },
+    buenosDias(){
+      console.log (`yo, ${this.nombre}, te doy los buenos días`);
+    }
+};
+
+persona1.edad=37;
+persona1.buenasTardes=function(){
+      console.log (`yo, ${this.nombre}, te doy las buenas tardes`);
+}
+
+persona1.buenasNoches=()=>{     //it doesn't work. It's an arrow function
+      console.log (`yo, ${this.nombre}, te doy las buenas noches`);
+}
+
+delete(persona1.medidas);
+console.log (persona1);
+persona1.buenosDias();
+persona1.buenasTardes();
+persona1.buenasNoches();
+
+//Creating objects with New
+function perro(nombre, raza) {
+    this.nombre = nombre;
+    this.raza = raza;
+}
+
+let perro1=new Perro ("pirata","beagle");
+console.log (perro1);
+
+
+//?. special syntax construct
+//it's been recently added. Allows to return undefined instead of error ir a property doesn't exist.
+//it applies only to declared variables
+let user = {}; // a user without properties
+//console.log(user.address.street); // Throws an error
+
+//could be solved by checking before with ? or &&. Not very elegant
+console.log(user.address ? user.address.street : undefined);
+console.log( user.address && user.address.street && user.address.street.name ); // undefined (no error)
+
+//The optional chaining ?. stops the evaluation if the value before ?. is undefined or null and returns undefined.
+let user = {}; // user has no address
+console.log( user?.address?.street ); // returns undefined (no error)
+
+/* ?. should be used only to check properties that it’s fine for them not to exists.
+Thus, if some object must exist, but a property is optional, then it should be written object.property?.subproperty, but not object?.property?.subproperty
+because, if object happens to be undefined, we’ll see a programming error about it and fix it. Otherwise, if we overuse ?., coding errors can be silenced where not appropriate, and become more difficult to debug.*/
+
+
+//?.() works with methods
+let userAdmin = {
+    isAdmin() {
+      console.log("I am admin");
+    }
+  };
+  
+let userGuest = {};
+userAdmin.isAdmin?.(); // I am admin
+//userGuest.isAdmin(); // throws an error (method doesn't exist)
+userGuest.isAdmin?.(); // nothing happens (although no such method)
+
+
+//?.[] allows to safely read a property from an object that may not exist
+let clave = "nombre";
+
+let personal1 = {
+  nombre: "Felipe"
+};
+
+let personal2 = null;
+
+console.log( personal1?.[clave] ); // Felipe
+//console.log( personal2[clave] ); // throws an error as it doesn't exist
+console.log( personal2?.[clave] ); // undefined
