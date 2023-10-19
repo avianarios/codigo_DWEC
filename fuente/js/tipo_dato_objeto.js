@@ -52,7 +52,7 @@ user=creaUsuario("pepe", 30);
 console.log (user);
 
 //iterating through objects
-for (llave in usuario){
+for (let llave in usuario){
     console.log (usuario.llave);  //it doesn't work
     console.log (usuario[llave]);  //it works
 }

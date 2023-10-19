@@ -209,11 +209,11 @@ razasPerro.map(x=>"perro "+x);
 //When we need to iterate over an array – we can use forEach, for or for..of.
 //When we need to iterate and return the data for each element – we can use map.
 //When we need to iterate and return a single value calculated by using the whole array, we can use reduce
-//if numeros is empty add a zero, => sum + current, 0);
+//zero or empty brackets need to be added as 2nd parameter of reduce when using an empty array. It is the starting value;
 let result = numeros.reduce((sum, current) => sum + current);
 console.log( result );
 
-console.log(matrizRazasGato.reduce((total, actual)=>total+actual));     //concatenates strings
+console.log(numeros.reduce((total, actual)=>total+actual));     //concatenates strings
 
 //JOIN does the opposite to string.split. It returns a string made of concatenating the elements of an array
 let nombres=['Purificación', 'Procopio', 'Patrocinio', 'Apolinar'];
