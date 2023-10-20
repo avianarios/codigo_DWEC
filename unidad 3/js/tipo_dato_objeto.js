@@ -263,3 +263,25 @@ let personal2 = null;
 console.log( personal1?.[clave] ); // Felipe
 //console.log( personal2[clave] ); // throws an error as it doesn't exist
 console.log( personal2?.[clave] ); // undefined
+
+
+//Keys and values of an object can be retrieved
+for (let valor of Object.values(persona1)){
+    console.log (valor);
+}
+console.log (Object.keys(persona1));
+
+
+//fromEntries --> Transforming objects 
+let prices = {
+    banana: 1,
+    orange: 2,
+    meat: 4,
+  };
+  
+  let doublePrices = Object.fromEntries(
+    // convert prices to array, map each key/value pair into another pair
+    // and then fromEntries gives back the object
+    Object.entries(prices).map(entry => [entry[0], entry[1] * 2]));
+
+  console.log(doublePrices);
