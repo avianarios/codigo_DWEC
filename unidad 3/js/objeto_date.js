@@ -11,16 +11,22 @@ console.log (
     ahora.getMonth(),
     ahora.getDay(),
     ahora.getHours(),
-    ahora.getDate()
+    ahora.getDate() //gets day of month. Not really intuitive
 );
 
 //some setters
 ahora.setFullYear(2022);
 ahora.setMonth(ahora.getMonth()-2);
-ahora.setDate(23);
+ahora.setDate(-1);  //can use negative numbers meaning one day before the last one of the previous month
 ahora.setMinutes(68);   //adds minutes to current hour, beginning at 0
 console.log(ahora);
 
 
-//substracting dates
+//substracting dates to compare
 console.log (ahora-hace5anyos); //returns nº of miliseconds
+console.log (ahora.getTime()-hace5anyos.getTime()); //it does the same but, apparently, quicker
+
+//creating a new date object from a string
+let ms = Date.parse("2012-01-26T13:51:50.417-07:00");   //it gets miliseconds from base date
+let date = new Date(Date.parse("2012-01-26T13:51:50.417")); //it creates a new date from a string
+console.log(ms, date);
