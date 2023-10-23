@@ -58,12 +58,13 @@ matrizFrutas.push ("piña"); //adds "piña" to the top position (the end)
 console.log (matrizFrutas);
 
 //array as a queue: shift and push
-matrizFrutas.shift();   //gets an element fro the beginning
+matrizFrutas.shift();   //extracts an element fro the beginning. It is very costly, as all array elements have to me moved one position backward
 console.log(matrizFrutas);
 matrizFrutas.push ("piña"); //adds "piña" to the last position
 console.log(matrizFrutas);
 
 //unshift adds an element to the beginning of array
+//it is really costly, as all array elements have to be moved one position forward to make room for the new one
 matrizFrutas.unshift("guayaba");
 
 ////////CONVERSION TO STRING//////////

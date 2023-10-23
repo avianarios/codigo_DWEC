@@ -193,3 +193,30 @@ let suma=(a,b)=>(a+b);
 
 console.log (resta(4,2));
 console.log(suma(4,2));
+
+
+//recursive functions
+//Two ways: traditional
+function pow(x, n) {
+  let result = 1;
+  // multiply result by x n times in the loop
+  for (let i = 0; i < n; i++) {
+    result *= x;
+  }
+  return result;
+}
+
+alert( pow(2, 3) ); // 8
+
+//or recursive
+//it implies that there must be a base case and a way of dividing problems in subproblems
+function pow(x, n) {
+  if (n == 1) { //base case
+    return x;
+  } else {
+    return x * pow(x, n - 1); //breaking down in subproblems
+  }
+}
+
+alert( pow(2, 3) ); // 8
+
