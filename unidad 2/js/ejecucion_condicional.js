@@ -56,3 +56,10 @@ switch (nota) {
   default:
     console.log( "¡Excelente!" );
 }
+
+//variable scope
+if (1){
+  let cadena="hola";
+  console.log(cadena);  //prints hola
+}
+console.log (cadena);   //error! cadena is not defined
