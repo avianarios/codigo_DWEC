@@ -193,3 +193,63 @@ let suma=(a,b)=>(a+b);
 
 console.log (resta(4,2));
 console.log(suma(4,2));
+
+
+//recursive functions
+//Two ways: traditional
+function pow(x, n) {
+  let result = 1;
+  // multiply result by x n times in the loop
+  for (let i = 0; i < n; i++) {
+    result *= x;
+  }
+  return result;
+}
+
+alert( pow(2, 3) ); // 8
+
+//or recursive
+//it implies that there must be a base case and a way of dividing problems in subproblems
+function pow(x, n) {
+  if (n == 1) { //base case
+    return x;
+  } else {
+    return x * pow(x, n - 1); //breaking down in subproblems
+  }
+}
+
+alert( pow(2, 3) ); // 8
+
+
+//Rest parameters
+//allows to pass an undetermined number or parameters as an array. Must be placed at the end
+function sumaTodo(num1, num2, ...numeros){
+  let acumulado=num1+num2;
+  for (let num of numeros){
+    acumulado+=num;
+  }
+  return acumulado;
+}
+
+console.log (sumaTodo(1,2,3,4,5,6,7,8));
+//palabras is an array containing all elements passed as arguments
+function concatena (...palabras) {
+  let resultado="";
+  for (let palabra of palabras){
+    resultado+=palabra;
+  }
+  return resultado;
+}
+
+let concatena2 = (...palabras) => {
+  let resultado="";
+  for (let palabra of palabras){
+    resultado+=palabra;
+  }
+  return resultado;
+}
+
+console.log (concatena("a", "b", "c", "d"));
+console.log (concatena2("a", "b", "c", "d"));
+
+
