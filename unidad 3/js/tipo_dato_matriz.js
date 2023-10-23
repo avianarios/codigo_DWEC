@@ -58,12 +58,13 @@ matrizFrutas.push ("piña"); //adds "piña" to the top position (the end)
 console.log (matrizFrutas);
 
 //array as a queue: shift and push
-matrizFrutas.shift();   //gets an element fro the beginning
+matrizFrutas.shift();   //extracts an element fro the beginning. It is very costly, as all array elements have to me moved one position backward
 console.log(matrizFrutas);
 matrizFrutas.push ("piña"); //adds "piña" to the last position
 console.log(matrizFrutas);
 
 //unshift adds an element to the beginning of array
+//it is really costly, as all array elements have to be moved one position forward to make room for the new one
 matrizFrutas.unshift("guayaba");
 
 ////////CONVERSION TO STRING//////////
@@ -224,8 +225,32 @@ let razasGato="pelo corto, pelo largo, angora, callejero";
 let matrizRazasGato=razasGato.split(",");
 console.log (matrizRazasGato);
 
+
+//COPY arrays
+let arr = arrCopy = [1, 2, 3];
+let arrCopy2 = [...arr]; // spread the array into a list of parameters then put the result into a new array
+let  arrCopy3=Array.from(arr);  //copy numeros values into numeros2. If we use =, a reference is created and both are the same object
+
+// do the arrays have the same contents?
+console.log(JSON.stringify(arr) === JSON.stringify(arrCopy)); // true
+console.log(JSON.stringify(arr) === JSON.stringify(arrCopy2)); // true
+console.log(JSON.stringify(arr) === JSON.stringify(arrCopy3)); // true
+
+// are the arrays equal?
+console.log(arr === arrCopy); // true (same reference)
+console.log(arr === arrCopy2); // false (not same reference)
+console.log(arr === arrCopy3); // false (not same reference)
+
+// modifying our initial array does not modify the copy:
+arr.push(4);
+console.log(arr); // 1, 2, 3, 4
+console.log(arrCopy); // 1, 2, 3, 4
+console.log(arrCopy2); // 1, 2, 3
+console.log(arrCopy3); // 1, 2, 3
+
+
 //SORT sorts the original array and returns it
-let numeros2=Array.from(numeros);   //copy numeros values into numeros2. If we use =, a reference is created and both are the same object
+let numeros2=Array.from(numeros);
 numeros2.sort();    //numeros2 has been ordered converting numbers to strings, so 15<2 as 1<2
 console.log (numeros);
 
@@ -259,3 +284,20 @@ console.log (numeros);
 //Array.isArray() is the only way to know if something is an array
 console.log (typeof(numeros));  //object
 console.log(Array.isArray(numeros));  //true
+
+
+//Spread operator (operador de expansión)
+//transform an array into a list of arguments
+let arr = [3, 5, 1];
+let arr2 = [-1, 0, 7];
+let arr3= [2, 8, ...arr, -21, ...arr2];  //spread can be used to combine several arrays
+
+console.log( Math.max(...arr) );  //Math.max needs a list of arguments, not an array
+console.log( Math.max(1, ...arr2, 21, ...arr) );  //several arrays can be combined
+console.log (Math.max(...arr3));
+
+//any iterable object, and string is, works with spread operator
+let cad="hola";
+console.log(...cad);    //returns every letter separately 
+console.log([...cad]);  //returns an array of letters
+//array.from iterables
