@@ -195,7 +195,7 @@ console.log (resta(4,2));
 console.log(suma(4,2));
 
 
-//recursive functions
+//Recursive functions
 //Two ways: traditional
 function pow(x, n) {
   let result = 1;
@@ -208,8 +208,11 @@ function pow(x, n) {
 
 alert( pow(2, 3) ); // 8
 
-//or recursive
-//it implies that there must be a base case and a way of dividing problems in subproblems
+//or recursive 
+//Two conditions:
+//1.- there must be a base case that finishes recursion
+//2.- there must be a way of dividing problems in subproblems
+//Recursive functions call themselves. Not all problems can be expressed as recursive functions
 function pow(x, n) {
   if (n == 1) { //base case
     return x;
@@ -218,7 +221,7 @@ function pow(x, n) {
   }
 }
 
-alert( pow(2, 3) ); // 8
+console.log( pow(2, 3) ); // 8
 
 
 //Rest parameters
@@ -230,8 +233,8 @@ function sumaTodo(num1, num2, ...numeros){
   }
   return acumulado;
 }
-
 console.log (sumaTodo(1,2,3,4,5,6,7,8));
+
 //palabras is an array containing all elements passed as arguments
 function concatena (...palabras) {
   let resultado="";
@@ -241,15 +244,15 @@ function concatena (...palabras) {
   return resultado;
 }
 
+/*arrow function 
 let concatena2 = (...palabras) => {
   let resultado="";
   for (let palabra of palabras){
     resultado+=palabra;
   }
   return resultado;
-}
+}*/
 
 console.log (concatena("a", "b", "c", "d"));
-console.log (concatena2("a", "b", "c", "d"));
 
 
