@@ -195,8 +195,8 @@ console.log (resta(4,2));
 console.log(suma(4,2));
 
 
-//Recursive functions
-//Two ways: traditional
+////////RECURSION//////////
+//Two ways of creating a function: traditional
 function pow(x, n) {
   let result = 1;
   // multiply result by x n times in the loop
@@ -205,14 +205,13 @@ function pow(x, n) {
   }
   return result;
 }
-
-alert( pow(2, 3) ); // 8
+console.log( pow(2, 3) ); // 8
 
 //or recursive 
-//Two conditions:
+//Not all problems can be expressed as recursive functions. Two conditions must be satisfied:
 //1.- there must be a base case that finishes recursion
 //2.- there must be a way of dividing problems in subproblems
-//Recursive functions call themselves. Not all problems can be expressed as recursive functions
+//Recursive functions call themselves
 function pow(x, n) {
   if (n == 1) { //base case
     return x;
@@ -220,11 +219,10 @@ function pow(x, n) {
     return x * pow(x, n - 1); //breaking down in subproblems
   }
 }
-
 console.log( pow(2, 3) ); // 8
 
 
-//Rest parameters
+///////Rest parameters////////
 //allows to pass an undetermined number or parameters as an array. Must be placed at the end
 function sumaTodo(num1, num2, ...numeros){
   let acumulado=num1+num2;
@@ -255,4 +253,16 @@ let concatena2 = (...palabras) => {
 
 console.log (concatena("a", "b", "c", "d"));
 
+
+/////////Nested functions/////////////
+//a function created within another function
+function creaUsuario(){
+  let nombre;
+  let apellido;
+
+  function asignaNombre(cual){
+    nombre=cual;
+  }
+
+}
 
