@@ -116,6 +116,20 @@ console.log(x(4));
 let y = x(3);
 console.log(y);
 
+//named expression function
+//No mandatory function name, but useful when need to call itself
+let sayHi = function func(who) {
+  if (who) {
+    console.log(`Hello, ${who}`);
+  } else {
+    func("Guest"); // Ahora todo va bien
+  }
+};
+
+let welcome = sayHi;
+sayHi = null;
+
+welcome(); // Hello, Guest (la llamada anidada funciona)
 
 //difference num 1 between function declaration and function expressions
 //Function declaration (declaración de función) can be used anywhere even in code declared before it was created
@@ -253,16 +267,64 @@ let concatena2 = (...palabras) => {
 
 console.log (concatena("a", "b", "c", "d"));
 
+/////////Autoexecutable functions///////
+//executed once, then can't be called again
+//option 1
+(function() { console.log("hola mundo") }) ();
+
+//option 2
+( function(quien){
+  console.log("hola " + quien);
+})("mundo");
+
 
 /////////Nested functions/////////////
 //a function created within another function
-function creaUsuario(){
-  let nombre;
-  let apellido;
-
-  function asignaNombre(cual){
-    nombre=cual;
+//inner function is invisible outside and can use outer variables
+function saludador(quien){
+  return function(){ //acá se crea la funcion anónima a retornar. No hace falta nombre
+    console.log("hola " + quien);
   }
-
 }
+var saluda = saludador("mundo");
+saluda(); //hola mundo
+
+
+function creaUsuario(quien){
+  let nombre; //inner variables can't be accessed outside function
+  return function usu(){  //need a name to create properties
+    nombre=quien;
+    console.log("Usuario "+nombre+" creado");
+  };
+  usu.apellido="perez";
+}
+
+let usua=creaUsuario("pepe");
+usua.apellido="gonzález";
+console.log (usua.apellido);  //gonzález
+console.log (usua.nombre);  //undefined
+usua();
+
+
+
+///////////callback functions////////////
+//a callback function is the one which is passed as argument to another function to be called
+function calculate(a, b, fn) {
+  var c = a + b + fn(a, b);
+  return c;
+}
+
+function sum(a, b) {
+  return a + b;
+}
+
+function product(a, b) {
+  return a * b;
+}
+
+console.log(calculate(10, 20, sum));  //60
+console.log(calculate(10, 20, product));  //230
+
+
+
 
