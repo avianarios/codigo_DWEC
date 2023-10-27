@@ -30,14 +30,6 @@ do{
   //something
 } while (1);  //infinite loop
 
-//for
-let asignaturas=["Desarrollo web en entorno cliente",
-                 "Diseño de interfaces web", 
-                 "Desarrollo web en entorno servidor"];  //matriz
-for (let m = 0; m < (asignaturas.length); m++) { // shows 0, then 1, then 2
-  console.log(asignaturas[m]);
-}
-
 //nested loops
 for (let m = 0; m < 3; m++) { // shows 0, then 1, then 2
   for (let n = 0; n < 3; n++) { // shows 0, then 1, then 2

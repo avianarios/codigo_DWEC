@@ -27,6 +27,7 @@ function pow(x, n) {
   
   
   ///////Rest parameters////////
+  //example 1
   //allows to pass an undetermined number or parameters. Must be placed at the end
   function sumaTodo(aux,...numeros){
     let acumulado=aux;
@@ -36,17 +37,30 @@ function pow(x, n) {
     return acumulado;
   }
   console.log (sumaTodo(0,1,2,3,4,5,6,7,8));
-     
-  /*arrow function 
+
+  //example 2  
+  arrow function 
   let concatena2 = (...palabras) => {
     let resultado="";
     for (let palabra of palabras){
       resultado+=palabra;
     }
     return resultado;
-  }*/
+  }
   
   console.log (concatena("a", "b", "c", "d"));
+
+  //example 3
+  function restarRecursivo(total,...numeros){
+    if (numeros.length==1){
+      return (total-=numeros.pop());
+    }else{
+      total-=numeros.pop();
+      return (restarRecursivo(total,...numeros));
+    }
+  }
+  let aux=1000;
+  console.log(restarRecursivo(aux,4,56,24,2,123,123,123));
   
   /////////Autoexecutable functions///////
   //executed once, then can't be called again
