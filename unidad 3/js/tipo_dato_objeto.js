@@ -2,6 +2,16 @@ let usuario={
     id:"1", nombre:"pepe", edad:30
 };
 
+//rest parameter
+//allows to create an object without knowing the amount of properties it will have
+const { street, ...address } = {
+    street: 'Platz der Republik 1',
+    postalCode: '11011',
+    city: 'Berlin',
+  };
+
+console.log (address);
+  
 
 //accessing object properties
 console.log(usuario.nombre);    //returns value
