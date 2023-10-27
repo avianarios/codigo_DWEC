@@ -180,7 +180,13 @@ saluda("pepe");
 
 ////////////ARROW FUNCTIONS//////////
 //similar to function expressions, but specifying the returning value
-let suma=(a,b) => a+b;
+
+let suma=(a,b)=>{
+  return (a+b); //could've been done in a single line, but for demonstration purposes
+}
+
+//same as before but more concise
+let suma=(a,b)=>(a+b);
 let saluda=(nombre)=> console.log("yo te saludo "+nombre);
 let despidete=()=>console.log("adiós");
 
@@ -197,14 +203,6 @@ let resta=(a,b)=>{
   return (resultado); //could've been done in a single line, but for demonstration purposes
 }
 
-//curly brace are not needed
-let suma=(a,b)=>{
-  return (a+b); //could've been done in a single line, but for demonstration purposes
-}
-
-//same as before but more concise
-let suma=(a,b)=>(a+b);
-
-console.log (resta(4,2));
+console.log(resta(4,2));
 console.log(suma(4,2));
 
