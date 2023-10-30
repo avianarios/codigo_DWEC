@@ -247,7 +247,7 @@ let grupo = {
     muestraLista() {
         this.habitantes.forEach(
             //arrow functions have no "this", so here "this" is related to showList's context. That's why it works
-            persona => console.log(this.title + ': ' + persona)   
+            persona => console.log(this.nombre + ': ' + persona)   
         );
     },
 
