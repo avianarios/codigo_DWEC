@@ -285,3 +285,41 @@ let prices = {
     Object.entries(prices).map(entry => [entry[0], entry[1] * 2]));
 
   console.log(doublePrices);
+
+
+/*//binding methods
+//when passing an object method as an argument, context is lost, resulting in undefined "this"
+
+//example 1
+let usuario = {
+    nombre: "Perico"
+};
+  
+function diAlgo(frase) {
+    console.log(frase + ', ' + this.nombre);
+}
+  
+diAlgo("hola"); //undefined
+//binding method to object fixes context, resulting in a usable "this"
+diAlgo.bind(usuario)("hasta luego");
+let funcUser = diAlgo.bind(usuario);
+funcUser("adiós");
+
+//example 2
+let usuario = {
+    nombre: "Perico",
+    diAlgo(frase="no se qué decir"){
+        console.log(frase + ', ' + this.nombre);
+    }
+};
+
+
+usuario.diAlgo("hola");
+//binding method to object fixes context, resulting in a usable "this"
+let funcionEnlazada=usuario.diAlgo.bind(usuario);
+funcionEnlazada("hasta luego"); //diAlgo can be called anywhere, using funcionEnlazada, and it will work
+//usuario.diAlgo.bind(usuario)("adiós");
+//window.nombre="bbbb";
+setTimeout(usuario.diAlgo, 1000);
+setTimeout(funcionEnlazada, 1000);
+*/
