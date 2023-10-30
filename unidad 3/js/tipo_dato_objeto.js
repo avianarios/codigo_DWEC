@@ -11,7 +11,6 @@ const { street, ...address } = {
   };
 
 console.log (address);
-  
 
 //accessing object properties
 console.log(usuario.nombre);    //returns value
@@ -333,3 +332,34 @@ funcionEnlazada("hasta luego"); //diAlgo can be called anywhere, using funcionEn
 setTimeout(usuario.diAlgo, 1000);
 setTimeout(funcionEnlazada, 1000);
 */
+
+
+/////////////Arrow functions and "this"///////////
+let group = {
+    title: "Our Group",
+    students: ["John", "Pete", "Alice"],
+  
+    showList() {
+        this.students.forEach(
+            //arrow functions have no "this", so here "this" is related to showList's context. That's why it works
+            student => alert(this.title + ': ' + student)   
+        );
+    }
+};
+  
+group.showList();
+
+
+let group = {
+    title: "Our Group",
+    students: ["John", "Pete", "Alice"],
+  
+    showList() {
+      this.students.forEach(function(student) {
+        // Error: Cannot read property 'title' of undefined
+        alert(this.title + ': ' + student);
+      });
+    }
+  };
+  
+  group.showList();
