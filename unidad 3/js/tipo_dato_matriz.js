@@ -32,7 +32,6 @@ for (let i=0; i<matrizFrutas.length; i++){
     console.log (matrizFrutas[i]);
 }
 
-
 //Iterate over the bidimensional array
 //option #1
 let funcion2=(elemento)=>{
