@@ -1,8 +1,20 @@
+//////Creating objects////////
+//directly
 let usuario={
     id:"1", nombre:"pepe", edad:30
 };
 
-//rest parameter
+//with NEW
+function perro(nombre, raza) {
+    this.nombre = nombre;
+    this.raza = raza;
+}
+
+let perro1=new Perro ("pirata","beagle");
+console.log (perro1);
+
+
+//with rest parameter
 //allows to create an object without knowing the amount of properties it will have
 const { street, ...address } = {
     street: 'Platz der Republik 1',
@@ -18,7 +30,7 @@ console.log (usuario.noExiste);    //returns undefined, but no error
 console.log ("hola" in usuario);     //returns false, but no error
 console.log ("edad" in usuario);   //returns true
 
-//assigning values
+//assigning new properties with values
 usuario.esAdmin=false;
 console.log(usuario);
 
@@ -148,12 +160,12 @@ persona1.medidas.altura=200;
 console.log(persona1.medidas.altura, persona2.medidas.altura);
 
 
-
-//THIS usage. Example 1
+///////////THIS//////////
+//Example 1
 usuario={nombre:"pepe"}
 usuario2={nombre:"juan"}
 
-//create a function that makes usage of this (Arrow functions don't work here)
+//create a function that makes usage of this
 diHola=function (){
     console.log(this.nombre);
 }
@@ -165,7 +177,7 @@ usuario2.saluda=diHola;
 usuario.saluda();
 usuario2.saluda();
 
-
+//example 2
 //THIS only works with methods and ref1 is not
 "use strict";
 let persona={
@@ -179,18 +191,24 @@ let persona={
 console.log(persona.ref1.nombre);    //doesn't work. This is only for methods
 console.log(persona.ref2().nombre);  //works
 
-/* 
-function creaUsuario(){
-  return {
-      nombre:"pepe",
-      ref:this
-  };
-}    
-let usuario=creaUsuario();
- console.log (usuario.ref.nombre);*/
+//example 3
+//this behaves different with arrow functions
+usuario={nombre:"pepe"}
+
+diHola=function (){
+  return(`Hola, soy ${this.nombre}`);
+}
+let diAdios=() => {return(`Adiós, soy ${this.nombre}`)};
+
+//assign function to object property
+usuario.saluda=diHola;
+usuario.despidete=diAdios;
+
+console.log(usuario.saluda());
+console.log(usuario.despidete());
 
 
-//Usage of "this"
+//example 4
 persona1={
     nombre:"pepe",
     profesion: "fontanero",
@@ -218,17 +236,34 @@ persona1.buenosDias();
 persona1.buenasTardes();
 persona1.buenasNoches();
 
-//Creating objects with New
-function perro(nombre, raza) {
-    this.nombre = nombre;
-    this.raza = raza;
-}
 
-let perro1=new Perro ("pirata","beagle");
-console.log (perro1);
+//example 5
+/////////////Arrow functions and "this"///////////
+let grupo = {
+    nombre: "Los amigos",
+    habitantes: ["Máximo", "Higinio", "Salustiano"],
+    localidades: ["Jódar", "Guarromán", "La cabra del santo cristo"],
+  
+    muestraLista() {
+        this.habitantes.forEach(
+            //arrow functions have no "this", so here "this" is related to showList's context. That's why it works
+            persona => console.log(this.title + ': ' + persona)   
+        );
+    },
+
+    muestraLocalidades() {
+        this.habitantes.forEach(function(persona) {
+          // Error: Cannot read property 'title' of undefined
+          console.log(persona+" es de:"+ this.localidades);
+        });
+      }
+};
+  
+grupo.muestraLista();
+grupo.muestraLocalidades();
 
 
-//?. special syntax construct
+///////?. special syntax construct/////////
 //it's been recently added. Allows to return undefined instead of error ir a property doesn't exist.
 //it applies only to declared variables
 let user = {}; // a user without properties
@@ -242,7 +277,7 @@ console.log( user.address && user.address.street && user.address.street.name ); 
 let user = {}; // user has no address
 console.log( user?.address?.street ); // returns undefined (no error)
 
-/* ?. should be used only to check properties that it’s fine for them not to exists.
+/* ?. should be used only to check properties that it’s fine for them not to exist.
 Thus, if some object must exist, but a property is optional, then it should be written object.property?.subproperty, but not object?.property?.subproperty
 because, if object happens to be undefined, we’ll see a programming error about it and fix it. Otherwise, if we overuse ?., coding errors can be silenced where not appropriate, and become more difficult to debug.*/
 
@@ -281,7 +316,7 @@ for (let valor of Object.values(persona1)){
 console.log (Object.keys(persona1));
 
 
-//fromEntries --> Transforming objects 
+/////////fromEntries --> Transforms a par of values key:value into an object ////////
 let prices = {
     banana: 1,
     orange: 2,
@@ -333,33 +368,3 @@ setTimeout(usuario.diAlgo, 1000);
 setTimeout(funcionEnlazada, 1000);
 */
 
-
-/////////////Arrow functions and "this"///////////
-let group = {
-    title: "Our Group",
-    students: ["John", "Pete", "Alice"],
-  
-    showList() {
-        this.students.forEach(
-            //arrow functions have no "this", so here "this" is related to showList's context. That's why it works
-            student => alert(this.title + ': ' + student)   
-        );
-    }
-};
-  
-group.showList();
-
-
-let group = {
-    title: "Our Group",
-    students: ["John", "Pete", "Alice"],
-  
-    showList() {
-      this.students.forEach(function(student) {
-        // Error: Cannot read property 'title' of undefined
-        alert(this.title + ': ' + student);
-      });
-    }
-  };
-  
-  group.showList();
