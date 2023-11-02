@@ -165,12 +165,12 @@ console.log(persona1.medidas.altura, persona2.medidas.altura);
 usuario={nombre:"pepe"}
 usuario2={nombre:"juan"}
 
-//create a function that makes usage of this
+//create a function that utilizes "this"
 diHola=function (){
     console.log(this.nombre);
 }
 
-//assign function to object property
+//assign function to an object property
 usuario.saluda=diHola;
 usuario2.saluda=diHola;
 
@@ -178,7 +178,7 @@ usuario.saluda();
 usuario2.saluda();
 
 //example 2
-//THIS only works with methods and ref1 is not
+//"this" only works with methods
 "use strict";
 let persona={
       nombre:"pepe",
@@ -188,11 +188,11 @@ let persona={
       }
 }
 
-console.log(persona.ref1.nombre);    //doesn't work. This is only for methods
-console.log(persona.ref2().nombre);  //works
+console.log(persona.ref1.nombre);    //doesn't work. "this" is only for methods
+console.log(persona.ref2().nombre);  //it works
 
 //example 3
-//this behaves different with arrow functions
+//"this" behaves differently with arrow functions
 usuario={nombre:"pepe"}
 
 diHola=function (){
@@ -226,7 +226,7 @@ persona1.buenasTardes=function(){
       console.log (`yo, ${this.nombre}, te doy las buenas tardes`);
 }
 
-persona1.buenasNoches=()=>{     //it doesn't work. It's an arrow function
+persona1.buenasNoches=()=>{     //arrow functions have no "this". Here, "this" refers to persona1's context
       console.log (`yo, ${this.nombre}, te doy las buenas noches`);
 }
 
@@ -246,22 +246,25 @@ let grupo = {
   
     muestraLista() {
         this.habitantes.forEach(
-            //arrow functions have no "this", so here "this" is related to showList's context. That's why it works
+            //arrow functions have no "this", so here "this" references muestraLista's context. That's why it works
             persona => console.log(this.nombre + ': ' + persona)   
         );
     },
 
     muestraLocalidades() {
         this.habitantes.forEach(function(persona) {
-          // Error: Cannot read property 'title' of undefined
-          console.log(persona+" es de:"+ this.localidades);
+          console.log(persona+" es de:"+ this.localidades);     // Undefined
         });
-      }
+    },
+  
+    muestraNombre(){
+      console.log(this.nombre);
+    }
 };
   
 grupo.muestraLista();
 grupo.muestraLocalidades();
-
+grupo.muestraNombre();
 
 ///////?. special syntax construct/////////
 //it's been recently added. Allows to return undefined instead of error ir a property doesn't exist.
