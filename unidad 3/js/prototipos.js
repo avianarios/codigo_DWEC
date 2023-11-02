@@ -37,25 +37,3 @@ console.log (perro.desplazate(), conejo.desplazate());
 
 //example 2
 //getter and setter
-let coche={
-    marca:"",
-    modelo:"",
-    set marcayModelo(aux){
-        [this.marca, this.modelo]=aux.split(' ');
-    }
-
-    get marcayModelo(){
-        return `$this.marca, $this.modelo`;
-    }
-}
-
-coche.marcayModelo="alfa romeo";    //launches setter
-console.log(coche.marcayModelo());  //launches getter
-
-
-let creaUsuario=(name,age)=>(
-    {name, age}
-);
-
-usuario=creaUsuario("don quijote", "perez");
-console.log (usuario);
