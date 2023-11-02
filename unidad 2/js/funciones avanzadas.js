@@ -227,6 +227,7 @@ console.log(result); // 20
 
 ///////////callback functions////////////
 //a callback function is the one which is passed as argument to another function to be called
+//example 1
 function calculate(a, b, fn) {
   var c = a + b + fn(a, b);
   return c;
@@ -244,6 +245,37 @@ console.log(calculate(10, 20, sum));  //60
 console.log(calculate(10, 20, product));  //230
   
   
+//example 2
+function ask(question, yes, no) {
+  if (confirm(question)) yes()  //confirm shows up a window asking accept or cancel
+  else no();
+}
+
+//showOk and showCancel are called callback functions
+function showOk() {
+  console.log( "You agreed." );
+}
+
+function showCancel() {
+  console.log( "You canceled the execution." );
+}
+
+// usage: functions showOk, showCancel are passed as arguments to ask
+ask("Do you agree?", showOk, showCancel);
+
+
+//example 3
+//Another way to express the last code (not recommended tough)
+function pregunta(question, yes, no) {
+  if (confirm(question)) yes()  //confirm shows up a window asking accept or cancel
+  else no();
+}
+
+pregunta(
+  "Agree?",
+  function() {console.log("estás de acuerdo");},
+  function () { console.log ("no estás de acuerdo");}
+);
   
   
   
