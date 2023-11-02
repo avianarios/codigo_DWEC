@@ -342,12 +342,11 @@ let coche={
     }
 
     get marcayModelo(){
-        return `$this.marca, $this.modelo`;
+        return `${this.marca} ${this.modelo}`;
     }
 }
-
-coche.marcayModelo="alfa romeo";    //launches "marcayModelo" setter
-console.log(coche.marcayModelo());  //launches "marcayModelo" getter
+coche.marcayModelo="Volkswagen Golf";   //launches setter
+console.log(coche.marcayModelo);  //launches getter
 
 
 
