@@ -318,20 +318,37 @@ for (let valor of Object.values(persona1)){
 }
 console.log (Object.keys(persona1));
 
-
-/////////fromEntries --> Transforms a par of values key:value into an object ////////
+////////Performing operations with all object's properties/////////
 let prices = {
     banana: 1,
     orange: 2,
     meat: 4,
   };
   
+// Object.entries converts each property into an array to facilitate operating with it
+// Object.fromEntries takes an array and returns an object
   let doublePrices = Object.fromEntries(
-    // convert prices to array, map each key/value pair into another pair
-    // and then fromEntries gives back the object
     Object.entries(prices).map(entry => [entry[0], entry[1] * 2]));
 
   console.log(doublePrices);
+
+
+////////////getters and setters/////////
+let coche={
+    marca:"",
+    modelo:"",
+    set marcayModelo(aux){
+        [this.marca, this.modelo]=aux.split(' ');
+    }
+
+    get marcayModelo(){
+        return `$this.marca, $this.modelo`;
+    }
+}
+
+coche.marcayModelo="alfa romeo";    //launches "marcayModelo" setter
+console.log(coche.marcayModelo());  //launches "marcayModelo" getter
+
 
 
 /*//binding methods
