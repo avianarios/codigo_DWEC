@@ -268,7 +268,7 @@ grupo.muestraNombre();
 
 ///////?. special syntax construct/////////
 //it's been recently added. Allows to return undefined instead of error ir a property doesn't exist.
-//it applies only to declared variables
+//appliable to nested properties from declared objects
 let user = {}; // a user without properties
 //console.log(user.address.street); // Throws an error
 
