@@ -9,7 +9,7 @@ class User {
     //no comma to separate methods
   
     sayHi() {
-      alert(this.name);
+      console.log(this.name);
     }
   
   }
@@ -46,3 +46,31 @@ let gatito=class gato{
 new gatito().maulla();
 let b=new gatito();
 b.maulla();
+
+/////////getters and setters//////////7
+let lechoncillo=class lechon{
+
+  constructor(nombre){
+    this.nombre=nombre;
+  }
+
+  get nombreMarrano(){
+    return this.name;
+  }
+
+  set nombreMarrano(nombre){
+    this.nombre=nombre;
+  }
+  //do not use a property name as a getter or setter name
+  get edad(){
+    return this.anyos;
+  }
+
+  set edad(anyos){
+    this.anyos=anyos;
+  }
+}
+
+let l=new lechoncillo("pipas");
+l.edad=2; //maks this.anyos=2
+console.log (l, Object.keys(l).length);
