@@ -26,16 +26,18 @@ console.log (address);
 
 //accessing object properties
 console.log(usuario.nombre);    //returns value
-console.log (usuario.noExiste);    //returns undefined, but no error
-console.log ("hola" in usuario);     //returns false, but no error
-console.log ("edad" in usuario);   //returns true
+console.log(usuario.noExiste);    //returns undefined, but no error
+console.log("hola" in usuario);     //returns false, but no error
+console.log("edad" in usuario);   //returns true
 
 //assigning new properties with values
 usuario.esAdmin=false;
+usuario['direccion']="avenida pez, 3";
 console.log(usuario);
 
 //removing properties
 delete(usuario.edad);
+delete(usuario['esAdmin']);
 console.log(usuario);
 
 //brackets allows to calculate in real-time the key 
@@ -63,7 +65,7 @@ console.log (user);
 
 //another way of doing the same
 //same as before but function as arrow
-//as properties have the same name as variables, they can be removed
+//as properties have the same name as parameters, they can be removed
 //here they have been removed from arrow, but can be done in traditional funcion as well
 let creaUsuario=(name,age)=>(
     {name, age}
@@ -216,22 +218,23 @@ persona1={
         altura:180,
         pecho: 100,
     },
+    //two differente ways of declaring a function
     buenosDias(){
       console.log (`yo, ${this.nombre}, te doy los buenos días`);
+    },
+    felizAnyo: function(){
+        console.log (`yo, ${this.nombre}, te felicito el año nuevo`);
     }
 };
 
-persona1.edad=37;
+//creating two functions for later assignment to the object
 persona1.buenasTardes=function(){
       console.log (`yo, ${this.nombre}, te doy las buenas tardes`);
-}
-
+};
 persona1.buenasNoches=()=>{     //arrow functions have no "this". Here, "this" refers to persona1's context
       console.log (`yo, ${this.nombre}, te doy las buenas noches`);
-}
+};
 
-delete(persona1.medidas);
-console.log (persona1);
 persona1.buenosDias();
 persona1.buenasTardes();
 persona1.buenasNoches();
