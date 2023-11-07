@@ -288,3 +288,45 @@ animales.sort(Animal.comparaMaxVelocidad);
 for (let animal of animales){
   console.log(animal.nombre);
 }
+
+
+//Internal and external interface
+//Internal: Methods and properties accesibles from other methods but not from outside
+//External: methods and properties accesibles also from outside the class
+
+
+//interal properties are preceded by underscore
+class tostadora{
+  constructor (potencia){
+    this._potencia= potencia;
+  }
+  get potencia(){
+    return this._potencia;
+  }
+}
+
+let tostadora1=new tostadora(100);
+//underscore is a convention for private properties
+//they are meant to be accessible only within the classs, 
+//but Nothing prevents user from changing their value
+tostadora1._potencia=225;
+console.log (tostadora1.potencia);
+
+//protected properties are preceded by sharp
+//it's a new feature, meaning old browsers may need polyfills
+class tostadora{
+  #tamanyoPan=10;
+  constructor (potencia){
+    this._potencia= potencia;
+  }
+  get potencia(){
+    return this._potencia;
+  }
+}
+
+let tostadora1=new tostadora(100);
+//underscore is a convention for private properties
+//they are meant to be accessible only within the classs, 
+//but Nothing prevents user from changing their value
+tostadora1._potencia=225;
+console.log (tostadora1.potencia);
