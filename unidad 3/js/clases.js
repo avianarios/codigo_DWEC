@@ -206,32 +206,12 @@ console.log(conejo.tamanyoOrejas);
 //////////static methods////////////
 //static methods are assigned to a class rather than to an object
 //a good candidate to be static method is the one which is appliable to the class, but not to any particular object
+//they must be called by using the class name, not the instantiate object
+//"regular" methods are called "instance methods"
+
 //example 1
-//foolish example, no need to static methods here
-class Animal {
-  constructor(nombre) {
-    this.velocidad = 0;
-    this.nombre = nombre;
-  }
-  static corre(velocidad) {
-    this.velocidad = velocidad;
-    console.log(`${this.nombre} corre a una velocidad de ${this.velocidad}.`);
-  }
-  para() {
-    this.velocidad = 0;
-    console.log(`${this.nombre} se queda quieto.`);
-  }
-}
-
-
-class conejo extends Animal{ }
-
-let conejito=new conejo("achuchao");
-//conejito.corre(5);  //undefined, conejito.corre is not a function
-conejito.para();
-
-//example 2
-//much better example. comparaVelocidad does not belong to any object. It belongs to the parent class
+//comparaVelocidad does not belong to any object. It belongs to the parent class
+//comparaVelocidad can only be called from the class, not the instantiated objects
 class Animal {
   constructor(nombre, velocidad=0) {
     this.velocidad = velocidad;
@@ -252,14 +232,14 @@ class Animal {
 class conejo extends Animal{};
 class perro extends Animal{};
 
-
 let conejito=new conejo("achuchao",7);
 let perrito=new perro("cibeles",3);
 console.log(Animal.comparaVelocidad(conejito, perrito));
 
 
-//example 3
+//example 2. static property
 class Animal {
+  static fechaNacimiento;
   constructor(nombre, maxVelocidad) {
     this.maxVelocidad = maxVelocidad;
     this.nombre = nombre;
@@ -283,17 +263,17 @@ let animales=[
   new perro("roque", 2),
   new perro("cibeles", 8)
 ];
+console.log (Animal.fechaCompra, animales[0].fechaCompra);  //first works, second not
+Animal.nombre="fufas";  //not working, not static property
 
 animales.sort(Animal.comparaMaxVelocidad);
 for (let animal of animales){
   console.log(animal.nombre);
 }
 
-
 //Internal and external interface
 //Internal: Methods and properties accesibles from other methods but not from outside
 //External: methods and properties accesibles also from outside the class
-
 
 //interal properties are preceded by underscore
 class tostadora{
