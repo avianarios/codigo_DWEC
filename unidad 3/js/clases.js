@@ -405,3 +405,62 @@ class batidora extends electrodomestico{
 
 let b=new batidora("ufesa", "ax23", 500);
 console.log (b.getPotencia());
+
+///////////////////////////////////////////////
+///////////////intanceof//////////////////////
+//////////////////////////////////////////////
+//allows to check if an object is an instance of a class
+//ejemplo 1
+class Electrodomestico{};
+let electro=new electrodomestico();
+
+// ¿Es un objeto de la clase Electrodoméstico?
+console.log( electro instanceof Electrodomestico ); // verdadero
+
+
+//ejemplo 2
+let matriz = [1, 2, 3];
+console.log( matriz instanceof Array ); // verdadero
+console.log( matriz instanceof Object ); // verdadero
+//la clase Array hereda de Object
+
+
+/////////////////////
+///////mixins////////
+/////////////////////
+
+//In JavaScript, a class can't inherit from two classes
+//Solution: inherit and copy methods
+class Base1 {
+  constructor() {
+    this.contador = 0;
+  }
+  aumenta() {
+    this.contador++;
+    return this;
+  }
+  muestra(){
+    console.log(this.contador);
+    return this;
+  }
+}
+
+let miMixin = (claseBase) => class extends claseBase {
+  constructor() {
+    super();
+  }
+  resta() {
+    this.contador--;
+    return this;
+  }
+}
+
+class Extendida extends miMixin(Base1) {
+  reinicia() {
+    this.contador = 0;
+    return this;
+  }
+}
+
+let miObjeto = new Extendida();
+miObjeto.aumenta().aumenta().muestra().reinicia().muestra();
