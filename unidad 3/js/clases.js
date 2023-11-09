@@ -47,21 +47,17 @@ new gatito().maulla();
 let b=new gatito();
 b.maulla();
 
-/////////getters and setters//////////7
+////////////////////////////////////////////////////
+/////////getters and setters//////////
+////////////////////////////////////////////////////
 let lechoncillo=class lechon{
 
-  constructor(nombre){
+  constructor(nombre, edad){
     this.nombre=nombre;
+    this.edad=edad;
   }
 
-  //do not use the same name used for a property as a getter or setter name (nombre, for instance)
-  get nombreMarrano(){
-    return this.nombre;
-  }
-
-  set nombreMarrano(nombre){
-    this.nombre=nombre;
-  }
+  //do not use the same of a property as a getter or setter
   get edad(){
     return this.anyos;
   }
@@ -69,14 +65,29 @@ let lechoncillo=class lechon{
   set edad(anyos){
     this.anyos=anyos;
   }
+
+  //alternative getter and setter
+  getNombreMarrano(){
+    return this.nombre;
+  }
+
+  setNombreMarrano(nombre){
+    this.nombre=nombre;
+  }
 }
 
 let marranillo=new lechoncillo("pipas");
-marranillo.edad=2; //makes this.anyos=2. Setters are called with equal instead of parenthesis
+console.log (marranillo.edad);  //edad is a getter. Look at the syntax
+marranillo.edad=2;  //Edad is a setter. with this syntax, they are called with equal instead of parenthesis
 console.log (marranillo, Object.keys(marranillo).length);
-console.lo g(marranillo.nombreMarrano);
 
+//with this alternative setter and getter, parenthesis must be used
+marranillo.setNombreMarrano("puerquín");  
+console.log (marranillo.getNombreMarrano()); 
+
+////////////////////////////////////////////////////
 //////////losing this (pérdida de this)/////////////
+////////////////////////////////////////////////////
 /*this references the context where it was called. If it is different from the object (context) where it was created, 
 it no longer references its object*/
 class Button {
@@ -95,8 +106,9 @@ let button = new Button("hello");
 setTimeout(button.click, 1000); // undefined. This no longer references its object
 setTimeout(button.clack, 1000); // this from clack references its class
 
-
+////////////////////////////////////////////////////
 ////////class extension/Herencia de clase////////
+////////////////////////////////////////////////////
 class Animal {
   constructor(nombre) {
     this.velocidad = 0;
@@ -124,8 +136,9 @@ conejo.corre();
 conejo.salta(5);
 
 
-
+////////////////////////////////////////////////////
 /////method overriding/////
+////////////////////////////////////////////////////
 class Animal {
   constructor(nombre) {
     this.velocidad = 0;
@@ -165,7 +178,9 @@ conejo.para();  //method from conejo, not animal
 conejo.corre(6);
 conejo.salta(5);
 
+////////////////////////////////////////////////////
 ///////////extending from a class created with a function/////////////
+////////////////////////////////////////////////////
 function creaClase() {
   return class {
       constructor(nombre) {
@@ -183,8 +198,9 @@ function creaClase() {
 class animal extends creaClase() {}
 new animal().corre(4); // Hola
 
-
+////////////////////////////////////////////////////
 ////overriding a constructor////
+////////////////////////////////////////////////////
 class Animal {
   constructor(nombre) {
     this.velocidad = 0;
@@ -203,7 +219,9 @@ let conejo = new Conejo("Conejito pequeño", 5);
 console.log(conejo.nombre);
 console.log(conejo.tamanyoOrejas);
 
-//////////static methods////////////
+////////////////////////////////////////////////////
+//static methods////////////////////////////////////
+////////////////////////////////////////////////////
 //static methods are assigned to a class rather than to an object
 //a good candidate to be static method is the one which is appliable to the class, but not to any particular object
 //they must be called by using the class name, not the instantiate object
@@ -275,7 +293,10 @@ for (let animal of animales){
 //Internal: Methods and properties accesibles from other methods but not from outside
 //External: methods and properties accesibles also from outside the class
 
-//interal properties are preceded by underscore
+////////////////////////////////////////////////////
+//interal properties////////////////////////////////
+//are preceded by underscore////////////////////////
+////////////////////////////////////////////////////
 class tostadora{
   constructor (potencia){
     this._potencia= potencia;
@@ -292,8 +313,11 @@ let tostadora1=new tostadora(100);
 tostadora1._potencia=225;
 console.log (tostadora1.potencia);
 
-//protected properties are preceded by sharp
-//it's a new feature, meaning old browsers may need polyfills
+////////////////////////////////////////////////////
+//protected properties//////////////////////////////
+// are preceded by sharp it's a new feature
+// old browsers may need polyfills
+////////////////////////////////////////////////////
 class tostadora{
   #tamanyoDelPan;
   constructor (potencia, tamanyoPan){
@@ -338,7 +362,9 @@ console.log (tostadora1.tamanyoPan);
 //tostadora1.setPotencia(10);  //Error, no such a function (it's private)
 tostadora1.getPotencia();
 
-//private properties and methods are not inherited
+////////////////////////////////////////////////////
+//private properties and methods are not inherited//
+////////////////////////////////////////////////////
 class electrodomestico{
   #potencia
   constructor (potencia){
@@ -347,6 +373,11 @@ class electrodomestico{
   
   getPotencia(){
     return this.#potencia;
+  }
+  
+  #setPotencia(potencia){
+    this.#potencia=potencia;
+    //this[#potencia]=potencia; //not working. Private properties do not allow brackets
   }
 }
 
@@ -360,7 +391,11 @@ class batidora extends electrodomestico{
   getPotencia(){
     //return this.#potencia;  //error: private name #potencia not defined
     //return super.#potencia;  //error: private fields can't be accessed on super
-    return super.getPotencia();   //the only way of accessing private properties on parent's class
+    return super.getPotencia();
+  }
+  
+  setPotencia(potencia){
+    //super.#setPotencia(250);  //error: private fields can't be accessed on super
   }
 }
 
