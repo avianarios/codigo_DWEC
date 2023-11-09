@@ -72,7 +72,7 @@ let lechoncillo=class lechon{
 }
 
 let marranillo=new lechoncillo("pipas");
-marranillo.edad=2; //maks this.anyos=2
+marranillo.edad=2; //makes this.anyos=2. Setters are called with equal instead of parenthesis
 console.log (marranillo, Object.keys(marranillo).length);
 console.lo g(marranillo.nombreMarrano);
 
@@ -165,7 +165,7 @@ conejo.para();  //method from conejo, not animal
 conejo.corre(6);
 conejo.salta(5);
 
-///////////extending form a class created with a function/////////////
+///////////extending from a class created with a function/////////////
 function creaClase() {
   return class {
       constructor(nombre) {
@@ -295,18 +295,43 @@ console.log (tostadora1.potencia);
 //protected properties are preceded by sharp
 //it's a new feature, meaning old browsers may need polyfills
 class tostadora{
-  #tamanyoPan=10;
-  constructor (potencia){
-    this._potencia= potencia;
+  #tamanyoDelPan;
+  constructor (potencia, tamanyoPan){
+    this._potencia=potencia;
+    this.#tamanyoDelPan=10;
   }
-  get potencia(){
+  
+  //an alternative way of expressing a getter
+  getPotencia(){
     return this._potencia;
+  }
+  
+  //an alternative way of expressing a setter
+  #setPotencia(potencia){
+    this._potencia=potencia;
+  }
+
+  set tamanyoPan(tamanyo){
+    this.#tamanyoDelPan=tamanyo;
+  }
+  
+  get tamanyoPan(){
+    return this.#tamanyoDelPan;
   }
 }
 
-let tostadora1=new tostadora(100);
-//underscore is a convention for private properties
-//they are meant to be accessible only within the classs, 
-//but Nothing prevents user from changing their value
+let tostadora1=new tostadora(100, 8);
+//underscore is a convention for expressing a property to be protected, meaning not accessible outside the class
+//but nothing prevents user from changing their value
 tostadora1._potencia=225;
-console.log (tostadora1.potencia);
+console.log (tostadora1._potencia);
+
+//Sharp makes a property private, meaning no access outside the class
+//tostadora1.#tamanyoDelPan=10;  //Error (it's private)
+//traditional way of using setters and getters (with equal and no parenthesis)
+tostadora1.tamanyoPan=10;
+console.log (tostadora1.tamanyoPan);
+
+//alternative way of using getters and setters (with parenthesis)
+//tostadora1.setPotencia(10);  //Error, no such a function (it's private)
+tostadora1.getPotencia();
