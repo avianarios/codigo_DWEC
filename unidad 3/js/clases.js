@@ -194,7 +194,7 @@ class Animal {
 
 class Conejo extends Animal{
   constructor(nombre, tamanyoOrejas){
-    super.nombre=nombre;    //super has to be called in order for the parent constructor to create an object for "this". If not
+    super(nombre);    //super has to be called in order for the parent constructor to create an object for "this". If not
     this.tamanyoOrejas=tamanyoOrejas;
   }
 }
@@ -299,6 +299,8 @@ class tostadora{
   constructor (potencia, tamanyoPan){
     this._potencia=potencia;
     this.#tamanyoDelPan=10;
+    this.marca=marca;
+    this.modelo=modelo;
   }
   
   //an alternative way of expressing a getter
@@ -335,3 +337,32 @@ console.log (tostadora1.tamanyoPan);
 //alternative way of using getters and setters (with parenthesis)
 //tostadora1.setPotencia(10);  //Error, no such a function (it's private)
 tostadora1.getPotencia();
+
+//private properties and methods are not inherited
+class electrodomestico{
+  #potencia
+  constructor (potencia){
+    this.#potencia=potencia;
+  }
+  
+  getPotencia(){
+    return this.#potencia;
+  }
+}
+
+class batidora extends electrodomestico{
+  constructor(nombre, modelo, potencia){
+    super(potencia);
+    this.nombre=nombre;
+    this.modelo=modelo;
+  }
+  
+  getPotencia(){
+    //return this.#potencia;  //error: private name #potencia not defined
+    //return super.#potencia;  //error: private fields can't be accessed on super
+    return super.getPotencia();   //the only way of accessing private properties on parent's class
+  }
+}
+
+let b=new batidora("ufesa", "ax23", 500);
+console.log (b.getPotencia());
