@@ -292,11 +292,18 @@ for (let animal of animales){
 //Internal and external interface
 //Internal: Methods and properties accesibles from other methods but not from outside
 //External: methods and properties accesibles also from outside the class
+/*it's a good idea to isolate internal behaviour and state from external agressions. 
+    -protects users from themselves. It avoids users making changes to internal properties 
+    -allows internal code to be modified if external interface is kept
+    -it hides complexity, making simple the usage of your code 
+*/
 
 ////////////////////////////////////////////////////
-//interal properties////////////////////////////////
-//are preceded by underscore////////////////////////
+/////////////private properties/////////////////////
 ////////////////////////////////////////////////////
+//underscore is a convention for private properties
+//users should not access underscored properties outside the class
+//but nothing prevents user from changing their value
 class tostadora{
   constructor (potencia){
     this._potencia= potencia;
@@ -307,9 +314,6 @@ class tostadora{
 }
 
 let tostadora1=new tostadora(100);
-//underscore is a convention for private properties
-//they are meant to be accessible only within the classs, 
-//but Nothing prevents user from changing their value
 tostadora1._potencia=225;
 console.log (tostadora1.potencia);
 
