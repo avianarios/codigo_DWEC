@@ -47,9 +47,9 @@ new gatito().maulla();
 let b=new gatito();
 b.maulla();
 
-////////////////////////////////////////////////////
-/////////getters and setters//////////
-////////////////////////////////////////////////////
+////////////////////////////////////////
+///////////getters and setters//////////
+////////////////////////////////////////
 let lechoncillo=class lechon{
 
   constructor(nombre, edad){
@@ -57,7 +57,7 @@ let lechoncillo=class lechon{
     this.edad=edad;
   }
 
-  //do not use the same of a property as a getter or setter
+  //do not use the same name of a property as a getter or setter
   get edad(){
     return this.anyos;
   }
@@ -95,7 +95,7 @@ class Button {
     this.value = value;
   }
   click() {
-    console.log(this.value);
+    console.log(this.value);  //undefined. "this" doesn't exist in this context
   }
   clack = () => { //fixes this losing problem
     console.log(this.value);
@@ -106,9 +106,9 @@ let button = new Button("hello");
 setTimeout(button.click, 1000); // undefined. This no longer references its object
 setTimeout(button.clack, 1000); // this from clack references its class
 
-////////////////////////////////////////////////////
+/////////////////////////////////////////////////
 ////////class extension/Herencia de clase////////
-////////////////////////////////////////////////////
+/////////////////////////////////////////////////
 class Animal {
   constructor(nombre) {
     this.velocidad = 0;
@@ -136,9 +136,9 @@ conejo.corre();
 conejo.salta(5);
 
 
-////////////////////////////////////////////////////
-/////method overriding/////
-////////////////////////////////////////////////////
+/////////////////////////////////////////////
+//////////////method overriding//////////////
+/////////////////////////////////////////////
 class Animal {
   constructor(nombre) {
     this.velocidad = 0;
@@ -160,8 +160,7 @@ class Conejo extends Animal{
     this.escondete(msg);
   }
   escondete(msg=2000){
-    //super only works with arrow functions when using it inside functions
-    //setTimeout(function() { super.stop() }, msg);   //error
+    //setTimeout(function() { super.stop() }, msg);   //error, super only works with arrow functions when using it inside functions
     setTimeout(() => {
        super.para();
        console.log(`${this.nombre} se esconde en su madriguera durante ${msg/1000} segundos`)
@@ -178,9 +177,9 @@ conejo.para();  //method from conejo, not animal
 conejo.corre(6);
 conejo.salta(5);
 
-////////////////////////////////////////////////////
-///////////extending from a class created with a function/////////////
-////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+///////extending from a class created with a function////////
+/////////////////////////////////////////////////////////////
 function creaClase() {
   return class {
       constructor(nombre) {
@@ -196,11 +195,13 @@ function creaClase() {
 }
 
 class animal extends creaClase() {}
-new animal().corre(4); // Hola
+new animal("pelusa").corre(4); 
+a=new animal("mancha");
+a.corre(3);
 
-////////////////////////////////////////////////////
-////overriding a constructor////
-////////////////////////////////////////////////////
+////////////////////////////////////////
+////////overriding a constructor////////
+////////////////////////////////////////
 class Animal {
   constructor(nombre) {
     this.velocidad = 0;
@@ -210,7 +211,7 @@ class Animal {
 
 class Conejo extends Animal{
   constructor(nombre, tamanyoOrejas){
-    super(nombre);    //super has to be called in order for the parent constructor to create an object for "this". If not
+    super(nombre);    //super must be called in order for the parent constructor to create an object for "this"
     this.tamanyoOrejas=tamanyoOrejas;
   }
 }
@@ -219,9 +220,9 @@ let conejo = new Conejo("Conejito pequeño", 5);
 console.log(conejo.nombre);
 console.log(conejo.tamanyoOrejas);
 
-////////////////////////////////////////////////////
-//static methods////////////////////////////////////
-////////////////////////////////////////////////////
+///////////////////////////////////////////////////
+////////////////static methods/////////////////////
+///////////////////////////////////////////////////
 //static methods are assigned to a class rather than to an object
 //a good candidate to be static method is the one which is appliable to the class, but not to any particular object
 //they must be called by using the class name, not the instantiate object
@@ -253,9 +254,13 @@ class perro extends Animal{};
 let conejito=new conejo("achuchao",7);
 let perrito=new perro("cibeles",3);
 console.log(Animal.comparaVelocidad(conejito, perrito));
+//conejito.comparaVelocidad(conejito, perrito); //Error, is not a valid function
 
 
-//example 2. static property
+///////////////////////////////////////////////////
+////////////////static properties//////////////////
+///////////////////////////////////////////////////
+//as with static methods, it must be applied to class-meaningful properties. 
 class Animal {
   static fechaNacimiento;
   constructor(nombre, maxVelocidad) {
@@ -314,13 +319,13 @@ class tostadora{
 }
 
 let tostadora1=new tostadora(100);
-tostadora1._potencia=225;
+tostadora1._potencia=225; //it works, but programmers shouldn't do this
 console.log (tostadora1.potencia);
 
-////////////////////////////////////////////////////
-//protected properties//////////////////////////////
-// are preceded by sharp it's a new feature
-// old browsers may need polyfills
+///////////////////////////////////////////////////
+//////////////////protected properties/////////////
+// it's a new feature. Old browsers may need polyfills
+// Protected properties are preceded by sharp and are not accessible outside
 ////////////////////////////////////////////////////
 class tostadora{
   #tamanyoDelPan;
@@ -331,12 +336,10 @@ class tostadora{
     this.modelo=modelo;
   }
   
-  //an alternative way of expressing a getter
   getPotencia(){
     return this._potencia;
   }
   
-  //an alternative way of expressing a setter
   #setPotencia(potencia){
     this._potencia=potencia;
   }
@@ -351,12 +354,6 @@ class tostadora{
 }
 
 let tostadora1=new tostadora(100, 8);
-//underscore is a convention for expressing a property to be protected, meaning not accessible outside the class
-//but nothing prevents user from changing their value
-tostadora1._potencia=225;
-console.log (tostadora1._potencia);
-
-//Sharp makes a property private, meaning no access outside the class
 //tostadora1.#tamanyoDelPan=10;  //Error (it's private)
 //traditional way of using setters and getters (with equal and no parenthesis)
 tostadora1.tamanyoPan=10;
@@ -366,9 +363,8 @@ console.log (tostadora1.tamanyoPan);
 //tostadora1.setPotencia(10);  //Error, no such a function (it's private)
 tostadora1.getPotencia();
 
-////////////////////////////////////////////////////
-//private properties and methods are not inherited//
-////////////////////////////////////////////////////
+
+//Example 2: private properties and methods are not inherited
 class electrodomestico{
   #potencia
   constructor (potencia){
@@ -428,7 +424,6 @@ console.log( matriz instanceof Object ); // verdadero
 /////////////////////
 ///////mixins////////
 /////////////////////
-
 //In JavaScript, a class can't inherit from two classes
 //Solution: inherit and copy methods
 class Base1 {
