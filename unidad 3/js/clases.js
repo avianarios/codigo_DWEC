@@ -261,8 +261,8 @@ console.log(Animal.comparaVelocidad(conejito, perrito));
 ////////////////static properties//////////////////
 ///////////////////////////////////////////////////
 //as with static methods, it must be applied to class-meaningful properties. 
-class Animal {
-  static fechaNacimiento;
+class Mamiferos {
+  static numeroPatas=4;
   constructor(nombre, maxVelocidad) {
     this.maxVelocidad = maxVelocidad;
     this.nombre = nombre;
@@ -278,16 +278,16 @@ class Animal {
   }
 }
 
-class conejo extends Animal{};
-class perro extends Animal{};
+class conejo extends Mamiferos{};
+class perro extends Mamiferos{};
 
 let animales=[
   new conejo("achuchao", 7),
   new perro("roque", 2),
   new perro("cibeles", 8)
 ];
-console.log (Animal.fechaCompra, animales[0].fechaCompra);  //first works, second not
-Animal.nombre="fufas";  //not working, not static property
+console.log (Mamiferos.numeroPatas, animales[0].numeroPatas);  //first works, second not
+Mamiferos.nombre="fufas";  //not working, not static property
 
 animales.sort(Animal.comparaMaxVelocidad);
 for (let animal of animales){
