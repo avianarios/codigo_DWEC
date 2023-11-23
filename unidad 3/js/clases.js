@@ -344,7 +344,7 @@ class tostadora{
     this._potencia=potencia;
   }
 
-  set tamanyoPan(tamanyo){
+  set tamanyoPan(tamanyo){  //don't use as name of the setter the name of the property. It'll throw an error
     this.#tamanyoDelPan=tamanyo;
   }
   
