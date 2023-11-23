@@ -355,13 +355,13 @@ class tostadora{
 
 let tostadora1=new tostadora(100, 8);
 //tostadora1.#tamanyoDelPan=10;  //Error (it's private)
-//traditional way of using setters and getters (with equal and no parenthesis)
-tostadora1.tamanyoPan=10;
-console.log (tostadora1.tamanyoPan);
+//using official getters and setters: treat them as a property, point and equal
+tostadora1.tamanyoPan=10; //setter
+console.log (tostadora1.tamanyoPan);  //getter
 
-//alternative way of using getters and setters (with parenthesis)
-//tostadora1.setPotencia(10);  //Error, no such a function (it's private)
-tostadora1.getPotencia();
+//using getters and setters defined as traditional methods. Usage as regular methods: with parenthesis
+//tostadora1.setPotencia(10);  //setter Error, no such a function (it's private)
+tostadora1.getPotencia(); //getter
 
 
 //Example 2: private properties and methods are not inherited
