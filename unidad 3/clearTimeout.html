@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script>
+            var timeoutID;
+
+            function showAlert() {
+                timeoutID = setTimeout(alert, 3000, 'setTimeout Demo!');
+            }
+
+            function clearAlert() {
+                clearTimeout(timeoutID);
+            }
+          </script>
+    </head>
+    <body>
+        <p>JavaScript setTimeout Demo</p>
+        <button onclick="showAlert();">Show</button>
+        <button onclick="cancelAlert();">Cancel</button>
+    </body>
+
+</html>
+
