@@ -13,6 +13,10 @@ console.log(location+
     "\n"+location.href+
     "\n"+document.location.protocol);
 
+/////////////////
+/////methods/////
+/////////////////
+
 //assign method
 //moves to another url
 location.assign(url);
@@ -39,4 +43,13 @@ for (const [key, value] of parametros){
 //check if a parameter exists
 console.log (parametros.has("precio"));
 
-//localStorage property
+////////////////////
+/////properties/////
+////////////////////
+
+location.href //returns a string containing the entire URL
+location.protocol //A string containing the protocol scheme of the URL, including the final ':'.
+location.host //A string containing the host, that is the hostname, a ':', and the port of the URL.
+location.hostname //A string containing the domain of the URL.
+location.port   //A string containing the port number of the URL.
+Location.search //A string containing a '?' followed by the parameters or "querystring" of the URL. Modern browsers provide URLSearchParams and URL.searchParams to make it easy to parse out the parameters from the querystring.
