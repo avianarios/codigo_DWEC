@@ -35,17 +35,31 @@ if (navigator.cookieEnabled){
 
 ////geolocation
 //returns a geolocation object to interact with Geolocation API
-let localizacion=navigator.geolocation;
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    //document.getElementById("demo").innerHTML =
-    console.log (    "Geolocation is not supported by this browser.");
+//see geoLocation.js
+let posicion=navigator.geolocation;
+
+//language
+//returns user's browser language
+console.log(navigator.language);
+
+//clipboard
+//returns an object to read and write to system clipboard interacting with clipboard API
+//we'll talk about it in a later unit
+navigator.clipboard
+.readText()
+.then(    //this is a "promise". we'll talk about it in a later unit
+  (clipText) => (document.querySelector(".cliptext").innerText = clipText),
+);
+
+//permissions
+//returns an object that can be used to query and update permission status of APIs covered by the Permissions API. 
+//we'll talk about it in a later unit
+navigator.permissions.query({ name: "geolocation" }).then((result) => {
+  if (result.state === "granted") {
+    showMap();
+  } else if (result.state === "prompt") {
+    showButtonToEnableMap();
   }
-  
-  function showPosition(position) {
-  /*  document.getElementById("demo").innerHTML =
-    "Latitude: " + position.coords.latitude + "<br>" +
-    "Longitude: " + position.coords.longitude;*/
-    console.log (`latitud: ${position.coords.latitude}, longitud: ${position.coords.longitude}`);
-  }
+  // Don't do anything if the permission was denied.
+});
+
