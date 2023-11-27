@@ -50,8 +50,14 @@
                 }
             }
 
+            function showPosition(position) {
+                let latlon = position.coords.latitude + "," + position.coords.longitude;
 
+                let img_url = "http://www.openstreetmap.org/?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&zoom=17&layers=M";
+                //"https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=YOUR_KEY";
 
+                etiqueta.innerHTML = "<img src='"+img_url+"'>";
+            }
 
         </script>        
     </body>
