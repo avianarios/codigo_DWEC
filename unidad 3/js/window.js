@@ -122,3 +122,17 @@ console.log (window.location);
 //document
 //returns a reference to an object document representing the content showed in the window
 console.log (window.document);
+
+//localStorage and sessionStorage are window properties, as well as objects
+
+//screen
+//screen is a window property, as well as an object
+//represents the screen the object is being represented on
+//read-only properties
+console.log (window.screen.availHeight);    //pixels available in the screen in the vertical dimension. Some devices reserves space for themselves
+console.log (window.screen.height);
+console.log (window.screen.availWidth);
+console.log (window.screen.width);
+console.log (window.screen.colorDepth);
+console.log (window.screen.orientation);
+
