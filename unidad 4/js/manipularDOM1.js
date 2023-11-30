@@ -29,11 +29,11 @@ console.log (aux4[0],aux4.length);
 
 ////querySelector////
 //returns the very first element within the document that matches the given selector. It only returns the element that matches with one of the specified CSS selectors, or a group of selectors.
-
+document.querySelector("section");
 
 ////querySelectorAll////
 //returns a static NodeList of elements that matches with one or a group of selectors. If no element matches, an empty NodeList is returned.
-
+document.querySelector("section");
 
 
 /////////////////////////////////
@@ -70,9 +70,11 @@ seccion.appendChild(nodo);
 nodo.appendChild(texto);
 document.body.appendChild(seccion);
 
-////replaceWith, insertBefore////
+////replaceWith, parentNode, insertBefore////
 //1: Replaces a node with another one
-//2: Inserts a node before another one
+//2: Returns the parent element of a given node
+//3: Inserts a node before another one
+
 //creates a form field and appends it
 const dir = document.createElement("input");
 dir.type="text";
@@ -87,6 +89,18 @@ const boton = document.getElementById("enviar");
 const parent = boton.parentNode;
 dir.replaceWith(boton);
 parent.insertBefore(dir, boton);
+
+
+////firstChild, lastChild, childNodes////
+//1: get the first Child of any type provided a given node.
+// Caution: Any whitespace will create a text_node (#text "\n  "), from a single space to multiple spaces, returns, tabs...
+//2: get the first Child of type "element_node" provided a given node (#text is not)
+//3: get the lastChild of a given node
+//4: get the list of the children of a given node
+//document.getElementById("listaCompra").firstChild.innerHTML="mangos";
+document.getElementById("listaCompra").firstElementChild.innerHTML="mangos";
+//console.log (a.firstChild.innerHTML);
+
 
 /*
 
