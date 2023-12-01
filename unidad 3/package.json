@@ -4,7 +4,8 @@
   "description": "Código de prueba de la unidad 3",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "documenta": "./node_modules/jsdoc/jsdoc.js js/*.js -d documentacion"
   },
   "repository": {
     "type": "git",
