@@ -1,3 +1,16 @@
+/*main sources:
+https://www.digitalocean.com/community/tutorials/how-to-modify-attributes-classes-and-styles-in-the-dom
+https://www.javascripttutorial.net/javascript-dom/
+https://www.w3schools.com/
+*/
+
+
+//////////////////////////////
+////manipulating CSS nodes////
+//////////////////////////////
+
+
+
 ////createElement, createTextNode, appendChild////
 //1: creates a node
 //2: creates a text element

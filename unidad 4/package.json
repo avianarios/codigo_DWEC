@@ -1,10 +1,11 @@
 {
   "name": "unidad-4",
   "version": "1.0.0",
-  "description": "Código de la unidad 4",
+  "description": "Código fuente de la unidad 4",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "documenta": "./node_modules/jsdoc/jsdoc.js js/*.js -d documentacion"
   },
   "repository": {
     "type": "git",

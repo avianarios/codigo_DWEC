@@ -46,10 +46,10 @@ clearTimeout(timeoutID);    //cancels timeout
 
 ///setInterval method///
 //executes a function periodically
-function mensaje(){
+function mensaje2(){
     alert ("mensaje");
 }
-setInterval(mensaje, 2000);
+setInterval(mensaje2, 2000);
 
 setInterval(()=>{
     alert("mensaje");
