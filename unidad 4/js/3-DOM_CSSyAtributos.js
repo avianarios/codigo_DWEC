@@ -1,6 +1,9 @@
 /*main sources:
 https://www.digitalocean.com/community/tutorials/how-to-modify-attributes-classes-and-styles-in-the-dom
 https://www.javascripttutorial.net/javascript-dom/
+https://alvarotrigo.com/blog/change-css-javascript/
+https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
 https://www.w3schools.com/
 */
 
@@ -19,8 +22,22 @@ setTimeout(()=>{
     elemento.style.fontSize="1rem";
     elemento.style.textAlign="center";
     elemento.style.fontWeight="bold";
-}, 1000);
+}, 3000);
 
+
+const miEstilo= `
+    display: block;
+    width: 80%;
+    background-color: red;
+    border: 2px;
+    font-size: 5em;
+    color: white;
+    margin: 20px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border: 2px solid black;
+`;
+elemento.style.cssText=miEstilo;
 
 ///////////////////////////////////
 ////manipulating tag attributes////
@@ -44,6 +61,42 @@ parrafos.forEach(element => {
             element.removeAttribute('id');
         }
 });
+
+////////////////////////////////////////////
+////add, remove, replace, toggle classes////
+////////////////////////////////////////////
+//4-If it doesn't exist, then it's added. If it exists, then it's removed
+let a=Array.from(document.getElementsByClassName("parrafo_cuerpo"));
+a.forEach(elemento=>{
+    elemento.classList.add("otraClase");
+    elemento.classList.toggle("parrafo_cuerpo")
+});
+
+
+//////////////////////////////////////////////
+////////////modify CSS stylesheets////////////
+//////////////////////////////////////////////
+//Reasons to modify CSS instead of inline stlye:
+//1-Apply the change to all elements with a certain selector. 
+//2-Apply the change to future elements that will be added dynamically later on.
+//3-Applying changes to a huge amount of elements sharing the selector would be extremely slow
+//////////////////////////////////////////////
+
+// Getting the stylesheet
+////////////zzzzzzzzzzzzzz
+const stylesheet = document.styleSheets[1]; //the second linked stylesheet
+let elementRules;
+
+// looping through all its rules and getting your rule
+for(let i = 0; i < stylesheets.cssRules.length; i++) {
+  if(stylesheet.cssRules[i].selectorText === '#parrafo') {
+    elementRules = stylesheets.cssRules[i];
+  }
+}
+
+// modifying the rule in the stylesheet
+elementRules.style.setProperty('background', 'blue');
+
 
 
 /*

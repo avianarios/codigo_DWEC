@@ -1,3 +1,11 @@
+/*main sources:
+https://www.digitalocean.com/community/tutorials/how-to-access-elements-in-the-dom
+https://www.javascripttutorial.net/javascript-dom/
+https://www.w3schools.com/
+
+
+*/
+
 /////////////////////
 ////DOM selectors////
 /////////////////////
