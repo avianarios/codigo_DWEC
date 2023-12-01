@@ -1,0 +1,22 @@
+{
+  "name": "unidad-4",
+  "version": "1.0.0",
+  "description": "Código de la unidad 4",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avianarios/codigo_DWEC.git"
+  },
+  "author": "Alejandro Viana Ríos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avianarios/codigo_DWEC/issues"
+  },
+  "homepage": "https://github.com/avianarios/codigo_DWEC#readme",
+  "devDependencies": {
+    "jsdoc": "^4.0.2"
+  }
+}

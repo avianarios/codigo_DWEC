@@ -1,7 +1,6 @@
-#parrafo1{
-    background-color: red;
+.parrafo_cuerpo{
+    font-size: 0.75rem;
+    font-weight: 100;
 }
 
-#parrafo2{
-    size: 2rem;
-}
+
