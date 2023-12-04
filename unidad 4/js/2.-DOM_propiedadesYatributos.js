@@ -130,3 +130,38 @@ for (let attr of document.body.attributes) {
 
 //why would I want non-standard attributes? 
 //they are useful to pass custom data from HTML to JavaScrip or to mark HTML elements to do something with them in JavaScript. User doesn't get affected
+/*let mascota={
+    nombre: 'gatín',
+    raza: 'común europeo'
+};
+
+ // el código encuentra un elemento con la marca y muestra lo que se solicita
+ let user = {
+    nombre: "Pete",
+    edad: 25
+  };
+
+  for(let div of document.querySelectorAll('[show-info]')) {
+    // inserta la información correspondiente en el campo
+    let field = div.getAttribute('show-info');
+    div.innerHTML = user[field]; // primero Pete en "nombre", luego 25 en "edad"
+  }
+*/
+
+let mascotas=[
+    {nombre:'gatín', raza:'común europeo'},
+    {nombre:'perrín', raza:'cocker'}
+];
+
+console.log (mascotas[1]);
+
+
+//no funciona aún
+let i=0;
+for(let elemento of document.querySelectorAll('[muestra-info]')) {
+    // inserta la información correspondiente en el campo
+    let field = elemento.getAttribute('muestra-info');
+    elemento.innerHTML = mascotas[i%2][field]; // primero Pete en "nombre", luego 25 en "edad"
+    console.log (document.querySelectorAll('[muestra-info]').length, i);
+    i++;
+}
