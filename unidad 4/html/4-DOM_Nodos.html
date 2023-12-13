@@ -13,11 +13,11 @@
       <h2>Ejemplo de creación de nodos de DOM</h2>
       <section class="seccion">
         <img src="../img/gato4.jpg" alt="Un lindo gatito">
-        <p class="parrafo_cuerpo" id="parrafo1">Esto es un enlace a <a href="https://es.wikipedia.org/wiki/Felis_silvestris_catus">Felis silvestris catus</a></p>
+        <p class="parrafo_cuerpo" id="parrafo1">Esto es un enlace a <a href="https://es.wikipedia.org/wiki/Felis_silvestris_catus" target="_blank">Felis silvestris catus</a></p>
       </section>
       <section class="seccion">
         <img src="../img/perro2.jpg" alt="Un lindo perrito">
-        <p class="parrafo_cuerpo" id="parrafo2">Esto es un enlace a <a href="https://es.wikipedia.org/wiki/Canis_familiaris">Canis familiaris</a></p>
+        <p class="parrafo_cuerpo" id="parrafo2">Esto es un enlace a <a href="https://es.wikipedia.org/wiki/Canis_familiaris"  target="_self">Canis familiaris</a></p>
       </section>
       <section>
         <form id="formulario-contacto">
@@ -25,14 +25,30 @@
           <input type="text" id="nombre" name="nombre" placeholder="nombre">
           <label for="apellidos">Apellidos</label>
           <input type="text" id="apellidos" name="apellidos" placeholder="apellidos">
+          <input type="checkbox" checked name="first" value="first"> <label for="first">First option</label>
+          <input type="checkbox" name="second" value="second"> <label for="second">Second option</label>
+          <input type="checkbox" name="third" value="third"> <label for="third">Third option</label>
           <button id="enviar">Enviar</button>
         </form>
       </section>
+      <section id="parrafos">
+        <p class="texto">esto es un párrafo</p>
+        <p class="texto especial">esto es un párrafo especial</p>
+        <p class="texto">esto es un párrafo</p>
+        <p class="texto especial">esto es un párrafo especial</p>
+        <p class="texto">esto es un párrafo</p>
+        <p class="texto especial">esto es un párrafo especial</p>
+      </section>      
       <section>
         <ul id="listaCompra">
           <li id="a">cebollas</li>
           <li>manzanas</li>
           <li>peras</li>
+          <ul>
+            <li>blanquillas</li>
+            <li>conferencia</li>
+            <li>agua</li>
+          </ul>
           <li>plátanos</li>
           <li>aguacates</li>
         </ul>
