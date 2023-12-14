@@ -458,4 +458,4 @@ class Extendida extends miMixin(Base1) {
 }
 
 let miObjeto = new Extendida();
-miObjeto.aumenta().aumenta().muestra().reinicia().muestra();
+miObjeto.aumenta().aumenta().muestra().resta().reinicia().muestra();
