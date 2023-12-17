@@ -194,7 +194,7 @@ console.log(persona.ref1.nombre);    //doesn't work. "this" is only for methods
 console.log(persona.ref2().nombre);  //it works
 
 //example 3
-//"this" behaves differently with arrow functions
+//"this" loses its context in arrow functions, so it doesn't work
 usuario={nombre:"pepe"}
 
 diHola=function (){
@@ -231,7 +231,7 @@ persona1={
 persona1.buenasTardes=function(){
       console.log (`yo, ${this.nombre}, te doy las buenas tardes`);
 };
-persona1.buenasNoches=()=>{     //arrow functions have no "this". Here, "this" refers to persona1's context
+persona1.buenasNoches=()=>{     //arrow functions have no "this". Here, "this" refers to persona1's context. 
       console.log (`yo, ${this.nombre}, te doy las buenas noches`);
 };
 
@@ -241,7 +241,7 @@ persona1.buenasNoches();
 
 
 //example 5
-/////////////Arrow functions and "this"///////////
+/////////////Arrow functions and "this" on arrays inside objects///////////
 let grupo = {
     nombre: "Los amigos",
     habitantes: ["Máximo", "Higinio", "Salustiano"],
