@@ -1,10 +1,3 @@
-/*main sources:
-https://www.digitalocean.com/community/tutorials/how-to-modify-attributes-classes-and-styles-in-the-dom
-https://www.javascripttutorial.net/javascript-dom/
-https://www.w3schools.com/
-*/
-
-
 //////////////////////////////
 ////manipulating CSS nodes////
 //////////////////////////////
@@ -44,26 +37,3 @@ dir.replaceWith(boton);
 parent.insertBefore(dir, boton);
 
 
-////firstChild, lastChild, childNodes////
-//1: get the first Child of any type provided a given node.
-// Caution: Any whitespace will create a text_node (#text "\n  "), from a single space to multiple spaces, returns, tabs...
-//2: get the first Child of type "element_node" provided a given node (#text is not)
-//3: get the lastChild of a given node
-//4: get the list of the children of a given node
-//document.getElementById("listaCompra").firstChild.innerHTML="mangos";
-document.getElementById("listaCompra").firstElementChild.innerHTML="mangos";
-//console.log (a.firstChild.innerHTML);
-
-
-/*
-
-document.getElementById("enviar").parentNode
-getElementById("direccion")
-childNode[4].parentNode.insertBefore(childNode[4], childNode[3]);
-
-
-
-
-
-////appendchild////
-//adds a child to a node*/
