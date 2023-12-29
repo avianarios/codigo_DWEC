@@ -1,10 +1,3 @@
-/*main sources:
-https://www.javascripttutorial.net/javascript-dom/
-https://es.javascript.info/basic-dom-node-properties
-https://es.javascript.info/dom-attributes-and-properties
-https://www.w3schools.com/
-*/
-
 ////////////////
 ////nodetype////
 ////////////////
@@ -62,7 +55,7 @@ setTimeout(()=>{
     document.getElementById("enviar").textContent="Texto cambiado";
 }, 2000);
 
-////outherHTML////
+////outerHTML////
 //innerHTML+the HTML element itself
 let aux=document.querySelector("h2");
 aux.outerHTML="<h3>Este es el nuevo encabezado</h3>";
@@ -76,37 +69,50 @@ console.log (document.getElementsByTagName("section")[0].firstChild.data);
 console.log (document.getElementById("titulo1").firstChild.nodeType); //type 1: element node
 console.log (document.getElementById("titulo1").firstChild.innerHTML);
 
-///////////////////////////////////
-////manipulating node attributes////
-///////////////////////////////////
+
+//////////////////////////////////
+///manipulating node attributes///
+//////////////////////////////////
+
 //HTML standard attributes have the DOM properties counterparts. They're case insensitive
-//Non standard attributes can be created
+//Non standard attributes can be created. they are useful to pass custom data from HTML to JavaScrip or to mark HTML elements to do something with them in JavaScript. User doesn't get affected
+
+/*Example of standard and non-standard attributes:
+<section class="container" data-attr="value"></div>
+class and data-attr are attributes. the former is standard, the latter is not
+*/
+
+//Creating non-standard attributes
 document.body.myData = {
     name: 'Cesar',
     title: 'Emperador'
   };
 console.log (document.body.myData.title);
 
-
 //HTML standard attributes can be accessed by using its name
 let imagen=document.querySelector("img")
 imagen.alt="el nuevo texto de la imagen";
 imagen.src="https://picsum.photos/300";
 
-//but non standard attributes can't
+//but non-standard attributes can't
 document.body.myData.title="saludos";    //it doesn't work
 
 
 //both standard and non standard attributes can be manipulated by using functions
-////hasAttribute, getAttribute, setAttribute, removeAttribute////
-//1- Checks if a tag has an attribute or not
-//2- Gets attribute value
-//3- Sets attribute value
-//4- Removes attribute from tag
+////hasAttributes, hasAttribute, getAttributeNames, getAttribute, setAttribute, removeAttribute, toggleAttribute////
+//1.-Checks if an element has attributes
+//2.-Checks if an element has a specific attribute
+//3.-Returns an array with the attributes of an element
+//4.-Gets attribute value
+//5.-Sets attribute value
+//6.-Removes attribute from tag
+//7.-If the attribute exists, it is removed. Otherwise, it is created
 
 //example 1: standard attribute. Changing img src
+console.log("¿La imagen tiene atributos?:"+imagen.hasAttributes());
+console.log("Nombres de los atributos:"+imagen.getAttributeNames());
 if (imagen.hasAttribute('src')){
-    console.log ("La imagen actual es "+imagen.getAttribute('src'));
+    console.log ("El atributo src de la imagen es "+imagen.getAttribute('src'));
     imagen.setAttribute('src', 'https://picsum.photos/300');
 }
 
@@ -118,50 +124,36 @@ parrafos.forEach(element => {
         }
 });
 
-//example 3: creating non-standard attribute
+//example 3: modifying a boolean attribute
+let boton=document.getElementById("enviar");
+boton.setAttribute("disabled", "");     //it's a boolean attribute. Had we specify "true", it'd be treated as an string. Therefore, "" means true and the lack of the attribute means false
+boton.toggleAttribute("disabled");  //if it doesn't exist, it is created (in a boolean attribute, means true). If it exists, it is removed (in a boolean attribute, means false)
+
+//example 4: creating non-standard attribute
 document.body.setAttribute('myData.title','hola');  //it works
 
-//example 4: creating non-standard attribute and iterating through them
+//example 5: creating non-standard attribute and iterating through them
 //attributes collection is iterable
 document.body.setAttribute('myData.age','25');
 for (let attr of document.body.attributes) { 
     console.log( `${attr.name} = ${attr.value}` );
 }
 
-//why would I want non-standard attributes? 
-//they are useful to pass custom data from HTML to JavaScrip or to mark HTML elements to do something with them in JavaScript. User doesn't get affected
-/*let mascota={
-    nombre: 'gatín',
-    raza: 'común europeo'
-};
-
- // el código encuentra un elemento con la marca y muestra lo que se solicita
- let user = {
-    nombre: "Pete",
-    edad: 25
-  };
-
-  for(let div of document.querySelectorAll('[show-info]')) {
-    // inserta la información correspondiente en el campo
-    let field = div.getAttribute('show-info');
-    div.innerHTML = user[field]; // primero Pete en "nombre", luego 25 en "edad"
-  }
-*/
-
+//example 6
 let mascotas=[
     {nombre:'gatín', raza:'común europeo'},
     {nombre:'perrín', raza:'cocker'}
 ];
 
-console.log (mascotas[1]);
-
-
-//no funciona aún
-let i=0;
+let col=fila=0;
 for(let elemento of document.querySelectorAll('[muestra-info]')) {
     // inserta la información correspondiente en el campo
     let field = elemento.getAttribute('muestra-info');
-    elemento.innerHTML = mascotas[i%2][field]; // primero Pete en "nombre", luego 25 en "edad"
-    console.log (document.querySelectorAll('[muestra-info]').length, i);
-    i++;
+    elemento.innerHTML = mascotas[fila][field];
+    col++;
+    //como se ha usado un for let of, hay que controlar filas y columnas
+  if (col%2==0){
+    fila++;
+    col=0;
+  }
 }

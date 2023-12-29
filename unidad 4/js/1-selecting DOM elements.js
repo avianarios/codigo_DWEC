@@ -1,13 +1,7 @@
-/*main sources:
-https://www.digitalocean.com/community/tutorials/how-to-access-elements-in-the-dom
-https://es.javascript.info/searching-elements-dom
-https://www.javascripttutorial.net/javascript-dom/
-https://www.w3schools.com/
-*/
-
 /////////////////////
 ////DOM selectors////
 /////////////////////
+//Browser API//
 
 //getElementById//
 //returns an element whose id matches a passed string. Since the ids of elements are unique, this is the fastest way to select an element.
@@ -35,6 +29,10 @@ console.log (aux4[0],aux4.length);
 //returns the very first element within the document that matches the given selector. It only returns the element that matches with one of the specified CSS selectors, or a group of selectors.
 let seccion=document.querySelector("section");
 console.log(seccion);
+//the previous result can be used as an starting point
+let parrafo=seccion.querySelector("p");
+console.log(parrafo);
+
 
 ////querySelectorAll////
 //returns a static NodeList of elements that matches with one or a group of CSS selectors. If no element matches, an empty NodeList is returned.
@@ -42,5 +40,13 @@ console.log(seccion);
 let secciones=document.querySelectorAll("section");
 console.log (secciones, secciones[0].textContent);
 
+
 let elements=document.querySelectorAll('ul > li:last-child');   //CSS selectors can be used
 console.log (elements.length, elements[0].innerHTML);   //although there is only 1 element, it is still an array
+
+/*a NodeList is not an Array. Main differences might be:
+    -array methods, like push, pop, slice, join, shift... can't be used
+    -NodeList can be live or static. Arrays are always static. Live collections allow to interact with their new members even after being selected
+    - 
+
+*/
