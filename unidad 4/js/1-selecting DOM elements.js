@@ -33,6 +33,11 @@ console.log(seccion);
 let parrafo=seccion.querySelector("p");
 console.log(parrafo);
 
+/*body and head have their own shortctus making
+document.querySelector("body") equivalent to document.body
+and
+document.querySelector("head") equivalent to document.head
+
 
 ////querySelectorAll////
 //returns a static NodeList of elements that matches with one or a group of CSS selectors. If no element matches, an empty NodeList is returned.
