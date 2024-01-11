@@ -20,17 +20,21 @@ console.log (document.getElementById("titulo1").nodeName,
             document.nodeName);
 
 
-///////////////
-////content////
-///////////////
-////innerHTML, innerText and textContent////
-//getting and setting text
-//1:HTML Content of the selection including spacing, line breaks and formatting (html tags) --> Avoid using it. HTML malicious content could be inserted
-//2:Just the visible text, without text spacing and tags
-//3:All the text, including invisible, with spacing --> Should be used
+///////////////////////////////////
+////getting and setting content////
+///////////////////////////////////
+
+
+///////innerHTML and outerHTML///////
+//both includes HTML tags
+//1:Gets the elements within the selected element, including HTML tags and text spaces
+//2:Gets the elements within the selected element and the element itself, including HTML tags but no text spaces
 
 //example 1: substitute a text
-document.getElementById("titulo1").innerHTML="<article>Animales que viven con nosotros (modificado tras haber sido renderizado)</article>";
+document.getElementById("titulo1").innerHTML="<p>Animales que viven con nosotros (modificado tras haber sido renderizado)</p>";
+console.log ("innerHTML:"+document.getElementById("titulo1").innerHTML);
+console.log ("outterHTML:"+document.getElementById("titulo1").outerHTML);
+
 
 //example 2: adds a text to a list of elements
 //const parrafos=document.getElementsByTagName("p");
@@ -38,11 +42,29 @@ document.getElementById("titulo1").innerHTML="<article>Animales que viven con no
 let listaParrafos=Array.from (document.getElementsByTagName("p"));
 listaParrafos.forEach(elemento => {
     setTimeout(()=>{
-        elemento.innerHTML+="<article>Este texto se le ha añadido al enlace original</article>";        //Should innerText or textContend be used, HTML tags would've been literally added
+        elemento.innerHTML+="<p>Este texto se le ha añadido al enlace original</p>";        //Should innerText or textContend be used, HTML tags would've been literally added
     }, 3000);
 });
 
 //example 3
+let aux=document.querySelector("h3");
+aux.outerHTML="<h2>Este es el nuevo encabezado de nivel 2 que ha sustituido al de nivel 3</h2>";
+console.log (aux.outerHTML);        //be carefull, aux still holds a reference to the former element altough it doesn't exist anymore!!
+console.log (document.querySelector("h2"));     //undefined (h2 no longer exists and there were only one h2 header)
+
+///////innerText and outerText ///////
+//Both gets ONLY the visible text of the element and its children, without HTML tags or text spacing
+//1:If overriding it doesn't override selected HTML element
+//2:If overriding it overrides selected HTML element
+document.querySelector("h2").innerHTML="<h3>nuevo encabezado de nivel 2<h3>";
+setTimeout(()=>{
+    document.querySelector("h2").outerHTML="<h3>ahora el encabezado de nivel 2 pasa a ser de nivel 3</h3>";
+    }, 10000);
+
+
+///////textContent///////
+//Gets all the text of the element and its descendants, including invisible, with spacing. Doesn't get HTML tags and doesn't interpret them --> Should be used
+//example 1
 let seleccionado=Array.from(document.getElementsByClassName("parrafo_cuerpo"));
 seleccionado.forEach(elemento=>{
     setTimeout(()=>{
@@ -50,24 +72,10 @@ seleccionado.forEach(elemento=>{
     }, 2000);
 });
 
-//example 4
+//example 2
 setTimeout(()=>{
     document.getElementById("enviar").textContent="Texto cambiado";
 }, 2000);
-
-////outerHTML////
-//innerHTML+the HTML element itself
-let aux=document.querySelector("h2");
-aux.outerHTML="<h3>Este es el nuevo encabezado</h3>";
-console.log (aux.outerHTML);        //be carefull, aux still holds a reference to the former element altough it doesn't exist anymore!!
-console.log (document.querySelector("h2"));     //undefined (h2 no longer exists and there were only one h2 header)
-
-////data////
-//text nodes don't have innerHTML, but data
-console.log (document.getElementsByTagName("section")[0].firstChild.nodeType); //type 3: text node
-console.log (document.getElementsByTagName("section")[0].firstChild.data);
-console.log (document.getElementById("titulo1").firstChild.nodeType); //type 1: element node
-console.log (document.getElementById("titulo1").firstChild.innerHTML);
 
 
 //////////////////////////////////

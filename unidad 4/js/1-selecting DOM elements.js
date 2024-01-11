@@ -15,7 +15,7 @@ console.log (aux2[0], aux2.length);
 
 ////getElementsByClassName////
 //returns an HTMLCollection of elements that match the passed class name. Bypassing the class names separated by whitespace, we can search for multiple class names.
-let aux3=document.getElementsByClassName("seccion");
+let aux3=document.getElementsByClassName("parrafo_cuerpo");
 console.log (aux3[0], aux3.length);
 
 ////getElementsByName////
@@ -37,8 +37,8 @@ console.log(parrafo);
 ////querySelectorAll////
 //returns a static NodeList of elements that matches with one or a group of CSS selectors. If no element matches, an empty NodeList is returned.
 //if an element is created after querySelectorAll was called, the static nodelist is NOT updated
-let secciones=document.querySelectorAll("section");
-console.log (secciones, secciones[0].textContent);
+let art=document.querySelectorAll("article");
+console.log (art, art[0].textContent);
 
 
 let elements=document.querySelectorAll('ul > li:last-child');   //CSS selectors can be used
