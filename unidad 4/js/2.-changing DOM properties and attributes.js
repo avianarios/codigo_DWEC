@@ -90,41 +90,72 @@ setTimeout(()=>{
 class and data-attr are attributes. the former is standard, the latter is not
 */
 
-//Creating non-standard attributes
-document.body.myData = {
+//first of all, I select the element I'll be working with
+let imagen=document.querySelector("img");
+
+
+/////////Creating and setting attributes/////////
+//with standard attributes, setAttribute or the name of the attribute preceeded by a dot can be used
+//with custom attributes, only setAttribute
+
+//remember: document.body is equivalent to document.querySelector("body")
+document.body.myData = {        //it works, but DOM is not modified, so it can't be used
     name: 'Cesar',
     title: 'Emperador'
   };
-console.log (document.body.myData.title);
-
-//HTML standard attributes can be accessed by using its name
-let imagen=document.querySelector("img")
+  //this is the way of creating non-standard attributes
+document.body.setAttribute('fecha','11/1/2024');  //it works
 imagen.alt="el nuevo texto de la imagen";
 imagen.src="https://picsum.photos/300";
+imagen.derechos_de_autor="no";  //it doesn't work
+imagen.setAttribute("derechos de autor", "no")
 
-//but non-standard attributes can't
-document.body.myData.title="saludos";    //it doesn't work
 
-
-//both standard and non standard attributes can be manipulated by using functions
-////hasAttributes, hasAttribute, getAttributeNames, getAttribute, setAttribute, removeAttribute, toggleAttribute////
-//1.-Checks if an element has attributes
-//2.-Checks if an element has a specific attribute
-//3.-Returns an array with the attributes of an element
-//4.-Gets attribute value
-//5.-Sets attribute value
-//6.-Removes attribute from tag
-//7.-If the attribute exists, it is removed. Otherwise, it is created
-
-//example 1: standard attribute. Changing img src
+/////////Checking element's attributes/////////
 console.log("¿La imagen tiene atributos?:"+imagen.hasAttributes());
-console.log("Nombres de los atributos:"+imagen.getAttributeNames());
+console.log("¿La imagen tiene el atributo derechos de autor?:"+imagen.hasAttribute("derechos de autor"));
+console.log("¿La imagen tiene el atributo cámara?:"+imagen.hasAttribute("camara"));
 if (imagen.hasAttribute('src')){
     console.log ("El atributo src de la imagen es "+imagen.getAttribute('src'));
     imagen.setAttribute('src', 'https://picsum.photos/300');
 }
 
-//example 2: standard attribute. Removing id from paragraphs
+/////////Getting attribute names/////////
+console.log("Nombres de los atributos de la imagen:"+imagen.getAttributeNames());
+imagen.getAttributeNames().forEach((atributo)=>{
+    console.log(atributo);
+});
+
+//attributes can also be obtained with document.querySelector("img").attributes
+//but this way an NamedNodeMap is returned, not an Array and, besides, attributes values are returned as well
+//it can be iterated by using for...of
+for (let atributo of imagen.attributes){
+    console.log (atributo);
+}
+
+//in order to use forEach, an array has to be created in any of the three following ways
+Array.from (imagen.attributes).forEach((atributo)=>{
+    console.log (atributo);
+});
+  
+[...imagen.attributes].forEach((atributo)=>{
+    console.log (atributo);
+});
+  
+Array.prototype.forEach.call(
+    imagen.attributes,
+    (atributo)=>{ console.log (atributo); }
+);
+
+//example creating non-standard attribute and iterating through them
+//attributes collection is iterable
+document.body.setAttribute('myData.age','25');
+for (let attr of document.body.attributes) { 
+    console.log( `${attr.name} = ${attr.value}` );
+}
+
+/////////Removing attributes/////////
+//Removing id from paragraphs
 let parrafos=Array.from (document.getElementsByTagName("p"));
 parrafos.forEach(element => {
         if (element.hasAttribute('id')){
@@ -132,22 +163,14 @@ parrafos.forEach(element => {
         }
 });
 
-//example 3: modifying a boolean attribute
+/////////toggling boolean attribute's value/////////
+//Boolean values are tricky in HTML. If they exists, they are true. Otherwise, they are false. They have no value, just exists or no. If they are assigned to true, they are treated as an string
 let boton=document.getElementById("enviar");
-boton.setAttribute("disabled", "");     //it's a boolean attribute. Had we specify "true", it'd be treated as an string. Therefore, "" means true and the lack of the attribute means false
+boton.setAttribute("disabled", "");     //it's a boolean attribute with true value.
 boton.toggleAttribute("disabled");  //if it doesn't exist, it is created (in a boolean attribute, means true). If it exists, it is removed (in a boolean attribute, means false)
 
-//example 4: creating non-standard attribute
-document.body.setAttribute('myData.title','hola');  //it works
 
-//example 5: creating non-standard attribute and iterating through them
-//attributes collection is iterable
-document.body.setAttribute('myData.age','25');
-for (let attr of document.body.attributes) { 
-    console.log( `${attr.name} = ${attr.value}` );
-}
-
-//example 6
+//more complex example
 let mascotas=[
     {nombre:'gatín', raza:'común europeo'},
     {nombre:'perrín', raza:'cocker'}
