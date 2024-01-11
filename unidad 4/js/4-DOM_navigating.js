@@ -37,15 +37,20 @@ dir.replaceWith(boton);
 parent.insertBefore(dir, boton);
 
 
-////firstChild, lastChild, childNodes////
+////firstChild, firstElementChild////
 //1: get the first Child of any type provided a given node.
 // Caution: Any whitespace will create a text_node (#text "\n  "), from a single space to multiple spaces, returns, tabs...
 //2: get the first Child of type "element_node" provided a given node (#text is not)
-//3: get the lastChild of a given node
-//4: get the list of the children of a given node
-//document.getElementById("listaCompra").firstChild.innerHTML="mangos";
 document.getElementById("listaCompra").firstElementChild.innerHTML="mangos";
-//console.log (a.firstChild.innerHTML);
+
+
+
+////lastChild, lastElementChild, childNodes////
+//1: get the lastChild of a given node (including text_node, nº3)
+//2: get the last child of a given node which is a element_node (nº1)
+//3: get the list of the children of a given node ()
+//document.getElementById("listaCompra").firstChild.innerHTML="mangos";
+
 
 
 /*

@@ -8,19 +8,24 @@
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
   </head>
   <body><!--Esto es un comentario sin ningún sentido-->
-      <h1 id="titulo1">Animales de compañía</h1>
-      <h2>Ejemplo de manipulación de texto en DOM</h2>      
-      <section class="seccion">
-        <img src="../img/gato4.jpg" alt="Un lindo gatito">
-        <p muestra-info="nombre"></p>
-        <p muestra-info="raza"></p>
-        <p class="parrafo_cuerpo" id="parrafo1">Esto es un enlace a <a href="https://es.wikipedia.org/wiki/Felis_silvestris_catus" target="_blank">Felis silvestris catus</a></p>
-      </section>
-      <section class="seccion">
-        <img src="../img/perro2.jpg" alt="Un lindo perrito">
-        <p muestra-info="nombre"></p>
-        <p muestra-info="raza"></p>
-        <p class="parrafo_cuerpo" id="parrafo2">Esto es un enlace a <a href="https://es.wikipedia.org/wiki/Canis_familiaris"  target="_self">Canis familiaris</a></p>
+      <header>
+        <h1 id="titulo1">Animales de compañía</h1>
+        <h2>Ejemplo de manipulación de texto en DOM</h2>
+        <h3>Encabezado de nivel 3</h3>
+      </header>
+      <section>
+        <article id="gato">
+          <img src="../img/gato4.jpg" alt="Un lindo gatito">
+          <p muestra-info="nombre"></p>
+          <p muestra-info="raza"></p>
+          <p class="parrafo_cuerpo" id="parrafo1">Esto es un enlace a <a href="https://es.wikipedia.org/wiki/Felis_silvestris_catus" target="_blank">Felis silvestris catus</a></p>
+        </article>
+        <article id="perro">
+          <img src="../img/perro2.jpg" alt="Un lindo perrito">
+          <p muestra-info="nombre"></p>
+          <p muestra-info="raza"></p>
+          <p class="parrafo_cuerpo" id="parrafo2">Esto es un enlace a <a href="https://es.wikipedia.org/wiki/Canis_familiaris"  target="_self">Canis familiaris</a></p>
+        </article>  
       </section>
       <section>
         <form id="formulario-contacto">
@@ -41,12 +46,12 @@
         </form>
       </section>
       <section id="parrafos">
-        <p class="texto">esto es un párrafo texto</p>
+        <p class="normal">esto es un párrafo normal</p>
         <p class="especial">esto es un párrafo especial</p>
-        <p class="texto">esto es un párrafo texto</p>
+        <p class="normal">esto es un párrafo normal</p>
         <p class="especial">esto es un párrafo especial</p>
-        <p class="texto">esto es un párrafo texto</p>
-        <p>esto es un párrafo normal</p>
+        <p class="normal">esto es un párrafo normal</p>
+        <p>esto es un párrafo sin clase</p>
       </section>   
       <section>
         <ul id="listaCompra">
