@@ -38,14 +38,19 @@ setTimeout(()=>{
 
 ////cloneNode(arg), isConnected////
 //if arg=true, it also clones children
-const seccion_clonada=seccion.cloneNode(false);
+//After cloning, connecting the node to the DOM is needed. isConnected returns true when the node is connected to DOM
+const seccion_clonada=seccion.cloneNode(true);
 console.log (seccion_clonada.isConnected);  //false
 document.body.appendChild(seccion_clonada);
 console.log (seccion_clonada.isConnected);  //true
 
 ////removeChild////
-document.body.querySelector("p")
-zzzzzzz
+//example: removing the last section of the body
+/*Slow way:
+let padre=document.body;
+let borrar=document.querySelector("section:last-of-type");
+padre.removeChild(borrar);*/
+document.body.removeChild(document.querySelector("section:last-of-type"));
 
 ////replaceWith, parentNode, insertBefore////
 //1: Replaces a node with another one
@@ -68,3 +73,4 @@ dir.replaceWith(boton);
 parent.insertBefore(dir, boton);
 
 
+*/
