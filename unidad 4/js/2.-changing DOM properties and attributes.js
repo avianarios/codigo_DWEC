@@ -39,10 +39,10 @@ console.log ("outterHTML:"+document.getElementById("titulo1").outerHTML);
 //example 2: adds a text to a list of elements
 //const parrafos=document.getElementsByTagName("p");
 //let listaParrafos=Array.prototype.slice.call(parrafos);
-let listaParrafos=Array.from (document.getElementsByTagName("p"));
+let listaParrafos=Array.from (document.querySelectorAll("p.normal"));
 listaParrafos.forEach(elemento => {
     setTimeout(()=>{
-        elemento.innerHTML+="<p>Este texto se le ha añadido al enlace original</p>";        //Should innerText or textContend be used, HTML tags would've been literally added
+        elemento.innerHTML+=" <strong>Este texto ha sido añadido tras crear el DOM usando innerHTML</strong>";        //Should innerText or textContend be used, HTML tags would've been literally added
     }, 3000);
 });
 
@@ -65,11 +65,11 @@ setTimeout(()=>{
 ///////textContent///////
 //Gets all the text of the element and its descendants, including invisible, with spacing. Doesn't get HTML tags and doesn't interpret them --> Should be used
 //example 1
-let seleccionado=Array.from(document.getElementsByClassName("parrafo_cuerpo"));
+let seleccionado=Array.from(document.getElementsByClassName("especial"));
 seleccionado.forEach(elemento=>{
     setTimeout(()=>{
-        elemento.textContent+=" Vaya animal más adorable";
-    }, 2000);
+        elemento.textContent+=" <strong>Este texto ha sido añadido tras crear el DOM usando textContent</strong>";
+    }, 3000);
 });
 
 //example 2
@@ -108,17 +108,27 @@ document.body.setAttribute('fecha','11/1/2024');  //it works
 imagen.alt="el nuevo texto de la imagen";
 imagen.src="https://picsum.photos/300";
 imagen.derechos_de_autor="no";  //it doesn't work
-imagen.setAttribute("derechos de autor", "no")
+imagen.setAttribute("derechos_de_autor", "no");
 
 
 /////////Checking element's attributes/////////
+//example 1: changing src attribute from images
 console.log("¿La imagen tiene atributos?:"+imagen.hasAttributes());
-console.log("¿La imagen tiene el atributo derechos de autor?:"+imagen.hasAttribute("derechos de autor"));
+console.log("¿La imagen tiene el atributo derechos de autor?:"+imagen.hasAttribute("derechos_de_autor"));
 console.log("¿La imagen tiene el atributo cámara?:"+imagen.hasAttribute("camara"));
 if (imagen.hasAttribute('src')){
     console.log ("El atributo src de la imagen es "+imagen.getAttribute('src'));
     imagen.setAttribute('src', 'https://picsum.photos/300');
 }
+
+//example 2: adding id to the first paragraph of any section, no matter if it's direct child or not
+aux=document.body.querySelectorAll("section p:first-of-type");
+let i=0;
+for (let parrafo of aux){
+	parrafo.setAttribute("id",`id_parrafo${i}`);
+    i++;
+}
+
 
 /////////Getting attribute names/////////
 console.log("Nombres de los atributos de la imagen:"+imagen.getAttributeNames());
@@ -162,6 +172,49 @@ parrafos.forEach(element => {
             element.removeAttribute('id');
         }
 });
+
+
+////////Special attribute: class////////
+//class is an attribute than can store many values separated by spaces. Thus, it needs to be treated differently
+//aux=document.body.querySelector("#parrafos p.normal");  //I get the first paragraph with any class defined
+
+//getting classes information
+//classlist -> returns a list of classes
+//classlist.value  -> returns the list of classes as a string
+//classlist.length
+//classlist.contains("class") -> returns true if element has "class"
+
+let enlaces=document.body.querySelectorAll("a");    //I get the links
+for (let enlace of enlaces){
+    if (enlace.classList.length>0){
+        console.log (enlace.classList.length,
+                     enlace.classList.value); 
+        console.log(enlace.classList.item(enlace.classList.length-1)); //Returns a specific class
+        console.log (enlace.classList.contains("una_clase"));   
+    }
+}
+
+
+//performing operation with classes
+//classlist.add -> adds a class
+//enlaces=document.body.querySelectorAll("a");    //I get the links
+for (let enlace of enlaces){
+    enlace.classList.add("clase_nueva1","clase_nueva2");        //Adds classes
+}
+
+//classlist.replace(old, new)
+enlace=enlaces[0].classList;    //Selecting the first link
+enlace.replace("clase_nueva1", "clase_mas_nueva1");
+
+//classlist.remove -> removes a class
+enlace.remove("clase_nueva2");
+enlace=enlaces[1].classList;    //Selecting the first link
+enlace.remove(enlace.item(enlace.length-1));    //removes the last class
+
+
+//classlist.toggle("clase") -> remove "clase" if exists, creates if not
+enlace.toggle("clase_nueva");
+
 
 /////////toggling boolean attribute's value/////////
 //Boolean values are tricky in HTML. If they exists, they are true. Otherwise, they are false. They have no value, just exists or no. If they are assigned to true, they are treated as an string
