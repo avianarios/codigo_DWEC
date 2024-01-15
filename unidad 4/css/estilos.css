@@ -9,7 +9,8 @@ body{
     font-weight: 100;
 }
 
-#parrafos>article{
+article{
     border: 3px solid black;
     margin: 10px;
 }
+
