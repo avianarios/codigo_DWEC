@@ -8,49 +8,14 @@
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
   </head>
   <body>
-      <!--Esto es un comentario sin ningún sentido-->
-      <header>
-        <h1 id="titulo1">Animales de compañía</h1>
-        <h2>Ejemplo de manipulación de texto en DOM</h2>      
-        <h3>Encabezado de nivel 3</h3>
-      </header>
-      <!--The blank space after section tag has been purposely removed-->
-      <section id="animales"><article id="gato">
-          <img src="../img/gato4.jpg" alt="Un lindo gatito">
-          <p muestra-info="nombre"></p>
-          <p muestra-info="raza"></p>
-          <p class="parrafo_cuerpo" id="parrafo1">Esto es un enlace a <a href="https://es.wikipedia.org/wiki/Felis_silvestris_catus" target="_blank">Felis silvestris catus</a></p>
-        </article><article id="perro">
-          <img src="../img/perro2.jpg" alt="Un lindo perrito">
-          <p muestra-info="nombre"></p>
-          <p muestra-info="raza"></p>
-          <p class="parrafo_cuerpo" id="parrafo2">Esto es un enlace a <a href="https://es.wikipedia.org/wiki/Canis_familiaris"  target="_self">Canis familiaris</a></p>
-        </article><pepe></pepe>
-      </section>
       <section>
-        <article>
-          <form id="formulario_contacto">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" placeholder="nombre" required>
-            <label for="apellidos">Apellidos</label>
-            <input type="text" id="apellidos" name="apellidos" placeholder="apellidos">
-            <label for="correo">Correo-e</label>
-            <input type="text" id="correo" name="correo" placeholder="Correo electrónico">
-            <label for="dni">DNI</label>
-            <input type="text" name="dni" required pattern="(([X-Z]{1}-?[0-9]{7})|([0-9]{8}))[A-Z]{1}" />
-            <label for="dni">Edad</label>
-            <input type="number" name="edad" min="18" max="100"/>
-            <input type="checkbox" checked name="first" value="first"> <label for="first">First option</label>
-            <input type="checkbox" name="second" value="second"> <label for="second">Second option</label>
-            <input type="checkbox" name="third" value="third" disabled> <label for="third">Third option</label>
-            <button id="enviar">Enviar</button>
-          </form>
-        </article>
-        <article>
-          <p>useless button than listen for a click event before calling two methods: saluda and cambiaTexto </p>
           <button id="cambiaTexto">Cambia texto</button>
-          <button id="eliminaEventos">Elimina eventos</button>
+        <article>
+          <h1 id="hoverPara">Hover over this Text !</h1>
+          <b id="effect"></b>
+          <button id="clickIt">Click here to stop listening for events</button>
         </article>
+        <button id="cambiaClase">Change style</button>
       </section>
   </body>
 </html>
