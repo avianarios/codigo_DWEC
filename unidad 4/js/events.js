@@ -40,8 +40,36 @@ Event listener-> attaches an interface to an element allowing it to “listen”
 */
 
 
+function makeid(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+
+
+
 //creating an event listener
-let boton=document.querySelector("#formulario_contacto button");
+let boton=document.querySelector("#cambiaTexto");
+let cambiaTexto=()=>{ boton.innerText=makeid(5)}
+let saluda=()=> { console.log('¡Saludos, criatura!'); };
+
+boton.addEventListener("click", cambiaTexto);
 boton.addEventListener("click", saluda);
 
-let saluda=()=> { console.log('¡Saludos, criatura!'); };
+//removing an event listener
+/* boton2=document.querySelector("#eliminaEventos");
+let eliminaEventos=(cual)=>{
+    console.log(cual);
+    let aux=document.querySelector(`#${cual}`);
+    aux.removeEventListener("click", cambiaTexto)
+}
+
+boton2=addEventListener("click", eliminaEventos("cambiaTexto"));
+
+*/
