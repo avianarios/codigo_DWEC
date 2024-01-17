@@ -14,3 +14,10 @@ article{
     margin: 10px;
 }
 
+.oculto{
+    visibility: hidden;
+}
+
+.rojo{
+    background-color: red;
+}

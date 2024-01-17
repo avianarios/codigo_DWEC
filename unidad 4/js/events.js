@@ -40,6 +40,9 @@ Event listener-> attaches an interface to an element allowing it to “listen”
 */
 
 
+
+//creating an event listener
+//example 1
 function makeid(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -53,8 +56,6 @@ function makeid(length) {
 }
 
 
-
-//creating an event listener
 let boton=document.querySelector("#cambiaTexto");
 let cambiaTexto=()=>{ boton.innerText=makeid(5)}
 let saluda=()=> { console.log('¡Saludos, criatura!'); };
@@ -62,14 +63,26 @@ let saluda=()=> { console.log('¡Saludos, criatura!'); };
 boton.addEventListener("click", cambiaTexto);
 boton.addEventListener("click", saluda);
 
-//removing an event listener
-/* boton2=document.querySelector("#eliminaEventos");
-let eliminaEventos=(cual)=>{
-    console.log(cual);
-    let aux=document.querySelector(`#${cual}`);
-    aux.removeEventListener("click", cambiaTexto)
+//example 2
+let button = document.querySelector("#cambiaClase");
+const toggle = () => button.classList.toggle("rojo");
+button.addEventListener("click", toggle);         // Add/remove red CSS
+
+
+//removeEventListener
+const y = document.getElementById("hoverPara");
+y.addEventListener("mouseover", RespondMouseOver);
+
+const z=document.getElementById("clickIt");
+z.addEventListener("click", RespondClick);
+ 
+function RespondMouseOver() {
+    document.getElementById("effect").innerHTML +=
+        "mouseover Event !!" + "<br>";
 }
-
-boton2=addEventListener("click", eliminaEventos("cambiaTexto"));
-
-*/
+ 
+function RespondClick() {
+    y.removeEventListener("mouseover", RespondMouseOver);
+    document.getElementById("effect").innerHTML +=
+        'You clicked the "click here" button. Now mouseover event doesn\'t work !!';
+}
