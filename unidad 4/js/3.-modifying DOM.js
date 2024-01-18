@@ -36,8 +36,8 @@ setTimeout(()=>{
 },3000);
 
 ////remove and removeChild////
-//1: Needs a reference to the parent and the node being removed (the child)
-//2: Needs only a reference to the node being removed
+//1: Needs only a reference to the node being removed
+//2: Needs a reference to the parent and the node being removed (the child). Returns a reference to the removed node so it can be connected to the DOM again
 //caution: removing does not erases the element. It is just disconnected from the DOM, but still exists (until web browser's garbage collector removes it from memory). Therefore, it can be inserted again
 let borrar=document.querySelector("#lista_compra");
 borrar.isConnected ? console.log ("El elemento está conectado al DOM") : console.log ("El elemento no está conectado al DOM");
