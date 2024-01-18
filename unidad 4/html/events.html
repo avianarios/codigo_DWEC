@@ -6,16 +6,42 @@
     <title>Simple DOM example</title>
     <script src="../js/events.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&family=Roboto:wght@300&display=swap" rel="stylesheet">
   </head>
   <body>
       <section>
-          <button id="cambiaTexto">Cambia texto</button>
         <article>
-          <h1 id="hoverPara">Hover over this Text !</h1>
-          <b id="effect"></b>
-          <button id="clickIt">Click here to stop listening for events</button>
+          <button id="cambiaTexto">Cambia texto</button>
+          <button id="cambiaClase">Change style</button>
+          <button id="coordenadas">Coordinates</button>
+          <button id="boton4">Press here</button>
+          <p id="texto_articulo1"></p>
         </article>
-        <button id="cambiaClase">Change style</button>
+        <article>
+          <h3 id="hoverPara">Hover over this Text !</h3>
+          <p id="effect"></p>
+          <button id="clickIt">Stop listening for events</button>
+        </article>
+      </section>
+      <section id="bubbling" class="borde_negro m20">
+        <article class="borde_negro m20">
+          <h3>Bubbling</h3>
+          <p class="borde_negro m20">This is a paragraph inside an article inside a section. Press at any place on this paragraph to console out how events are transmitted all the way up</p>
+        </article>
+      </section>
+      <section id="bubbling2" class="borde_negro m20">
+        <article class="borde_negro m20">
+          <h3>Capturing an event occurred on a child</h3>
+          <p class="borde_negro m20">This is a paragraph. Only the section parent has defined an event handler</p>
+        </article>
+      </section>
+      <section id="stop_bubbling" class="borde_negro m20">
+        <article class="borde_negro m20">
+          <h3>Bubbling stopped</h3>
+          <p class="borde_negro m20">An eventHandler is defined at this paragraph. It won't allow bubbling. Do it just when there's a real reason</p>
+        </article>
       </section>
   </body>
 </html>
