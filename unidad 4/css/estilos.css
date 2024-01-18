@@ -1,18 +1,12 @@
 body{
     margin: 0 auto;
-    width: 66vw;
+    width: 50vw;
     background-color:aliceblue;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
-.parrafo_cuerpo{
-    font-size: 0.75rem;
-    font-weight: 100;
-}
 
-article{
-    border: 1px solid black;
-    margin: 10px;
-}
 
 .oculto{
     visibility: hidden;
@@ -20,4 +14,16 @@ article{
 
 .rojo{
     background-color: red;
+}
+
+.borde_negro{
+    border: 1px solid black;
+}
+
+.m20{
+    margin:20px;
+}
+
+h3{
+    text-align: center;
 }
