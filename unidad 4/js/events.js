@@ -121,7 +121,7 @@ const eventManager = new EventManager(button);
 
 
 
-//example 5: bubbling
+//example 6: bubbling
 //let's add event listeners all the way up on ancestors of a paragraph
 let seccion=document.querySelector("#event_handler");
 let articulo=document.querySelector("#bubbling_phase");
@@ -185,9 +185,6 @@ parrafo.addEventListener('click', function (evento){
     evento.stopPropagation();
     console.log("Estoy en "+this.tagName+", y el evento lo lanzó "+evento.target.tagName);
 }, true);   //beware of this "true" option
-
-
-
 
 
 
