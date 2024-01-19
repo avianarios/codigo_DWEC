@@ -13,12 +13,14 @@
   <body>
       <section class="contenedor-flex-nv1 ai-center gap">
         <section class="contenedor-flex-nv1 ai-center borde gap">
-          <article class="borde">
-            <h3>Simple event examples</h3>
-            <button id="cambiaTexto">Cambia texto</button>
-            <button id="cambiaClase">Change colour</button>
-            <button id="boton4">example 4</button>
-            <button id="boton5">example 5</button>
+          <article class="contenedor-flex-nv1 gap borde jc-center">
+            <h3>addEventListener</h3>
+            <ul class="contenedor-flex-nv2 gap borde jc-center">
+              <li><button id="cambiaTexto">Cambia texto</button></li>
+              <li><button id="cambiaClase">Change colour</button></li>
+              <li><button id="boton4">example 4</button></li>
+              <li><button id="boton5">example 5</button></li>
+            </ul>
           </article>
           <article class="borde">
             <h3>Reading event information</h3>
@@ -27,8 +29,8 @@
             <button id="coordenadas">Get event info</button>
             <p id="texto_coordenadas"></p>
           </article>
-          <article class="borde">
-            <h3 id="hoverPara">Hover over this Text !</h3>
+          <article class="contenedor-flex-nv1 borde">
+            <h3 id="hoverPara">removeEventListener (hover this text)</h3>
             <p id="effect"></p>
             <button id="clickIt">Stop listening for events</button>
           </article>

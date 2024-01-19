@@ -1,6 +1,6 @@
 body{
     /*width: 50%;*/
-    width: 50vw;
+    width: 60vw;
     margin: 0 auto;
     background-color: lightblue;
     font-family: 'Open Sans', sans-serif;
@@ -21,13 +21,13 @@ h3{
     width: 80%; 
 }
 
-article, .borde_negro{
+.borde_negro{
     border: 1px solid;
 }
 
 .contenedor-flex-nv1{
     background-color: bisque;
-    padding: 10px 50px 50px 50px;
+    /*padding: 10px 50px 50px 50px;*/
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -38,12 +38,23 @@ article, .borde_negro{
     padding: 0;
     margin: 0;
 }
+
+.flex-columna{
+    flex-direction: column;
+}
   
 .ai-center{
     align-items: center;
+}
+
+.jc-center{
+    justify-content: center;
 }
 
 .gap{
     gap:10px;
 }
   
+ul{
+    list-style: none;
+}
