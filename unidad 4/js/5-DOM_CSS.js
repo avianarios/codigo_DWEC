@@ -1,12 +1,3 @@
-/*main sources:
-https://www.digitalocean.com/community/tutorials/how-to-modify-attributes-classes-and-styles-in-the-dom
-https://www.javascripttutorial.net/javascript-dom/
-https://alvarotrigo.com/blog/change-css-javascript/
-https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
-https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
-https://www.w3schools.com/
-*/
-
 ///////////////////////////////////
 ////manipulating CSS Properties////
 ///////////////////////////////////
@@ -39,19 +30,6 @@ const miEstilo= `
 `;
 elemento.style.cssText=miEstilo;
 
-
-
-////////////////////////////////////////////
-////add, remove, replace, toggle classes////
-////////////////////////////////////////////
-//4-If it doesn't exist, then it's added. If it exists, then it's removed
-let a=Array.from(document.getElementsByClassName("parrafo_cuerpo"));
-a.forEach(elemento=>{
-    elemento.classList.add("otraClase");
-    elemento.classList.toggle("parrafo_cuerpo")
-});
-
-
 //////////////////////////////////////////////
 ////////////modify CSS stylesheets////////////
 //////////////////////////////////////////////
@@ -62,7 +40,7 @@ a.forEach(elemento=>{
 //////////////////////////////////////////////
 
 // Getting the stylesheet
-////////////zzzzzzzzzzzzzz
+////////////
 const stylesheet = document.styleSheets[1]; //the second linked stylesheet
 let elementRules;
 
@@ -75,24 +53,6 @@ for(let i = 0; i < stylesheets.cssRules.length; i++) {
 
 // modifying the rule in the stylesheet
 elementRules.style.setProperty('background', 'blue');
-
-
-
-/*
-const button = document.querySelector('button');
-// Not all browsers have `forEach` on NodeLists, convert to array
-const paragraphs = Array.from(document.querySelectorAll('p'));
-const image = document.querySelector('img');
-
-button.addEventListener('click', clickHandler);
-image.addEventListener('click', clickHandler);
-
-function clickHandler(e) {
-  // Loop through all paragraph tags
-  paragraphs.forEach(p => p.style.color = 'red');
-}*/
-
-
 
 
 
