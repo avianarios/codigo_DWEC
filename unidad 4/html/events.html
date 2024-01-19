@@ -11,37 +11,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&family=Roboto:wght@300&display=swap" rel="stylesheet">
   </head>
   <body>
-      <section>
-        <article>
-          <button id="cambiaTexto">Cambia texto</button>
-          <button id="cambiaClase">Change style</button>
-          <button id="coordenadas">Coordinates</button>
-          <button id="boton4">Press here</button>
-          <p id="texto_articulo1"></p>
-        </article>
-        <article>
-          <h3 id="hoverPara">Hover over this Text !</h3>
-          <p id="effect"></p>
-          <button id="clickIt">Stop listening for events</button>
-        </article>
-      </section>
-      <section id="bubbling" class="borde_negro m20">
-        <article class="borde_negro m20">
-          <h3>Bubbling</h3>
-          <p class="borde_negro m20">This is a paragraph inside an article inside a section. Press at any place on this paragraph to console out how events are transmitted all the way up</p>
-        </article>
-      </section>
-      <section id="bubbling2" class="borde_negro m20">
-        <article class="borde_negro m20">
-          <h3>Capturing an event occurred on a child</h3>
-          <p class="borde_negro m20">This is a paragraph. Only the section parent has defined an event handler</p>
-        </article>
-      </section>
-      <section id="stop_bubbling" class="borde_negro m20">
-        <article class="borde_negro m20">
-          <h3>Bubbling stopped</h3>
-          <p class="borde_negro m20">An eventHandler is defined at this paragraph. It won't allow bubbling. Do it just when there's a real reason</p>
-        </article>
-      </section>
+      <section class="contenedor-flex-nv1 ai-center gap">
+        <section class="contenedor-flex-nv1 ai-center borde gap">
+          <article class="borde">
+            <h3>Simple event examples</h3>
+            <button id="cambiaTexto">Cambia texto</button>
+            <button id="cambiaClase">Change colour</button>
+            <button id="boton4">example 4</button>
+            <button id="boton5">example 5</button>
+          </article>
+          <article class="borde">
+            <h3>Reading event information</h3>
+            <p>Events are stored in an object which provides additional information. Different types of events provide different properties</p>
+            <p>type, currentTarget, target, istrusted, timeStamp, clientX, clientY</p>
+            <button id="coordenadas">Get event info</button>
+            <p id="texto_coordenadas"></p>
+          </article>
+          <article class="borde">
+            <h3 id="hoverPara">Hover over this Text !</h3>
+            <p id="effect"></p>
+            <button id="clickIt">Stop listening for events</button>
+          </article>
+        </section>
+
+        <section id="event_handler" class="contenedor-flex-nv1 ai-center borde gap">
+          <header>
+            <h1>Event propagation</h1>
+            <p>The standard DOM Events describes 3 phases of event propagation:</p>
+            <ol>
+              <li>Capturing phase – the event goes all the way down from Window>Document>HTML>... to the element.</li>
+              <li>Target phase – the event reached the target element. It is not handled separately, but at capturing and at bubbling phase</li>
+              <li>Bubbling phase – the event bubbles all the way up from the element to ...HTML>Document>Window</li>
+            </ol>
+          </p>
+          </header>
+          <article id="handler_on_parent" class="borde">
+            <h3>Capturing on a parent handler an event occurred on a child</h3>
+            <p class="borde_negro m20">This is a paragraph. Article has no event handler, only its parent, section</p>
+          </article>
+          <article id="bubbling_phase" class="borde">
+            <h3>Bubbling</h3>
+            <p class="borde_negro m20">This is by default how events are handled by eventHandlers. Press at any place on this paragraph to console out how events are transmitted all the way up</p>
+          </article>
+          <article id="stop_bubbling" class="borde">
+            <h3>Bubbling stopped</h3>
+            <p class="borde_negro m20">An eventHandler is defined at this paragraph. It won't allow bubbling. Do it unless there's a real reason</p>
+          </article>
+        </section>
+        <section id="event_handler2" class="contenedor-flex-nv1 ai-center borde gap">
+          <article id="capturing_phase" class="borde">
+            <h3>Capturing phase</h3>
+            <p class="borde_negro m20">This is not standard way of capturing events. A third optional element in addEventListener is required to be true</p>
+          </article>          
+        </section>
+    </section>
   </body>
 </html>

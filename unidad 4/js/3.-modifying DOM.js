@@ -36,9 +36,9 @@ setTimeout(()=>{
 },3000);
 
 ////remove and removeChild////
+//removing does not erases the element. It is just disconnected from the DOM, but still exists (until web browser's garbage collector removes it from memory)
 //1: Needs only a reference to the node being removed
 //2: Needs a reference to the parent and the node being removed (the child). Returns a reference to the removed node so it can be connected to the DOM again
-//caution: removing does not erases the element. It is just disconnected from the DOM, but still exists (until web browser's garbage collector removes it from memory). Therefore, it can be inserted again
 let borrar=document.querySelector("#lista_compra");
 borrar.isConnected ? console.log ("El elemento está conectado al DOM") : console.log ("El elemento no está conectado al DOM");
 let referencia=document.querySelector("#lista").removeChild(borrar);
@@ -62,18 +62,17 @@ texto=document.createTextNode("Texto creado con JS para insertalo en el DOM din�
 nodo.appendChild(texto);
 parrafo_temporal.appendChild(nodo);
 
-
 padre=document.querySelector("#parrafos>article");
 lugar_insercion1=document.querySelector("#parrafos>article:first-of-type>p:nth-of-type(3)");
-lugar_insercion2=document.querySelector("#parrafos>article:first-of-type>p:last-of-type");
 
-let parrafo_temporal2=parrafo_temporal.cloneNode(true);
-let parrafo_temporal3=parrafo_temporal.cloneNode(true);
 padre.insertBefore(parrafo_temporal, lugar_insercion1);
 
 ////before and after////
 //before is similar to insertBefore method, but needless to specify parent element
 //example 1
+let parrafo_temporal2=parrafo_temporal.cloneNode(true);
+let parrafo_temporal3=parrafo_temporal.cloneNode(true);
+lugar_insercion2=document.querySelector("#parrafos>article:first-of-type>p:last-of-type");
 lugar_insercion1.before(parrafo_temporal2);
 lugar_insercion2.after(parrafo_temporal3);
 
@@ -116,7 +115,9 @@ objetivo.after(seccion_clonada);
 
 parrafo=document.createElement("p");
 parrafo.textContent="nuevo texto";
-//element=document.createTextNode("nuevo texto");
+//alternative to .textContent:
+//  texto=document.createTextNode("nuevo texto");
+//  parrafo.appendChild(texto);
 
 //elemento_final.replaceWith(parrafo);
 objetivo.replaceWith(parrafo);  

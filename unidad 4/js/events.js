@@ -64,20 +64,25 @@ let saluda=()=> { console.log('¡Saludos, criatura!'); };
 boton.addEventListener("click", cambiaTexto);       //Warning!! if cambiaTexto() is assigned, it is a function call
 boton.addEventListener("click", saluda);
 
-//example 2
+//example 2: changing button color
 let boton2 = document.querySelector("#cambiaClase");
 const toggle = () => boton2.classList.toggle("rojo");
 boton2.addEventListener("click", toggle);         // Add/remove red CSS. 
 
-//example 3
+//example 3: Reading event information 
 //when an event occurs, the browser creates an event object, puts details into it and passes to the event handler
+//type, currentTarget, target, istrusted, timeStamp, clientX, clientY
 let boton3 = document.querySelector("#coordenadas");
-const coordenadas = (event) => {
-    document.getElementById("texto_articulo1").innerHTML="An event of type: "+event.type + " has occurred at:" + event.currentTarget+" at coordinates "+event.clientX+":"+event.clientY;
-}
-boton3.addEventListener("click", coordenadas);
+boton3.addEventListener("click", (event) => {
+    document.getElementById("texto_coordenadas").innerHTML="An event of type: "+event.type + " has occurred at:" + event.currentTarget+" at time "+event.timeStamp +" at coordinates X:"+event.clientX+" Y:"+event.clientY;
+    ( event.isTrusted ) ? texto_coordenadas.innerHTML+="<br>Is a trusted event (launched by web browser)" : texto_coordenadas.innerHTML+="Is not a trusted event (launched by programmer)";
+    //also works: texto_coordenadas.innerHTML="An event of type: "+event.type + " has occurred at:" + event.currentTarget+" at coordinates X:"+event.clientX+" Y:"+event.clientY;
+});
+/*const { type, timeStamp, isTrusted } = event;
+console.log({ type, timeStamp, isTrusted });*/
 
-//example 4
+
+//example 4: handling events with an object
 //Besides a function, an object as an event handler can be assigned by using addEventListener. When an event occurs, its handleEvent method is called.
 class Manejador {
     handleEvent(event) {
@@ -93,50 +98,98 @@ class Manejador {
     onMouseup() {
       boton4.innerHTML += "...and released.";
     }
-  }
+}
+let menu = new Manejador();
+boton4.addEventListener('mousedown', menu);
+boton4.addEventListener('mouseup', menu);
 
-  let menu = new Manejador();
-  boton4.addEventListener('mousedown', menu);
-  boton4.addEventListener('mouseup', menu);
+
+//example 5: handling events with an object
+class EventManager {
+    constructor(element) {
+      element.addEventListener('click', ()=>this.sendMessage());      //by using an arrow function, this references to the eventManager class allowing to call other methods within any method
+    }
+  
+    sendMessage() {
+      alert("Has hecho click en el botón");
+    }
+}
+  
+const button = document.querySelector("#boton5");
+const eventManager = new EventManager(button);
 
 
-//example 5
-//usage of the third, optional, parameter. It controls when to trigger the event: bubbling phase (false, default) of capturing phase (true)
+
+
+//example 5: bubbling
 //let's add event listeners all the way up on ancestors of a paragraph
-let seccion=document.querySelector("section#bubbling");
-let articulo=seccion.querySelector("article:first-of-type");
-let parrafo=articulo.querySelector("p:first-of-type");
+let seccion=document.querySelector("#event_handler");
+let articulo=document.querySelector("#bubbling_phase");
+let parrafo=articulo.querySelector("#bubbling_phase p");
 seccion.addEventListener('click', function(evento){
-    console.log("Estoy en "+this.tagName+", pero el evento lo lanzó "+evento.target.tagName);
-});
-articulo.addEventListener('click', function(evento){
     //evento.currentTarget is equal to this
-    console.log("Estoy en "+evento.currentTarget.tagName+", pero el evento lo lanzó "+evento.target.tagName);
-});
-parrafo.addEventListener('click', function(){
-    console.log("Estoy en "+this.tagName);
-});
-
-
-//example 6
-//A handler on a parent element can always get the details about where it actually happened.
-seccion=document.querySelector("section#bubbling2");
-seccion.addEventListener('click', function(evento){
     console.log("Estoy en "+this.tagName+", pero el evento lo lanzó "+evento.target.tagName);
 });
 
-//example 7
-//stop bubbling
-seccion=document.querySelector("section#stop_bubbling");
-parrafo=document.querySelector("section#stop_bubbling > article > p");
+articulo.addEventListener('click', function(evento){
+    console.log("Estoy en "+this.tagName+", pero el evento lo lanzó "+evento.target.tagName);
+});
+//this.tagName equals evento.currentTarget.tagName
+
+parrafo.addEventListener('click', function(evento){
+    console.log("Estoy en "+this.tagName+", y el evento lo lanzó "+evento.target.tagName);
+});
+
+
+//example 6: Capturing on a parent handler an event occurred on a child
+//A handler on a parent element can always get the details about where it actually happened.
+/*articulo=document.querySelector("#handler_on_parent");
+articulo.addEventListener('click', (evento)=>
+    console.log("Estoy en "+evento.currentTarget.tagName+", pero el evento lo lanzó "+evento.target.tagName)
+);*/
+/*alternative:
+articulo.addEventListener('click', function(evento){
+    console.log("Estoy en "+this.tagName+", pero el evento lo lanzó "+evento.target.tagName);
+});*/
+
+
+//example 7: stop bubbling
+articulo=document.querySelector("#stop_bubbling");
+parrafo=document.querySelector("#stop_bubbling > p");
 parrafo.addEventListener('click', function (evento){
     evento.stopPropagation();
     console.log("Estoy en "+this.tagName+", y el evento lo lanzó "+evento.target.tagName);
 });
 
-seccion.addEventListener('click', function (evento){
+articulo.addEventListener('click', function (evento){
     console.log("Estoy en "+this.tagName+", y el evento lo lanzó "+evento.target.tagName);
 });
+
+//example 8: capturing phase
+//when the third, optional, parameter of addEventListener is set to be true, the handler is set on capturing phase
+seccion=document.querySelector("#event_handler2");
+articulo=document.querySelector("#capturing_phase");
+parrafo=document.querySelector("#capturing_phase > p");
+
+seccion.addEventListener('click', function(evento){
+    //evento.currentTarget is equal to this
+    console.log("Estoy en "+evento.currentTarget.tagName+", pero el evento lo lanzó "+evento.target.tagName);
+}, true);
+
+articulo.addEventListener('click', function(evento){
+    console.log("Estoy en "+this.tagName+", pero el evento lo lanzó "+evento.target.tagName);
+}, true);
+//this.tagName equals evento.currentTarget.tagName
+
+parrafo.addEventListener('click', function (evento){
+    evento.stopPropagation();
+    console.log("Estoy en "+this.tagName+", y el evento lo lanzó "+evento.target.tagName);
+}, true);   //beware of this "true" option
+
+
+
+
+
 
 
 
