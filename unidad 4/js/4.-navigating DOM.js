@@ -45,3 +45,7 @@ console.log (origen.lastChild);
 console.log (origen.previousSibling);
 console.log (origen.nextSibling);
 
+
+//closest parent to elemento that matches "section" CSS selector
+let elemento=document.querySelector("[alt*='gatito']");
+console.log (elemento.closest("section"));
