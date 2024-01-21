@@ -11,61 +11,93 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&family=Roboto:wght@300&display=swap" rel="stylesheet">
   </head>
   <body>
-      <section class="contenedor-flex-nv1 ai-center gap">
-        <section class="contenedor-flex-nv1 ai-center borde gap">
-          <article class="contenedor-flex-nv1 gap borde jc-center">
-            <h3>addEventListener</h3>
-            <ul class="contenedor-flex-nv2 gap borde jc-center">
-              <li><button id="cambiaTexto">Cambia texto</button></li>
-              <li><button id="cambiaClase">Change colour</button></li>
-              <li><button id="boton4">example 4</button></li>
-              <li><button id="boton5">example 5</button></li>
-            </ul>
-          </article>
-          <article class="borde">
-            <h3>Reading event information</h3>
-            <p>Events are stored in an object which provides additional information. Different types of events provide different properties</p>
-            <p>type, currentTarget, target, istrusted, timeStamp, clientX, clientY</p>
-            <button id="coordenadas">Get event info</button>
-            <p id="texto_coordenadas"></p>
-          </article>
-          <article class="contenedor-flex-nv1 borde">
-            <h3 id="hoverPara">removeEventListener (hover this text)</h3>
-            <p id="effect"></p>
-            <button id="clickIt">Stop listening for events</button>
-          </article>
-        </section>
 
-        <section id="event_handler" class="contenedor-flex-nv1 ai-center borde gap">
-          <header>
-            <h1>Event propagation</h1>
-            <p>The standard DOM Events describes 3 phases of event propagation:</p>
-            <ol>
-              <li>Capturing phase – the event goes all the way down from Window>Document>HTML>... to the element.</li>
-              <li>Target phase – the event reached the target element. It is not handled separately, but at capturing and at bubbling phase</li>
-              <li>Bubbling phase – the event bubbles all the way up from the element to ...HTML>Document>Window</li>
-            </ol>
-          </p>
-          </header>
-          <article id="handler_on_parent" class="borde">
-            <h3>Capturing on a parent handler an event occurred on a child</h3>
-            <p class="borde_negro m20">This is a paragraph. Article has no event handler, only its parent, section</p>
-          </article>
-          <article id="bubbling_phase" class="borde">
-            <h3>Bubbling</h3>
-            <p class="borde_negro m20">This is by default how events are handled by eventHandlers. Press at any place on this paragraph to console out how events are transmitted all the way up</p>
-          </article>
-          <article id="stop_bubbling" class="borde">
-            <h3>Bubbling stopped</h3>
-            <p class="borde_negro m20">An eventHandler is defined at this paragraph. It won't allow bubbling. Do it unless there's a real reason</p>
-          </article>
-        </section>
-        <section id="event_handler2" class="contenedor-flex-nv1 ai-center borde gap">
-          <article id="capturing_phase" class="borde">
-            <h3>Capturing phase</h3>
-            <p class="borde_negro m20">This is not standard way of capturing events. A third optional element in addEventListener is required to be true</p>
-          </article>          
-        </section>
+    <section class="contenedor-flex-columna gap">
+      <section class="contenedor-flex-columna ai-center borde gap">
+        <article class="contenedor-flex-columna gap borde jc-center">
+          <h3>Attaching one or several event handlers</h3>
+          <ul class="contenedor-flex-fila gap jc-center">
+            <li><button id="cambiaClase">Change button colour</button></li>
+            <li><button id="cambiaTexto">Count clicks</button></li>
+          </ul>
+        </article>
+
+        <article class="contenedor-flex-columna gap borde jc-center">
+          <h3>Reading event information</h3>
+          <p>Events are stored in an object which provides additional information. Different types of events provide different properties</p>
+          <p>type, currentTarget, target, istrusted, timeStamp, clientX, clientY</p>            
+          <button id="informacionEvento">Event object information</button>
+          <p id="texto_coordenadas" class="dp_none"></p>
+        </article>
+
+        <article class="contenedor-flex-columna gap borde jc-center">
+          <h3>Defining an event handler using an object instead of a function</h3>
+          <p>aaaaaaa</p>
+          <ul class="contenedor-flex-fila gap jc-center">
+            <li><button id="eventhandler_object1">One event with object</button></li>
+            <li><button id="eventhandler_object2">Example 2</button></li>
+          </ul>
+        </article>
+
+        <article class="contenedor-flex-columna gap borde jc-center">
+          <h3>Using data attributes alongside objects to assign event handlers just once</h3>
+          <p>There's no need to assign an event handler at each element. data attributes can be used to assign event handlers once</p>
+          <ul id="botones_accion" class="contenedor-flex-fila gap jc-center">
+            <li><button data-accion="save">Save</button></li>
+            <li><button data-accion="load">Load</button></li>
+            <li><button data-accion="search">Search</button></li>
+          </ul>
+          <p id="texto_botones_accion"></p>
+        </article>
+
+        <article class="contenedor-flex-columna borde jc-center">
+          <h3 id="hoverPara">Removing event listener (hover this text)</h3>
+          <p id="effect"></p>
+          <button id="clickIt">Stop listening for events</button>
+        </article>
+      </section>
+
+
+      <section id="event_propagation" class="contenedor-flex-columna ai-center borde gap">
+        <header>
+          <h3>Event propagation</h3>
+          <p>The standard DOM Events describes 3 phases of event propagation:</p>
+          <ol>
+            <li>Capturing phase – the event goes all the way down from Window>Document>HTML>... to the element.</li>
+            <li>Target phase – the event reached the target element. It is not handled separately, but at capturing and at bubbling phase</li>
+            <li>Bubbling phase – the event bubbles all the way up from the element to ...HTML>Document>Window</li>
+          </ol>
+          <p>Event handlers have been created only for this section. It could've been created for the whole document, starting at window->document->html...</p>
+        </header>
+        <article id="bubbling_phase" class="borde">
+          <h3>Bubbling</h3>
+          <p class="borde_negro m20">This is by default how events are handled by eventHandlers. Click at any place on this paragraph to console out how events are transmitted all the way up</p>
+        </article>
+        <article id="capturing_phase" class="contenedor-flex-columna borde jc-center">
+          <h3>Capturing</h3>
+          <p class="borde_negro m20">This is not standard way of capturing events. A third optional element in addEventListener is required to be true<br>
+            Click on the paragraph to see how events are transmitted all the way down from where an event handler was defined to the element where it occurred</p>
+        </article>
+        <article id="stop_bubbling" class="borde">
+          <h3>Stopping propagation</h3>
+          <p class="borde_negro m20">An eventHandler is defined at this paragraph. It won't allow bubbling. Do it unless there's a real reason</p>
+        </article>
+      </section>
+  
+      <section id="event2" class="contenedor-flex-columna ai-center borde gap">
+        <article id="handler_on_parent" class="borde">
+          <h3>Capturing an event just on a parent element</h3>
+          <p class="borde_negro m20">An event handler on parent section has been previously defined, but there's no event handler at this section nor at this paragraph.<br>
+              Click on the paragraph and watch console to see how this event is captured by the parent of its parent (section)</p>
+        </article>
+        <article id="event_delegation" class="contenedor-flex-columna borde jc-center">
+          <h3>Event delegation</h3>
+          <p></p>
+  
+        </article>
+  
+      </section>
+
     </section>
   </body>
 </html>
