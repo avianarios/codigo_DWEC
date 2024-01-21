@@ -13,19 +13,28 @@ body{
 
 h3{
     text-align: center;
+    margin: 0px;
 }
 
 .borde{
     border: 3px solid lightblue;
-    padding: 10px 30px 30px 30px;
-    width: 80%; 
+    padding: 10px 0px;
+    width: 85%; 
+}
+
+p{
+    margin: 10px;
+}
+
+.dp_none{
+    display:none;
 }
 
 .borde_negro{
     border: 1px solid;
 }
 
-.contenedor-flex-nv1{
+.contenedor-flex-columna{
     background-color: bisque;
     /*padding: 10px 50px 50px 50px;*/
     display: flex;
@@ -33,7 +42,7 @@ h3{
     flex-direction: column;
 }
 
-.contenedor-flex-nv2 {
+.contenedor-flex-fila {
     display: flex;
     padding: 0;
     margin: 0;
