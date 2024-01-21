@@ -30,10 +30,6 @@ p{
     display:none;
 }
 
-.borde_negro{
-    border: 1px solid;
-}
-
 .contenedor-flex-columna{
     background-color: bisque;
     /*padding: 10px 50px 50px 50px;*/
@@ -66,4 +62,37 @@ p{
   
 ul{
     list-style: none;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    border: 1px solid;
+}
+
+
+#tabla1 th {
+    text-align: center;
+    font-weight: bold;
+}
+  
+#tabla1 td {
+    width: 150px;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: bottom;
+    padding-top: 5px;
+    padding-bottom: 12px;
+}
+  
+
+#tabla1 .highlight {
+    background: red;
+}
+
+th{
+    background-color: aqua;
+}
+
+td{
+    background-color:azure;
 }
