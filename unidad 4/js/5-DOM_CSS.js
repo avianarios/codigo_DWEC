@@ -8,20 +8,11 @@
 
 //by using elemento.style.CSSConvertedPropertyName, inline styles are those being modified
 let elemento=document.getElementById("parrafo1");
-setTimeout(()=>{
-    elemento.style.backgroundColor="#00ff00";
-    elemento.style.fontSize="1rem";
-    elemento.style.textAlign="center";
-    elemento.style.fontWeight="bold";
-}, 3000);
-
-
 const miEstilo= `
-    display: block;
     width: 80%;
     background-color: red;
     border: 2px;
-    font-size: 5em;
+    font-size: 2em;
     color: white;
     margin: 20px;
     padding-left: 10px;
@@ -29,6 +20,16 @@ const miEstilo= `
     border: 2px solid black;
 `;
 elemento.style.cssText=miEstilo;
+
+
+setTimeout(()=>{
+  elemento.style.backgroundColor="#00ff00";
+  elemento.style.fontSize="1rem";
+  elemento.style.textAlign="center";
+  elemento.style.fontWeight="bold";
+}, 3000);
+
+
 
 //////////////////////////////////////////////
 ////////////modify CSS stylesheets////////////
@@ -41,21 +42,16 @@ elemento.style.cssText=miEstilo;
 
 // Getting the stylesheet
 ////////////
-const stylesheet = document.styleSheets[1]; //the second linked stylesheet
+const hoja_estilos = document.styleSheets[0]; //the second linked stylesheet
 let elementRules;
 
 // looping through all its rules and getting your rule
-for(let i = 0; i < stylesheets.cssRules.length; i++) {
-  if(stylesheet.cssRules[i].selectorText === '#parrafo') {
-    elementRules = stylesheets.cssRules[i];
+for(let i = 0; i < hoja_estilos.cssRules.length; i++) {
+  if(hoja_estilos.cssRules[i].selectorText === '.fondo_rojo') {
+    elementRules = hoja_estilos.cssRules[i];
   }
 }
 
 // modifying the rule in the stylesheet
-elementRules.style.setProperty('background', 'blue');
-
-
-
-
-
-
+if (elementRules) elementRules.style.setProperty('background-color', 'blue');
+//elementRules.style.backgroundColor='green';

@@ -1,5 +1,4 @@
 body{
-    /*width: 50%;*/
     width: 60vw;
     margin: 0 auto;
     background-color: lightblue;
@@ -7,8 +6,20 @@ body{
     font-family: 'Roboto', sans-serif;
   }
 
-.rojo{
+.fondo_rojo{
     background-color: red;
+}
+
+.fondo_verde{
+    background-color: green;
+}
+
+.letra_grande{
+    font-size: 1.15rem;
+}
+
+.letra_pequeña{
+    font-size: 0.85rem;
 }
 
 h3{

@@ -83,18 +83,41 @@ lugar_insercion.insertAdjacentElement("afterend", newButton);*/
 
 ////Reading event information ////
 //when an event occurs, the browser creates an event object, puts details into it and passes to the event handler
+//What information? Depends on the event
 //type, currentTarget, target, istrusted, timeStamp, clientX, clientY
 let infoEvento = document.getElementById("informacionEvento");
-infoEvento.addEventListener("click", (event) => {
+infoEvento.addEventListener("click", (evento) => {
     //When using an ID, browser creates a property with the same name and attach to document. Thus, texto_coordenadas.innerHTML can be used besides document.getElementByID("texto_coordenadas"). The latter is much more recommended
     //more info: https://stackoverflow.com/questions/3434278/do-dom-tree-elements-with-ids-become-global-properties
-    let texto1=document.getElementById("texto_coordenadas");
-    if (texto1.classList.contains ("dp_none")){ texto1.classList.remove("dp_none"); }
-    texto1.innerHTML="An event of type: "+event.type + " has occurred at:" + event.currentTarget+" at time "+event.timeStamp +" at coordinates X:"+event.clientX+" Y:"+event.clientY;
-    ( event.isTrusted ) ? texto1.innerHTML+="<br>Is a trusted event (launched by web browser)" : texto1.innerHTML+="Is not a trusted event (launched by programmer)";
+    let texto_explicativo=document.getElementById("texto_coordenadas");
+    if (texto_explicativo.classList.contains ("dp_none")){ texto_explicativo.classList.remove("dp_none"); }
+    texto_explicativo.innerHTML="Button "+evento.button + " has been pressed<br>";
+    texto_explicativo.innerHTML+="An event of type: "+evento.type + " has occurred at:" + evento.currentTarget+"<br> at timestamp of "+evento.timeStamp +"<br> at coordinates X:"+evento.clientX+" Y:"+evento.clientY;
+    ( evento.isTrusted ) ? texto_explicativo.innerHTML+="<br>Is a trusted event (launched by web browser)" : texto_explicativo.innerHTML+="Is not a trusted event (launched by programmer)";
+
+    if (evento.altKey) texto_explicativo.innerHTML+="<br>alt Key pressed";
+    if (evento.ctrlKey) texto_explicativo.innerHTML+="<br>control Key pressed";
+    if (evento.shiftKey) texto_explicativo.innerHTML+="<br>shift Key pressed";
+    if (evento.metaKey) texto_explicativo.innerHTML+="<br>meta Key pressed"; //MAC only
 });
 /*const { type, timeStamp, isTrusted } = event;
 console.log({ type, timeStamp, isTrusted });*/
+
+document.addEventListener('contextmenu', evento => {
+    evento.preventDefault();        //removes default action when pressing right button
+    let texto_explicativo=document.getElementById("texto_coordenadas");
+    if (texto_explicativo.classList.contains ("dp_none")){ texto_explicativo.classList.remove("dp_none"); }
+    texto_explicativo.innerHTML="Button "+evento.button + " has been pressed";
+
+    /*
+    if (texto_explicativo.textContent.includes ("Button 0")){
+        texto_explicativo.innerHTML=texto_explicativo.innerHTML.replace("Button 0", "Button 2");
+    }else{
+        if (!texto_explicativo.textContent.includes("Button 2"))
+            texto_explicativo.innerHTML+="<br>Button "+evento.button + " has been pressed";
+    }*/
+   
+});
 
 
 
@@ -317,5 +340,24 @@ addGlobalEventListener(
   },
   { once: true }
 )*/
+
+
+//changing css stylesheet depending on a selection form
+
+////Changing stylesheet depending on a select field////
+let selector=document.querySelector("select[name=color]");
+selector.addEventListener('change', (event)=>{
+  let hoja=document.querySelector("head :last-child");
+  if (hoja.rel=="stylesheet")
+    hoja.href="../css/"+form_cambia_color.selector_color.options[form_cambia_color.selector_color.selectedIndex].value;
+  else{
+    let head = document.querySelector('head');
+    let hoja_estilos = document.createElement('link');
+    hoja_estilos.rel = 'stylesheet';
+    hoja_estilos.type = 'text/css';
+    hoja_estilos.href = "../css/"+form_cambia_color.selector_color.options[form_cambia_color.selector_color.selectedIndex].value;
+    head.insertAdjacentElement("beforeend", hoja_estilos);
+  }
+});
 
 
