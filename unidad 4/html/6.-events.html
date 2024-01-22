@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple DOM example</title>
-    <script src="../js/events.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="../js/6.-events.js" defer></script>
   </head>
   <body>
 
@@ -25,7 +25,8 @@
         <article class="contenedor-flex-columna gap borde jc-center">
           <h3>Reading event information</h3>
           <p>Events are stored in an object which provides additional information. Different types of events provide different properties</p>
-          <p>type, currentTarget, target, istrusted, timeStamp, clientX, clientY</p>            
+          <p>Here you can practice with mouse events getting information about: type, currentTarget, target, istrusted, timeStamp, clientX, clientY and buttons pressed</p>            
+          <p>context menu is disabled so you can check that button 2 (right button has been pressed)</p>
           <button id="informacionEvento">Event object information</button>
           <p id="texto_coordenadas" class="dp_none"></p>
         </article>
@@ -132,9 +133,21 @@
             </tr>
           </table>
         </article>
-
-
-
+      </section>
+      <section class="contenedor-flex-columna borde jc-center">
+        <article class="contenedor-flex-columna borde jc-center">
+          <h3>Changing stylesheet depending on a select field</h3>
+          <p>using onChange form event</p>
+          <form name="form_cambia_color" action="#" onsubmit="return false;">
+            <p id="sample">StyleSheet Changer :</p>
+            <select name="selector_color">
+              <option value="default.css">White Theme</option>
+              <option value="red.css">Red Theme</option>
+              <option value="blue.css">Blue Theme</option>
+              <option value="green.css">Green Theme</option>
+            </select>
+          </form>
+        </article>
       </section>
     </section>
   </body>
