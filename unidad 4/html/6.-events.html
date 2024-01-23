@@ -12,8 +12,14 @@
   </head>
   <body>
 
-    <section class="contenedor-flex-columna gap">
+    <section class="contenedor-flex-columna aux gap">
+
       <section class="contenedor-flex-columna ai-center borde gap">
+        <header class="contenedor-flex-columna gap jc-center">
+          <h2>Handling events</h2>
+          <h3>how to create and remove event handlers as well as how to get information about the event launched</h3>
+        </header>
+
         <article class="contenedor-flex-columna gap borde jc-center">
           <h3>Attaching one or several event handlers</h3>
           <ul id="lista_botones1" class="contenedor-flex-fila gap jc-center">
@@ -72,7 +78,7 @@
       </section>
 
 
-      <section id="event_propagation" class="contenedor-flex-columna ai-center borde gap">
+      <section id="bubbling_and_capturing" class="contenedor-flex-columna ai-center borde gap">
         <header>
           <h3>Event propagation</h3>
           <p>The standard DOM Events describes 3 phases of event propagation:</p>
@@ -98,18 +104,18 @@
         </article>
       </section>
   
-      <section class="contenedor-flex-columna ai-center borde gap">
+      <section class="contenedor-flex-columna ai-center borde gap" id="event_delegation">
         <header>
-          <h3>Event handlers defined at parents</h3>
+          <h3>Event delegation</h3>
         </header>
         <article id="handler_on_parent" class="borde">
           <h3>Capturing an event just on a parent element</h3>
           <p>An event handler on parent section has been previously defined, but there's no event handler at this section nor at this paragraph.<br>
               Click on the paragraph and watch console to see how this event is captured by the parent of its parent (section)</p>
         </article>
-        <article id="event_delegation" class="contenedor-flex-columna borde jc-center">
-          <h3>Event delegation</h3>
-          <p>There's an event handler for the whole table, not every cell<br>
+        <article class="contenedor-flex-columna borde jc-center">
+          <h3>Capturing a click event at table level</h3>
+          <p>There's a click event handler for the whole table, not every cell<br>
           Click on any cell</p>
           <table id="tabla1">
             <tr>
@@ -133,10 +139,66 @@
             </tr>
           </table>
         </article>
+
+
+
       </section>
-      <section class="contenedor-flex-columna borde jc-center">
+      <section class="contenedor-flex-columna borde jc-center gap">
+        <header>
+          <h3>UI Events</h3>
+          <p>This section covers some of the most used events, but not all. click has already been discussed</p>
+        </header>
         <article class="contenedor-flex-columna borde jc-center">
-          <h3>Changing stylesheet depending on a select field</h3>
+          <h3>Mouse: mouseover and mouseout</h3>
+          <p>There's a click event handler for the whole table, not every cell<br>
+          Click on any cell</p>
+          <table id="tabla2">
+            <tr>
+              <th colspan="3"> Encabezado</th>
+            </tr>
+            <tr>
+              <td>celda</td>
+              <td>celda</td>
+              <td>celda</td>
+            </tr>
+            <tr>
+              <td>celda</td>
+              <td>celda</td>
+              <td>celda</td>
+              </td>
+            </tr>
+            <tr>
+              <td>celda</td>
+              <td>celda</td>
+              <td>celda</td>
+            </tr>
+          </table>
+        </article>
+
+        <article class="contenedor-flex-columna borde jc-center">
+          <header>
+            <h3>Pointer devices</h3>
+            <p>Allow dealing with events of any kind of pointing devices such as pens, fingers at touchscreens or even mice</p>
+            <p>Interesting events: pointerdown (button is pressed), pointermove y pointerup (button is released)</p>
+            <p>Interesting properties:</p>
+              <ul class="lista_viñetas">
+                <li>isPrimary (=true for the first pointing device touching screen)</li>
+                <li>pointerId a unique ID assigned to each finger, allows to track each finger movement along the screen</li>
+                <li>width and height of the surface the pointing device (finger) is touching the screen (1 if it is a mouse)</li>
+                <li>pressure from 0 (not pressure) to 1 (pressure). 0.5 if not supported</li>
+              </ul>
+          </header>
+          <p>The surface below is watching pointerup event</p>
+          <p id="superficie_puntero_up" class="superficie_puntero"> </p>
+          <p>The surface below is watching pointerdown event</p>
+          <p id="superficie_puntero_down" class="superficie_puntero"> </p>
+          <p>The surface below is watching pointermove event</p>
+          <p id="superficie_puntero_move" class="superficie_puntero"> </p>
+        </article>
+        
+
+        <article class="contenedor-flex-columna borde jc-center">
+          <h3>Forms</h3>
           <p>using onChange form event</p>
           <form name="form_cambia_color" action="#" onsubmit="return false;">
             <p id="sample">StyleSheet Changer :</p>
@@ -148,6 +210,9 @@
             </select>
           </form>
         </article>
+
+
+
       </section>
     </section>
   </body>
