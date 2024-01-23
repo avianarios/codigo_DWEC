@@ -142,7 +142,7 @@ const eventManager = new EventManager(button_object1);
 class Manejador {
     handleEvent(event) {
         //let method = 'on' + event.type[0].toUpperCase() + event.type.slice(1);    // allows to switch mousedown to onMousedown
-        this[event.type](event);
+        this[event.type]();
     }
 
     mousedown(){
@@ -173,16 +173,13 @@ button_object2.addEventListener('mouseup', menu);
 //data attribute must be called data-accion (notice event.target.dataset.accion) and its value must be guardar, cargar and
 class Menu {
     constructor(elem) {
-      this._elem = elem;
       elem.onclick = this.onClick.bind(this); 
     }
-
-// Si no se usa bind, el this de dentro del método hace referencia al elemento que procoa el evento y no a la clase del componente.
-// gracias a bind, se pueden usar los métodos y propiedades de la clase mediante this. 
-// bind realiza una copia de la función que queremos ejecutar, y le pasa por parámetro el elemento al que va a apuntar this.
+// Si no se usa bind, el this de dentro del método hace referencia al elemento que provoca el evento y no a la clase.
+// bind permite usar this para llamar a los métodos y propiedades de la clase
+// funciona copiando la función que queremos ejecutar y pasándole por parámetro el elemento al que va a apuntar this.
 
     save() {
-        //texto_botones_accion.textContent="aaa"
         this.contenedor_texto.textContent="save button pressed";
     }
 
@@ -201,9 +198,10 @@ class Menu {
             this[action](); //calls the method that matches the name of the action in data-accion
         }
     };
-  }
+}
 
-  new Menu(botones_accion);
+let botones=document.getElementById("botones_accion");
+new Menu(botones);
 
 
   ////using data attributes////
@@ -345,7 +343,7 @@ addGlobalEventListener(
 //changing css stylesheet depending on a selection form
 
 ////Changing stylesheet depending on a select field////
-let selector=document.querySelector("select[name=color]");
+let selector=document.querySelector("select[name=selector_color]");
 selector.addEventListener('change', (event)=>{
   let hoja=document.querySelector("head :last-child");
   if (hoja.rel=="stylesheet")
