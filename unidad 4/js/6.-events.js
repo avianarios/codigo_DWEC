@@ -243,7 +243,7 @@ function RespondClick() {
 
 ////Event propagation////
 //let's add event listeners all the way up on ancestors of a paragraph untill its section for both phases: capturing and bubbling 
-let seccion=document.getElementById("event_propagation");
+let seccion=document.getElementById("bubbling_and_capturing");
 seccion.addEventListener('click', function(evento){
     console.log("Bubbling phase: Estoy en "+evento.currentTarget.tagName+" y el evento lo lanzó "+evento.target.tagName);
 });
@@ -251,7 +251,7 @@ seccion.addEventListener('click', function(evento){
     console.log("Capturing phase: Estoy en "+evento.currentTarget.tagName+" y el evento lo lanzó "+evento.target.tagName);
 }, {capture:true}); //using true is equivalent to {capture:true}. it can be used with once:true to remove after using for the first time {capture:true, once:true}
 
-let elementos=document.querySelectorAll("#event_propagation *");
+let elementos=document.querySelectorAll("#bubbling_and_capturing *");
 for (let elemento of elementos){
     elemento.addEventListener('click', (evento) =>{
         console.log("Bubbling phase: Estoy en "+evento.currentTarget.tagName+" y el evento lo lanzó "+evento.target.tagName);
@@ -286,7 +286,7 @@ for (let element of document.querySelectorAll("*")){
     }, {capture:true});     //"{capture:true}" can be changed by just "true". {capture:true,once:true}
 }*/
 
-////stop propagation////
+//stop propagation
 parrafo=document.querySelector("#stop_bubbling > p");
 parrafo.addEventListener('click', evento=>{
     console.log("Parando la propagación en "+evento.currentTarget.tagName);
@@ -294,15 +294,14 @@ parrafo.addEventListener('click', evento=>{
 });
 
 
-
-////Capturing an event just on a parent element////
-objetivo=document.querySelector("section:nth-of-type(3)");
+////Event delegation////
+//Capturing an event just on a parent element
+objetivo=document.getElementById("event_delegation");
 objetivo.addEventListener('click', (evento)=>{
     console.log ("event captured at "+evento.currentTarget.tagName+" y lanzado en "+evento.target.tagName);
 });
 
-
-////Event handlers defined at parents////  
+//capturing a click event at table level
 objetivo=document.getElementById("tabla1");
 let selectedTd;
 
@@ -317,6 +316,32 @@ objetivo.addEventListener('click', (evento)=>{
     td.classList.toggle("highlight");
 });
 
+
+////UI Events////
+
+//mouseover and mouseout
+objetivo=document.getElementById("tabla2");
+objetivo.addEventListener('mouseover', (evento)=>{
+    evento.target.style.background="red";
+});
+objetivo.addEventListener('mouseout', (evento)=>{
+    evento.target.style.background="";
+});
+
+
+//pointer
+objetivo_up=document.getElementById("superficie_puntero_up");
+objetivo_up.addEventListener('pointerup', (evento)=>{
+    objetivo_up.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
+});
+objetivo_down=document.getElementById("superficie_puntero_down");
+objetivo_down.addEventListener('pointerdown', (evento)=>{
+    objetivo_down.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
+});
+objetivo_move=document.getElementById("superficie_puntero_move");
+objetivo_move.addEventListener('pointermove', (evento)=>{
+    objetivo_move.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
+});
 
 /*Function to add an event listener dynamically
 function addGlobalEventListener(type, selector, callback, options) {
