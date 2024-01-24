@@ -230,14 +230,15 @@ const boton_para_hover=document.getElementById("clickIt");
 boton_para_hover.addEventListener("click", RespondClick);
  
 function RespondMouseOver() {
-    document.getElementById("effect").innerHTML += "mouseover Event !!" + "<br>";
+    objetivo=document.getElementById("caja_hover");
+    objetivo.hidden="";
+    document.getElementById("caja_hover").innerHTML += "mouseover Event !!" + "<br>";
 }
  
 function RespondClick() {
     texto_hover.removeEventListener("mouseover", RespondMouseOver);
     boton_para_hover.textContent="Start listening for events again";
-
-    document.getElementById("effect").innerHTML += 'eventListener removed. Now mouseover event doesn\'t work !!';
+    document.getElementById("caja_hover").innerHTML = 'EventListener removed. Now mouseover event doesn\'t work !!';
 }
 
 
@@ -330,17 +331,27 @@ objetivo.addEventListener('mouseout', (evento)=>{
 
 
 //pointer
-objetivo_up=document.getElementById("superficie_puntero_up");
+objetivo_up=document.getElementById("caja_puntero_up");
 objetivo_up.addEventListener('pointerup', (evento)=>{
     objetivo_up.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
 });
-objetivo_down=document.getElementById("superficie_puntero_down");
+objetivo_down=document.getElementById("caja_puntero_down");
 objetivo_down.addEventListener('pointerdown', (evento)=>{
     objetivo_down.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
 });
-objetivo_move=document.getElementById("superficie_puntero_move");
+objetivo_move=document.getElementById("caja_puntero_move");
 objetivo_move.addEventListener('pointermove', (evento)=>{
     objetivo_move.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
+});
+
+
+//keyboard
+objetivo=document.getElementById("introduccion_texto");
+objetivo.addEventListener('keydown', (evento)=>{
+    document.getElementById("caja_keydown").innerHTML+="Event:"+evento.type+" physical key code:"+evento.code+" Character:"+evento.key+"<br>";
+});
+objetivo.addEventListener('keyup', (evento)=>{
+    document.getElementById("caja_keyup").innerHTML+="Event:"+evento.type+" physical key code:"+evento.code+" Character:"+evento.key+"<br>";
 });
 
 /*Function to add an event listener dynamically
@@ -363,6 +374,8 @@ addGlobalEventListener(
   },
   { once: true }
 )*/
+
+
 
 
 //changing css stylesheet depending on a selection form

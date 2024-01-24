@@ -72,7 +72,7 @@ p{
     gap:10px;
 }
   
-ul:not("#lista_viñetas"){
+ul:not(.lista_viñetas){
     list-style: none;
 }
 
@@ -109,11 +109,18 @@ td{
     background-color:azure;
 }
 
-.superficie_puntero{
+.caja_mensajes{
     border: 1px solid black;
     width: 90%;
     height: 180px;
     cursor: pointer;
     overflow: scroll;
     user-select: none;
+    background-color: white;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.caja_teclado{
+    width: 90%;    
 }
