@@ -72,7 +72,7 @@
 
         <article class="contenedor-flex-columna borde jc-center">
           <h3 id="hoverPara">Removing event listener (hover this text)</h3>
-          <p id="effect"></p>
+          <p id="caja_hover" hidden class="caja_mensajes"> </p>
           <button id="clickIt">Stop listening for events</button>
         </article>
       </section>
@@ -188,12 +188,26 @@
                 <li>pressure from 0 (not pressure) to 1 (pressure). 0.5 if not supported</li>
               </ul>
           </header>
-          <p>The surface below is watching pointerup event</p>
-          <p id="superficie_puntero_up" class="superficie_puntero"> </p>
-          <p>The surface below is watching pointerdown event</p>
-          <p id="superficie_puntero_down" class="superficie_puntero"> </p>
-          <p>The surface below is watching pointermove event</p>
-          <p id="superficie_puntero_move" class="superficie_puntero"> </p>
+          <p>The surface below is showing pointerup event</p>
+          <p id="caja_puntero_up" class="caja_mensajes"> </p>
+          <p>The surface below is showing pointerdown event</p>
+          <p id="caja_puntero_down" class="caja_mensajes"> </p>
+          <p>The surface below is showing pointermove event</p>
+          <p id="caja_puntero_move" class="caja_mensajes"> </p>
+        </article>
+
+        <article class="contenedor-flex-columna borde jc-center">
+          <header>
+            <h3>Keyboard events</h3>
+            <p>Keyboard are not the only way of getting user inputs, so do not rely solely on them to react to users input</p>
+            <p>interesting properties: code (physical key code) and key (character)</p>
+            <p></p>            
+          </header>
+          <input type="text" id="introduccion_texto"  class="caja_teclado">
+          <p>The surface below is showing keyup event</p>
+          <p id="caja_keyup" class="caja_mensajes"> </p>
+          <p>The surface below is showing keydown event</p>
+          <p id="caja_keydown" class="caja_mensajes"> </p>
         </article>
         
 
