@@ -116,11 +116,23 @@ td{
     cursor: pointer;
     overflow: scroll;
     user-select: none;
-    background-color: white;
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: rgb(248, 240, 230);
 }
 
 .caja_teclado{
     width: 90%;    
+}
+
+.fijo{
+    position: fixed;
+    top:1vh;
+    left: 1vw;
+    background-color: bisque;
+
+}
+
+.oculto{
+    visibility: hidden;
 }
