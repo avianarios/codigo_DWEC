@@ -378,44 +378,45 @@ addGlobalEventListener(
 
 //scroll
 objetivo=document.getElementById("muestra_desplazamiento");
+texto=document.getElementById("pixeles_desplazamiento");
 objetivo.addEventListener('click', ()=>{
-    document.getElementById("pixeles_desplazamiento").classList.toggle("oculto");
+    texto.classList.toggle("oculto");
     if (objetivo.textContent.includes("show"))
         objetivo.textContent="click to hide scroll";
     else
         objetivo.textContent="click to show scroll";
-
     
 });
 
 window.addEventListener('scroll', ()=>{
-    document.getElementById('pixeles_desplazamiento').innerHTML = window.pageYOffset + 'px';
-    console.log(document.documentElement.clientHeight);
+    texto.innerHTML = window.pageYOffset + 'px';
 });
 
-objetivo=document.getElementById("caja_desplazamiento");
-for (let i=0; i<20; i++){
-    objetivo.insertAdjacentHTML("beforeend", `<p>Date: ${new Date()}</p>`);
-}
-objetivo.addEventListener("scroll", populate);
-////////////zzzzzzzzzzzzzzz
 
+//form
+let formulario=document.querySelector("form[name=form1]");
 
-//changing css stylesheet depending on a selection form
+formulario.nombre.addEventListener("focus", (evento)=>{
+    console.log(evento.currentTarget.tagName)
+})
+
+/*formulario.addEventListener("change", (evento)=>{
+    console.log ("ha cambiado");
+});*/
+
 
 ////Changing stylesheet depending on a select field////
-let selector=document.querySelector("select[name=selector_color]");
-selector.addEventListener('change', (event)=>{
+formulario.elements.selector_color.addEventListener('change', (event)=>{
   let hoja=document.querySelector("head :last-child");
   if (hoja.rel=="stylesheet")
-    hoja.href="../css/"+form_cambia_color.selector_color.options[form_cambia_color.selector_color.selectedIndex].value;
+    hoja.href="../css/"+formulario.elements.selector_color.options[formulario.elements.selector_color.selectedIndex].value;
   else{
-    let head = document.querySelector('head');
+    //let head = document.querySelector('head');
     let hoja_estilos = document.createElement('link');
     hoja_estilos.rel = 'stylesheet';
     hoja_estilos.type = 'text/css';
-    hoja_estilos.href = "../css/"+form_cambia_color.selector_color.options[form_cambia_color.selector_color.selectedIndex].value;
-    head.insertAdjacentElement("beforeend", hoja_estilos);
+    hoja_estilos.href = "../css/"+formulario.elements.selector_color.options[formulario.elements.selector_color.selectedIndex].value;
+    hoja.insertAdjacentElement("afterend", hoja_estilos);
   }
 });
 

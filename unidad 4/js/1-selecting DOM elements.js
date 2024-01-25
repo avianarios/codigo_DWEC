@@ -34,9 +34,9 @@ let parrafo=seccion.querySelector("p");
 console.log(parrafo);
 
 /*body and head have their own shortctus making
-document.querySelector("body") equivalent to document.body
-and
-document.querySelector("head") equivalent to document.head
+document.querySelector("body") is equivalent to document.body
+document.querySelector("head") is equivalent to document.head
+document.querySelector("html") is equivalent to document.documentElement
 
 
 ////querySelectorAll////
