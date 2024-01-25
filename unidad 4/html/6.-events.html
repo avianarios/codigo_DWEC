@@ -180,12 +180,12 @@
             <p>Allow dealing with events of any kind of pointing devices such as pens, fingers at touchscreens or even mice</p>
             <p>Interesting events: pointerdown (button is pressed), pointermove y pointerup (button is released)</p>
             <p>Interesting properties:</p>
-              <ul class="lista_viñetas">
-                <li>isPrimary (=true for the first pointing device touching screen)</li>
-                <li>pointerId a unique ID assigned to each finger, allows to track each finger movement along the screen</li>
-                <li>width and height of the surface the pointing device (finger) is touching the screen (1 if it is a mouse)</li>
-                <li>pressure from 0 (not pressure) to 1 (pressure). 0.5 if not supported</li>
-              </ul>
+            <ul class="lista_viñetas">
+              <li>isPrimary (=true for the first pointing device touching screen)</li>
+              <li>pointerId a unique ID assigned to each finger, allows to track each finger movement along the screen</li>
+              <li>width and height of the surface the pointing device (finger) is touching the screen (1 if it is a mouse)</li>
+              <li>pressure from 0 (not pressure) to 1 (pressure). 0.5 if not supported</li>
+            </ul>
           </header>
           <p>The surface below is showing pointerup event</p>
           <p id="caja_puntero_up" class="caja_mensajes"> </p>
@@ -216,21 +216,36 @@
           <p>Scroll is elastic. A little further away from the page end could be reached at some browsers. The page will bounce back to normality</p>
           <button id="muestra_desplazamiento">Click to show number of pixels of scroll</button>
           <p id="pixeles_desplazamiento" class="fijo oculto"></p>
-          <p id="caja_desplazamiento" class="caja_mensajes2">Desplaza hacia abajo </p>
-
         </article>
 
         <article class="contenedor-flex-columna borde jc-center">
           <h3>Forms</h3>
+          <p>if more than one form is present, they can be referred:</p>
+          <ul class="lista_viñetas">
+            <li>by using their name: document.forms.formulario1.elements.uno.value</li>
+            <li>by using their index: document.forms[0].elements.uno.value</li>
+            <li>by using querySelector</li>
+          </ul>
+          <p>grouped elements, as checkboxes or radio buttons, can be accessed with formulario.elements.nombre[0]</p>
           <p>using onChange form event</p>
-          <form name="form_cambia_color" action="#" onsubmit="return false;">
-            <p id="sample">StyleSheet Changer :</p>
+          <form name="form1" class="contenedor-flex-columna">
+            <input type="text" id="nombre" name="nombre" placeholder="nombre" required>
+            <input type="text" id="apellidos" name="apellidos" placeholder="apellidos">
+            <input type="text" id="correo" name="correo" placeholder="Correo electrónico">
+            <input type="text" name="dni" required pattern="(([X-Z]{1}-?[0-9]{7})|([0-9]{8}))[A-Z]{1}" placeholder="DNI"/>
+            <input type="number" name="edad" min="18" max="100" placeholder="Edad"/>
+            <article class="contenedor-flex-fila">
+              <input type="checkbox" name="options" value="first" checked> <label for="first">First option</label>
+              <input type="checkbox" name="options" value="second"> <label for="second">Second option</label>
+              <input type="checkbox" name="options" value="third" disabled> <label for="third">Third option</label>
+            </article>
             <select name="selector_color">
               <option value="default.css">White Theme</option>
               <option value="red.css">Red Theme</option>
               <option value="blue.css">Blue Theme</option>
               <option value="green.css">Green Theme</option>
             </select>
+            <button id="enviar">Enviar</button>
           </form>
         </article>
 
