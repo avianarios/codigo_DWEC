@@ -376,6 +376,21 @@ addGlobalEventListener(
 )*/
 
 
+//scroll
+objetivo=document.getElementById("muestra_desplazamiento");
+objetivo.addEventListener('click', ()=>{
+    document.getElementById("caja_desplazamiento").classList.toggle("oculto");
+    if (objetivo.textContent.includes("show"))
+        objetivo.textContent="click to hide scroll";
+    else
+        objetivo.textContent="click to show scroll";
+
+    
+});
+
+window.addEventListener('scroll', ()=>{
+    document.getElementById('caja_desplazamiento').innerHTML = window.pageYOffset + 'px';
+  });
 
 
 //changing css stylesheet depending on a selection form
