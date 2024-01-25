@@ -229,7 +229,7 @@
           <p>grouped elements, as checkboxes or radio buttons, can be accessed with formulario.elements.nombre[0]</p>
           <p>select controls has 3 properties: options, value and selectedIndex</p>
           <p>using onChange form event</p>
-          <form name="form1" class="contenedor-flex-columna">
+          <form name="form1" class="contenedor-flex-columna gap">
             <input type="text" id="nombre" name="nombre" placeholder="nombre" required>
             <input type="text" id="apellidos" name="apellidos" placeholder="apellidos">
             <input type="text" id="correo" name="correo" placeholder="Correo electrónico">
@@ -248,6 +248,7 @@
             </select>
             <button id="enviar">Enviar</button>
           </form>
+          <p id="caja_eventos_form" class="caja_mensajes"> </p>
         </article>
 
       </section>

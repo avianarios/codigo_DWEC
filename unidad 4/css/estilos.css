@@ -136,3 +136,11 @@ td{
 .oculto{
     visibility: hidden;
 }
+
+.sin_rellenar{
+    border: 3px solid red;
+}
+
+.relleno{
+    border: 3px solid green;
+}
