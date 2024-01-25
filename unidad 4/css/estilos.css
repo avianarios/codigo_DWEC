@@ -121,6 +121,17 @@ td{
     background-color: rgb(248, 240, 230);
 }
 
+.caja_mensajes2{
+    border: 1px solid black;
+    width: 90%;
+    height: 180px;
+    cursor: pointer;
+    overflow: scroll;
+    user-select: none;
+    background-color: rgb(248, 240, 230);
+}
+
+
 .caja_teclado{
     width: 90%;    
 }
