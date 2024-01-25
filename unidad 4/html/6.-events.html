@@ -130,7 +130,6 @@
               <td>celda</td>
               <td>celda</td>
               <td>celda</td>
-              </td>
             </tr>
             <tr>
               <td>celda</td>
@@ -213,8 +212,12 @@
         <article class="contenedor-flex-columna borde jc-center">
           <h3>Scroll</h3>
           <p>Window object has a scroll eventlistener attached that shows up </p>
-          <button id="muestra_desplazamiento">Click to show scroll</button>
-          <p id="caja_desplazamiento" class="fijo oculto"></p>
+          <p>Scroll is imprecise. Page end could be detected 50-100px away from the real page end. Small amounts of pixels are ignored</p>
+          <p>Scroll is elastic. A little further away from the page end could be reached at some browsers. The page will bounce back to normality</p>
+          <button id="muestra_desplazamiento">Click to show number of pixels of scroll</button>
+          <p id="pixeles_desplazamiento" class="fijo oculto"></p>
+          <p id="caja_desplazamiento" class="caja_mensajes2">Desplaza hacia abajo </p>
+
         </article>
 
         <article class="contenedor-flex-columna borde jc-center">

@@ -379,7 +379,7 @@ addGlobalEventListener(
 //scroll
 objetivo=document.getElementById("muestra_desplazamiento");
 objetivo.addEventListener('click', ()=>{
-    document.getElementById("caja_desplazamiento").classList.toggle("oculto");
+    document.getElementById("pixeles_desplazamiento").classList.toggle("oculto");
     if (objetivo.textContent.includes("show"))
         objetivo.textContent="click to hide scroll";
     else
@@ -389,8 +389,16 @@ objetivo.addEventListener('click', ()=>{
 });
 
 window.addEventListener('scroll', ()=>{
-    document.getElementById('caja_desplazamiento').innerHTML = window.pageYOffset + 'px';
-  });
+    document.getElementById('pixeles_desplazamiento').innerHTML = window.pageYOffset + 'px';
+    console.log(document.documentElement.clientHeight);
+});
+
+objetivo=document.getElementById("caja_desplazamiento");
+for (let i=0; i<20; i++){
+    objetivo.insertAdjacentHTML("beforeend", `<p>Date: ${new Date()}</p>`);
+}
+objetivo.addEventListener("scroll", populate);
+////////////zzzzzzzzzzzzzzz
 
 
 //changing css stylesheet depending on a selection form
