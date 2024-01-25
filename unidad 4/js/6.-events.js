@@ -395,10 +395,31 @@ window.addEventListener('scroll', ()=>{
 
 //form
 let formulario=document.querySelector("form[name=form1]");
+texto_eventos_form=document.getElementById("caja_eventos_form");
+//focus event can't be delegate as form can't get the focus. Is the input field that gets it
+for (let campo of formulario.querySelectorAll("input")){
+    campo.addEventListener("focus", (evento)=>{
+        texto_eventos_form.innerHTML+="<br>Event of type"+evento.type+" at field "+evento.currentTarget.placeholder;
+    });
 
-formulario.nombre.addEventListener("focus", (evento)=>{
-    console.log(evento.currentTarget.tagName)
-})
+    campo.addEventListener("blur", (evento)=>{
+        texto_eventos_form.innerHTML+="<br>Event of type"+evento.type+" at field "+evento.currentTarget.placeholder;
+        if (!evento.currentTarget.value){
+            //evento.currentTarget.placeholder+=""
+            evento.currentTarget.classList.add("sin_rellenar");
+            evento.currentTarget.classList.remove("relleno");
+        }else{
+            evento.currentTarget.classList.add("relleno");
+            evento.currentTarget.classList.remove("sin_rellenar");
+        }
+    });
+}
+
+/*formulario.nombre.addEventListener("focus", (evento)=>{
+    objetivo.innerHTML+="<br>Event of type"+evento.type+" en "+evento.currentTarget.tagName;
+})*/
+
+
 
 /*formulario.addEventListener("change", (evento)=>{
     console.log ("ha cambiado");
