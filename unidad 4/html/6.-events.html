@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple DOM example</title>
+    <title>Events</title>
     <link rel="stylesheet" type="text/css" href="../css/estilos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -250,6 +250,20 @@
             <input type="submit" value="Enviar">
           </form>
           <p id="caja_eventos_form" class="caja_mensajes"> </p>
+        </article>
+
+        <article class="contenedor-flex-columna borde jc-center">
+          <header>
+            <h3>Page events</h3>
+            <ul>
+              <li>DOMContentLoaded: DOM is built, but external resources may have not been loaded</li>
+              <li>load: DOM is built and external resources are loaded</li>
+              <li>beforeunload/unload: user leaves the website</li>
+            </ul>
+          </header>
+          <p>This is a random image loaded to delay the load of the page and to make noticeable the difference between DOMContentLoaded and load</p><img src="https://picsum.photos/200/300" alt="random image">
+          <p>The surface below is showing page events</p>
+          <p id="caja_eventos_pagina" class="caja_mensajes"> </p>
         </article>
 
       </section>
