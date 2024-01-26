@@ -127,20 +127,38 @@ td{
 
 .fijo{
     position: fixed;
-    top:1vh;
-    left: 1vw;
-    background-color: bisque;
-
+    top: 0px;
+    background-color: lightcoral;
+    margin: 0px;
+    padding: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid red;
 }
 
 .oculto{
     visibility: hidden;
 }
 
-.sin_rellenar{
+.borde_rojo{
     border: 3px solid red;
 }
 
-.relleno{
+.borde_verde{
     border: 3px solid green;
+}
+
+#error{
+    position: absolute;
+    top: -30px;
+    left: 200px;
+    background: red;
+    color: white;
+    padding: 5px;
+    
+}
+
+.relativo{
+    position: relative;
+    width: 100%;
 }
