@@ -501,3 +501,17 @@ formulario.elements.selector_color.addEventListener('change', (event)=>{
 });
 
 
+//webpage events
+caja_texto_eventos=document.getElementById("caja_eventos_pagina");
+document.addEventListener("DOMContentLoaded", (evento)=>{
+    caja_texto_eventos.innerHTML+="<br>Event of type "+evento.type+" at "+evento.currentTarget+" finished at "+evento.timeStamp+" ms";
+    caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
+    //caja_texto_eventos.innerHTML+="DOM is built at "+ evento.timeStamp+" ms";
+
+});
+
+window.addEventListener("load", (evento)=>{
+    caja_texto_eventos.innerHTML+="<br>Event of type "+evento.type+" at "+evento.currentTarget+" finished at "+evento.timeStamp+" ms";
+    caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
+});
+
