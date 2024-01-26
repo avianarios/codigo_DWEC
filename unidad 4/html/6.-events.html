@@ -228,8 +228,7 @@
           </ul>
           <p>grouped elements, as checkboxes or radio buttons, can be accessed with formulario.elements.nombre[0]</p>
           <p>select controls has 3 properties: options, value and selectedIndex</p>
-          <p>remarcable events: focus (focusin), blur (focusout), change, input, cut, copy, paste</p>
-          <p>using onChange form event</p>
+          <p>remarcable events: focus (focusin), blur (focusout), change, input, cut, copy, paste, submit</p>
           <form name="form1" class="contenedor-flex-columna gap relativo">
             <input type="text" id="nombre" name="nombre" placeholder="nombre" required>
             <p id="error" hidden>Usted se llama perico, corríjalo</p>
@@ -248,7 +247,7 @@
               <option value="blue.css">Blue Theme</option>
               <option value="green.css">Green Theme</option>
             </select>
-            <button id="enviar">Enviar</button>
+            <input type="submit" value="Enviar">
           </form>
           <p id="caja_eventos_form" class="caja_mensajes"> </p>
         </article>

@@ -447,6 +447,12 @@ formulario.addEventListener("copy", noPermitido);
 formulario.addEventListener("cut", noPermitido);
 formulario.addEventListener("paste", registra);
 
+//is triggered when enter key is pressed at any input field
+//submit can also be triggered by form.submit() method
+formulario.addEventListener("submit", registra);
+
+
+
 function noPermitido(evento){
     evento.preventDefault();
     alert (evento.type+" is not allowed");
@@ -457,6 +463,8 @@ function registra(evento){
     caja_texto_eventos.innerHTML+="<br>Event of type "+evento.type+" at field "+evento.target.placeholder;
     caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
 }
+
+
 
 
 
