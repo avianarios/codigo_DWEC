@@ -168,7 +168,6 @@ button_object2.addEventListener('mouseup', menu);
 
 
 
-
 ////Using data attributes alongside objects to assign event handler just once////
 //data attribute must be called data-accion (notice event.target.dataset.accion) and its value must be guardar, cargar and
 class Menu {
@@ -331,35 +330,28 @@ objetivo.addEventListener('mouseout', (evento)=>{
 
 
 //pointer
-objetivo_up=document.getElementById("caja_puntero_up");
-objetivo_up.addEventListener('pointerup', (evento)=>{
-    objetivo_up.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
-    objetivo_up.scrollTo(0, objetivo_up.scrollHeight);
-});
-objetivo_down=document.getElementById("caja_puntero_down");
-objetivo_down.addEventListener('pointerdown', (evento)=>{
-    objetivo_down.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
-    objetivo_down.scrollTo(0, objetivo_down.scrollHeight);
-});
-objetivo_move=document.getElementById("caja_puntero_move");
-objetivo_move.addEventListener('pointermove', (evento)=>{
-    objetivo_move.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
-    objetivo_move.scrollTo(0, objetivo_move.scrollHeight);
-});
+document.getElementById("caja_pointerup").addEventListener('pointerup',  mensajes_puntero);
+document.getElementById("caja_pointerdown").addEventListener('pointerdown', mensajes_puntero);
+document.getElementById("caja_pointermove").addEventListener('pointermove', mensajes_puntero);
 
+function mensajes_puntero (evento){
+    let nombre_destino="caja_"+evento.type;
+    let caja_texto_eventos=document.getElementById(nombre_destino);
+    caja_texto_eventos.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
+    caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
+}
 
 //keyboard
 objetivo=document.getElementById("introduccion_texto");
-objetivo.addEventListener('keydown', (evento)=>{
-    caja_texto_eventos=document.getElementById("caja_keydown");
+objetivo.addEventListener('keydown', mensajes_teclado);
+objetivo.addEventListener('keyup', mensajes_teclado);
+
+function mensajes_teclado(evento){
+    let nombre_destino="caja_"+evento.type;
+    caja_texto_eventos=document.getElementById(nombre_destino);
     caja_texto_eventos.innerHTML+="Event:"+evento.type+" physical key code:"+evento.code+" Character:"+evento.key+"<br>";
     caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
-});
-objetivo.addEventListener('keyup', (evento)=>{
-    caja_texto_eventos=document.getElementById("caja_keyup");
-    caja_texto_eventos.innerHTML+="Event:"+evento.type+" physical key code:"+evento.code+" Character:"+evento.key+"<br>";
-    caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
-});
+}
 
 /*Function to add an event listener dynamically
 function addGlobalEventListener(type, selector, callback, options) {
@@ -395,7 +387,7 @@ objetivo.addEventListener('click', ()=>{
 });
 
 window.addEventListener('scroll', ()=>{
-    texto.innerHTML = window.scrollY + 'px';
+    texto.textContent = window.scrollY + 'px';
 });
 
 
@@ -405,7 +397,6 @@ caja_texto_eventos=document.getElementById("caja_eventos_form");
 //focus and blur events do not propagate in bubbling phase. Two options to avoid declaring an eventhandler for each form input:
 //  1.-They propagate at capture phase, so declare them at that phase by using {capture:true}
 //  2.- Add focusin and focusout events with addEventListener. They are the same as foscus and blur, but the former propagates on bubbling phase.
-
 
 formulario.addEventListener("focus", (evento)=>{
     caja_texto_eventos.innerHTML+="<br>Event of type "+evento.type+" at field "+evento.target.name;
@@ -451,8 +442,6 @@ formulario.addEventListener("paste", registra);
 //submit can also be triggered by form.submit() method
 formulario.addEventListener("submit", registra);
 
-
-
 function noPermitido(evento){
     evento.preventDefault();
     alert (evento.type+" is not allowed");
@@ -463,27 +452,6 @@ function registra(evento){
     caja_texto_eventos.innerHTML+="<br>Event of type "+evento.type+" at field "+evento.target.placeholder;
     caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
 }
-
-
-
-
-
-/*let entrada=document.querySelector("input[name=dni]");
-entrada.addEventListener('invalid', (evento)=>{
-    entrada.classList.remove("borde_verde");
-    entrada.classList.add("borde_rojo");
-})*/
-
-/*formulario.nombre.addEventListener("focus", (evento)=>{
-    objetivo.innerHTML+="<br>Event of type"+evento.type+" en "+evento.currentTarget.tagName;
-})*/
-
-
-
-/*formulario.addEventListener("change", (evento)=>{
-    console.log ("ha cambiado");
-});*/
-
 
 ////Changing stylesheet depending on a select field////
 formulario.elements.selector_color.addEventListener('change', (event)=>{
@@ -503,15 +471,10 @@ formulario.elements.selector_color.addEventListener('change', (event)=>{
 
 //webpage events
 caja_texto_eventos=document.getElementById("caja_eventos_pagina");
-document.addEventListener("DOMContentLoaded", (evento)=>{
-    caja_texto_eventos.innerHTML+="<br>Event of type "+evento.type+" at "+evento.currentTarget+" finished at "+evento.timeStamp+" ms";
+window.addEventListener("DOMContentLoaded", mensaje)
+window.addEventListener("load", mensaje);
+
+function mensaje (evento){
+    caja_texto_eventos.innerHTML+="<br>Event "+evento.type+" finished at "+evento.timeStamp+" ms";
     caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
-    //caja_texto_eventos.innerHTML+="DOM is built at "+ evento.timeStamp+" ms";
-
-});
-
-window.addEventListener("load", (evento)=>{
-    caja_texto_eventos.innerHTML+="<br>Event of type "+evento.type+" at "+evento.currentTarget+" finished at "+evento.timeStamp+" ms";
-    caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
-});
-
+};
