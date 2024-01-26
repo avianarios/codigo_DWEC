@@ -334,24 +334,31 @@ objetivo.addEventListener('mouseout', (evento)=>{
 objetivo_up=document.getElementById("caja_puntero_up");
 objetivo_up.addEventListener('pointerup', (evento)=>{
     objetivo_up.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
+    objetivo_up.scrollTo(0, objetivo_up.scrollHeight);
 });
 objetivo_down=document.getElementById("caja_puntero_down");
 objetivo_down.addEventListener('pointerdown', (evento)=>{
     objetivo_down.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
+    objetivo_down.scrollTo(0, objetivo_down.scrollHeight);
 });
 objetivo_move=document.getElementById("caja_puntero_move");
 objetivo_move.addEventListener('pointermove', (evento)=>{
     objetivo_move.innerHTML+="Event:"+evento.type+" Pointer type:"+evento.pointerType+" isprimary:"+evento.isPrimary+" PointerID:"+evento.pointerId+"<br>";
+    objetivo_move.scrollTo(0, objetivo_move.scrollHeight);
 });
 
 
 //keyboard
 objetivo=document.getElementById("introduccion_texto");
 objetivo.addEventListener('keydown', (evento)=>{
-    document.getElementById("caja_keydown").innerHTML+="Event:"+evento.type+" physical key code:"+evento.code+" Character:"+evento.key+"<br>";
+    caja_texto_eventos=document.getElementById("caja_keydown");
+    caja_texto_eventos.innerHTML+="Event:"+evento.type+" physical key code:"+evento.code+" Character:"+evento.key+"<br>";
+    caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
 });
 objetivo.addEventListener('keyup', (evento)=>{
-    document.getElementById("caja_keyup").innerHTML+="Event:"+evento.type+" physical key code:"+evento.code+" Character:"+evento.key+"<br>";
+    caja_texto_eventos=document.getElementById("caja_keyup");
+    caja_texto_eventos.innerHTML+="Event:"+evento.type+" physical key code:"+evento.code+" Character:"+evento.key+"<br>";
+    caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
 });
 
 /*Function to add an event listener dynamically
@@ -382,38 +389,82 @@ texto=document.getElementById("pixeles_desplazamiento");
 objetivo.addEventListener('click', ()=>{
     texto.classList.toggle("oculto");
     if (objetivo.textContent.includes("show"))
-        objetivo.textContent="click to hide scroll";
+        objetivo.textContent=objetivo.textContent.replace("show", "hide");
     else
-        objetivo.textContent="click to show scroll";
-    
+        objetivo.textContent=objetivo.textContent.replace("hide", "show");
 });
 
 window.addEventListener('scroll', ()=>{
-    texto.innerHTML = window.pageYOffset + 'px';
+    texto.innerHTML = window.scrollY + 'px';
 });
 
 
 //form
 let formulario=document.querySelector("form[name=form1]");
-texto_eventos_form=document.getElementById("caja_eventos_form");
-//focus event can't be delegate as form can't get the focus. Is the input field that gets it
-for (let campo of formulario.querySelectorAll("input")){
-    campo.addEventListener("focus", (evento)=>{
-        texto_eventos_form.innerHTML+="<br>Event of type"+evento.type+" at field "+evento.currentTarget.placeholder;
-    });
+caja_texto_eventos=document.getElementById("caja_eventos_form");
+//focus and blur events do not propagate in bubbling phase. Two options to avoid declaring an eventhandler for each form input:
+//  1.-They propagate at capture phase, so declare them at that phase by using {capture:true}
+//  2.- Add focusin and focusout events with addEventListener. They are the same as foscus and blur, but the former propagates on bubbling phase.
 
-    campo.addEventListener("blur", (evento)=>{
-        texto_eventos_form.innerHTML+="<br>Event of type"+evento.type+" at field "+evento.currentTarget.placeholder;
-        if (!evento.currentTarget.value){
-            //evento.currentTarget.placeholder+=""
-            evento.currentTarget.classList.add("sin_rellenar");
-            evento.currentTarget.classList.remove("relleno");
+
+formulario.addEventListener("focus", (evento)=>{
+    caja_texto_eventos.innerHTML+="<br>Event of type "+evento.type+" at field "+evento.target.name;
+    caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
+}, {capture:true});
+
+formulario.addEventListener("blur", (evento)=>{
+    caja_texto_eventos.innerHTML+="<br>Event of type "+evento.type+" at field "+evento.target.placeholder;
+    caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
+
+    if (!evento.target.value){
+        evento.target.classList.add("borde_rojo");
+        evento.target.classList.remove("borde_verde");
+    }else{
+        evento.target.classList.add("borde_verde");
+        evento.target.classList.remove("borde_rojo");
+    }
+
+    if (evento.target.name=="nombre"){
+        if (evento.target.value!="perico"){
+        console.log ("usted se llama perico, corríjalo");
+        objetivo=document.getElementById("error");
+        objetivo.hidden = !objetivo.hidden;
+        evento.target.focus();  //not working on firefox
         }else{
-            evento.currentTarget.classList.add("relleno");
-            evento.currentTarget.classList.remove("sin_rellenar");
+            objetivo=document.getElementById("error");
+            objetivo.hidden = !objetivo.hidden;
         }
-    });
+    }
+}, {capture:true});
+
+//it is triggered every time the user change any value
+formulario.addEventListener("input", registra);
+
+//it is triggered when the element has finished changing
+formulario.addEventListener("change", registra);
+
+formulario.addEventListener("copy", noPermitido);
+formulario.addEventListener("cut", noPermitido);
+formulario.addEventListener("paste", registra);
+
+function noPermitido(evento){
+    evento.preventDefault();
+    alert (evento.type+" is not allowed");
+    registra(evento);
+};
+
+function registra(evento){
+    caja_texto_eventos.innerHTML+="<br>Event of type "+evento.type+" at field "+evento.target.placeholder;
+    caja_texto_eventos.scrollTo(0, caja_texto_eventos.scrollHeight);
 }
+
+
+
+/*let entrada=document.querySelector("input[name=dni]");
+entrada.addEventListener('invalid', (evento)=>{
+    entrada.classList.remove("borde_verde");
+    entrada.classList.add("borde_rojo");
+})*/
 
 /*formulario.nombre.addEventListener("focus", (evento)=>{
     objetivo.innerHTML+="<br>Event of type"+evento.type+" en "+evento.currentTarget.tagName;

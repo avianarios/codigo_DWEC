@@ -66,7 +66,7 @@
           </ul>
           <button data-oculta="subscribe-mail">Show subscription form</button>
           <form id="subscribe-mail" hidden>
-           <input type="email" placeholder="email">
+           <input type="email" name="email" placeholder="email">
           </form>
         </article>
 
@@ -228,17 +228,19 @@
           </ul>
           <p>grouped elements, as checkboxes or radio buttons, can be accessed with formulario.elements.nombre[0]</p>
           <p>select controls has 3 properties: options, value and selectedIndex</p>
+          <p>remarcable events: focus (focusin), blur (focusout), change, input, cut, copy, paste</p>
           <p>using onChange form event</p>
-          <form name="form1" class="contenedor-flex-columna gap">
+          <form name="form1" class="contenedor-flex-columna gap relativo">
             <input type="text" id="nombre" name="nombre" placeholder="nombre" required>
+            <p id="error" hidden>Usted se llama perico, corríjalo</p>
             <input type="text" id="apellidos" name="apellidos" placeholder="apellidos">
             <input type="text" id="correo" name="correo" placeholder="Correo electrónico">
-            <input type="text" name="dni" required pattern="(([X-Z]{1}-?[0-9]{7})|([0-9]{8}))[A-Z]{1}" placeholder="DNI"/>
+            <input type="text" name="dni" placeholder="DNI" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe poner 8 números y una letra" minlength="9" maxlength="9" />
             <input type="number" name="edad" min="18" max="100" placeholder="Edad"/>
             <article class="contenedor-flex-fila">
-              <input type="checkbox" name="options" value="first" checked> <label for="first">First option</label>
-              <input type="checkbox" name="options" value="second"> <label for="second">Second option</label>
-              <input type="checkbox" name="options" value="third" disabled> <label for="third">Third option</label>
+              <label><input type="checkbox" name="options" value="first" checked> First option</label>
+              <label><input type="checkbox" name="options" value="second"> Second option</label>
+              <label><input type="checkbox" name="options" value="third" disabled> Third option</label>
             </article>
             <select name="selector_color">
               <option value="default.css">White Theme</option>
