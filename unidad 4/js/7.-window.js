@@ -16,6 +16,7 @@ let demora=3000;
 document.getElementById("settimeout_example").addEventListener("click", ()=>{
     setTimeout((funcion, destino, tiempo) => {
         texto1.textContent=`Ejemplo de cómo pasar parámetros a la función ${funcion} para que se vean en ${destino} a los ${tiempo} segundos`;
+        texto1.classList.remove("dp_none");
         //console.log (`hola, soy ${nombre} y te tengo que decir que ${mensaje}`);
     }, demora, "setTimeout", "pantalla", demora/1000);
 });
@@ -26,6 +27,7 @@ let demora2=1000;
 let timeoutID;
 document.getElementById("setinterval_example").addEventListener("click", (evento)=>{
     timeoutID=setInterval(incrementSeconds, demora2, evento.currentTarget.textContent);
+    texto1.classList.remove("dp_none");
     let seconds=0;
     function incrementSeconds(donde) {
         texto1.textContent = `Button "${donde}" clicked ${seconds} seconds ago`;
@@ -142,32 +144,24 @@ document.getElementById("pide_datos").addEventListener("click", (evento)=>{
 ///////////////////////
 ///////properties//////
 ///////////////////////
+let texto_propiedades=document.getElementById("texto_propiedades");
+document.getElementById("show_window_properties").addEventListener("click", (evento)=>{
+    texto_propiedades.innerHTML=`<br>window.innerHeight: ${window.innerHeight}
+                                <br>window.innerWidth: ${window.innerWidth}
+                                <br>window.location: ${window.location}
+                                <br>window.document: ${window.document}
+                                <br>window.screen.availHeight: ${window.screen.availHeight}
+                                <br>window.screen.availWidth: ${window.screen.availWidth}
+                                <br>window.screen.height: ${window.screen.height}
+                                <br>window.screen.width: ${window.screen.width}
+                                <br>window.screen.colorDepth: ${window.screen.colorDepth}
+                                <br>window.screen.orientation.type: ${window.screen.orientation.type}
+                                `;
+    texto_propiedades.classList.remove("dp_none");
+    document.documentElement.scrollTo(0, document.documentElement.scrollHeight);
+});
 
-//innerHeight returns the interior height of the window in pixels
-//it's read-only
-console.log (window.innerHeight);
 
-//innerWidth returns the interior width of the window in pixels
-//it's read-only
-console.log (window.innerWidth);
-
-//location is a window property, as well as an object
-//represents the current url
-console.log (window.location);
-
-//document
-//returns a reference to an object document representing the content showed in the window
-console.log (window.document);
 
 //localStorage and sessionStorage are window properties, as well as objects
 
-//screen
-//screen is a window property, as well as an object
-//represents the screen the object is being represented on
-//read-only properties
-console.log (window.screen.availHeight);    //pixels available in the screen in the vertical dimension. Some devices reserves space for themselves
-console.log (window.screen.height);
-console.log (window.screen.availWidth);
-console.log (window.screen.width);
-console.log (window.screen.colorDepth);
-console.log (window.screen.orientation);

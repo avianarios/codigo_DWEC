@@ -74,10 +74,12 @@ p{
   
 ul:not(.lista_viñetas){
     list-style: none;
+    padding: 0px;
 }
 
-ul{
-    padding: 0px;
+ul, ol{
+    padding-left: 10px;
+    margin:0px;
 }
 
 table, th, td {
@@ -165,4 +167,8 @@ td{
 .relativo{
     position: relative;
     width: 100%;
+}
+
+.texto_pequeño{
+    font-size: 0.75rem;
 }

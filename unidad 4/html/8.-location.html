@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Window object</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <script src="../js/7.-window.js" defer></script>
+    <title>Document</title>
+     <script src="../js/8.-location.js" defer></script>
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
@@ -16,16 +13,15 @@
         <section class="contenedor-flex-columna ai-center borde gap">
 
           <article class="contenedor-flex-columna gap borde jc-center">
-            <h3>setTimeout, setInterval and clearTimeout</h3>
-            <ol>
-              <li>Delays an action</li>
-              <li>Executes an action in a regular basis</li>
-              <li>Stops an action started with setInterval</li>
-            </ol>
-            <label>SetTimeout example: <button id="settimeout_example">Show message (2sec delay)</button></label>
-            <label>setInterval example: <button id="setinterval_example">Show time counter</button></label>
-            <label>clearTimeout example:<button id="cleartimeout_example">Stop time counter</button></label>
-            <p id='texto1' class="dp_none"></p>
+            <h3>location</h3>
+            <p>is reachable through window and document. Interesting properties:</p>
+            <ul class="lista_viñetas">
+              <li>hostname</li>
+              <li>href</li>
+              <li>protocol</li>
+            </ul>
+            <button id="show_location">show location properties</button>
+            <p id='texto1' class="dp_none texto_pequeño"></p>
           </article>
           
           <article class="contenedor-flex-columna gap borde jc-center">
@@ -79,31 +75,6 @@
               <li><button id="muestra_confirmacion">Ask confirmation</button></li>
               <li><button id="pide_datos">Ask for data</button></li>
             </ul>
-          </article>
-
-          <article class="contenedor-flex-columna gap borde jc-center">
-            <h2>window properties</h2>
-            <p>some window properties (location, document and screen) are objects as well, so they can be accessed in two ways: window.location.href or location.href</p>
-            <ol>
-              <li>innerHeight (RO):interior height of the window (px)</li>
-              <li>innerWidth (RO):interior width of the window (px)</li>
-              <li>location: current URL</li>
-              <li>document: content showed in the window (object)</li>
-              <li>LocalStorage</li>
-              <li>SessionStorage</li>
-              <li>Screen (RO)
-                <ul class="lista_viñetas">
-                  <li>availHeight: pixels available in the y axis</li>
-                  <li>availWidth</li>
-                  <li>height</li>
-                  <li>width</li>
-                  <li>colorDepth</li>
-                  <li>orientation</li>
-                </ul>
-              </li>
-            </ol>
-            <button id="show_window_properties">Show window properties</button>
-            <p id='texto_propiedades' class="dp_none"></p>
           </article>
 
         </section>

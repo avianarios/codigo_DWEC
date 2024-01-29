@@ -8,10 +8,17 @@
 
 //location is reachable through window and document
 //it has many properties: hostname, href, protocol, etc.
-console.log(location+
-    "\n"+window.location.hostname+
-    "\n"+location.href+
-    "\n"+document.location.protocol);
+let texto1=document.getElementById("texto1");
+document.getElementById("show_location").addEventListener("click", (evento)=>{
+  evento.target.innerText.includes("show") ? 
+      evento.target.innerText=evento.target.innerText.replace("show", "hide") : 
+      evento.target.innerText=evento.target.innerText.replace("hide", "show");
+  texto1.classList.toggle("dp_none");
+  texto1.innerHTML=`<ul class="lista_viñetas"><li>location: ${location}</li>
+                      <li>location.href: ${location.href}</li>
+                      <li>window.location.hostname: ${window.location.hostname}</li>
+                      <li>document.location.protocol: ${document.location.protocol}</li></ul>`;
+})
 
 /////////////////
 /////methods/////
@@ -19,11 +26,12 @@ console.log(location+
 
 //assign method
 //moves to another url
+let url="www.google.es";
 location.assign(url);
 //the next sentences makes JavaScript to call assign method
 window.location=url;
 location.href=url;
-
+/*
 //replace method
 //similar to assign, but it doesn't create an entrance in browser's history. back button can't be pressed
 location.replace(url);
@@ -53,3 +61,4 @@ location.host //A string containing the host, that is the hostname, a ':', and t
 location.hostname //A string containing the domain of the URL.
 location.port   //A string containing the port number of the URL.
 Location.search //A string containing a '?' followed by the parameters or "querystring" of the URL. Modern browsers provide URLSearchParams and URL.searchParams to make it easy to parse out the parameters from the querystring.
+*/
