@@ -9,99 +9,135 @@
 //////methods//////
 ///////////////////
 
-///open method///
+////setTimeout, setInterval and clearTimeout////
+//setTimeout performs an action with a given delay
+let texto1=document.getElementById("texto1");
+let demora=3000;
+document.getElementById("settimeout_example").addEventListener("click", ()=>{
+    setTimeout((funcion, destino, tiempo) => {
+        texto1.textContent=`Ejemplo de cómo pasar parámetros a la función ${funcion} para que se vean en ${destino} a los ${tiempo} segundos`;
+        //console.log (`hola, soy ${nombre} y te tengo que decir que ${mensaje}`);
+    }, demora, "setTimeout", "pantalla", demora/1000);
+});
+
+//setInterval
+//two paramethers: function and miliseconds to call the function. Optional paramethers, to be specified after the former, can be passed to the function
+let demora2=1000;
+let timeoutID;
+document.getElementById("setinterval_example").addEventListener("click", (evento)=>{
+    timeoutID=setInterval(incrementSeconds, demora2, evento.currentTarget.textContent);
+    let seconds=0;
+    function incrementSeconds(donde) {
+        texto1.textContent = `Button "${donde}" clicked ${seconds} seconds ago`;
+        seconds++;
+    }
+});
+
+//clearTimeout method//
+//removes the timeout by using the timestamp returned when calling setTimeout
+document.getElementById("cleartimeout_example").addEventListener("click", (evento)=>{
+    clearTimeout(timeoutID);    //cancels timeout
+});
+
+
+//open method//
 //open an url in a new window
 /*arguments: 
     1- the URL to load
     2- the window target (name or _self, _blank, _parent, and _top)
     3- a string of window features (properties of the new window as width, height, menubar, toolbar, location, status, scrollbar or resizable)*/
-let url="https://www.mozilla.org";
-let destino="_blank";
-let caracteristicas='height=600,width=800, resizable';
-window.open(url, destino, caracteristicas)
 
-let url2 = 'https://elpais.com';
+let url="https://www.mozilla.org";
+document.getElementById("abre_ventana1").addEventListener("click", (evento)=>{
+    let destino="_blank";
+    let caracteristicas='height=600,width=800, resizable';
+    window.open(url, destino, caracteristicas)
+});
+
 //let abreVentana=(url, destino, caracteristicas) => (window.open(url, destino, caracteristicas));
 //abreVentana(url, '_blank', caracteristicas);
 //abreVentana(url2, 'ventana', caracteristicas);
 
-///setTimeout method///
-//executes a callback function once specified time has expired
-//setTimeout (funcion, retraso, ..parámetros para la función)
-window.setTimeout(() => {
-    window.open (url);
-  }, 2000, "https://elpais.com");
 
-//example 2
-function mensaje(nombre, mensaje){
-    console.log (`hola, ${nombre} y te tengo que decir que ${mensaje}`);
-}
-setTimeout(mensaje, 2000, "Perico", "buenas noches");
-
-///clearTimeout method///
-//removes the timeout
-//it needs the timestamp returned when calling setTimeout
-let timeoutID=setTimeout(alert, 5000, "texto de la alerta");
-clearTimeout(timeoutID);    //cancels timeout
-
-///setInterval method///
-//executes a function periodically
-function mensaje2(){
-    alert ("mensaje");
-}
-setInterval(mensaje2, 2000);
-
-setInterval(()=>{
-    alert("mensaje");
-}, 2000);
-
+let espera=5000;
+document.getElementById("abre_ventana2").addEventListener("click", (evento)=>{
+    let seconds = espera/1000;
+    let muestra_contador = document.getElementById('contador');
+    muestra_contador.classList.toggle("dp_none");
+    function incrementSeconds() {
+        muestra_contador.textContent = "Opening window in " + seconds + " seconds.";
+        seconds--;
+        console.log (seconds);
+        if (seconds==-1){
+            clearInterval(cancelar_intervalo);
+            muestra_contador.textContent="Window already opened";
+        }
+    }
+    let cancelar_intervalo = setInterval(incrementSeconds, 1000);
+    window.setTimeout(() => {
+        window.open (url);
+    }, espera);
+});
 // window.setTimeout(window.open (url), 2000); //doesn't work. setTimeout expects the first argument to be a function
+
 
 
 ///resize method///
 //resizeBy adds or substract a certain amount of px to current window (if it is resizable)
-nuevaVentana=window.open("www.duckduckgo.es", "unNombre", "height=1000, width=900, resizable");
-setTimeout(() => {
-  nuevaVentana.resizeBy(-300,-200);
-}, 2000);  
 
-setTimeout(() => {
-    window.open ("www.elpais.com");
-  }, 2000); 
+document.getElementById("redimensiona_ventana1").addEventListener("click", (evento)=>{
+//    nuevaVentana=window.open(window.location.href, "unNombre", "height=1000, width=1500, resizable");
+    nuevaVentana=window.open("", "unNombre", "height=1000, width=1500, resizable");
+    setTimeout(() => {
+      nuevaVentana.resizeBy(-400,-300);
+    }, 2000);
+});
 
-//resizeTo sets current window to a specific size (if it is resizable)
-setTimeout(() => {
-    nuevaVentana.resizeTo(600, 900);
-}, 2000);
+document.getElementById("redimensiona_ventana2").addEventListener("click", (evento)=>{
+    nuevaVentana=window.open("", "unNombre", "height=1000, width=1500, resizable");
+    setTimeout(() => {
+        nuevaVentana.resizeTo(600, 900);
+    }, 2000);
+});
 
-///moveTo method///
-//moves a window to a specific location
-setTimeout(() => {
-    nuevaVentana.moveTo(500, 500);
-}, 2000);
+//move
+document.getElementById("mueve_ventana").addEventListener("click", (evento)=>{
+    nuevaVentana=window.open("", "unNombre", "height=800, width=1000, resizable");
+    setTimeout(() => {
+        nuevaVentana.moveTo(500, 500);
+    }, 2000);
+});
 
-///close method///
-//closes a window
-setTimeout(() => {
-    nuevaVentana.close();
-}, 2000);
 
-///alert method///
-///shows a message
-window.alert("esto es un mensaje");
-alert("esto es otro mensaje");
 
-///confirm method///
-///shows a confirmation window
-//it has two buttons, ok or cancel, and return true or false
-let opcion=window.confirm("¿Está seguro de que desea borrarlo?");
-opcion ? alert ("vamos a borrarlo") : alert ("no lo borramos");
+//close
+document.getElementById("cierra_ventana").addEventListener("click", (evento)=>{
+    nuevaVentana=window.open("", "unNombre", "height=1000, width=1500, resizable");
+    setTimeout(() => {
+        nuevaVentana.close();
+    }, 2000);
+});
 
-///prompt method///
-///shows an input field
-//a default text can be provided
-let nombre=window.prompt("Dígame su nombre", "nombre");
-let edad=Number(window.prompt("Dígame su edad","edad"));
+//alert
+document.getElementById("muestra_mensaje").addEventListener("click", (evento)=>{
+    window.alert("esto es un mensaje");
+});
+
+
+//confirm
+//shows a confirmation window with two buttons, ok or cancel Returns true or false
+document.getElementById("muestra_confirmacion").addEventListener("click", (evento)=>{
+    let opcion=window.confirm("¿Está seguro de que desea borrarlo?");
+    opcion ? alert ("vamos a borrarlo") : alert ("no lo borramos");
+});
+
+//prompt
+//shows an input field. A default text can be provided
+document.getElementById("pide_datos").addEventListener("click", (evento)=>{
+    let nombre=window.prompt("Dígame su nombre", "nombre");
+    let edad=Number(window.prompt("Dígame su edad","edad"));
+});
+
 
 ///////////////////////
 ///////properties//////
@@ -135,4 +171,3 @@ console.log (window.screen.availWidth);
 console.log (window.screen.width);
 console.log (window.screen.colorDepth);
 console.log (window.screen.orientation);
-
