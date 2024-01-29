@@ -8,6 +8,9 @@
 //2: creates a text element
 //3: creates a comment
 //4: makes a node to be child of another one
+
+//When trying to insert the same element twice, any method (appendChild, before, after...) just MOVES it, so it is inserted just once. The solution is cloning it
+
 //example 1: creates a new section with a comment and a paragraph on it
 let seccion=document.createElement("section");
 let comentario=document.createComment("Comentario creado con JS para insertarlo en el DOM dinámicamente");
