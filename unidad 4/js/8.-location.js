@@ -18,7 +18,7 @@ document.getElementById("show_location").addEventListener("click", (evento)=>{
                       <li>location.href: ${location.href}</li>
                       <li>window.location.hostname: ${window.location.hostname}</li>
                       <li>document.location.protocol: ${document.location.protocol}</li></ul>`;
-})
+});
 
 /////////////////
 /////methods/////
@@ -26,39 +26,47 @@ document.getElementById("show_location").addEventListener("click", (evento)=>{
 
 //assign method
 //moves to another url
-let url="www.google.es";
-location.assign(url);
-//the next sentences makes JavaScript to call assign method
-window.location=url;
-location.href=url;
-/*
-//replace method
-//similar to assign, but it doesn't create an entrance in browser's history. back button can't be pressed
-location.replace(url);
+let url="https://www.mozilla.org";
 
-//reload method
-//reloads page content
-location.reload(); //reloads current page using cache when content hasn't changed
-location.reload(true); //forces to download all content from server
+document.getElementById("assign_button").addEventListener("click", (evento)=>{
+  location.assign(url);
+  /*the next sentences makes JavaScript to call assign method
+  window.location=url;
+  location.href=url;*/
+});
+
+document.getElementById("replace_button").addEventListener("click", (evento)=>{
+  //similar to assign, but it doesn't create an entrance in browser's history. back button can't be pressed
+  location.replace(url);
+});
+
+document.getElementById("reload_button").addEventListener("click", (evento)=>{
+  //location.reload(); //reloads current page using cache when content hasn't changed
+  location.reload(true); //forces to download all content from server
+});
+
 
 //iterating through location.search
-console.log (location.search);
-parametros=new URLSearchParams (location.search);   //URLSearchParams has to be used as it returns an iterable object
+/*location="https://duckduckgo.com/?t=ffab&q=viajes+a+islandia&ia=web"
+parametros=new URLSearchParams (location.search);
 for (const [key, value] of parametros){
   console.log (`${key}: ${value}`);
-}
+}*/
 
 //check if a parameter exists
-console.log (parametros.has("precio"));
+//console.log (parametros.has("precio"));
 
 ////////////////////
 /////properties/////
 ////////////////////
-
-location.href //returns a string containing the entire URL
-location.protocol //A string containing the protocol scheme of the URL, including the final ':'.
-location.host //A string containing the host, that is the hostname, a ':', and the port of the URL.
-location.hostname //A string containing the domain of the URL.
-location.port   //A string containing the port number of the URL.
-Location.search //A string containing a '?' followed by the parameters or "querystring" of the URL. Modern browsers provide URLSearchParams and URL.searchParams to make it easy to parse out the parameters from the querystring.
-*/
+let texto_propiedades=document.getElementById("texto_propiedades");
+document.getElementById("show_properties_button").addEventListener("click", (evento)=>{
+  texto_propiedades.innerHTML=`<br>location.href: ${location.href}
+                              <br>location.protocol: ${location.protocol}
+                              <br>location.host: ${location.host}
+                              <br>location.hostname: ${location.hostname}
+                              <br>location.port: ${location.port}
+                              <br>location.search: ${location.search}`;
+  texto_propiedades.classList.remove("dp_none");
+  document.documentElement.scrollTo(0, document.documentElement.scrollHeight);
+});

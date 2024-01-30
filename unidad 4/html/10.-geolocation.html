@@ -1,66 +1,36 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <button onclick="damePosicion()">Posiciona</button>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigator object</title>
+     <script src="../js/10.-geoLocation.js" defer></script>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+</head>
+<body>
+    <section class="contenedor-flex-columna gap">
+        <article class="contenedor-flex-columna gap borde jc-center">
+            <h2>Geolocation</h2>
+            <ul>
+              <li>getCurrentPosition: gets static position</li>
+              <li>watchPosition: gets a live position</li>
+            </ul>
+            <p>both methods return an object with some interesting properties (click buttons)</p>
+            <button id="getcurrentposition_button">Show static position</button>
+            <button id="watchposition_button">Show live position</button>
+            <p id='texto_coordenadas' class="dp_none texto_pequeño"></p>
+            <div id="map-wrapper" class="dp_none">
+              <div id="map" class="dp_none"><div>
+           </div>
+          </article>
 
-        <p id="parrafo"></p>
+      </section>
 
-        <script>
-            const etiqueta = document.getElementById("parrafo");  
-
-            const opciones = {
-                enableHighAccuracy: true,
-                maximumAge: 30000,
-                timeout: 27000,
-            };
-
-            function damePosicion(){
-                if (navigator.geolocation) {    //should be checked 
-                    navigator.geolocation.getCurrentPosition(muestraPosicion, muestraError, opciones);
-                } else { 
-                    etiqueta.innerHTML="Su navegador no soporta geolocalización";
-                }
-            }
-
-            function muestraPosicion(position) {
-                etiqueta.innerHTML= "latitud:"+position.coords.latitude+"<br>longitud:"+position.coords.longitude;
-            }
-
-            function muestraError(error) {
-                switch(error.code) {
-                    case error.PERMISSION_DENIED:
-                       etiqueta.innerHTML="El usuario denegó la petición de localización";
-                        break;
-                    case error.POSITION_UNAVAILABLE:
-                        etiqueta.innerHTML="La información sobre localización no está disponible";
-                        break;
-                    case error.TIMEOUT:
-                        etiqueta.innerHTML="Se agotó el tiempo de la petición";
-                        break;
-                    default:
-                        etiqueta.innerHTML="Ocurrió un error desconocido";
-                }
-            }
-
-            function showPosition(position) {
-                let latlon = position.coords.latitude + "," + position.coords.longitude;
-
-                let img_url = "http://www.openstreetmap.org/?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&zoom=17&layers=M";
-                //"https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=YOUR_KEY";
-
-                etiqueta.innerHTML = "<img src='"+img_url+"'>";
-            }
-
-        </script>        
-    </body>
-
+</body>
 </html>
-
