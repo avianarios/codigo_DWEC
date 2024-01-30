@@ -42,7 +42,7 @@ document.getElementById("cleartimeout_example").addEventListener("click", (event
 });
 
 
-//open method//
+//open
 //open an url in a new window
 /*arguments: 
     1- the URL to load
@@ -82,11 +82,8 @@ document.getElementById("abre_ventana2").addEventListener("click", (evento)=>{
 });
 // window.setTimeout(window.open (url), 2000); //doesn't work. setTimeout expects the first argument to be a function
 
-
-
-///resize method///
+//resize
 //resizeBy adds or substract a certain amount of px to current window (if it is resizable)
-
 document.getElementById("redimensiona_ventana1").addEventListener("click", (evento)=>{
 //    nuevaVentana=window.open(window.location.href, "unNombre", "height=1000, width=1500, resizable");
     nuevaVentana=window.open("", "unNombre", "height=1000, width=1500, resizable");
@@ -109,8 +106,6 @@ document.getElementById("mueve_ventana").addEventListener("click", (evento)=>{
         nuevaVentana.moveTo(500, 500);
     }, 2000);
 });
-
-
 
 //close
 document.getElementById("cierra_ventana").addEventListener("click", (evento)=>{
@@ -145,7 +140,7 @@ document.getElementById("pide_datos").addEventListener("click", (evento)=>{
 ///////properties//////
 ///////////////////////
 let texto_propiedades=document.getElementById("texto_propiedades");
-document.getElementById("show_window_properties").addEventListener("click", (evento)=>{
+document.getElementById("show_window_properties_button").addEventListener("click", (evento)=>{
     texto_propiedades.innerHTML=`<br>window.innerHeight: ${window.innerHeight}
                                 <br>window.innerWidth: ${window.innerWidth}
                                 <br>window.location: ${window.location}
@@ -155,8 +150,7 @@ document.getElementById("show_window_properties").addEventListener("click", (eve
                                 <br>window.screen.height: ${window.screen.height}
                                 <br>window.screen.width: ${window.screen.width}
                                 <br>window.screen.colorDepth: ${window.screen.colorDepth}
-                                <br>window.screen.orientation.type: ${window.screen.orientation.type}
-                                `;
+                                <br>window.screen.orientation.type: ${window.screen.orientation.type}`;
     texto_propiedades.classList.remove("dp_none");
     document.documentElement.scrollTo(0, document.documentElement.scrollHeight);
 });

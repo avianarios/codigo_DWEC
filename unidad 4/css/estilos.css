@@ -15,6 +15,14 @@ body{
     background-color: green;
 }
 
+.borde_rojo{
+    border: 3px solid red;
+}
+
+.borde_verde{
+    border: 3px solid green;
+}
+
 .letra_grande{
     font-size: 1.15rem;
 }
@@ -146,13 +154,7 @@ td{
     visibility: hidden;
 }
 
-.borde_rojo{
-    border: 3px solid red;
-}
 
-.borde_verde{
-    border: 3px solid green;
-}
 
 #error{
     position: absolute;
@@ -172,3 +174,9 @@ td{
 .texto_pequeño{
     font-size: 0.75rem;
 }
+
+#map-wrapper, #map{
+    width: 100%;
+    height: 400px;
+}
+

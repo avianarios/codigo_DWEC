@@ -8,7 +8,19 @@
 ////userAgent
 //provides information that identifies the web browser
 //read-only
-window.navigator.userAgent;
+let texto_propiedades=document.getElementById("texto_propiedades");
+document.getElementById("show_properties_button").addEventListener("click", (evento)=>{
+  texto_propiedades.innerHTML=`<br>navigator.userAgent: ${window.navigator.userAgent}
+                              <br>navigator.cookieEnabled: ${navigator.cookieEnabled}
+                              <br>navigator.geolocation: ${navigator.geolocation}
+                              <br>navigator.language: ${navigator.language}
+                              <br>navigator.clipboard: ${navigator.clipboard}
+                              <br>navigator.permissions: ${navigator.permissions}`;
+  texto_propiedades.classList.remove("dp_none");
+});
+
+/*
+console.log (window.navigator.userAgent);
 
 //useful when offering functionality depending on the web broser
 //there's no guarantee that the browser agent is indeed the one advertised by this property.
@@ -51,6 +63,7 @@ navigator.clipboard
   (clipText) => (document.querySelector(".cliptext").innerText = clipText),
 );
 
+
 //permissions
 //returns an object that can be used to query and update permission status of APIs covered by the Permissions API. 
 //we'll talk about it in a later unit
@@ -63,3 +76,4 @@ navigator.permissions.query({ name: "geolocation" }).then((result) => {
   // Don't do anything if the permission was denied.
 });
 
+*/

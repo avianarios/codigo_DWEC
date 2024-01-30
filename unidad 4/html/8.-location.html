@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Location object</title>
      <script src="../js/8.-location.js" defer></script>
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
     <section class="contenedor-flex-columna gap">
-
-        <section class="contenedor-flex-columna ai-center borde gap">
-
           <article class="contenedor-flex-columna gap borde jc-center">
-            <h3>location</h3>
+            <h2>location</h2>
             <p>is reachable through window and document. Interesting properties:</p>
             <ul class="lista_viñetas">
               <li>hostname</li>
@@ -25,61 +22,34 @@
           </article>
           
           <article class="contenedor-flex-columna gap borde jc-center">
-            <h3>open</h3>
-            <p>Opens a new url</p>
-            <ul id="lista_botones1" class="contenedor-flex-columna gap jc-center">
-              <li><button id="abre_ventana1">Open new window (with options)</button></li>
-              <li><button id="abre_ventana2">Open new window (with delay)</button></li>
-            </ul>
-            <p id='contador' class="dp_none"></p>
-          </article>
-  
-          <article class="contenedor-flex-columna gap borde jc-center">
-            <h3>resizeBy and resizeTo</h3>
-            <ol>
-              <li>Adds or subtracts from the window size</li>
-              <li>Stablishes the new size</li>
-            </ol>
-            <ul id="lista_botones1" class="contenedor-flex-columna gap jc-center">
-              <li><button id="redimensiona_ventana1">Open new window and resize it (resizeBy)</button></li>
-              <li><button id="redimensiona_ventana2">Open new window and resize it (resizeTo)</button></li>
-            </ul>
-          </article>
-
-          <article class="contenedor-flex-columna gap borde jc-center">
-            <h3>moveTo</h3>
-            <p>move an already opened window </p>
-            <ul id="lista_botones1" class="contenedor-flex-columna gap jc-center">
-              <li><button id="mueve_ventana">Open new window and move it</button></li>
-            </ul>
-          </article>
-
-          <article class="contenedor-flex-columna gap borde jc-center">
-            <h3>close</h3>
-            <p>Close an already opened window </p>
-            <ul id="lista_botones1" class="contenedor-flex-columna gap jc-center">
-              <li><button id="cierra_ventana">Open new window and close it</button></li>
-            </ul>
-          </article>
-
-          <article class="contenedor-flex-columna gap borde jc-center">
-            <h2>showing information</h2>
+            <h2>Opening URLs</h2>
             <h3>alert, confirm and prompt</h3>
             <ol>
               <li>alert: Shows a message in a modal window</li>
               <li>confirm: Shows a confirmation window</li>
               <li>prompt: Asks for data</li>
             </ol>
-            <ul id="lista_botones1" class="contenedor-flex-columna gap jc-center">
-              <li><button id="muestra_mensaje">Show message</button></li>
-              <li><button id="muestra_confirmacion">Ask confirmation</button></li>
-              <li><button id="pide_datos">Ask for data</button></li>
+            <ul id="lista_botones1" class="contenedor-flex-fila gap jc-center">
+              <li><button id="assign_button">assign</button></li>
+              <li><button id="replace_button">replace</button></li>
+              <li><button id="reload_button">reload</button></li>
             </ul>
           </article>
 
-        </section>
-   
+          <article class="contenedor-flex-columna gap borde jc-center">
+            <h2>location properties</h2>
+            <h3></h3>
+            <ol>
+              <li>href: entire URL</li>
+              <li>protocol: protocol scheme of the URL, including the final ':'.</li>
+              <li>host: hostname:port or the URL</li>
+              <li>hostname: domain of the URL</li>
+              <li>port: port number of the URL</li>
+              <li>search: "querystring" of the URL</li>
+            </ol>
+            <button id="show_properties_button">show properties</button>
+            <p id='texto_propiedades' class="dp_none"></p>
+          </article>
       </section>
-
 </body>
 </html>
