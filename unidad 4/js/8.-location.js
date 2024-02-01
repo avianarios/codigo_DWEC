@@ -53,9 +53,6 @@ for (const [key, value] of parametros){
   console.log (`${key}: ${value}`);
 }*/
 
-//check if a parameter exists
-//console.log (parametros.has("precio"));
-
 ////////////////////
 /////properties/////
 ////////////////////
