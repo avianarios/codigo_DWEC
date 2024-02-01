@@ -32,6 +32,12 @@ document.getElementById("setinterval_example").addEventListener("click", (evento
         texto1.textContent = `Button "${donde}" clicked ${seconds} seconds ago`;
         seconds++;
     }
+
+/*    let interval_ID=setInterval((texto)=>{
+        caja_texto.textContent=`button ${texto} pressed ${segundos} secs ago`;
+        segundos++;
+    }, delay2, evento.target.textContent);*/
+
 });
 
 //clearTimeout method//
@@ -155,6 +161,71 @@ document.getElementById("show_window_properties_button").addEventListener("click
 });
 
 
+//////////////////////////////////////////////
+//one eventlistener event delegation version//
+//////////////////////////////////////////////
+/*let delay=3000;
+let caja_texto=document.getElementById("muestra_texto");
+let segundos=0;
+let delay2=1000;
+let interval_ID;
+let window_ID;
 
-//localStorage and sessionStorage are window properties, as well as objects
-
+let url="http://127.0.0.1:50075/html/window.htm";
+document.getElementById("form1").addEventListener("click", (evento)=>{
+    evento.preventDefault();
+    switch (evento.target.id){
+        case "settimeout":
+            setTimeout ( (donde, retraso)=>{
+                caja_texto.textContent=`estoy metiendo un texto en ${donde} tras ${retraso} segundos`;
+                caja_texto.classList.remove("dp_none");
+            }, 1000, "un párrafo", delay/1000);
+            break;
+        case "setinterval":
+            caja_texto.classList.remove("dp_none");
+            interval_ID=setInterval((texto)=>{
+                caja_texto.textContent=`button ${texto} pressed ${segundos} secs ago`;
+                segundos++;
+            }, delay2, evento.target.textContent);            
+            break;
+        case "stopinterval":
+            clearTimeout(interval_ID);
+            break;
+        case "open":
+                let destino="_blank";
+                let parametros="height=600, widht=500, resizable";
+                window_ID=window.open(url, destino, parametros);
+            break;
+        case "close":
+                setTimeout(()=>{
+                    window_ID.close();
+                }, 3000);
+            break;
+        case "resizeTo":
+            window_ID.resizeTo(700, 600);
+            break;
+        case "resizeBy":
+            window_ID.resizeBy(-100, 200);
+            break;
+        case "move":
+            window_ID.moveTo(700, 500);
+            break;
+        case "confirm":
+            let opcion=window.confirm("¿Está seguro?");
+            opcion ? window.alert("ha dicho que sí") : window.alert("ha dicho que no");
+            break;
+        case "prompt":
+            let edad=window.prompt("¿qué edad tiene", "edad");
+            break;
+        case "propiedades":
+            caja_texto.classList.remove("dp_none");
+            caja_texto.textContent=`
+                ${window.innerHeight}
+                ${window.innerWidth}
+                ${window.location}
+                ${window.screen.height}
+                ${window.screen.width}`;
+            break;
+    }
+});
+*/
