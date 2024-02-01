@@ -17,7 +17,6 @@ document.getElementById("settimeout_example").addEventListener("click", ()=>{
     setTimeout((funcion, destino, tiempo) => {
         texto1.textContent=`Ejemplo de cómo pasar parámetros a la función ${funcion} para que se vean en ${destino} a los ${tiempo} segundos`;
         texto1.classList.remove("dp_none");
-        //console.log (`hola, soy ${nombre} y te tengo que decir que ${mensaje}`);
     }, demora, "setTimeout", "pantalla", demora/1000);
 });
 
