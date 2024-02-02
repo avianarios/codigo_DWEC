@@ -4,13 +4,15 @@
 
 //create cookie
 //document.cookie
-
+for (let formulario of document.querySelectorAll("form")){
+    formulario.addEventListener("submit", (evento)=>{
+        evento.preventDefault();
+    });
+}
 //let radiobuttons=document.getElementById("SameSite");
-let formulario_galletita=document.getElementById("formulario-galletita");
-formulario_galletita.addEventListener("submit", (evento)=>{
-    evento.preventDefault();
-});
+
 //document.forms[0].addEventListener("change", (evento)=>{
+let formulario_galletita=document.getElementById("formulario-galletita");
 let estado=formulario_galletita.elements["secure"].checked;
 
 document.getElementById("secure").addEventListener("change", (evento)=>{
@@ -81,22 +83,64 @@ document.getElementById("show_cookies_button").addEventListener("click", (evento
 ///////////////////////////////////////
 
 //creating localstorage
+/* TERMINAR EVENTDELEGATION
+let storage=document.getElementById("storage").addEventListener("click", (evento)=>{
+    if evento.
 
-let formulario_almacenamiento=document.getElementById("formulario_storage");
-formulario_almacenamiento.addEventListener("submit", (evento)=>{
-    evento.preventDefault();
-});
+});*/
 
-formulario_almacenamiento.addEventListener("click", (evento)=>{
-    let nombre=formulario_almacenamiento.elements[1].value;
-    let valor=formulario_almacenamiento.elements[2].value
+let formulario_escritura_almacenamiento=document.getElementById("formulario_creacion_storage");
+formulario_escritura_almacenamiento.addEventListener("click", (evento)=>{
+    let nombre=formulario_escritura_almacenamiento.elements[1].value;
+    let valor=formulario_escritura_almacenamiento.elements[2].value
     if (evento.target.id=="create_localstorage_button"){
         localStorage.setItem(nombre,valor);  //starting at 1 due to fieldset counting as a form element
-        //it also works localStorage.nombre=valor
+        //it also works localStorage.nombre=valor or localStorage['nombre']=valor
     }else{
         sessionStorage.setItem(nombre,valor);  //starting at 1 due to fieldset counting as a form element
     }
 });
+
+let formulario_lectura_almacenamiento=document.getElementById("formulario_lectura_storage");
+let texto_propiedades2=document.getElementById("texto_propiedades2");
+
+
+formulario_lectura_almacenamiento.addEventListener("click", (evento)=>{
+    texto_propiedades2.classList.remove("dp_none");
+    texto_propiedades2.innerHTML="";
+    if (evento.target.id=="show_localstorage_button"){
+        for (let llave of Object.keys(localStorage)){
+            texto_propiedades2.innerHTML+=`${llave}:${localStorage.getItem(llave)}<br>`;
+        }
+    }else{
+        for (let llave of Object.keys(sessionStorage)){
+            texto_propiedades2.innerHTML+=`${llave}:${sessionStorage.getItem(llave)}<br>`;
+        }
+    }
+    document.documentElement.scrollTo(0, document.documentElement.scrollHeight);
+});
+
+
+
+
+
+/*const myObject = {
+  name : "john doe",
+  age : 32,
+  gender : "male",
+  profession : "optician" 
+}
+
+window.localStorage.setItem("myObject", JSON.stringify(myObject));
+
+
+
+let newObject = window.localStorage.getItem("myObject");
+console.log(JSON.parse(newObject));
+*/
+
+
+
 
 //Storing information: cookies (document object) and localStorage and sessionStorage (window object)
 //localStorage

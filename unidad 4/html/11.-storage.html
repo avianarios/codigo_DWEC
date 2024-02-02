@@ -38,7 +38,7 @@
           <p>one last tip: instead of storing all the user info in cookies, one for each user configuration, store only his ID and match at server side with a SQL request</p>
         </header>
 
-        <article class="contenedor-flex-columna gap borde jc-center">
+        <article class="contenedor-flex-columna gap borde jc-center" id="cookies">
           <h2>Create, modify and remove cookies</h2>
           <p>To remove, just create a cookie with the same paramethers as the old one but a past "expires" date or max-age=0</p>
           <p>To modify, just create a cookie keeping the same name but changing its value as the old one</p>
@@ -79,7 +79,7 @@
       </section>
 
 
-      <section class="contenedor-flex-columna gap">
+      <section class="contenedor-flex-columna gap" id="storage">
         <header>
           <h2>localStorage and sessionStorage</h2>
           <p>It's an alternative to cookies. It's a database storaged and available only in the client</p>
@@ -89,13 +89,52 @@
 
         <article class="contenedor-flex-columna gap borde jc-center">
           <h3>Create localStorage and sessionStorage</h3>
-          <form id="formulario_storage" class="contenedor-flex-columna gap">
+          <form id="formulario_creacion_storage" class="contenedor-flex-columna gap">
             <fieldset class="contenedor-flex-fila gap">
               <input type="text" name="nombre" placeholder="nombre" required class="borde_rojo">:
               <input type="text" name="valor_nombre" placeholder="valor" required class="borde_rojo">
             </fieldset>
             <button id="create_localstorage_button">create localStorage</button>
             <button id="create_sessionstorage_button">create sessionStorage</button>
+          </form>
+        </article>
+
+        <article class="contenedor-flex-columna gap borde jc-center">
+          <h3>Create complex localStorage and sessionStorage</h3>
+          <form id="formulario_creacion_storage_complejo" class="contenedor-flex-columna gap">
+            <fieldset class="contenedor-flex-fila gap">
+              <input type="text" name="campo1" placeholder="nombre1" required class="borde_rojo">:
+              <input type="text" name="valor1" placeholder="valor1" required class="borde_rojo">
+            </fieldset>
+            <fieldset class="contenedor-flex-fila gap">
+              <input type="text" name="campo2" placeholder="nombre2">:
+              <input type="text" name="valor2" placeholder="valor2">
+            </fieldset>
+            <fieldset class="contenedor-flex-fila gap">
+              <input type="text" name="nombre3" placeholder="nombre3">:
+              <input type="text" name="valor3" placeholder="valor3">
+            </fieldset>
+            <button id="create_complex_localstorage_button">create complex localStorage</button>
+            <button id="create_complex_sessionstorage_button">create complex sessionStorage</button>
+          </form>
+        </article>
+
+        <article class="contenedor-flex-columna gap borde jc-center">
+          <h3>Read localStorage and sessionStorage</h3>
+          <form id="formulario_lectura_storage" class="contenedor-flex-columna gap">
+            <button id="show_localstorage_button">show localStorage</button>
+            <button id="show_sessionstorage_button">show sessionStorage</button>
+            <p id='texto_propiedades2' class="dp_none texto_pequeño"></p>
+          </form>
+        </article>
+
+
+        <article class="contenedor-flex-columna gap borde jc-center">
+          <h3>Reamove localStorage and sessionStorage</h3>
+          <form id="formulario_lectura_storage" class="contenedor-flex-columna gap">
+            <button id="remove_localstorage_button">remove localStorage</button>
+            <button id="remove_sessionstorage_button">remove sessionStorage</button>
+            <p id='texto_propiedades2' class="dp_none texto_pequeño"></p>
           </form>
         </article>
     </section>
