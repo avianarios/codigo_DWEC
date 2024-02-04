@@ -9,7 +9,7 @@
 </head>
 <body>
     <section class="contenedor-flex-columna gap20">
-      <section class="contenedor-flex-columna gap">
+      <section class="contenedor-flex-columna gap" id="cookies">
         <header class="contenedor-flex-columna gap jc-center">
           <h2>Cookies</h2>
           <p>HTTP is a stateless protocol meaning two requirements of a website (different or not) are treated as independent. The server knows nothing about user.
@@ -57,7 +57,7 @@
                   <input type="radio" id="none" name="SameSite" value="None">none
               </fieldset></li>
             </ul>
-            <button id="create_cookie_button">create cookie</button>
+            <button id="create_cookie">create cookie</button>
           </form>
         </article>
 
@@ -66,7 +66,7 @@
           <p>Cookies can be created at any website, but they can be only read at their domain or path</p>
           <p>Try to create a cookie for a different domain or path, /productos, for instance at the previous section. Watch at developers tools how it is created and click on the following button to read cookies</p>
           <p>only name:value is shown</p>
-          <button id="show_cookies_button">show cookies</button>
+          <button id="show_cookies">show cookies</button>
           <p id='texto_propiedades' class="dp_none texto_pequeño"></p>
         </article>
 
@@ -86,44 +86,38 @@
           <p>The former is a long term storage whilst the latter last as long as the browser is opened</p>
         </header>
 
-
         <article class="contenedor-flex-columna gap borde jc-center">
           <h3>Create localStorage and sessionStorage</h3>
-          <form id="formulario_creacion_storage" class="contenedor-flex-columna gap">
-            <fieldset class="contenedor-flex-fila gap">
-              <input type="text" name="nombre" placeholder="nombre" required class="borde_rojo">:
-              <input type="text" name="valor_nombre" placeholder="valor" required class="borde_rojo">
+          <form id="formulario_escritura_almacenamiento" class="contenedor-flex-columna gap">
+            <fieldset class="contenedor-flex-fila gap" id="informacion_basica_storage">
+              <legend>Información básica</legend>
+              <input type="text" name="campo1" placeholder="nombre" required class="borde_rojo">:
+              <input type="text" name="valor1" placeholder="valor" required class="borde_rojo">
             </fieldset>
-            <button id="create_localstorage_button">create localStorage</button>
-            <button id="create_sessionstorage_button">create sessionStorage</button>
+            <fieldset id="informacion_extra_storage">
+              <legend>Información extra</legend>
+              <fieldset class="contenedor-flex-fila gap">
+                <input type="text" name="campo2" placeholder="nombre2">:
+                <input type="text" name="valor2" placeholder="valor2">
+              </fieldset>
+              <fieldset class="contenedor-flex-fila gap">
+                <input type="text" name="nombre3" placeholder="nombre3">:
+                <input type="text" name="valor3" placeholder="valor3">
+              </fieldset>
+            </fieldset>
+            <button id="create_localstorage">create simple localStorage</button>
+            <button id="create_sessionstorage">create simple sessionStorage</button>
+            <button id="create_complex_localstorage">create complex localStorage</button>
+            <button id="create_complex_sessionstorage">create complex sessionStorage</button>
           </form>
         </article>
 
-        <article class="contenedor-flex-columna gap borde jc-center">
-          <h3>Create complex localStorage and sessionStorage</h3>
-          <form id="formulario_creacion_storage_complejo" class="contenedor-flex-columna gap">
-            <fieldset class="contenedor-flex-fila gap">
-              <input type="text" name="campo1" placeholder="nombre1" required class="borde_rojo">:
-              <input type="text" name="valor1" placeholder="valor1" required class="borde_rojo">
-            </fieldset>
-            <fieldset class="contenedor-flex-fila gap">
-              <input type="text" name="campo2" placeholder="nombre2">:
-              <input type="text" name="valor2" placeholder="valor2">
-            </fieldset>
-            <fieldset class="contenedor-flex-fila gap">
-              <input type="text" name="nombre3" placeholder="nombre3">:
-              <input type="text" name="valor3" placeholder="valor3">
-            </fieldset>
-            <button id="create_complex_localstorage_button">create complex localStorage</button>
-            <button id="create_complex_sessionstorage_button">create complex sessionStorage</button>
-          </form>
-        </article>
-
+    
         <article class="contenedor-flex-columna gap borde jc-center">
           <h3>Read localStorage and sessionStorage</h3>
           <form id="formulario_lectura_storage" class="contenedor-flex-columna gap">
-            <button id="show_localstorage_button">show localStorage</button>
-            <button id="show_sessionstorage_button">show sessionStorage</button>
+            <button id="show_localstorage">show localStorage</button>
+            <button id="show_sessionstorage">show sessionStorage</button>
             <p id='texto_propiedades2' class="dp_none texto_pequeño"></p>
           </form>
         </article>
@@ -131,9 +125,12 @@
 
         <article class="contenedor-flex-columna gap borde jc-center">
           <h3>Reamove localStorage and sessionStorage</h3>
-          <form id="formulario_lectura_storage" class="contenedor-flex-columna gap">
-            <button id="remove_localstorage_button">remove localStorage</button>
-            <button id="remove_sessionstorage_button">remove sessionStorage</button>
+          <form id="formulario_eliminacion_storage" class="contenedor-flex-columna gap">
+            <input type="text" name="campo1" placeholder="nombre" required class="borde_rojo" id="nombre_borrar">
+            <button id="remove_one_localstorage">remove one localStorage</button>
+            <button id="remove_one_sessionstorage">remove one sessionStorage</button>
+            <button id="remove_all_localstorage">remove all localStorage</button>
+            <button id="remove_all_sessionstorage">remove all sessionStorage</button>
             <p id='texto_propiedades2' class="dp_none texto_pequeño"></p>
           </form>
         </article>
