@@ -155,11 +155,78 @@ document.getElementById("show_window_properties_button").addEventListener("click
                                 <br>window.screen.height: ${window.screen.height}
                                 <br>window.screen.width: ${window.screen.width}
                                 <br>window.screen.colorDepth: ${window.screen.colorDepth}
-                                <br>window.screen.orientation.type: ${window.screen.orientation.type}`;
+                                <br>window.screen.orientation.type: ${window.screen.orientation.type}
+                                <br>window.navigator.userAgent: ${window.navigator.userAgent}
+                                <br>window.navigator.cookieEnabled: ${navigator.cookieEnabled}
+                                <br>window.navigator.geolocation: ${navigator.geolocation}
+                                <br>window.navigator.language: ${navigator.language}
+                                <br>window.navigator.clipboard: ${navigator.clipboard}
+                                <br>window.navigator.permissions: ${navigator.permissions}                                
+                                `;
     texto_propiedades.classList.remove("dp_none");
     document.documentElement.scrollTo(0, document.documentElement.scrollHeight);
 });
 
+
+///////////////
+////history////
+///////////////
+document.body.addEventListener("click", (evento)=>{
+    switch (evento.target.id){
+        case "back":
+            window.history.back();
+            break;
+        case "forward":
+            window.history.forward();
+            break;
+        case "go":
+            window.history.go(parseInt(document.getElementById("posiciones").value));
+            break;
+    }
+});
+
+
+/*
+console.log (window.navigator.userAgent);
+
+//useful when offering functionality depending on the web broser
+//there's no guarantee that the browser agent is indeed the one advertised by this property.
+//Some browsers allow users to modify useragent to pretend they are using another browser
+//therefore, you can't rely on detecting user browser this way
+if (window.navigator.userAgent.includes("Chrome")){
+    //do something
+}
+
+//it is better to try to detect the funcionality needed (capability detection)
+if( typeof window.addEventListener === 'function' ) {
+    // let's use addEventListener
+} else {
+    // addEventListener is not supported, use another way
+}*/
+
+
+/*
+//clipboard
+//returns an object to read and write to system clipboard interacting with clipboard API
+//we'll talk about it in a later unit
+navigator.clipboard
+.readText()
+.then(    //this is a "promise". we'll talk about it in a later unit
+  (clipText) => (document.querySelector(".cliptext").innerText = clipText),
+);
+
+
+//permissions
+//returns an object that can be used to query and update permission status of APIs covered by the Permissions API. 
+//we'll talk about it in a later unit
+navigator.permissions.query({ name: "geolocation" }).then((result) => {
+  if (result.state === "granted") {
+    showMap();
+  } else if (result.state === "prompt") {
+    showButtonToEnableMap();
+  }
+  // Don't do anything if the permission was denied.
+});*/
 
 //////////////////////////////////////////////
 //one eventlistener event delegation version//
