@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Localstorage object</title>
-     <script src="../js/11.-storage.js" defer></script>
+     <script src="../js/10.-storage.js" defer></script>
+     <script src="../js/10.-indexDB.js" defer></script>
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
@@ -84,16 +85,12 @@
           <h2>localStorage and sessionStorage</h2>
           <p>It's an alternative to cookies. It's a database storaged and available only in the client</p>
           <p>The former is a long term storage whilst the latter last as long as the browser is opened</p>
+          <p>They are not sent at each HTTP connection</p>
         </header>
 
         <article class="contenedor-flex-columna gap borde jc-center">
           <h3>Create localStorage and sessionStorage</h3>
           <form id="formulario_escritura_almacenamiento" class="contenedor-flex-columna gap">
-            <fieldset class="contenedor-flex-fila gap" id="informacion_basica_storage">
-              <legend>Información básica</legend>
-              <input type="text" name="campo1" placeholder="nombre" required class="borde_rojo">:
-              <input type="text" name="valor1" placeholder="valor" required class="borde_rojo">
-            </fieldset>
             <fieldset id="informacion_extra_storage">
               <legend>Información extra</legend>
               <fieldset class="contenedor-flex-fila gap">
@@ -135,6 +132,41 @@
           </form>
         </article>
     </section>
+
+    <section class="contenedor-flex-columna gap" id="indexedDB">
+      <header>
+        <h2>IndexedDB</h2>
+        <p>It's a web browser built-in data base much more powerful than localStorage</p>
+        <p>Stores almost any kind of values by keys, multiple key types.</p>
+        <p>Supports transactions (multiple)</p>
+        <p>Supports key range queries, indexes.</p>
+        <p>Can store much bigger volumes of data than localstorage</p>
+        <p>Suitable for big web apps</p>
+        <p>multiple databases can coexist, with different names, at same domain. A website can't access databases from different websites</p>
+      </header>
+      <article class="contenedor-flex-columna gap borde jc-center">
+        <h3>Creating an indexedDB</h3>
+        <form id="formulario_indexedDB" class="contenedor-flex-columna gap">
+          <input type="text" name="nombre_indexedDB" placeholder="nombre base de datos" required class="borde_rojo" id="nombre_indexedDB">
+          <button id="open_indexedDB">open/create an IndexedDB</button>
+          <button id="remove_indexedDB">remove an IndexedDB</button>
+        </form>
+      </article>
+
+      <article class="contenedor-flex-columna gap borde jc-center">
+        <h3>Adding fields to a indexedDB</h3>
+        <fieldset class="contenedor-flex-columna gap" id="informacion_basica_storage">
+          <legend>Libro</legend>
+          <input type="text" name="isbn" placeholder="ISBN" required class="borde_rojo">
+          <input type="text" name="nombre_libro" placeholder="nombre" required class="borde_rojo">
+          <input type="text" name="autor" placeholder="autor" required class="borde_rojo">
+          <button id="insert_item">Insert a book</button>
+        </fieldset>
+      </article>
+
+    </section>
+
+
 
 </body>
 </html>

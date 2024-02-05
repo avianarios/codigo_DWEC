@@ -9,11 +9,88 @@
 //////methods//////
 ///////////////////
 
+let url="https://www.mozilla.org";
+let texto1=document.getElementById("texto1");
+let timeoutID;
+let demora=3000;
+let demora2=1000;
+let seconds;
+
+
+document.body.addEventListener("click", (evento)=>{
+    switch (evento.target.id){
+        case "settimeout":
+            setTimeout((funcion, destino, tiempo) => {
+                texto1.textContent=`Ejemplo de cómo pasar parámetros a la función ${funcion} para que se vean en ${destino} a los ${tiempo} segundos`;
+                texto1.classList.remove("dp_none");
+            }, demora, "setTimeout", "pantalla", demora/1000);
+            break;
+        case "setinterval":
+            seconds=0;
+            timeoutID=setInterval((donde)=>{
+                texto1.textContent = `Button "${donde}" clicked ${seconds} seconds ago`;
+                seconds++;
+            }, demora2, evento.currentTarget.textContent);
+            texto1.classList.remove("dp_none");
+            break;
+        case "cleartimeout":
+            clearTimeout(timeoutID);    //cancels timeout
+            break;
+        case "open1":
+            let destino="_blank";
+            let caracteristicas='height=600,width=800, resizable';
+            window.open(url, destino, caracteristicas)
+            break;
+        case "open2":
+            seconds = espera/1000;
+            let muestra_contador = document.getElementById('contador');
+            muestra_contador.classList.toggle("dp_none");
+            function incrementSeconds() {
+                muestra_contador.textContent = "Opening window in " + seconds + " seconds.";
+                seconds--;
+                console.log (seconds);
+                if (seconds==-1){
+                    clearInterval(cancelar_intervalo);
+                    muestra_contador.textContent="Window already opened";
+                }
+            }
+            let cancelar_intervalo = setInterval(incrementSeconds, 1000);
+            window.setTimeout(() => {
+                window.open (url);
+            }, espera);
+            break;
+        case "resizeBy":
+            nuevaVentana=window.open("", "unNombre", "height=1000, width=1500, resizable");
+            setTimeout(() => {
+              nuevaVentana.resizeBy(-400,-300);
+            }, 2000);
+            break;
+        case "resizeTo":
+            nuevaVentana=window.open("", "unNombre", "height=1000, width=1500, resizable");
+            setTimeout(() => {
+                nuevaVentana.resizeTo(600, 900);
+            }, 2000);
+            break;
+        case "move":
+            nuevaVentana=window.open("", "unNombre", "height=800, width=1000, resizable");
+            setTimeout(() => {
+                nuevaVentana.moveTo(500, 500);
+            }, 2000);
+            break;
+        case "close":
+            nuevaVentana=window.open("", "unNombre", "height=1000, width=1500, resizable");
+            setTimeout(() => {
+                nuevaVentana.close();
+            }, 2000);
+            break;
+    }
+
+});
+
+/*
 ////setTimeout, setInterval and clearTimeout////
 //setTimeout performs an action with a given delay
-let texto1=document.getElementById("texto1");
-let demora=3000;
-document.getElementById("settimeout_example").addEventListener("click", ()=>{
+document.getElementById("settimeout").addEventListener("click", ()=>{
     setTimeout((funcion, destino, tiempo) => {
         texto1.textContent=`Ejemplo de cómo pasar parámetros a la función ${funcion} para que se vean en ${destino} a los ${tiempo} segundos`;
         texto1.classList.remove("dp_none");
@@ -22,9 +99,7 @@ document.getElementById("settimeout_example").addEventListener("click", ()=>{
 
 //setInterval
 //two paramethers: function and miliseconds to call the function. Optional paramethers, to be specified after the former, can be passed to the function
-let demora2=1000;
-let timeoutID;
-document.getElementById("setinterval_example").addEventListener("click", (evento)=>{
+document.getElementById("setinterval").addEventListener("click", (evento)=>{
     timeoutID=setInterval(incrementSeconds, demora2, evento.currentTarget.textContent);
     texto1.classList.remove("dp_none");
     let seconds=0;
@@ -32,17 +107,11 @@ document.getElementById("setinterval_example").addEventListener("click", (evento
         texto1.textContent = `Button "${donde}" clicked ${seconds} seconds ago`;
         seconds++;
     }
-
-/*    let interval_ID=setInterval((texto)=>{
-        caja_texto.textContent=`button ${texto} pressed ${segundos} secs ago`;
-        segundos++;
-    }, delay2, evento.target.textContent);*/
-
 });
 
 //clearTimeout method//
 //removes the timeout by using the timestamp returned when calling setTimeout
-document.getElementById("cleartimeout_example").addEventListener("click", (evento)=>{
+document.getElementById("cleartimeout").addEventListener("click", (evento)=>{
     clearTimeout(timeoutID);    //cancels timeout
 });
 
@@ -54,8 +123,7 @@ document.getElementById("cleartimeout_example").addEventListener("click", (event
     2- the window target (name or _self, _blank, _parent, and _top)
     3- a string of window features (properties of the new window as width, height, menubar, toolbar, location, status, scrollbar or resizable)*/
 
-let url="https://www.mozilla.org";
-document.getElementById("abre_ventana1").addEventListener("click", (evento)=>{
+/*document.getElementById("open1").addEventListener("click", (evento)=>{
     let destino="_blank";
     let caracteristicas='height=600,width=800, resizable';
     window.open(url, destino, caracteristicas)
@@ -67,7 +135,7 @@ document.getElementById("abre_ventana1").addEventListener("click", (evento)=>{
 
 
 let espera=5000;
-document.getElementById("abre_ventana2").addEventListener("click", (evento)=>{
+document.getElementById("open2").addEventListener("click", (evento)=>{
     let seconds = espera/1000;
     let muestra_contador = document.getElementById('contador');
     muestra_contador.classList.toggle("dp_none");
@@ -87,17 +155,20 @@ document.getElementById("abre_ventana2").addEventListener("click", (evento)=>{
 });
 // window.setTimeout(window.open (url), 2000); //doesn't work. setTimeout expects the first argument to be a function
 
+
 //resize
 //resizeBy adds or substract a certain amount of px to current window (if it is resizable)
-document.getElementById("redimensiona_ventana1").addEventListener("click", (evento)=>{
+
+
+document.getElementById("resizeBy").addEventListener("click", (evento)=>{
 //    nuevaVentana=window.open(window.location.href, "unNombre", "height=1000, width=1500, resizable");
     nuevaVentana=window.open("", "unNombre", "height=1000, width=1500, resizable");
     setTimeout(() => {
-      nuevaVentana.resizeBy(-400,-300);
+    nuevaVentana.resizeBy(-400,-300);
     }, 2000);
 });
 
-document.getElementById("redimensiona_ventana2").addEventListener("click", (evento)=>{
+document.getElementById("resizeTo").addEventListener("click", (evento)=>{
     nuevaVentana=window.open("", "unNombre", "height=1000, width=1500, resizable");
     setTimeout(() => {
         nuevaVentana.resizeTo(600, 900);
@@ -118,7 +189,7 @@ document.getElementById("cierra_ventana").addEventListener("click", (evento)=>{
     setTimeout(() => {
         nuevaVentana.close();
     }, 2000);
-});
+});*/
 
 //alert
 document.getElementById("muestra_mensaje").addEventListener("click", (evento)=>{
