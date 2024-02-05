@@ -15,19 +15,24 @@ for (let formulario of document.querySelectorAll("form")){
 let formulario_galletita=document.getElementById("formulario-galletita");
 let estado=formulario_galletita.elements["secure"].checked;
 
-document.getElementById("secure").addEventListener("change", (evento)=>{
-    estado=evento.target.checked;
+document.getElementById("cookies").addEventListener("change", (evento)=>{
+    switch (evento.target.id){
+        case "secure":
+            estado=evento.target.checked;
+            break;
+        case "SameSite":
+            if (evento.target.value=="None"){
+                formulario_galletita.elements["secure"].checked=true;
+                document.getElementById("secure").disabled=true;
+            }else{
+                formulario_galletita.elements["secure"].checked=estado;
+                document.getElementById("secure").disabled=false;
+            }
+            break;
+    }
+
 });
 
-document.getElementById("SameSite").addEventListener("change", (evento)=>{
-    if (evento.target.value=="None"){
-        formulario_galletita.elements["secure"].checked=true;
-        document.getElementById("secure").disabled=true;
-    }else{
-        formulario_galletita.elements["secure"].checked=estado;
-        document.getElementById("secure").disabled=false;
-    }
-});
 
 document.getElementById("cookies").addEventListener("click", (evento)=>{
     switch (evento.target.id){
@@ -87,7 +92,7 @@ document.getElementById("storage").addEventListener("click", (evento)=>{
         case "create_localstorage":
             if ((nombre!="") && (valor!=""))
                 localStorage.setItem(nombre,valor);  
-                //it also works localStorage.nombre=valor or localStorage['nombre']=valor
+                //it also works localStorage.nombre=valor or localStorage['nombre']=valor, but it's not recommended
             break;
         case "create_sessionstorage":
             if ((nombre!="") && (valor!=""))
@@ -140,29 +145,3 @@ document.getElementById("storage").addEventListener("click", (evento)=>{
         document.documentElement.scrollTo(0, document.documentElement.scrollHeight);
     }
 });
-
-
-
-//Storing information: cookies (document object) and localStorage and sessionStorage (window object)
-//localStorage
-/*Has no expiration date
-Client only
-Has no SSL support
-Data are not transferred on each HTTP request
-5 mb limit (check with the browser)*/
-/*
-window.localStorage.setItem("miGata","Pelusa");
-console.log (window.localStorage.getItem("miGata"));
-localStorage.removeItem("miGata");
-localStorage.setItem("miPerra","Cibeles");
-localStorage.setItem("miGata","Mancha");
-localStorage.clear();
-
-//sessionStorage
-//same as localStorage, but data is gone when closing the web browser
-window.sessionStorage.setItem("miGata","Pelusa");
-console.log (window.sessionStorage.getItem("miGata"));
-sessionStorage.removeItem("miGata");
-sessionStorage.setItem("miPerra","Cibeles");
-sessionStorage.setItem("miGata","Mancha");
-sessionStorage.clear();*/
