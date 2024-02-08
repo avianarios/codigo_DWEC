@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Localstorage object</title>
      <script src="../js/10.-storage.js" defer></script>
-     <script src="../js/10.-indexDB.js" defer></script>
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
@@ -13,11 +12,18 @@
       <section class="contenedor-flex-columna gap" id="cookies">
         <header class="contenedor-flex-columna gap jc-center">
           <h2>Cookies</h2>
-          <p>HTTP is a stateless protocol meaning two requirements of a website (different or not) are treated as independent. The server knows nothing about user.
-          <p>Sometimes it is useful to remember user and identify all his requests as part of the same connection. That's what cookies are used for</p>
-          <p>They are little chunks of plain text storaged at user's device and sent from web server at HTTP headers "Set-cookie"</p>
-          <p>Each time the user connects to the server (no matter to which page), browser sends back cookies that belongs to that domain by using "cookie" header</p>
-          <p>They can be created not only when sending web pages, but images, sripts....</p>
+          <ul class="lista_viñetas">
+            <li>HTTP is a stateless protocol meaning two requirements of a website (different or not) are treated as independent. The server knows nothing about user.</li>
+            <li>Sometimes it is useful to remember user and identify all his requests as part of the same connection. That's what cookies are used for</li>
+            <li>They are little chunks of plain text storaged at user's device and created and sent by web server at HTTP headers "Set-cookie"</li>
+            <li>Each time the user connects to the server (no matter to which page), browser sends back cookies that belongs to that domain by using "cookie" header</li>
+            <li>They can be created not only when sending web pages, but images, sripts....</li>
+            <li>They are associated to a domain. Therefore there are two types of cookies:
+            <ul class="lista_viñetas">
+              <li>first-party (origen): created by current domain server</li>
+              <li>third-party (terceros): when we connect to a server, it can deliver cookies created by servers with different domains. They are usually utilized to gather information about users for marketing and publicity purposes. </li>
+            </ul></li>
+          </ul>
           <p>Interesting properties:</p>
           <ul class="lista_viñetas">
             <li>name:value -> interesting piece of information</li>
