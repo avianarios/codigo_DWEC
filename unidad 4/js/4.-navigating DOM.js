@@ -28,7 +28,7 @@ origen.firstElementChild.innerHTML="texto nuevo";
 
 
 ////navigation through nodes////
-//remember there are several types of nodes (text, comments, elements...). Whitespace between elements are also text nodes.
+//remember there are several types of nodes (text, comments, elements...). Whitespace between elements are also a node (#text) and, therefore, it will be selected
 //.childNodes, .parentNode, .firstChild, .lastChild, .previousSibling, .nextSibling
 //childnodes returns an HTMLCollection
 
