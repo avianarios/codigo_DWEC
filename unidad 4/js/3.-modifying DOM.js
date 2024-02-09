@@ -151,10 +151,13 @@ punto_insercion.insertAdjacentElement("beforeend", be);
 punto_insercion.insertAdjacentElement("afterend", ae);
 
 //no need to create an element before inserting. 
-punto_insercion.insertAdjacentHTML("<article><p>un párrafo insertado</p></article>");
-/*Be careful when inserting HTML code. It could lead to security risks
-const evilInput = `<img src onerror="alert('evil')">`;
-document.body.insertAdjacentHTML('beforeend', evilInput);
+punto_insercion.insertAdjacentHTML("beforeend", "<article><p>un párrafo insertado</p></article>");
+/*Warning! Do not insert HTML obtained from untrusted sources like database, forms or user input. It could lead to security risks
+const codigoMaligo=prompt("dame el elemento a añadir");
+document.body.insertAdjacentHTML('beforeend', codigoMaligno);
+
+User could have inserted `<img src onerror="(function(){console.log('hago algo malo');})();">`;
+Thus, having provided no src, img will throw an error and onerror event will be triggered, launching a function
 */
 
 const titulo = document.getElementById("titulo1");
