@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/4.-jquery effects.js" defer></script>
+    <link rel="stylesheet" href="../css/estilos.css" type="text/css">
+</head>
+<body>
+    <section class="contenedor-flex-columna gap fondo-bisque">
+
+        <article id="show-and-hide" class="contenedor-flex-columna gap borde jc-center">
+            <h2>show and hide</h2>
+            <div class="contenedor-flex-fila gap jc-center">
+                <button id="show-btn">Click to show</button>
+                <button id="hide-btn">Click to hide</button>
+            </div>
+            <p class="very-slow">this paragrah will hide/show very slow</p>
+            <p class="slow">this paragrah will hide/show slow</p>
+            <p class="normal">this paragrah will hide/show normal</p>
+            <p class="fast">this paragrah will hide/show fast</p>
+            <p class="very-fast">this paragrah will hide/show very fast</p>
+            <p id="texto-show-hide" class="oculto"></p>
+        </article>
+
+        <article id="hover" class="contenedor-flex-columna gap borde jc-center">
+            <h2>slideup and slidedown</h2>
+            <p id="click">Click and I'll dissapear</p>
+            <p id="double-click">Double Click and I'll dissapear</p>
+        </article>
+
+        <article class="contenedor-flex-fila gap jc-center">
+            <button id="up-btn">Slide everything up</button>
+            <button id="down-btn">Slide everything down</button>        
+        </article>
+        
+        <article id="keyboard_events" class="contenedor-flex-columna gap borde jc-center">
+            <h2>show and fadeout</h2>
+            <input type="text" name="keyboard">
+            <div class="contenedor-flex-fila jc-center">
+                <p id='keypressed' class="letra_pequeña"></p>
+            </div>
+        </article>
+
+
+    </section>
+    
+</body>
+</html>
