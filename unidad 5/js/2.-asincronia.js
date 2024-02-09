@@ -60,7 +60,8 @@ document.addEventListener("click", (evento)=>{
         case "simplePromise":
             textoPromesaSimple.innerHTML=fetchPromise1+"--> Promise is created to fetch file";
             fetchPromise1.then((response) => {
-                textoPromesaSimple.innerHTML+=`Received response: ${response.status}`;
+                console.log(response);
+                textoPromesaSimple.innerHTML=`Received response: ${response.status}`;
             });
                 
             textoPromesaSimple.innerHTML+=`Started request`;
