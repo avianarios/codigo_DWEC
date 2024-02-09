@@ -156,7 +156,7 @@ punto_insercion.insertAdjacentHTML("beforeend", "<article><p>un párrafo inserta
 const codigoMaligo=prompt("dame el elemento a añadir");
 document.body.insertAdjacentHTML('beforeend', codigoMaligno);
 
-User could have inserted `<img src onerror="(function(){console.log('hago algo malo');})();">`;
+User could have inserted `<img src onerror="(()=>{console.log('hago algo malo');})();">`;
 Thus, having provided no src, img will throw an error and onerror event will be triggered, launching a function
 */
 
