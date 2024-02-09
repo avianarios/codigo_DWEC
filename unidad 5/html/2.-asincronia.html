@@ -100,7 +100,7 @@
 
         <article class="contenedor-flex-columna gap borde jc-center">
             <h3>Combining promises</h3>
-            <p>Requesting some files at the same time</p>
+            <p>Promise.all takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises fulfill. It rejects when any of the input's promises rejects, with this first rejection reason.</p>
             <p>Several promises can be fulfilled before doing something else even though they are not related</p>
             <button id="combiningAllPromises">Combining all unrelated promises</button>
             <p id='textoCombinandoTodasPromesas' class="caja_mensajes"></p>
@@ -109,6 +109,7 @@
         <article class="contenedor-flex-columna gap borde jc-center">
             <h3>Combining promises</h3>
             <p>Requesting some files at the same time</p>
+            <p>Promise.any takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when any of the input's promises fulfill. It rejects when all of the input's promises rejects, with this first rejection reason.</p>
             <p>Several promises can be fulfilled before doing something else even though they are not related</p>
             <button id="combiningAnyPromises">Combining any unrelated promises</button>
             <p id='textoCombinandoAlgunasPromesas' class="caja_mensajes"></p>
