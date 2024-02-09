@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/3.-jquery basic.js" defer></script>
+    <link rel="stylesheet" href="../css/estilos.css" type="text/css">
+</head>
+<body>
+    <section class="contenedor-flex-columna gap borde fondo-bisque">
+        <header>
+            <h1>Selecting and changing elements</h1>
+            <p>JQuery is a JavaScript library.Thus, regular JavaScript can be used</p>
+            <p>It provides an improved syntax and new methods</p>
+            <p>jquery code must be included in head</p>
+        </header>
+
+        <article class="contenedor-flex-columna gap borde jc-center">
+            <h2>First JQuery sentence</h2>
+            <p>It all starts with $(document).ready(function(){ bla bla}); (When document has been already loaded)</p>
+            <p>Document loaded</p>
+            <button type="button">Replace Text</button>
+        </article>
+
+        <article class="contenedor-flex-columna gap borde jc-center" id="changing">
+            <h2>Selecting elements and changing or adding CSS properties or text</h2>
+            <p>JQuery can change or add css properties. They are added as inline properties, prevailing over css files (caution!)</p>
+            <p>Following elements have been changed by using ID, class, attribute, css selectors or JQuery custom selectors</p>
+            <p>body style has been changed by using tag name</p>
+            <p id="a2p2">This paragraph has changed its background color by using its ID</p>
+            <p id="a2p1" class="destacado">This paragraph has changed its font-size by using its class</p>
+            <a href="https://duckduckgo.com/">¡pato pato vamos! (link changed by using attribute)</a>
+            <p>This paragraph has changed its background-color by using a CSS selector</p>
+            <p>This paragraph has changed its background-color by using a CSS selector</p>
+        </article>
+
+        <article class="contenedor-flex-columna gap borde jc-center" id="mouse">
+            <h2>Mouse events: mouseenter, mouseleave, hover, click, dblclick</h2>
+            <p id="texto-eventos-raton"></p>
+            <p id="hover">hover this text</p>
+              <div class="contenedor-flex-fila gap jc-center">
+                <button id="cambia-texto">Change all paragraph text</button>
+                <button id="cambia-color">Change all article color</button>
+            </div>
+        </article>
+
+        <article class="contenedor-flex-columna gap borde jc-center">
+            <h2>Form events: focus, blur, submit and change</h2>
+            <form>
+                <input type="text" name="nombre" placeholder="name">
+                <input type="text" name="apellidos" placeholder="surname">
+                <select>
+                    <option>Granada</option>
+                    <option>Córdoba</option>
+                    <option>Sevilla</option>
+                </select>
+                <button>Submit</button>
+            </form>
+            <p id='texto-form' class="letra-pequeña"></p>
+        </article>
+
+        <article id="keyboard-events" class="contenedor-flex-columna gap borde jc-center">
+            <h2>Keyboard event input</h2>
+            <input type="text" name="keyboard">
+            <div class="contenedor-flex-fila jc-center">
+                <p id='keypressed' class="letra-pequeña"></p>
+                <p id='keyup' class="letra-pequeña"></p>
+                <p id='keydown' class="letra-pequeña"></p>
+            </div>
+        </article>
+
+        <p id="pixeles-desplazamiento" class="fijo oculto"></p>
+
+    </section>
+    
+</body>
+</html>

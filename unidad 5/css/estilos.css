@@ -7,28 +7,50 @@ body{
     height: 100vh;
 }
 
-.fondo_rojo{
+.fondo-rojo{
     background-color: red;
 }
 
-.fondo_verde{
+.fondo-verde{
     background-color: green;
 }
 
-.borde_rojo{
+.fondo-rosita{
+    background-color: lightpink;
+}
+
+.fondo-amarillito{
+    background-color: lightyellow;
+}
+
+.fondo-bisque{
+    background-color: bisque;
+}
+
+.destacado1{
+    color: red;
+    font-size: 1.25rem;
+}
+
+.destacado2{
+    font: size 1.25rem;
+    background-color: red;
+}
+
+.borde-rojo{
     border: 3px solid red;
 }
 
-.borde_verde{
+.borde-verde{
     border: 3px solid green;
 }
 
-.letra_grande{
+.letra-grande{
     font-size: 1.15rem;
 }
 
-.letra_pequeña{
-    font-size: 0.85rem;
+.letra-pequeña{
+    font-size: 0.9rem;
 }
 
 h1, h2, h3{
@@ -41,17 +63,20 @@ h1, h2, h3{
     padding: 10px 0px;
     width: 85%; 
 }
-
-p{
-    margin: 10px;
+ul{
+    margin: 0px;
+    padding:0px;
 }
 
-.dp_none{
+p{
+    margin: 5px;
+}
+
+.dp-none{
     display:none;
 }
 
 .contenedor-flex-columna{
-    background-color: bisque;
     /*padding: 10px 50px 50px 50px;*/
     display: flex;
     align-items: center;
@@ -83,7 +108,7 @@ p{
 }
   
 
-.caja_mensajes{
+.caja-mensajes{
     border: 1px solid black;
     width: 90%;
     height: 180px;
@@ -95,8 +120,20 @@ p{
     background-color: rgb(248, 240, 230);
 }
 
+.fijo{
+    position: fixed;
+    top: 0px;
+    background-color: lightcoral;
+    margin: 0px;
+    padding: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid red;
+}
+
 .oculto{
-    visibility: hidden;
+/*    visibility: hidden;*/
+    display:none;   /*no space is reserved*/
 }
 
 #error{
@@ -107,13 +144,4 @@ p{
     color: white;
     padding: 5px;
     
-}
-
-.texto_pequeño{
-    font-size: 0.75rem;
-}
-
-.destacado{
-    font: size 1.25rem;
-    background-color: red;
 }
