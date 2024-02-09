@@ -438,8 +438,7 @@ formulario.addEventListener("copy", noPermitido);
 formulario.addEventListener("cut", noPermitido);
 formulario.addEventListener("paste", registra);
 
-//is triggered when enter key is pressed at any input field
-//submit can also be triggered by form.submit() method
+//a form can be submitted by using a submit button or by pressing enter when certain form elements have focus
 formulario.addEventListener("submit", registra);
 
 function noPermitido(evento){
