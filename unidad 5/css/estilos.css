@@ -82,47 +82,6 @@ p{
     gap:20px;
 }
   
-ul:not(.lista_viñetas){
-    list-style: none;
-    padding: 0px;
-}
-
-ul, ol{
-    margin:0px;
-}
-
-table, th, td {
-    border-collapse: collapse;
-    border: 1px solid;
-}
-
-
-table th {
-    text-align: center;
-    font-weight: bold;
-}
-  
-table td {
-    width: 150px;
-    white-space: nowrap;
-    text-align: center;
-    vertical-align: bottom;
-    padding-top: 5px;
-    padding-bottom: 12px;
-}
-  
-
-table .highlight {
-    background: red;
-}
-
-th{
-    background-color: aqua;
-}
-
-td{
-    background-color:azure;
-}
 
 .caja_mensajes{
     border: 1px solid black;
@@ -136,26 +95,9 @@ td{
     background-color: rgb(248, 240, 230);
 }
 
-.caja_teclado{
-    width: 90%;    
-}
-
-.fijo{
-    position: fixed;
-    top: 0px;
-    background-color: lightcoral;
-    margin: 0px;
-    padding: 15px;
-    font-weight: bold;
-    border-radius: 5px;
-    border: 1px solid red;
-}
-
 .oculto{
     visibility: hidden;
 }
-
-
 
 #error{
     position: absolute;
@@ -167,17 +109,11 @@ td{
     
 }
 
-.relativo{
-    position: relative;
-    width: 100%;
-}
-
 .texto_pequeño{
     font-size: 0.75rem;
 }
 
-#map-wrapper, #map{
-    width: 100%;
-    height: 400px;
+.destacado{
+    font: size 1.25rem;
+    background-color: red;
 }
-
