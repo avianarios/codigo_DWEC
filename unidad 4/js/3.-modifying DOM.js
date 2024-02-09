@@ -128,6 +128,9 @@ objetivo.replaceChildren(parrafo);
 
 ////insertAdjacentElement, insertAdjacentHTML, insertAdjacentText////
 //each method requires position to be provided. It can be one of the following: beforebegin, afterbegin, beforeend, afterend
+//insertAdjacentElement inserts an already created (but not inserted yet) element into the DOM
+//insertAdjacentHTML inserts an HTML code into DOM. No need to create an element. Much faster then innerHTML
+//insertAdjacentText inserts a plain text
 let punto_insercion=document.querySelector("#perro");
 bb=document.createElement("p");
 bb.textContent="un texto recién insertado con beforebegin de #perro";
@@ -146,3 +149,14 @@ punto_insercion.insertAdjacentElement("afterbegin", ab);
 
 punto_insercion.insertAdjacentElement("beforeend", be);
 punto_insercion.insertAdjacentElement("afterend", ae);
+
+//no need to create an element before inserting. 
+punto_insercion.insertAdjacentHTML("<article><p>un párrafo insertado</p></article>");
+/*Be careful when inserting HTML code. It could lead to security risks
+const evilInput = `<img src onerror="alert('evil')">`;
+document.body.insertAdjacentHTML('beforeend', evilInput);
+*/
+
+const titulo = document.getElementById("titulo1");
+let text = "Un texto nuevo";
+titulo.insertAdjacentText("afterbegin", text);
