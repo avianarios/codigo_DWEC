@@ -1,5 +1,5 @@
 body{
-    width: 50vw;
+    width: 70vw;
     margin: 0 auto;
     background-color: lightblue;
     font-family: 'Open Sans', sans-serif;
@@ -99,6 +99,10 @@ p{
     justify-content: center;
 }
 
+.jc-fs{
+    justify-content: flex-start;
+}
+
 .gap{
     gap:10px;
 }
@@ -144,4 +148,20 @@ p{
     color: white;
     padding: 5px;
     
+}
+
+.relativo{
+    position:relative;
+}
+
+.as-start{
+    align-self: self-start;
+}
+
+#caja{
+    width: 300px;
+    height: 200px;
+    background: #9d7ede;
+    margin-top: 20px;
+    border: 3px solid #6f40ce;
 }
