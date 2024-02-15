@@ -1,63 +1,10 @@
 $(()=>{
 //    $("#text button:first").click(()=>{
 
+
 ///////////////////////////
 ////getters and setters////
 ///////////////////////////
-
-//text method
-    $("#btn-getText").click(()=>{
-        console.log ($("#text > p:first").text());
-    });
-
-    $("#btn-getAllText").click(()=>{
-        console.log ($("#text > p").text());
-    });
-
-    $("#btn-setText").click(()=>{
-        $("#text > p:first").text("<strong>Las etiquetas HTML no son interpretadas</strong>");
-    });
-
-    $("#btn-setAllText").click(()=>{
-        $("#text > p").text("<strong>Este método</strong> no interpreta las etiquetas HTML");
-    });
-
-//html method
-    $("#btn-getHTML").click(()=>{
-        console.log ($("#HTML > p:first").html());
-    });
-
-    $("#btn-getAllHTML").click(()=>{
-        console.log ($("#HTML > p").html());
-    });
-
-    $("#btn-setHTML").click(()=>{
-        $("#HTML > p:first").html("<strong>Las etiquetas HTML SÍ son interpretadas</strong>");
-    });
-
-    $("#btn-setAllHTML").click(()=>{
-        $("#HTML > p").html("<strong>Este método</strong> SÍ interpreta las etiquetas HTML");
-    });
-
-//attr method
-    $("#btn-getImgattr").click(()=>{
-        console.log ($("#attr img").attr("alt"));
-    });
-
-    $("#btn-getLinkattr").click(()=>{
-        console.log ($("#attr a").attr("href"));
-    });
-
-    $("#btn-setImgattr").click(()=>{
-        $("#attr img").attr("alt", "una imagen aleatoria de un gato");
-    });
-
-    $("#btn-setLinkattr").click(()=>{
-        $("#attr a").text("The cat API");
-        $("#attr a").attr("href", "https://thecatapi.com/");
-    });
-
-
 //val method
     $("input").keyup(function(){
         $('#texto-form').text("input:"+$(this).val());
@@ -73,66 +20,79 @@ $(()=>{
         event.preventDefault();
     });
 
-    $("#btn-submit").click(()=>{
-        var regex = /^[a-zA-Z]+$/;
-        var currentValue = $('form input[name="nombre"]').val();
-
-        if(regex.test(currentValue) == false){
-            $("#texto-form").html('<p class="destacado1">Name field not valid!</p>');
-        }else{
-            $("#texto-form").html('');
-        }
-
-/*in order for show to work display:none must be set at the original element
-        if(regex.test(currentValue) == false){
-            $("#texto-form").html('<p class="destacado1">Name field not valid!</p>').show().fadeOut(2000);
-        }*/
-    });
-
-    $("#btn-fill").click(()=>{
-        $('form input[name="nombre"]').val("Procopio");
-        $('form input[name="apellidos"]').val("Máximo Meridio");
-    });
-
-/////////////////////////
-////inserting content////    
-/////////////////////////
-
-//append method
-    $("#btn-append").click(()=>{
-        $("#append-prepend > p").append("<strong> Paragraph appended with JQuery </strong>");
-    });
-
-    $("#btn-append-multiple").click(()=>{
-        $("#append-prepend > p").append("<strong> Paragraph <span class='destacado1'>number 1 appended</span> with JQuery </strong>", "<strong> Paragraph <span class='destacado1'>number 2 appended</span> with JQuery </strong>");
-    });
-
-//prepend method    
-    $("#btn-prepend").click(()=>{
-        $("#append-prepend > p").prepend("<strong> Paragraph prepended with JQuery </strong>");
-    });
-
-    $("#btn-prepend-multiple").click(()=>{
-        $("#append-prepend > p").prepend("<strong> Paragraph <span class='destacado1'>number 1 prepended</span> with JQuery </strong>", "<strong> Paragraph <span class='destacado1'>number 2 prepended</span> with JQuery </strong>");
-    });
-
-
-/*    $("#insert-content").click((evento)=>{
+    $("#getters-setters").click((evento)=>{
         switch(evento.target.id){
-            case "":
+            case "btn-getText":
+                console.log ($("#text > p:first").text());
                 break;
-            case "":
+            case "btn-getAllText":
+                console.log ($("#text > p").text());
                 break;
-            case "":
+            case "btn-setText":
+                $("#text > p:first").text("<strong>Las etiquetas HTML no son interpretadas</strong>");
                 break;
-            case "":
+            case "btn-setAllText":
+                $("#text > p").text("<strong>Este método</strong> no interpreta las etiquetas HTML");
+                break;
+            case "btn-getHTML":
+                console.log ($("#HTML > p:first").html());
+                break;
+            case "btn-getAllHTML":
+                console.log ($("#HTML > p").html());
+                break;
+            case "btn-setHTML":
+                $("#HTML > p:first").html("<strong>Las etiquetas HTML SÍ son interpretadas</strong>");
+                break;
+            case "btn-setAllHTML":
+                $("#HTML > p").html("<strong>Este método</strong> SÍ interpreta las etiquetas HTML");
+                break;
+            case "btn-getImgattr":
+                console.log ($("#attr img").attr("alt"));
+                break;
+            case "btn-getLinkattr":
+                console.log ($("#attr a").attr("href"));
+                break;
+            case "btn-setImgattr":
+                $("#attr img").attr("alt", "una imagen aleatoria de un gato");
+                break;
+            case "btn-setLinkattr":
+                $("#attr a").text("The cat API");
+                $("#attr a").attr("href", "https://thecatapi.com/");                
+                break;
+            case "btn-submit":
+                let regex = /^[a-zA-Z]+$/;
+                let currentValue = $('form input[name="nombre"]').val();
+        
+                if(regex.test(currentValue) == false){
+                    $("#texto-form").html('<p class="destacado1">Name field not valid!</p>');
+                    /*in order for show to work display:none must be set at the original element
+                    $("#texto-form").html('<p class="destacado1">Name field not valid!</p>').show().fadeOut(2000);*/
+                }else{
+                    $("#texto-form").html('');
+                }
+                break;
+            case "btn-fill":
+                $('form input[name="nombre"]').val("Procopio");
+                $('form input[name="apellidos"]').val("Máximo Meridio");
                 break;
         }
-    });*/
+    });
 
-
+    
     $("#insert-content").click((evento)=>{
         switch(evento.target.id){
+            case "btn-append":
+                $("#append-prepend > p").append("<strong> Paragraph appended with JQuery </strong>");
+                break;
+            case "btn-append-multiple":
+                $("#append-prepend > p").append("<strong> Paragraph <span class='destacado1'>number 1 appended</span> with JQuery </strong>", "<strong> Paragraph <span class='destacado1'>number 2 appended</span> with JQuery </strong>");
+                break;
+            case "btn-prepend":
+                $("#append-prepend > p").prepend("<strong> Paragraph prepended with JQuery </strong>");
+                break;
+            case "btn-prepend-multiple":
+                $("#append-prepend > p").prepend("<strong> Paragraph <span class='destacado1'>number 1 prepended</span> with JQuery </strong>", "<strong> Paragraph <span class='destacado1'>number 2 prepended</span> with JQuery </strong>");
+                break;
             case "btn-before":
                 $("#before-after > p").before("<strong> Paragraph inserted before with JQuery </strong>");
                 break;
@@ -191,88 +151,6 @@ $(()=>{
                 break;
         }
     });
-
-
-
-/*
-//before method
-    $("#btn-before").click(()=>{
-        $("#before-after > p").before("<strong> Paragraph inserted before with JQuery </strong>");
-    });
-
-    $("#btn-before-multiple").click(()=>{
-        $("#before-after > p").before("<strong> Paragraph <span class='destacado1'>number 1 inserted before</span> with JQuery </strong>", "<strong> Paragraph <span class='destacado1'>number 2 inserted before</span> with JQuery </strong>");
-    });
-
-//after method    
-    $("#btn-after").click(()=>{
-        $("#before-after > p").after("<strong> Paragraph inserted after with JQuery </strong>");
-    });
-
-    $("#btn-after-multiple").click(()=>{
-        $("#before-after > p").after("<strong> Paragraph <span class='destacado1'>number 1 inserted after</span> with JQuery </strong>", "<strong> Paragraph <span class='destacado1'>number 2 inserted after</span> with JQuery </strong>");
-    });
-
-//wrap method    
-    $("#btn-wrap").click(()=>{
-        $("#wrap>p").wrap("<div class='destacado1'></div>");
-    });
-
-
-//empty method
-$("#btn-empty").click(()=>{
-    $("#empty-remove").empty();
-});
-
-//remove method    
-$("#btn-remove").click(()=>{
-    $("#empty-remove").remove();
-});
-
-//unwrap method
-$("#btn-unwrap").click(()=>{
-    $("#unwrap p").unwrap();
-});
-
-//removeAttr method
-$("#btn-removeAttr").click(()=>{
-    $("#removeAttr > a").removeAttr("href");
-});
-
-//addClass method
-    $("#btn-addClass").click(()=>{
-        $("#adclass-removeclass-toggleclass > p").addClass("destacado1 texto-grande");
-    });
-
-//removeClass method
-    $("#btn-removeClass").click(()=>{
-        $("#adclass-removeclass-toggleclass > p").removeClass("destacado1 texto-grande");
-    });
-
-//toggleClass method
-    $("#btn-toggleClass").click(()=>{
-        $("#adclass-removeclass-toggleclass > p").toggleClass("destacado1 texto-grande");
-    });
-
-//css method
-    $("#btn-css1").click(()=>{
-        $("#css > p").css("color", "lightcoral");
-    });
-
-    $("#btn-css2").click(()=>{
-        $("#css > p").css("font-size", "1.25rem");
-    });
-
-    $("#btn-css3").click(()=>{
-        $("#css > p").css({"color":"lightcoral", "font-size":"1.25rem"});
-    });*/
-
-
-
-/*    $("#").click(()=>{
-
-    });*/
-
 });
 
 
