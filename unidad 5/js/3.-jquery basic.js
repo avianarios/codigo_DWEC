@@ -123,8 +123,9 @@ $(()=>{
 //form events
 $(()=>{
     $('select').change(function(){
-        let ciudad=$(this).find(":selected").val();
-        $('#texto-form').text("You have selected "+ciudad)
+/*        let ciudad=$(this).find(":selected").val();
+        $('#texto-form').text("You have selected "+ciudad)*/
+        $('#texto-form').text("You have changed your selection);
     });
 
     $('input').focus(function(){
@@ -138,19 +139,7 @@ $(()=>{
     //a form can be submitted by using a submit button or by pressing enter when certain form elements have focus
     $("form").submit(function(event){
         event.preventDefault();
-        var regex = /^[a-zA-Z]+$/;
-        var currentValue = $('form input[name="nombre"]').val();
-
-        if(regex.test(currentValue) == false){
-            $("#texto-form").html('<p class="destacado1">Name field not valid!</p>');
-        }else{
-            $("#texto-form").html('');
-        }
-
-/*in order for show to work display:none must be set at the original element
-        if(regex.test(currentValue) == false){
-            $("#texto-form").html('<p class="destacado1">Name field not valid!</p>').show().fadeOut(2000);
-        }*/
+        $('#texto-form').text("You have submitted the form");
     });
 });
 

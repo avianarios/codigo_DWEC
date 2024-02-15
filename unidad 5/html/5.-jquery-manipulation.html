@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery getters and setters</title>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/5.-jquery-manipulation.js" defer></script>
+    <link rel="stylesheet" href="../css/estilos.css" type="text/css">
+</head>
+<body>
+    <section class="contenedor-flex-columna fondo-bisque gap20">
+        <h2>JQuery content manipulation</h2>
+        <section class="contenedor-flex-columna fondo-bisque gap borde">
+            <header>
+                <h2>JQuery getters and setters</h2>
+                <p>some methods can be used to assign a value or to get it (if no value is provided)</p>
+                <p>most utilized are text, html, attr and val</p>
+            </header>
+            <article id="text" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>text</h3>
+                    <p>When getting, HTML tags are not recognized and ignored</p>
+                    <p>When setting, HTML tags are treated as simple text</p>
+                </header>
+                <p>Lorem ipsum dolor <strong>sit amet consectetur</strong> adipisicing elit. Qui fuga fugit cum soluta pariatur. Dolore autem iste commodi alias dolores impedit minima, voluptatum saepe. Numquam quis sint repudiandae ratione dolores.</p>
+                <p>Lorem ipsum dolor <strong>sit amet consectetur</strong> adipisicing elit. Qui fuga fugit cum soluta pariatur. Dolore autem iste commodi alias dolores impedit minima, voluptatum saepe. Numquam quis sint repudiandae ratione dolores.</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-getText">Get first</button>
+                    <button id="btn-getAllText">Get all</button>
+                    <button id="btn-setText">Set first</button>
+                    <button id="btn-setAllText">Set all</button>
+                </div>
+            </article>
+
+            <article id="HTML" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>html</h3>
+                    <p>When getting, HTML tags are recognized and treated as text</p>
+                    <p>When setting, HTML tags are interpreted</p>
+                </header>
+                <p>Lorem ipsum dolor <strong>sit amet consectetur</strong> adipisicing elit. Qui fuga fugit cum soluta pariatur. Dolore autem iste commodi alias dolores impedit minima, voluptatum saepe. Numquam quis sint repudiandae ratione dolores.</p>
+                <p>Lorem ipsum dolor <strong>sit amet consectetur</strong> adipisicing elit. Qui fuga fugit cum soluta pariatur. Dolore autem iste commodi alias dolores impedit minima, voluptatum saepe. Numquam quis sint repudiandae ratione dolores.</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-getHTML">Get first</button>
+                    <button id="btn-getAllHTML">Get all</button>
+                    <button id="btn-setHTML">Set first</button>
+                    <button id="btn-setAllHTML">Set all</button>
+                </div>
+            </article>
+
+            <article id="attr" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>attr</h3>
+                    <p>Utilized to get and set any attribute of any element</p>
+                </header>
+                <div class="container"></div>
+                <a href="https://jquery.com/" target="_blank">Jquery official site</a>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-getImgattr">Get img attr</button>
+                    <button id="btn-setImgattr">Set img attr</button>
+                    <button id="btn-getLinkattr">Get link attr</button>
+                    <button id="btn-setLinkattr">Set link attr</button>
+                </div>
+            </article>
+
+            <article class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h2>val</h2>
+                    <p>Utilized to get information within a form field</p>
+                </header>
+                <form>
+                    <input type="text" name="nombre" placeholder="name">
+                    <input type="text" name="apellidos" placeholder="surname">
+                    <select>
+                        <option>Granada</option>
+                        <option>Córdoba</option>
+                        <option>Sevilla</option>
+                    </select>
+                    <button id="btn-submit">Submit</button>
+                    <button id="btn-fill">Fill information</button>
+                </form>
+                <p id='texto-form' class="letra-pequeña"></p>
+            </article>            
+        </section>
+
+        <section id="insert-content" class="contenedor-flex-columna fondo-bisque gap borde">
+            <header>
+                <h2>JQuery insert content</h2>
+            </header>
+            <article id="append-prepend" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>append and prepend</h3>
+                    <p>Both insert content INSIDE of the selected elements</p>
+                    <p>append inserts it at the beginning and prepend at the end of the selected elements</p>
+                </header>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-append">Append one element</button>
+                    <button id="btn-append-multiple">Append multiple elements</button>
+                    <button id="btn-prepend">Prepend one element</button>
+                    <button id="btn-prepend-multiple">Prepend multiple elements</button>
+                </div>
+            </article>
+
+            <article id="before-after" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>before and after</h3>
+                    <p>Both insert content OUTSIDE of the selected elements</p>
+                    <p>before inserts it before the selected elements and after inserts it afer</p>
+                </header>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-before">Insert before</button>
+                    <button id="btn-before-multiple">Insert multiple elements before</button>
+                    <button id="btn-after">Insert after</button>
+                    <button id="btn-after-multiple">Insert multiple elements after</button>
+                </div>
+            </article>
+
+            <article id="wrap" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>wrap</h3>
+                    <p>It wraps an HTML structure aroud the selected elements</p>
+                </header>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-wrap">wrap</button>
+                </div>
+            </article>
+        </section>
+
+
+        <section id="remove-content" class="contenedor-flex-columna fondo-bisque gap borde">
+            <header>
+                <h2>JQuery remove content</h2>
+            </header>
+            <article id="empty-remove" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>empty and remove</h3>
+                    <p>empty will empty any node inside selection, BUT it will not remove the selection itself</p>
+                    <p>remove will empty any node inside selection, INCLUDING the selection itself</p>
+                </header>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-empty">Empty</button>
+                    <button id="btn-remove">Remove</button>
+                </div>
+            </article>
+
+            <article id="unwrap" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>unwrap</h3>
+                    <p>It removes the parent node of a selected element</p>
+                </header>
+                <strong><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p></strong>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-unwrap">unwrap</button>
+                </div>
+            </article>
+
+            <article id="removeAttr" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>removeAttr</h3>
+                    <p>It removes an attribute of a selected element</p>
+                </header>
+                <a href="https://jquery.com/" target="_blank">Jquery official site</a>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-removeAttr">remove href</button>
+                </div>
+            </article>
+        </section>
+
+        <section id="appearance" class="contenedor-flex-columna fondo-bisque gap borde">
+            <header>
+                <h2>document appearance</h2>
+            </header>
+            <article id="adclass-removeclass-toggleclass" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>addClass, removeClass and toggleClass</h3>
+                </header>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-addClass">Add</button>
+                    <button id="btn-removeClass">Remove</button>
+                    <button id="btn-toggleClass">Toggle</button>
+                </div>
+            </article>
+
+            <article id="css" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>css</h3>
+                </header>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-css1">Change color</button>
+                    <button id="btn-css2">Change size</button>
+                    <button id="btn-css3">Change color and size</button>
+                </div>
+            </article>
+        </section>
+
+
+        <section class="contenedor-flex-columna fondo-bisque gap borde">
+            <header>
+                <h2>document dimensions</h2>
+            </header>
+            <article id="width-height" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>width and height</h3>
+                </header>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-width">width</button>
+                    <button id="btn-height">height</button>
+                </div>
+            </article>
+        </section>        
+
+    </section>
+</body>
+</html>
