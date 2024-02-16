@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery traversing DOM</title>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/7.-jquery filtering.js" defer></script>
+    <link rel="stylesheet" href="../css/estilos.css" type="text/css">
+</head>
+<body>
+    <section class="contenedor-flex-columna fondo-bisque gap20">
+        <h2>JQuery traversing DOM</h2>
+        <section id="traversing" class="contenedor-flex-columna fondo-bisque gap borde">
+
+            <article id="parents" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <h3>parent, parents and parentsUntil</h3>
+                    <p>parentsUntil gets all the ancestors up to but not including the element matched by the selecto</p>
+                </header>
+                <p>Lorem ipsum dolor <strong>sit amet consectetur</strong> adipisicing elit. Qui fuga fugit cum soluta pariatur. Dolore autem iste commodi alias dolores impedit minima, voluptatum saepe. Numquam quis sint repudiandae ratione dolores.</p>
+                <p>Lorem ipsum dolor <strong>sit amet consectetur</strong> adipisicing elit. Qui fuga fugit cum soluta pariatur. Dolore autem iste commodi alias dolores impedit minima, voluptatum saepe. Numquam quis sint repudiandae ratione dolores.</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-getParent">Get parent</button>
+                    <button id="btn-setParent">Set parent</button>
+                    <button id="btn-getParents">Get parents</button>
+                    <button id="btn-setParents">Set parents</button>
+                    <button id="btn-getParentsUntil">Get parentsUntil</button>
+                    <button id="btn-setParentsUntil">Set parentsUntil</button>
+                </div>
+            </article>
+        </section>
+    </section>
+</body>
+</html>
