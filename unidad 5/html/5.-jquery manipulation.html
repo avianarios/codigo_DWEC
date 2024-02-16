@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JQuery getters and setters</title>
     <script src="../js/jquery-3.7.1.min.js"></script>
-    <script src="../js/5.-jquery-manipulation.js" defer></script>
+    <script src="../js/5.-jquery manipulation.js" defer></script>
     <link rel="stylesheet" href="../css/estilos.css" type="text/css">
 </head>
 <body>
@@ -206,23 +206,56 @@
         </section>
 
 
-        <section class="contenedor-flex-columna fondo-bisque gap borde">
+        <section id="dimensions" class="contenedor-flex-columna fondo-bisque gap borde">
             <header>
                 <h2>document dimensions</h2>
+                <img src="../img/jquery-dimensions.png" alt="jquery dimensions">
             </header>
-            <article id="width-height" class="contenedor-flex-columna gap borde jc-center">
+            <article id="width-height" class="contenedor-flex-columna gap borde jc-center m-20 p-20">
                 <header>
                     <h3>width and height</h3>
+                    <p>width and height doesn't include padding, border and margin</p>
                 </header>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
                 <div class="contenedor-flex-fila gap">
-                    <button id="btn-width">width</button>
-                    <button id="btn-height">height</button>
+                    <button id="btn-getwidth">get width</button>
+                    <button id="btn-setwidth">set width</button>
+                    <button id="btn-getheight">get height</button>
+                    <button id="btn-setheight">set height</button>
+                </div>
+            </article>
+
+            <article id="innerWidth-innerHeight" class="contenedor-flex-columna gap borde jc-center m-20 p-20">
+                <header>
+                    <h3>innerWidth and innerHeight</h3>
+                    <p>inner width and height includes the padding but excludes border and margin on the element.</p>
+                </header>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-getinnerwidth">get inner width</button>
+                    <button id="btn-setinnerwidth">set inner width</button>
+                    <button id="btn-getinnerheight">get inner height</button>
+                    <button id="btn-setinnerheight">set inner height</button>
+                </div>
+            </article>
+
+            <article id="outerWidth-outerHeight" class="contenedor-flex-columna gap borde jc-center m-20 p-20">
+                <header>
+                    <h3>outerWidth and outerHeight</h3>
+                    <p>outer width and height includes padding and border but excludes the margin on the element</p>
+                </header>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis laudantium nobis ducimus a eos, beatae dicta minima molestias corporis? Beatae perferendis odio a eos maiores voluptatem distinctio quas libero sapiente!</p>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-getouterwidth">get outer width</button>
+                    <button id="btn-setouterwidth">set outer width</button>
+                    <button id="btn-getouterheight">get outer height</button>
+                    <button id="btn-setouterheight">set outer height</button>
                 </div>
             </article>
         </section>        
-
     </section>
 </body>
 </html>

@@ -63,10 +63,10 @@ h1, h2, h3{
     padding: 10px 0px;
     width: 85%; 
 }
-ul{
+/*ul{
     margin: 0px;
     padding:0px;
-}
+}*/
 
 p{
     margin: 5px;
@@ -168,4 +168,12 @@ p{
 
 img{
     max-width: 100%;
+}
+
+.m-20{
+    margin:20px;
+}
+
+.p-20{
+    padding:20px;
 }

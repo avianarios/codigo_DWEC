@@ -151,6 +151,51 @@ $(()=>{
                 break;
         }
     });
+
+
+    $("#dimensions").click((evento)=>{
+        switch (evento.target.id){
+            case "btn-getwidth":
+//                console.log ($(this).width());  //this references viewport
+                console.log ($("#width-height").width());
+                break;
+            case "btn-setwidth":
+                $("#width-height").width(500);
+                break;
+            case "btn-getheight":
+                console.log ($("#width-height").height());  //this references viewport
+                break;
+            case "btn-setheight":
+                $("#width-height").height(500);
+                break;
+            case "btn-getinnerwidth":
+                console.log ($("#innerWidth-innerHeight").innerWidth());
+                break;
+            case "btn-setinnerwidth":
+                $("#innerWidth-innerHeight").innerWidth(500);
+                break;
+            case "btn-getinnerheight":
+                console.log ($("#innerWidth-innerHeight").innerHeight());
+                break;
+            case "btn-setinnerheight":
+                $("#innerWidth-innerHeight").innerHeight(500);
+                break;
+
+            case "btn-getouterwidth":
+                console.log ($("#outerWidth-outerHeight").outerWidth());
+                break;
+            case "btn-setouterwidth":
+                $("#outerWidth-outerHeight").outerWidth(500);
+                break;
+            case "btn-getouterheight":
+                console.log ($("#outerWidth-outerHeight").outerHeight());
+                break;
+            case "btn-setouterheight":
+                $("#outerWidth-outerHeight").outerHeight(500);
+                break;                
+
+        }
+    });
 });
 
 
