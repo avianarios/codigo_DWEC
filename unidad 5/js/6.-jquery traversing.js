@@ -53,7 +53,7 @@ $(()=>{
                 $("#siblings p:first").nextAll().addClass("borde-rojo");
                 break;
             case "btn-nextUntil":
-                $("#siblings h3").nextUntil().addClass("borde-rojo");
+                $("#siblings h3").nextUntil("ul").addClass("borde-rojo");
                 break;
             case "btn-prev":
                 $("#siblings ul").prev().addClass("borde-rojo");
