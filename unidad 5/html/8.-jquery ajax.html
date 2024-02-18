@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery AJAX</title>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/8.-jquery ajax.js" defer></script>
+    <link rel="stylesheet" href="../css/estilos.css" type="text/css">
+</head>
+<body>
+    <section class="contenedor-flex-columna fondo-bisque gap20">
+        <header>
+            <h2>JQuery AJAX</h2>
+            <p>Remember: Ajax is not a new technology, in fact, Ajax is not even really a technology at all. Ajax is just a term to describe the process of exchanging data from a web server asynchronously through JavaScript, without a page refresh.</p>
+            <p>How it works: your code sends a request to a URL, and when the request completes, a callback function can be triggered to handle the response. Further, since the request is asynchronous, the rest of your code continues to execute while the request is being processed.</p>
+            <p>Ajax request can be made only to the files that exist on the same web server that servers the page from which the Ajax request is sent, not to external or remote servers for security reasons. This is called same-origin policy.</p>
+        </header>
+        <section class="contenedor-flex-columna fondo-bisque gap borde">
+
+            <article id="ajax" class="contenedor-flex-columna gap borde jc-center">
+                <header>
+                    <p>load (URL, data, successCallback) -> loads an HTML page or framgment into a container</p>
+                    <p>get (URL, data, successCallback, dataType) -> gets information from a server</p>
+                    <p>post (URL, data, successCallback, dataType) -> sends information to a server</p>
+                    <p>getJSON (URL, data, successCallback)-> getJSON Load JSON-encoded data from the server using a GET HTTP request (similar to get)</p>
+                    <p>only URL is mandatory</p>
+                    <ul>
+                        <li>URL</li>
+                        <li>data (optional): set of query string (i.e. key/value pairs) that is sent to the web server along with the request</li>
+                        <li>successCallback (optional). It has three parameters
+                            <ul>
+                                <li>responseTxt — Contains the resulting content if the request succeeds.</li>
+                                <li>statusTxt — Contains the status of the request such as success or error.</li>
+                                <li>jqXHR — Contains the XMLHttpRequest object.</li>
+                            </ul>
+                        </li>
+                        <li>dataType (optional) is the returned type. If not specified, it is got based on MIME type of response</li>
+                    </ul>
+                </header>
+                <div id="contenido"></div>
+                <div class="contenedor-flex-fila gap">
+                    <button id="btn-loadFragment">load file fragment</button>
+                    <button id="btn-get">get</button>
+                    <button id="btn-post">post</button>
+                    <button id="btn-getJSON">getJSON</button>
+                    
+                </div>
+            </article>
+        </section>
+    </section>
+</body>
+</html>
