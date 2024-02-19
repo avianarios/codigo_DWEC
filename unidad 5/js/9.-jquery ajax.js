@@ -9,6 +9,7 @@ $(()=>{
                 $("#contenido").load(urlLocal, function(respuesta, estado, XMLH){
 //                    if (estado=="success"){
                         console.log("Server response:"+ estado, XMLH.status, XMLH.statusText);
+                        //XMLH contains the whole server response, even the resource
 //                    }
                 });
                 break;
