@@ -15,6 +15,10 @@ body{
     background-color: green;
 }
 
+.fondo-bisque{
+    background-color: bisque;
+}
+
 .borde_rojo{
     border: 3px solid red;
 }
@@ -181,3 +185,15 @@ td{
     height: 400px;
 }
 
+input:invalid{
+    border: 2px solid red;
+    background-color: rgb(237, 189, 189);
+}
+
+input:valid{
+    border:2px solid green;
+}
+
+fieldset{
+    border:0px;
+}

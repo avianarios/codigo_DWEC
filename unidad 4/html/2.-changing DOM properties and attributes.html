@@ -28,22 +28,35 @@
         </article>  
       </section>
       <section>
-        <form id="formulario-contacto">
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" name="nombre" placeholder="nombre" required>
-          <label for="apellidos">Apellidos</label>
-          <input type="text" id="apellidos" name="apellidos" placeholder="apellidos">
-          <label for="correo">Correo-e</label>
-          <input type="text" id="correo" name="correo" placeholder="Correo electrónico">
-          <label for="dni">DNI</label>
-          <input type="text" name="dni" required pattern="(([X-Z]{1}-?[0-9]{7})|([0-9]{8}))[A-Z]{1}" />
-          <label for="dni">Edad</label>
-          <input type="number" name="edad" min="18" max="100"/>
-          <input type="checkbox" checked name="first" value="first"> <label for="first">First option</label>
-          <input type="checkbox" name="second" value="second"> <label for="second">Second option</label>
-          <input type="checkbox" name="third" value="third" disabled> <label for="third">Third option</label>
+        <form id="formulario-contacto" class="contenedor-flex-columna">
+          <fieldset>
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="nombre" minlength="4" maxlength="15" required>
+          </fieldset>
+          <fieldset>
+              <label for="apellidos">Apellidos</label>
+              <input type="text" id="apellidos" name="apellidos" placeholder="apellidos">
+          </fieldset>
+          <fieldset>
+              <label for="correo">Correo-e</label>
+              <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required pattern="[a-z0-9\-\.]+@[a-z0-9\-]+\.[a-z]{2,4}">
+          </fieldset>
+          <fieldset>
+              <label for="dni">DNI</label>
+              <input type="text" name="dni" required pattern="(([X-Z]{1}-?[0-9]{7})|([0-9]{8}))[A-Z]{1}" placeholder="DNI"/>
+          </fieldset>
+          <fieldset>
+              <label for="dni">Edad</label>
+              <input type="number" name="edad" min="18" max="100" placeholder="min 18, max 100"/>
+          </fieldset>
+          <fieldset>
+              <input type="checkbox" checked name="first" value="first"> <label for="first">First option</label>
+              <input type="checkbox" name="second" value="second"> <label for="second">Second option</label>
+              <input type="checkbox" name="third" value="third" disabled> <label for="third">Third option</label>
+          </fieldset>
           <button id="enviar">Enviar</button>
         </form>
+
       </section>
       <section id="parrafos">
         <article>

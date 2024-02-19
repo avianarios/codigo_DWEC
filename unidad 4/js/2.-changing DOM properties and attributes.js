@@ -202,6 +202,10 @@ for (let enlace of enlaces){
     enlace.classList.add("clase_nueva1","clase_nueva2");        //Adds classes
 }
 
+//classname gets and set the class attribute
+console.log(enlaces[0].className);      //gets all classes
+enlaces[0].className="una_clase";       //sets classes
+
 //classlist.replace(old, new)
 enlace=enlaces[0].classList;    //Selecting the first link
 enlace.replace("clase_nueva1", "clase_mas_nueva1");

@@ -230,11 +230,11 @@
           <p>select controls has 3 properties: options, value and selectedIndex</p>
           <p>remarcable events: focus (focusin), blur (focusout), change, input, cut, copy, paste, submit</p>
           <form name="form1" class="contenedor-flex-columna gap relativo">
-            <input type="text" id="nombre" name="nombre" placeholder="nombre" required>
+            <input type="text" id="nombre" name="nombre" placeholder="nombre" minlength="4" maxlength="15" required>
             <p id="error" hidden>Usted se llama perico, corríjalo</p>
             <input type="text" id="apellidos" name="apellidos" placeholder="apellidos">
-            <input type="text" id="correo" name="correo" placeholder="Correo electrónico">
-            <input type="text" name="dni" placeholder="DNI" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe poner 8 números y una letra" minlength="9" maxlength="9" />
+            <input type="email" id="correo" name="correo" placeholder="Correo electrónico">
+            <input type="text" name="dni" placeholder="DNI" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe poner 8 números y una letra" />
             <input type="number" name="edad" min="18" max="100" placeholder="Edad"/>
             <article class="contenedor-flex-fila">
               <label><input type="checkbox" name="options" value="first" checked> First option</label>
