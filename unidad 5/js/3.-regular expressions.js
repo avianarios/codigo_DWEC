@@ -96,7 +96,7 @@ regexp=/^mas/;
 console.log (regexp.test("mastuerzo"), regexp.test("manoseo"), regexp.test("formas"));
 
 // $ -> ending
-regexp=/$mas/;
+regexp=/mas$/;
 console.log (regexp.test("mastuerzo"), regexp.test("manoseo"), regexp.test("formas"));
 
 // \b -> ending or preceed by space, dot, comma or end of string
