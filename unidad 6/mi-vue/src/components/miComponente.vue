@@ -14,7 +14,7 @@
     });
     const texto="<strong>Eres un tipo importante</strong>";
     const dynamicClass="ClaseDinamica";
-    const isButtonDisabled="true";
+    const isButtonDisabled=true;
 
     const objeto={
         color:"blue",
