@@ -9,7 +9,6 @@ import miComponente from './components/miComponente.vue'
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <miComponente msg="¡Oh, gran personaje!" msg2="Tus hazañas son de sobra conocidas"/>
       <HelloWorld msg="¡Bien!"/>
     </div>
   </header>
@@ -17,6 +16,10 @@ import miComponente from './components/miComponente.vue'
   <main>
     <TheWelcome />
   </main>
+
+  <footer>
+    <miComponente msg="¡Oh, gran personaje!" msg2="Tus hazañas son de sobra conocidas"/>
+  </footer>
 
 </template>
 
