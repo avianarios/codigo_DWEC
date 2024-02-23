@@ -233,7 +233,23 @@ for (let form of formularios){
     });
 }
 
-//validity returns a validityState object with several properties describing the valid state of an element
+
+/*validity offers two methods:
+    checkValidity() 	Returns true if an input element contains valid data.
+    setCustomValidity() 	Sets the validationMessage property of an input element.
+
+returns a validityState object with several properties describing the valid state of an element:
+    customError 	Set to true, if a custom validity message is set.
+    patternMismatch 	Set to true, if an element's value does not match its pattern attribute.
+    rangeOverflow 	Set to true, if an element's value is greater than its max attribute.
+    rangeUnderflow 	Set to true, if an element's value is less than its min attribute.
+    stepMismatch 	Set to true, if an element's value is invalid per its step attribute.
+    tooLong 	Set to true, if an element's value exceeds its maxLength attribute.
+    typeMismatch 	Set to true, if an element's value is invalid per its type attribute.
+    valueMissing 	Set to true, if an element (with a required attribute) has no value.
+    valid 	Set to true, if an element's value is valid.
+*/
+
 document.querySelector("#form2 [name='correo']").addEventListener("input", (evento)=> {
     if (evento.target.validity.typeMismatch){  //if typeMismatch==true, correo value doesn't match the right value for an email field
         evento.target.setCustomValidity(       //by assigning a non-empty message, the field is not valid and the form is not sent
