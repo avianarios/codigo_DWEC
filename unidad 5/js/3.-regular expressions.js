@@ -2,7 +2,7 @@
 //declaring//
 /////////////
 //as an object (preferred) or as literal
-let regObj=new RegExp('caso');
+/*let regObj=new RegExp('caso');
 let regLit1=/caso/;
 
 //objects allow to modify regular expressions on the fly
@@ -103,11 +103,11 @@ console.log (regexp.test("mastuerzo"), regexp.test("manoseo"), regexp.test("form
 regexp=/mancha\b/;
 console.log (regexp.test("en un lugar de la mancha"), regexp.test("señor,tiene usted una mancha en la solapa"), regexp.test("manchas más que el hollín"));
 
-// \B -> oposite to \b
+// \B -> oposite to \b*/
 
 // * -> previous character, or group, could appear 0 or more times
-regexp=/ab*/;   //always an a followed 0 or more times by b
-console.log (regexp.test("a"), regexp.test("aa"), regexp.test("aba"), regexp.test("ba"));     //true, true, true, true
+//regexp=/ab*/;   //always an a followed 0 or more times by b
+/*console.log (regexp.test("a"), regexp.test("aa"), regexp.test("aba"), regexp.test("ba"));     //true, true, true, true
 
 // + -> previous character, or group, could appear 1 or more times
 regexp=/ab+/;   //always an a followed 1 or more times by b
@@ -252,18 +252,14 @@ returns a validityState object with several properties describing the valid stat
 
 document.querySelector("#form2 [name='correo']").addEventListener("input", (evento)=> {
     if (evento.target.validity.typeMismatch){  //if typeMismatch==true, correo value doesn't match the right value for an email field
-        evento.target.setCustomValidity(       //by assigning a non-empty message, the field is not valid and the form is not sent
-        "¡Se esperaba una dirección de correo electrónico!",
-      );
+        evento.target.setCustomValidity("¡Se esperaba una dirección de correo electrónico!");   //by assigning a non-empty message, the field is not valid and the form is not sent
     } else {
         evento.target.setCustomValidity("");       //by assigning an empty message, the field is valid and the form is sent
     }
   });
 
 
-/////////////////////////////////////////////////////////////////////////////////////
-//Custom validation using JavaScript validation API with personalized error message//
-/////////////////////////////////////////////////////////////////////////////////////
+
 //form with novalidate that prevents browser from automatically validating form fields
 //const form=document.getElementsByTagName("form")[2];
 let campoError3=document.querySelector("#form3 .error");
@@ -278,6 +274,7 @@ correo.addEventListener("input", (evento)=> {       //triggered at each time use
 });
 
 document.getElementById("form3").addEventListener("submit", (evento)=>{
+    console.log("aquie")
     if (!correo.validity.valid){
         muestraError();
     }
@@ -285,7 +282,7 @@ document.getElementById("form3").addEventListener("submit", (evento)=>{
 
 let muestraError=()=>{
     if (correo.validity.valueMissing){
-        campoError3.textContent="Introduzca una dirección de correo";
+        correo.setCustomValidity("Introduzca una dirección de correo");
     }else if (correo.validity.typeMismatch){
         campoError3.textContent="El texto introducido no tiene el formato de una dirección de correo válida";
     }else if (correo.validity.tooShort){
