@@ -9,7 +9,7 @@ import SupportIcon from './icons/IconSupport.vue'
 
 <template>
   <WelcomeItem>
-    <template #icon>
+    <template #icon>  <!--In WelcomeItem component, slot name="icon" (matching #icon) will be replaced by DocumentationIcon component-->
       <DocumentationIcon />
     </template>
     <template #heading>Documentation</template>
