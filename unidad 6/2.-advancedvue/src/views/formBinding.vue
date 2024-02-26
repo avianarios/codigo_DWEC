@@ -1,5 +1,7 @@
 <script setup>
-    //form input binding
+    import { ref } from 'vue'
+
+//form input binding
     const mensaje=ref("");
     const checked=ref();
     const checkedNames=ref([]);
@@ -13,7 +15,7 @@
 
 <template>
             <article class="borde">
-            <h3>Form input binding</h3>
+            <h2>Form input binding</h2>
                 <!--v-model can be used on a component to implement a two-way binding.-->
 
                 <!--Not recommended
