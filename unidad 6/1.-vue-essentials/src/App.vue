@@ -9,15 +9,20 @@ import miComponente from './components/miComponente.vue'
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
+      <!--Helloworld is a component, imported at script section-->
       <HelloWorld msg="¡Bien!"/>
     </div>
   </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+  <section>
+    <main>
+      <TheWelcome />
+    </main>
 
+  </section>
+  
   <footer>
+    <!--Messages can be sent to a component by defining the variables at defineProps at script setup section-->
     <miComponente msg="¡Oh, gran personaje!" msg2="Tus hazañas son de sobra conocidas"/>
   </footer>
 

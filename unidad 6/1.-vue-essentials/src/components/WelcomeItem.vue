@@ -1,6 +1,7 @@
 <template>
   <div class="item">
     <i>
+      <!--A Slot allows to insert elements coming from parent. They are bound by its name-->
       <slot name="icon"></slot>
     </i>
     <div class="details">
