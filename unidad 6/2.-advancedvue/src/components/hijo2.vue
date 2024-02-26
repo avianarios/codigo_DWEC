@@ -12,7 +12,7 @@
 <template>
     <div>
         <h2>Este es el hijo 2</h2>
-        <p>Ejemplo de paso de valores entre padre e hijo mediante inject</p>
+        <p>Paso de valores entre padre e hijo mediante inject</p>
         <p>Tu país actual es: {{  pais }}</p>
 
         <select v-model="nuevoPais">
