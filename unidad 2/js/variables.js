@@ -1,4 +1,17 @@
 "use strict";
+/*Strict mode allows JavaScript engine to enforce additional constraints in order to allow developers to catch some common errors that otherwise would have been unnoticed such as...
+    -using an undeclared variable
+    -Duplicating a parameter name
+    -Using reserved future keywords
+    -Using deprecated features
+    -Assigning to a read-only property
+
+Some features use strict mode by default:
+    -ES6 classes
+    -ES6 modules
+    -Arrow functions
+    -Tagged template literals
+*/
 
 /*JavaScript es débilmente tipado, es decir
     -no es necesario declarar el tipo de las variables
@@ -20,6 +33,9 @@ let userName="pepe";  //stick to your decisions. be consistent
 let userAdress="calle pez";
 let clientSurname; //Should follown the former naming schema: userSurname
 
+//Mal uso de una constante
+const NOMBRE = prompt("Dígame su nombre");
+
 //Buena sintaxis
 const ROJO="#FF0000"; //constante cuyo valor no cambiará nunca
 const azul=""; //constantes cuyo valor no cambie nunca, pero aún no lo sé, lo calcularé
@@ -40,3 +56,17 @@ console.log(aux, aux2);
 console.log ('esto es un texto');
 console.log (`La variable userName vale....\t ${userName}\n`);
 console.log("el numero vale", numero);
+
+//variable scope
+if (1){
+    let cadena="hola";
+    console.log(cadena);  //prints hola
+}
+console.log (cadena);   //error! cadena is not defined
+
+let adios="adios";
+function hola(){
+    let adios="nos despedimos";
+    console.log (adios);
+}
+hola();

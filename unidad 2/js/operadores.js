@@ -6,7 +6,7 @@ Unary: operation performed over just one operand
 binary: operation performed over two operands
 */
 
-//string contatenation
+///////string contatenation///////
 let cadena="hola",
     cadena2="amados",
     cadena3="alumnos",
@@ -15,21 +15,28 @@ let cadena="hola",
 console.log(cadena+" "+cadena2+" "+cadena3);
 console.log(5+5+'4');
 
-//Math operators: +, -, *, /, % (remainer, resto), ** (exponentiation, exponente)
-let numero=5,
+///////
+/*Math operators:
+ +, -, *, /, % (remainer, resto), ** (exponentiation, exponente) */
+ ///////
+ let numero=5,
     numero2=12;
 console.log (numero2%numero);
 console.log (numero**2);
 console.log(+cadena4 + -cadena5);   //cadenas are converted into numbers thanks to the +/- operator
-numero_negativo=-numero;
+let numero_negativo=-numero;
 console.log (numero_negativo);
+
+console.log(numero2);
+numero2-=numero;
+console.log(numero2);
 
 //Be careful with operators precedence. It may change the result of the operation
 let x=2*2+1;
 console.log(x);
 console.log(3+10*2, 3+(10*2), (3+10)*2));
 
-//Assignment
+///////Assignment operator///////
 //= is also an operator, returning a value. Expressions are evaluated from right to left, taking into account operator precedence
 let a=4;
 let b=5;
@@ -37,28 +44,63 @@ let c=4-(a=b+1);    //confusing syntax. Not recommended
 let d=a=b=4+3;
 console.log (c, d);
 
-//Modify-in-place
+///////modify-in-place operators///////
 let n=5;
-n=n+5;
-console.log(n);
-n+=5;
-console.log(n);
-n*=2;
-console.log(n);
-n++;
-console.log(n);
-n--;
-console.log(n);
-//if the value of n is not used, it is the same doing n-- that --n
-
-//if the value of n is used...
+let c;
 c=n--;  //first n value is returned and then n value is decremented
 console.log(c);
 c=--n;  //first n value is decremented and then n value is returned
 console.log(c);
 
+console.log(n=n+5, n+=5);
+console.log(n);
+console.log(n*=2);
+console.log(n++, ++n);
+console.log(n);
+console.log(n--, --n);
 
-//logical operators
+
+/////////comparison operators/////////
+let num1=3,
+    num2=num3=5;
+
+let cad1="hola",
+    cad2="Hola",
+    cad3="holas";
+
+//unicode is used to determine the order of the letters
+console.log( num1>num2 );
+console.log( num2==num3 );
+console.log( num1!=num2 );
+console.log("----------------------------");
+console.log( cad1>cad2 );
+console.log( cad1==cad2 );
+console.log( cad1=cad2 );
+console.log("----------------------------");
+console.log( "4">num1 );
+
+/*Equality cannot differentiate 0 or empty string from false 
+due to the fact that empty string, and false, are converted to zero*/
+console.log("----------------------------");
+console.log( 0==false );
+console.log( ""==false );
+
+/*therefore, if differentiate is needed, strict equality must be used
+strict equality do not convert any data type so, if they are not the same
+type, it returns false*/
+console.log("----------------------------");
+console.log( 0===false );
+console.log( ""===false );
+
+//be carefull comparing with a variable that could take null or undefined value
+console.log("----------------------------");
+console.log( a>4 );
+let a=3;
+console.log( a>4 );
+
+
+
+///////logical operators///////
 let a=d=true,
     b=c=false;  //remember that 0, empty string, Null or NaN are false, 1 or higher are true
 
@@ -70,26 +112,27 @@ if ( a || b ){
 }else{
     console.log("los dos son falsos");
 }
+console.log("---------------------------");
 
 //or processes values until first true valor is found, returning the argument and leaving the unexplored
 console.log (a||b||c||"ninguno");
-//should c be false, texto would shown up
-c || console.log("texto");
+c || console.log("texto");  //should c be false, texto would shown up
+console.log("---------------------------");
 
 //and operator (&&)
 console.log ( a && b, b && c );
 console.log( a && b && c);  //should any operand be false, evaluation is stopped and false is returned
-(a&&d) ? console.log("ambos son verdaderos") : console.log("alguno, o ambos, son falsos");
-a && console.log("texto");
-(a>0) && console.log("a es mayor que cero");    //no recomendable: poco legible
+a && console.log("texto");  //if a exists, texto is shown
+(a>0) && console.log("a es mayor que cero");    //if a is greater than zero, a text is shwon. No recomendable: poco legible
+console.log("---------------------------");
 
 //not operator (!)
 console.log(!(c||d)&&(a||b));
 
 
-//nulish operator
-//?? returns the first argument that is not null nor undefined
-// || do not distinguish, 0, empty string "", and null/undefined, they are all "false" values
+///////nulish operator///////
+// || (or) do not distinguish, 0, empty string "", and null/undefined, they are all "false" values
+//?? (nulish) returns the first argument that is not null nor undefined
 // when using with ?? or ||, parenthesis must be used
 let height = 0; // altura cero
 
