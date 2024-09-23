@@ -16,8 +16,8 @@ function muestraMensaje() {
   
 
 ///////////ARGUMENTS/////////////
-/*Example of how to pass argument to a function
-how global variables with the same name that arguments are not modified*/
+//Primitive arguments (number, string, boolean, null, undefined, symbol, y bigint) are passed as value, meaning that a copy of them is made. Therefore, its original value won't change
+
 function muestraCliente(nombre, apellido) {
     nombre="el inconfundible "+nombre;  //an argument is a copy of a global variable. Modifying it don't change global variable
     console.log(nombre+" "+apellido);
@@ -26,7 +26,6 @@ function muestraCliente(nombre, apellido) {
 let nombre="Perico";
 muestraCliente(nombre,"Pérez");
 console.log(nombre);  //nombre variable won't be modified
-
 
 /*how to create a default value when an argument is not provided. Is a feature of modern JavaScript*/
 function muestraCliente2(nombre, apellido="sin apellido") { //default value for arguments
@@ -57,6 +56,29 @@ function buscaApellido(nombreBuscado){
 }
 
 muestraCliente3("procopio");
+
+//Object arguments are passed as a reference meaning that there is a variable pointing to the original object. Thus, If function modifies object using this reference, it will change outside but, if the variable which is pointing to the object, is reassigned and then the object is modified, it won't change
+function modificarObjeto(obj) {
+  obj.propiedad = 'nuevo valor'; // Modifica el objeto original
+}
+
+let miObjeto = { propiedad: 'valor original' };
+modificarObjeto(miObjeto);
+console.log(miObjeto.propiedad); // 'nuevo valor' (cambia)
+
+
+function reasignarObjeto(obj) {
+  obj = { propiedad: 'otro valor' }; // Reasigna a un nuevo objeto, pero no afecta el original
+}
+
+let otroObjeto = { propiedad: 'valor original' };
+reasignarObjeto(otroObjeto);
+console.log(otroObjeto.propiedad); // 'valor original' (no cambia)
+
+
+
+
+
 
 ///////////RETURNING VALUES/////////////
 let usuario={nombre:"pepe",edad:"17"};

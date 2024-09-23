@@ -42,7 +42,7 @@ for (;;){
   console.log("this loop will never end, unless you press ctrl+c");
 }
 
-//you can use break to exit the loop, while it is not recommended. 
+//break can be used to exit the loop, but it is not recommended. 
 //The best way to leave it is the condition
 let suma=0;
 //bad coding
@@ -74,7 +74,7 @@ for (i = 0; i < 10; i++) {
   }
 }
 
-//break/continue can't be used with ?
+//break/continue can't be used with question operator
 i=0;
 (i<10) ? i++ : continue;
 
