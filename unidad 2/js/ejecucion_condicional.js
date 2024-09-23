@@ -1,36 +1,33 @@
 let anyos=prompt("¿Cuántos años tienes?", "año");
-let condicion= (anyos>=18);
+let mayoria_edad= (anyos>=18);
+let fechoria_cometida=true;
+
+if (mayoria_edad){
+  console.log("Eres mayor de edad");
+}else{
+  console.log("eres menor de edad");
+}
 
 //if
-if (condicion){
-    console.log("ya puedes ir a la cárcel, ten cuidado");
+if (mayoria_edad && fechoria_cometida){
+    console.log("A la cárcel directo");
 }else{
-    console.log("aún eres menor de edad");
+  if (fechoria_cometida){
+    console.log ("Al reformatorio");
+  }else{
+    console.log("Sigue así, respeta la ley");
+  }
 }
-
-
-if ( anyos>18 ){
-    console.log("ya puedes ir a la cárcel");
-}else{
-    if (anyos<10){
-        console.log("Te falta mucho aún");
-    }else{
-        console.log("Ya te falta menos");
-    }
-}
-
 
 /*? operator works as an if. It is shorter and appealing, but less readable.
  Be carefull, it's not very intuitive when nesting*/
 
-//Equivalent to the first if
-( anyos>18 ) ? console.log("eres mayor de edad") : console.log("eres menor de edad");
+//Equivalent to first if
+( mayoria_edad ) ? console.log("Eres mayor de edad") : console.log("Eres menor de edad");
 
-//Equivalent to the second if
-( anyos>18 ) ? console.log("eres mayor de edad") :
-    (anyos<10) ? console.log("te falta mucho aún") :
-        console.log("Ya te falta menos");
-
+//Equivalent to second if
+(mayoria_edad && fechoria_cometida) ? console.log("A la cárcel directo") : fechoria_cometida ? console.log("Al reformatorio") : console.log("Sigue así, respeta la ley"); //same as before, but much more difficult to read
+  
 
 //switch
 //this is the only structure that needs break statement
@@ -57,9 +54,3 @@ switch (nota) {
     console.log( "¡Excelente!" );
 }
 
-//variable scope
-if (1){
-  let cadena="hola";
-  console.log(cadena);  //prints hola
-}
-console.log (cadena);   //error! cadena is not defined
