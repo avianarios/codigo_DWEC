@@ -1,11 +1,14 @@
-//shows up a window with the message and waits for the user to press ok
+//shows up a modal window with the message and waits for the user to press ok
 alert ("esto es un mensaje");
 
-//asks the user for a value
+//shows up a modal window asking the user for a value
 let numero=prompt("dame un número", "numero");
 
 //shows a message at the console
 console.log("esto es un texto");
+
+//shows up a modal window asking the user for confirmation
+let respuesta=confirm("¿acepta?"); 
 
 //the following variables are known due to an early import of variables.js at index.html
 console.log ( numero1 + cadena );
