@@ -130,11 +130,11 @@ console.log(!(c||d)&&(a||b));
 
 
 ///////nulish operator///////
-// || (or) do not distinguish, 0, empty string "", and null/undefined, they are all "false" values
-//?? (nulish) returns the first argument that is not null nor undefined
-// when using with ?? or ||, parenthesis must be used
-let height = 0; // altura cero
+// || do not distinguish between 0, empty string or false. They are all "false" values
+// ?? distinguishes
+let valor = 0;
 
 //useful to assing default values to variables
-console.log(height || 100); 
-console.log(height ?? 100); 
+let resultado=height || 100;     //returns 100. 0 is converted to false. but it's a number
+let resultado2=height ?? 100;     //returns 0 as it should do
+console.log (resultado, resultado2);  
