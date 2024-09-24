@@ -15,6 +15,14 @@ function muestraMensaje() {
   console.log ("muestro variables globales después de llamar a la función:", mensaje1, mensaje2); //showing global message variable 
   
 
+let adios="adios";
+function hola(){
+    let adios="nos despedimos";
+    console.log (adios);
+}
+hola();
+
+
 ///////////ARGUMENTS/////////////
 //Primitive arguments (number, string, boolean, null, undefined, symbol, y bigint) are passed as value, meaning that a copy of them is made. Therefore, its original value won't change
 
@@ -121,12 +129,12 @@ showMessage();
 
 
 //as a function can be assigned to a variable, it can be copied
-let diHola=function () {   //no need to specify function name
+let saluda=function () {   //no need to specify function name
   console.log( "Hola" );
 };  //semicolon at the end. It's an expression assigned to a variable
-let func=diHola;  //no parenthesis when assigning, they are variables
+let func=saluda;  //no parenthesis when assigning, they are variables
 func(); 
-diHola(); 
+saluda(); 
 
 //Another example
 // program to find the square of a number
@@ -161,8 +169,8 @@ function saluda(nombre){
   console.log("hola "+nombre);
 }
 
-diHola("Higinio");
-let diHola=function(nombre){
+saluda("Higinio");
+let saluda=function(nombre){
   console.log ("hola "+nombre);
 };
 
@@ -203,7 +211,7 @@ saluda("pepe");
 ////////////ARROW FUNCTIONS//////////
 //similar to function expressions, but specifying the returning value
 
-let suma=(a,b)=>{
+let sumar=(a,b)=>{
   return (a+b); //could've been done in a single line, but for demonstration purposes
 }
 

@@ -19,6 +19,14 @@ if (mayoria_edad && fechoria_cometida){
   }
 }
 
+//variable scope
+if (1){
+  let cadena="hola";
+  console.log(cadena);  //prints hola
+}
+console.log (cadena);   //error! cadena is not defined
+
+
 /*? operator works as an if. It is shorter and appealing, but less readable.
  Be carefull, it's not very intuitive when nesting*/
 

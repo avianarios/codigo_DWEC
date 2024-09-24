@@ -34,7 +34,7 @@ console.log(numero2);
 //Be careful with operators precedence. It may change the result of the operation
 let x=2*2+1;
 console.log(x);
-console.log(3+10*2, 3+(10*2), (3+10)*2));
+console.log(3+10*2, 3+(10*2), (3+10)*2);
 
 ///////Assignment operator///////
 //= is also an operator, returning a value. Expressions are evaluated from right to left, taking into account operator precedence
@@ -46,7 +46,6 @@ console.log (c, d);
 
 ///////modify-in-place operators///////
 let n=5;
-let c;
 c=n--;  //first n value is returned and then n value is decremented
 console.log(c);
 c=--n;  //first n value is decremented and then n value is returned
@@ -82,8 +81,8 @@ console.log( "4">num1 );
 /*Equality cannot differentiate 0 or empty string from false 
 due to the fact that empty string, and false, are converted to zero*/
 console.log("----------------------------");
-console.log( 0==false );
-console.log( ""==false );
+console.log( 0==false );    //true
+console.log( ""==false );   //true
 
 /*therefore, if differentiate is needed, strict equality must be used
 strict equality do not convert any data type so, if they are not the same
@@ -94,15 +93,15 @@ console.log( ""===false );
 
 //be carefull comparing with a variable that could take null or undefined value
 console.log("----------------------------");
-console.log( a>4 );
-let a=3;
+console.log( a>4 ); //a is still undefined, but no error is thrown
+a=3;
 console.log( a>4 );
 
 
 
 ///////logical operators///////
-let a=d=true,
-    b=c=false;  //remember that 0, empty string, Null or NaN are false, 1 or higher are true
+a=d=true;
+b=c=false;  //remember that 0, empty string, Null or NaN are false, 1 or higher are true
 
 //or operator ||
 console.log ( a || b, b || c );
