@@ -56,17 +56,3 @@ console.log(aux, aux2);
 console.log ('esto es un texto');
 console.log (`La variable userName vale....\t ${userName}\n`);
 console.log("el numero vale", numero);
-
-//variable scope
-if (1){
-    let cadena="hola";
-    console.log(cadena);  //prints hola
-}
-console.log (cadena);   //error! cadena is not defined
-
-let adios="adios";
-function hola(){
-    let adios="nos despedimos";
-    console.log (adios);
-}
-hola();

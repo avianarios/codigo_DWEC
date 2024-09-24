@@ -8,97 +8,105 @@ function pow(x, n) {
       result *= x;
     }
     return result;
-  }
-  console.log( pow(2, 3) ); // 8
+}
+console.log( pow(2, 3) ); // 8
   
-  //or recursive 
-  //Not all problems can be expressed as recursive functions. Two conditions must be satisfied:
-  //1.- there must be a base case that finishes recursion
-  //2.- there must be a way of dividing problems in subproblems
-  //Recursive functions call themselves
-  function pow(x, n) {
-    if (n == 1) { //base case
-      return x;
-    } else {
-      return x * pow(x, n - 1); //breaking down in subproblems
-    }
+//or recursive 
+//Not all problems can be expressed as recursive functions. Two conditions must be satisfied:
+//1.- there must be a base case that finishes recursion
+//2.- there must be a way of dividing problems in subproblems
+//Recursive functions call themselves
+function pow(x, n) {
+  if (n == 1) { //base case
+    return x;
+  } else {
+    return x * pow(x, n - 1); //breaking down in subproblems
   }
-  console.log( pow(2, 3) ); // 8
-  
-  
-  ///////Rest parameters////////
-  //example 1
-  //allows to pass an undetermined number or parameters. Must be placed at the end
-  function sumaTodo(aux,...numeros){
-    let acumulado=aux;
-    for (let num of numeros){
-      acumulado+=num;
-    }
-    return acumulado;
-  }
-  console.log (sumaTodo(0,1,2,3,4,5,6,7,8));
+}
+console.log( pow(2, 3) ); // 8
 
-  //example 2  
-  arrow function 
-  let concatena2 = (...palabras) => {
-    let resultado="";
-    for (let palabra of palabras){
-      resultado+=palabra;
-    }
-    return resultado;
-  }
-  
-  console.log (concatena("a", "b", "c", "d"));
 
-  //example 3
-  function restarRecursivo(total,...numeros){
-    if (numeros.length==1){
-      return (total-=numeros.pop());
-    }else{
-      total-=numeros.pop();
-      return (restarRecursivo(total,...numeros));
-    }
+///////Rest parameters////////
+//example 1
+//allows to pass an undetermined number or parameters. Must be placed at the end
+function sumaTodo(aux,...numeros){
+  let acumulado=aux;
+  for (let num of numeros){
+    acumulado+=num;
   }
-  let aux=1000;
-  console.log(restarRecursivo(aux,4,56,24,2,123,123,123));
-  
-  /////////Autoexecutable functions///////
-  //executed once, then can't be called again
-  //option 1
-  (function() { console.log("hola mundo") }) ();
-  
-  //option 2
-  ( function(quien){
+  return acumulado;
+}
+console.log (sumaTodo(0,1,2,3,4,5,6,7,8));
+
+//example 2  
+let concatena2 = (...palabras) => {
+  let resultado="";
+  for (let palabra of palabras){
+    resultado+=palabra;
+  }
+  return resultado;
+}
+
+console.log (concatena("a", "b", "c", "d"));
+
+//example 3
+function restarRecursivo(total,...numeros){
+  if (numeros.length==1){
+    return (total-=numeros.pop());
+  }else{
+    total-=numeros.pop();
+    return (restarRecursivo(total,...numeros));
+  }
+}
+let aux=1000;
+console.log(restarRecursivo(aux,4,56,24,2,123,123,123));
+
+///////Spread syntax////////
+//operador de expansión o de propagación//
+let arr = [3, 5, 1];
+let arr1 = [1, -2, 3, 4];
+let arr2 = [8, 3, -8, 1];
+
+//an array can't be passed to Math.max, as it expects a list of items. Spread syntax “expands” an iterable object arr into the list of arguments.
+alert( Math.max(1, ...arr, ...arr1, 2, ...arr2, 25));  
+
+/////////Autoexecutable functions///////
+//executed once, then can't be called again
+//option 1
+(function() { console.log("hola mundo") }) ();
+
+//option 2
+( function(quien){
+  console.log("hola " + quien);
+})("mundo");
+
+
+/////////Nested functions and closure/////////////
+//a function created within another function
+//inner function is invisible outside and can use outer variables
+function saludador(quien){
+  return function(){ //acá se crea la funcion anónima a retornar. No hace falta nombre
     console.log("hola " + quien);
-  })("mundo");
-  
-  
-  /////////Nested functions and closure/////////////
-  //a function created within another function
-  //inner function is invisible outside and can use outer variables
-  function saludador(quien){
-    return function(){ //acá se crea la funcion anónima a retornar. No hace falta nombre
-      console.log("hola " + quien);
-    }
   }
-  var saluda = saludador("mundo");
-  saluda(); //hola mundo
-  
-  
-  function creaUsuario(quien){
-    let nombre; //inner variables can't be accessed outside function
-    return function usu(){  //need a name to create properties
-      nombre=quien;
-      console.log("Usuario "+nombre+" creado");
-    };
-    usu.apellido="perez";
-  }
-  
-  let usua=creaUsuario("pepe");
-  usua.apellido="gonzález";
-  console.log (usua.apellido);  //gonzález
-  console.log (usua.nombre);  //undefined
-  usua();
+}
+var saluda = saludador("mundo");
+saluda(); //hola mundo
+
+
+function creaUsuario(quien){
+  let nombre; //inner variables can't be accessed outside function
+  return function usu(){  //need a name to create properties
+    nombre=quien;
+    console.log("Usuario "+nombre+" creado");
+  };
+  usu.apellido="perez";
+}
+
+let usua=creaUsuario("pepe");
+usua.apellido="gonzález";
+console.log (usua.apellido);  //gonzález
+console.log (usua.nombre);  //undefined
+usua();
   
   
 //scope and closure
@@ -107,7 +115,7 @@ function pow(x, n) {
 //allowing them to access an exterior function scope within an inner function
 
 //example 1
-let nombre= "Máximo";
+nombre= "Máximo";
 function saluda() {
   console.log("Hola, " + nombre);
 }
@@ -186,7 +194,7 @@ document.getElementById('size-16').onclick = size16;
 
 //example 7
 // ámbito global
-const e = 10;
+const f = 10;
 
 function sum(a) {
   return function (b) {
@@ -194,7 +202,7 @@ function sum(a) {
       // ámbito de funciones externas
       return function (d) {
         // ámbito local
-        return a + b + c + d + e;
+        return a + b + c + d + f;
       };
     };
   };

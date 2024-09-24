@@ -91,3 +91,19 @@ salida: for (let i = 0; i < 3; i++) {
     console.log(`you have chosen ${i}${j}`);
   }
 }
+
+
+//Iterable and non-iterable objects//
+//for...of -> iterable elements
+const matriz= [1, 2, 3];
+
+for (let elemento of matriz) {
+  console.log(elemento);  // 1, 2, 3
+}
+
+//for...in -> non-iterable object
+const obj = { name: "Alice", age: 25 };
+
+for (let key in obj) {
+  console.log(key, obj[key]);  // name Alice, age 25
+}
