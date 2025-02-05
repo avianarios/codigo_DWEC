@@ -1,7 +1,14 @@
 # Índice
 
-1. Programación síncrona y asíncrona
-2. El ciclo de eventos en JavaScript
+1. [Programación síncrona y asíncrona](#1--programación-síncrona-y-asíncrona)
+2. [El ciclo de eventos en JavaScript](#2--el-ciclo-de-eventos-en-javascript)
+3. [Mecanismos para conseguir asincronía](#3--mecanismos-para-conseguir-asincronía)
+  1. [Funciones globales](#31--funciones-globales)
+  2. [Eventos](#32--eventos)
+  3. [Funciones de retorno (callbacks) y eventos](#33--funciones-de-retorno-callbacks-y-eventos)
+  4. [Promesas then/catch](#34--promesas-thencatch)
+  5. [Promesas async/await](#35--promesas-asyncawait)
+  6. [Trabajadores web](#36--trabajadores-web-web-workers)
 
 
 ----
@@ -72,21 +79,27 @@ Aquí, la función `setTimeout` permite que "Fin" se imprima antes de que el pro
 
 # 2- El ciclo de eventos en JavaScript
 
-El **ciclo de eventos** (event loop) es un concepto central en cómo JavaScript maneja la ejecución del código. Al ejecutar código JavaScript, el motor de JavaScript lo coloca en dos grandes estructuras de datos que marcarán cúando se procesará cada instrucción: la **pila de ejecución** (call stack) y la **cola de tareas** (task queue).
+El **ciclo de eventos** (event loop) define cómo JavaScript maneja la ejecución del código. Para ejecutar un programa, el motor de JavaScript tiene tres estructuras de datos que marcarán cúando se procesará cada instrucción: la **pila de ejecución** (call stack), la **cola de microtareas** (microtasks queue) y la **cola de tareas** (task queue).
 
-- Pila de ejecución (Call Stack): es donde se coloca el código que va a ser ejecutado. JavaScript ejecuta el código de arriba a abajo, de forma secuencial, línea por línea, de forma síncrona. Cada vez que se llama a una función, esta se apila en la pila de ejecución.
-Cuando se termina de ejecutar una función, esta se "desapila", es decir, se retira de la pila de ejecución, y el flujo de control pasa a la siguiente línea de código.
+- **Pila de ejecución (Call Stack)**: es donde se coloca el **código síncono** que va a ser ejecutado. Para ejecutar un programa, JavaScript va tomando cada instrucción secuencialmente, en el orden definido en el programa y de forma síncrona, y hace lo siguiente:
+  - La analiza para ver si es sintácticamente correcta.
+  - Si no lo es, da error y termina. Si lo es, la apila en la pila de ejecución.
+  - Si es una instrucción corriente, la ejecuta y la saca de la pila. Si es una llamada a una función, irá apilando y ejecutando cada llamada y la llamada a la función no saldrá de la pila hasta que la ejecución de todas sus instrucciones haya finalizado. 
 
-- Cola de tareas (Task Queue): es donde se colocan las tareas asíncronas, como los **callbacks**, las **promesas resueltas**, o eventos como clics de botones. Estas tareas esperan a ser ejecutadas, pero no se ejecutan inmediatamente. En lugar de eso, permanecen en la cola hasta que la pila de ejecución está vacía.
+- **Cola de microtareas (microtasks queue)**: es donde se coloca el **código asíncrono** más urgente como las promesas, las operaciones de la API mutationObserver y las tareas agregadas mediante queueMicroTask(). Se ejecuta cuando la pila de ejecución se quede vacía y una vez que empieza, no pueden ser interrumpidas.
+
+- **Cola de tareas (Task Queue)**: es donde se coloca el **código asíncrono** menos urgente, como los eventos de usuario y de entrada/salida y temporizadores (setTimeout y setInterval). Estas tareas son las que menos prioridad tienen, por lo que se ejecutarán cuando la pila de ejecución y la cola de microtareas estén vacías. Cuando pasan a la pila pueden ser interrumpidas por microtareas.
 
 El **ciclo de eventos** se encarga de mover las tareas de la cola de tareas a la pila de ejecución para ser procesadas siguiendo los siguientes pasos:
 1. El event loop revisa constantemente si la pila de ejecución está vacía.
-2. Si la pila está vacía, el event loop mueve la primera tarea en la cola de tareas a la pila de ejecución.
-3. El proceso sigue y repite, verificando constantemente si hay tareas pendientes en la cola y si la pila está vacía.
+2. Si la pila está vacía, el event loop mueve la primera tarea en la cola de microtareas a la pila de ejecución.
+3. Si ésta también está vacía, irá a la cola de tareas en búsqueda de instrucciones
+4. El proceso se repite continuamente.
+
 
 ## ¿Cómo se gestionan las operaciones asíncronas?
 
-Las operaciones asíncronas, al colocarse en la cola de tareas, no se ejecutan inmediatamente. Lo harán una vez que la pila de ejecución se vacíe (es decir, que todo el código sincrónico se haya ejecutado), las tareas asíncronas comenzarán a moverse desde la cola de tareas a la pila de ejecución. Este mecanismo es el que hace que el código sea no bloqueante.
+Las operaciones asíncronas, al colocarse en la cola de tareas, no se ejecutan inmediatamente. Lo harán una vez que la pila de ejecución se vacíe (es decir, que todo el código síncrono se haya ejecutado), las tareas asíncronas comenzarán a moverse desde la cola de tareas a la pila de ejecución. Este mecanismo es el que hace que el código sea no bloqueante.
 
 ## Ejemplo:
 ```javascript
@@ -101,14 +114,14 @@ console.log('Fin');
 
 El orden de ejecución será:
 
-1. **'Inicio'** se imprime primero porque es el primer código sincrónico.
+1. **'Inicio'** se imprime primero porque es el primer código síncrono.
 2. `setTimeout` se coloca en la cola de tareas. Aunque tiene un retraso de 0 milisegundos, no se ejecuta inmediatamente.
-3. **'Fin'** se imprime a continuación, ya que es sincrónico.
+3. **'Fin'** se imprime a continuación, ya que es síncrono.
 4. Una vez que la pila de ejecución está vacía, el event loop toma la tarea de la cola de tareas (el callback de `setTimeout`) y la mueve a la pila de ejecución.
-5. **'Timeout'** se imprime después de que el código sincrónico ha terminado.
+5. **'Timeout'** se imprime después de que el código síncrono ha terminado.
 
 
-# Estrategias para mejorar la interactividad:
+## Estrategias para mejorar la interactividad:
 Si un script está realizando cálculos complejos o manipulaciones del DOM, las operaciones asíncronas no bloquean la ejecución del código síncrono, lo que permite que el hilo principal responda rápidamente a otras tareas pero hace que las operaciones asíncronas puedan tardar unos milisegundos en procesarse. El problema viene cuando se están haciendo operaciones más complejas que ocupen mucho tiempo de CPU ya que, en ese caso, las operaciones asíncronas podría tardar más en responder.
 
 Para mejorar la respuesta de las operaciones asíncronas se puede hacer lo siguiente:
@@ -141,7 +154,7 @@ Después del setTimeout
 Esto se ejecuta después de 2 segundos
 ```
 
-## 3.1- Eventos
+## 3.2- Eventos
 
 En JavaScript, los eventos son una parte fundamental de la interacción con el usuario, como los clics de botones, desplazamiento de página, o el envío de formularios. Aunque no siempre se les considera "métodos asíncronos", los eventos funcionan de manera asíncrona debido a cómo el motor de JavaScript maneja su ejecución.
 
@@ -182,7 +195,7 @@ Cálculo complejo terminado
 Operación compleja solicitada
 ```
 
-## 3.2- Uso conjunto de funciones de retorno (callbacks) y eventos
+## 3.3- Funciones de retorno (callbacks) y eventos
 
 Hasta ES6 (2015), la asincronía se manejaba mediante funciones de retorno (`callbacks`) y eventos. Un **callback** es una función de respuesta que se pasa como argumento a otra función y que se ejecuta una vez que esta última ha finalizado.
 
@@ -263,7 +276,7 @@ Para abordar esto, en JavaScript moderno se utilizan **promesas** y `async/await
 
 ----
 
-# 4- Promesas
+## 3.4- Promesas then/catch
 Las promesas surgen en con ES6 (ES2015) para simplificar la gestión del código asíncrono y simplificar la gestión de errores y el encadenamiento de operaciones. Son objetos que representan el estado actual de una operación asíncrona. Una promesa puede estar en uno de tres estados:
 - `Pendiente (pending)`: La operación asíncrona aún no ha terminado.
 - `Cumplida (fulfilled)`: La operación asíncrona se completó con éxito.
@@ -402,7 +415,7 @@ Promise.all([promesa1, promesa2, promesa3])
 ```
 ----
 
-# 5-Async/Await
+## 3.5- Promesas async/await
 La sintaxis de ES2015 (ES6) maneja bien la asincronía, pero permite encadenar varios .then y .catch, lo que puede resultar confuso en ocasiones. ES2017 (ES8) sigue gestionando la asincronía con promesas, pero introduce una nueva sintaxis para manejarlas de manera más legible y estructurada permitiendo escribir código asíncrono con una apariencia más similar al código síncrono. Para ello usa dos elementos que sustituyen a `.then()` y `.catch()`:
   - `async` se usa a la hora de declarar la función y hace que ésta devuelva una promesa. Si dentro de la función se devuelve un valor, este se envuelve automáticamente en una promesa resuelta.
   - `await` sólo puede usarse dentro de funciones `async` y permite esperar el resultado de una promesa antes de continuar con la ejecución.
@@ -482,19 +495,204 @@ async function cargarImagenes() {
 cargarImagenes();
 ```
 
-### 🔹 **Diferencias con Promesas normales**
-| Característica      | Promesas (`.then()`) | `async/await` |
+###  **Diferencias entre then y async/wait**
+| Característica      |  `.then()` | `async/await` |
 |--------------------|----------------|------------|
 | Lectura del código | Más difícil cuando hay muchas promesas encadenadas | Más legible, se parece a código síncrono |
 | Manejo de errores | `.catch()` | `try/catch` |
-| Ejecución en paralelo | `Promise.all()` | `Promise.all()` sigue siendo necesario |
 
 ---
 
-### **📌 Consideraciones importantes**
-1. `await` **pausa la ejecución** dentro de la función `async`, pero no bloquea el event loop.
-2. `async/await` es solo **azúcar sintáctico** sobre promesas, no es un nuevo mecanismo de asincronía.
-3. Para ejecutar tareas en paralelo, **no uses `await` dentro de bucles `for` si las operaciones no dependen entre sí**. Es mejor usar `Promise.all()`.
+## 3.6- Trabajadores web (web workers)
 
----
+### Los hilos de ejecución
 
+El motor de JavaScript en la mayoría de los entornos (como el navegador o Node.js) utiliza un solo hilo de ejecución para manejar el código JavaScript. Este hilo se encarga de:
+- Ejecutar código síncrono (instrucciones que van directamente a la pila de ejecución).
+- Procesar las tareas asíncronas (moviéndolas de la cola de tareas a la pila de ejecución).
+
+El ciclo de eventos y la cola de tareas permiten que el hilo único maneje la asincronía de manera eficiente, sin bloquear el hilo principal, pero aún así con un solo hilo, sólo se puede ejecutar una instrucción a la vez. 
+
+Sin embargo, en situaciones donde se necesitan realizar tareas que podrían bloquear el hilo principal (como procesamiento de grandes volúmenes de datos o tareas de cálculo complejas), JavaScript ofrece una forma de delegar trabajo a otros hilos mediante los `trabajadores web (web workers)`.
+
+Por tanto, los `trabajadores web` son una característica de JavaScript que permite ejecutar scripts en segundo plano, en un hilo separado del hilo principal de ejecución para evitar bloquear la interfaz de usuario en situacinoes como, por ejemplo:
+  - Procesamiento de tareas muy intensivas.
+  - Manipulación de grandes cantidades de datos.
+  - Operaciones que no requieren interacción con la interfaz de usuario.
+
+### Características:
+  - **Hilos separados**: Se ejecutan en un hilo separado, lo que permite la multitarea.
+  - **Sin acceso al DOM**: No tienen acceso directo al DOM (Document Object Model) ni a variables globales del hilo principal.
+  - **Comunicación por mensajes**: La comunicación entre el hilo principal y el trabajador se realiza a través de mensajes (usando postMessage y escuchando eventos message).
+
+
+### self
+En el contexto de un trabajador web, `self` hace referencia al propio trabajador, es decir, al hilo de ejecución que está corriendo en segundo plano. Es el equivalente a `this` en un entorno de ejecución normal.
+
+Se puede usar para escuchar mensajes (con onmessage), enviar mensajes (con postMessage()), y para importar scripts (con importScripts()).
+
+
+### Métodos
+
+- **`postMessage(message)`**: Envía un mensaje al trabajador web.
+  ```js
+  // En el hilo principal
+  worker.postMessage({ action: 'start', data: 'Hola, trabajador' });
+
+  // En el trabajador web
+  self.postMessage({ result: 'Tarea completada' });
+  ```
+
+- **`terminate()`**: Detiene el trabajador y libera recursos.
+  ```js
+  worker.terminate();
+  ```
+
+  - **`close()`**: Igual que terminate, pero dentro del trabajado
+  ```js
+  self.close();
+  ```
+
+- **`importScripts(script1, script2, ...)`**: Importa scripts dentro del trabajador.
+  ```js
+  self.importScripts('utils.js');
+  ```
+
+## Eventos del Objeto `Worker`
+
+- **`onmessage`**: Se activa cuando el trabajador envía un mensaje de vuelta.
+  ```js
+  worker.onmessage = function(event) {
+      console.log('Mensaje del trabajador:', event.data);
+  };
+  ```
+- **`onmessageerror`**: Se activa cuando ocurre un error al convertir de un formato serializado,como JSON, a objeto, un mensaje recibido por el trabajador web o el hilo principal.
+
+- **`onerror`**: Se activa si ocurre un error dentro del trabajador.
+  ```js
+  worker.onerror = function(event) {
+      console.error('Error en el trabajador:', event.message);
+  };
+  ```
+
+### Creación de trabajadores
+
+Los trabajadores web se crean usando el constructor `Worker`, que toma como argumento la URL de un archivo JavaScript que contiene el código que se ejecutará en el hilo separado.
+```js
+const worker = new Worker('worker.js');
+```
+#### Opción 1: Creación de trabajadores usando ficheros separados
+  1. **Crear el archivo del trabajador** (por ejemplo, worker.js), que contendrá el archivo que se ejecutará en el hilo separado.
+  ```js
+  // worker.js
+  self.onmessage = function(event) {
+      // Código que ejecutará el trabajador
+      console.log('Mensaje recibido del hilo principal:', event.data);
+      self.postMessage('Tarea terminada');
+  };
+  ```
+
+  2. **Crear un trabajador en el hilo principal (en `main.js`)**
+  En el hilo principal, se crea el trabajador pasando el archivo JavaScript que debe ejecutarse como argumento al constructor `Worker`.
+
+  ```js
+  // main.js
+  const worker = new Worker('worker.js');
+
+  // Enviar un mensaje al trabajador
+  worker.postMessage('Inicio de tarea');
+
+  // Escuchar mensajes del trabajador
+  worker.onmessage = function(event) {
+      console.log('Mensaje del trabajador:', event.data);
+  };
+  ```
+
+  3. **Gestionar la comunicación entre el hilo principal y el trabajador**  
+  El hilo principal y el trabajador se comunican mediante el método `postMessage`:
+   - El hilo principal usa `worker.postMessage()`.
+   - El trabajador usa `self.postMessage()`.
+
+
+```javascript
+//Ejemplo completo de trabajo con un trabajador web
+//`main.js` (hilo principal):
+
+// Crear el trabajador
+const worker = new Worker('worker.js');
+
+// Enviar un mensaje al trabajador
+worker.postMessage('Inicio de tarea');
+
+// Escuchar el mensaje de vuelta del trabajador
+worker.onmessage = function(event) {
+    console.log('Respuesta del trabajador:', event.data);
+};
+
+// Manejar errores del trabajador
+worker.onerror = function(error) {
+    console.error('Error en el trabajador:', error.message);
+};
+
+//`worker.js` (trabajador):
+// Escuchar mensajes del hilo principal
+self.onmessage = function(event) {
+    console.log('Mensaje recibido:', event.data);
+
+    // Realizar una tarea (simulando una tarea pesada)
+    let result = 0;
+    for (let i = 0; i < 1e6; i++) {
+        result += i;
+    }
+
+    // Enviar el resultado de vuelta al hilo principal
+    self.postMessage('Resultado: ' + result);
+};
+```
+
+
+```javascript
+//Ejemplo de lo que hace el trabajador pero con una promesa
+//DIFERENCIA:
+//  - La promesa se coloca en la cola de microtareas. Una vez que se queda vacía la cola, entra en la pila y nadie la desalojará hasta que acabe, monopolizando el hilo principal hasta que termine. 
+//  - El trabajador se ejecuta en un hilo separado y nunca bloqueará el hilo principal
+function tareaPesada() {
+    return new Promise((resolve) => {
+        let result = 0;
+        for (let i = 0; i < 1e9; i++) { // Bucle pesado
+            result += i;
+        }
+        resolve(result);
+    });
+}
+
+console.log("Inicio de tarea");
+
+tareaPesada().then((resultado) => {
+    console.log("Resultado:", resultado);
+});
+
+console.log("Tarea en proceso...");
+```
+
+
+#### Opción 2: Usar la función Blob
+Cuando el código del trabajador es pequeño, quizás no merece la pena crear un fichero separado y  definir el trabajador directamente dentro del archivo principal usando el método `Blob`. 
+```js
+const blob = new Blob([`
+    self.onmessage = function(event) {
+        let result = 0;
+        for (let i = 0; i < 1e6; i++) {
+            result += i;
+        }
+        self.postMessage(result);
+    };
+`], { type: 'application/javascript' });
+
+const worker = new Worker(URL.createObjectURL(blob));
+
+worker.postMessage('Start');
+worker.onmessage = function(event) {
+    console.log('Resultado del trabajador:', event.data);
+};
+```

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de Promesas y Event Loop</title>
+    <script src="../js/1.-ciclo-de-eventos.js" defer></script>
+    <link rel="stylesheet" href="../css/estilos.css" type="text/css">
+</head>
+<body class="contenedor-flex-vertical">
+    <main>
+        <h1>Ejemplos de orden de ejecución en el ciclo de eventos</h1>
+        <section>
+            <h2>Ejemplo 1: Código síncrono y código asíncrono (promesas)</h2>
+            <pre><code>
+            console.log('Código síncrono 1');
+
+            Promise.resolve().then(() => {
+                console.log('Promesa resuelta');
+            });
+
+            console.log('Código síncrono 2');
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Ejemplo 2: Código síncrono, asíncrono urgente (Promesas) y asíncrono no urgente (setTimeout)</h2>
+            <pre><code>
+            console.log('Código síncrono 1');
+
+            setTimeout(() => {
+                console.log('setTimeout');
+            }, 0);
+
+            Promise.resolve().then(() => {
+                console.log('Promesa resuelta');
+            });
+
+            console.log('Código síncrono 2');
+            </code></pre>
+        </section>
+    </main>
+</body>
+</html>
