@@ -225,7 +225,6 @@ Interactive elements such as `input`, `button`, `a`, `textarea`, `select`, etc. 
   - `paste`: the user pastes text.
 
 
-
 ### Event Attributes
 
 When an event occurs, the browser creates an `event` object that is passed as an argument to the event handler. Events have **attributes** that allow you to work with them. These attributes depend on the type of event, but some are common to all events. Some of them are as follows:
@@ -284,8 +283,7 @@ When an event is triggered, the browser generates an event object (which will be
 ## 5.2- Handling events
 Four ways of working with events:
 
-1. **Inline event handlers**  
-   **Not recommended.** Mixing HTML and JavaScript makes maintenance difficult and does not allow multiple handlers to be added for the same event.
+  1. **Inline event handlers**, i.e. mixing HTML and JavaScript. **Not recommended** because it makes maintenance difficult and does not allow multiple handlers to be associated with the same event.
 
    ```html
     <button onClick="console.log('¡Saludos, criatura!')">Saludar</button>
@@ -295,26 +293,21 @@ Four ways of working with events:
     </script>
    ```
 
-2. **Event handler as a property** 
-    **Not recommended.** Functions are assigned to events via properties such as onclick.
-    **Problems:** Only one handler can be associated with each event, limiting flexibility. This approach also lacks support for adding multiple listeners or fine-grained control over event handling.
+2. **Handler as event property**. Functionality is assigned to events through properties that are named like the event with ‘on’ prefixed (`onclick`, `onmouseover`, etc.). **Not recommended** because only one handler can be associated per event. 
 
    ```javascript
     let boton = document.querySelector("button");
     boton.onclick = function () { console.log("¡Saludos, criatura!"); };
    ```
 
-3. **Inline-like event assignment using attributes**
-    **The worst option.** Sets the event attribute directly in the DOM as a string, which is evaluated as code when the event occurs.
-    **Problems:** String is evaluated in the global context, which may cause security problems or issues with `this`. Besides, complex functions can't be passed as callbacks and only one handler is allowed per event.
+3. **Event assignment via attributes** Assigns event and functionality as a string directly as an attribute of the DOM. **The worst option** as the string is evaluated in the global context, which can lead to security vulnerabilities or `this` problems, complex functions cannot be passed as `callbacks` and only one handler is allowed per event.
 
   ```javascript
     let boton=document.querySelector("button");
     boton.setAttribute("onclick", "console.log('saludos, criatura')");  //arrow functions doesn't work
    ```
 
-4. **Using event listeners** 
-    **Recommended.** This method allows multiple handlers to be associated with the same event. It offers more control over event handling, is more flexible, does not rely on HTML attributes or strings, allows the use of custom events, and separates presentation and logic.
+  4. **Event listeners**. This is **recommended** as it allows multiple handlers to be associated with the same event. It offers greater control over event handling, is more flexible, does not rely on HTML attributes or strings, allows for custom events and separates presentation logic. 
 
     ```javascript
     let boton=document.querySelector("#formulario_contacto button");

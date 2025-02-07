@@ -282,8 +282,7 @@ Cuando un evento se dispara, el navegador genera un objeto event (que será pasa
 ## 5.2- Manejo de eventos
 Cuatro formas de trabajar con eventos:
 
-  1. **Manejadores de eventos en línea**  
-    **No recomendado.** Mezclar HTML y JavaScript dificulta el mantenimiento y no permite asociar múltiples manejadores al mismo evento.
+  1. **Manejadores de eventos en línea**, es decir, mezclar HTML y JavaScript. **No recomendado.** porque dificulta el mantenimiento y no permite asociar múltiples manejadores al mismo evento.
 
    ```html
     <button onClick="console.log('¡Saludos, criatura!')">Saludar</button>
@@ -293,26 +292,21 @@ Cuatro formas de trabajar con eventos:
     </script>
   ```
 
-  2. **Manejador como propiedad del evento**
-    **No recomendado.** Las funciones se asignan a eventos a través de propiedades como onclick.
-    **Problemas:** Solo se puede asociar un manejador por evento, lo que limita la flexibilidad. Además, este enfoque no permite agregar múltiples oyentes ni un control detallado sobre el manejo del evento.
+  2. **Manejador como propiedad del evento**. La funcionalidad se asigna a eventos a través de propiedades que se llaman como el evento anteponiendo "on" (`onclick`, `onmouseover`, etc.). **No recomendado** porque sólo se puede asociar un manejador por evento. 
   
   ```javascript
     let boton = document.querySelector("button");
     boton.onclick = function () { console.log("¡Saludos, criatura!"); };
    ```
 
-  3. **Asignación de eventos tipo en línea mediante atributos**
-    **La peor opción.** Establece el atributo del evento directamente en el DOM como una cadena, la cual se evalúa como código cuando el evento ocurre.
-    **Problemas:** La cadena se evalúa en el contexto global, lo que puede generar vulnerabilidades de seguridad o problemas con this, no se pueden pasar funciones complejas como callbacks y sólo se permite un manejador por evento.
+  3. **Asignación de eventos mediante atributos** Asigna evento y funcionalidad como una cadena directamente como un atributo del DOM. **La peor opción** ya que la cadena se evalúa en el contexto global, lo que puede generar vulnerabilidades de seguridad o problemas con `this`, no se pueden pasar funciones complejas como funciones de retorno (`callbacks`) y sólo se permite un manejador por evento.
 
     ```javascript
     let boton = document.querySelector("button");
     boton.setAttribute("onclick", "console.log('¡Saludos, criatura!')"); // Las funciones flecha no funcionan aquí
     ```
 
-  4. **Usando escuchadores de eventos**  
-    **Recomendado.** Este método permite asociar múltiples manejadores al mismo evento. Ofrece un mayor control sobre el manejo de eventos, es más flexible, no depende de atributos HTML o cadenas de texto, permite usar eventos personalizados y separa lógica de presentación. 
+  4. **Escuchadores de eventos**. Es el **recomendado** ya que permite asociar múltiples manejadores al mismo evento. Ofrece un mayor control sobre el manejo de eventos, es más flexible, no depende de atributos HTML o cadenas de texto, permite usar eventos personalizados y separa lógica de presentación. 
 
     ```javascript
     let boton = document.querySelector("#formulario_contacto button");
