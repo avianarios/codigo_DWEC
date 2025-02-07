@@ -542,12 +542,7 @@ Therefore, **web workers** are a JavaScript feature that allows scripts to run i
 
 
 ### `self`
-In the context of a web worker, `self` refers to the worker itself, i.e., the execution thread running in the background. It is the equivalent of `this` in a normal execution environment.
-
-It can be used to:
-- Listen for messages (with `onmessage`).
-- Send messages (with `postMessage()`).
-- Import scripts (with `importScripts()`).
+In the context of a web worker, `self` refers to the worker itself, i.e., the execution thread running in the background. It is the equivalent of `this` in a normal execution environment. It can be used to: listen for messages (with `onmessage`) and send messages (with `postMessage()`).
 
 
 ### Methods
@@ -574,11 +569,6 @@ It can be used to:
 - **close()**: Similar to terminate, but called inside the worker.
   ```javascript
   self.close();
-  ```
-
-- **importScripts(script1, script2, ...)**: Imports scripts into the worker.
-  ```javascript
-  self.importScripts('utils.js');
   ```
 
 ### Events

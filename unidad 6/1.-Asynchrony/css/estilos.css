@@ -98,7 +98,9 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: white;
+    color: #007bff;
+    border: 2px solid #007bff;
 }
 
 button[type="button"] {
@@ -107,7 +109,9 @@ button[type="button"] {
 }
 
 button[type="button"]:hover {
-    background-color: #218838;
+    background-color: white;
+    color: #28a745;
+    border: 2px solid #28a745;
 }
 
 #eliminarSimple,

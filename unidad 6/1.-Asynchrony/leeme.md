@@ -576,11 +576,6 @@ Se puede usar para escuchar mensajes (con onmessage), enviar mensajes (con postM
   self.close();
   ```
 
-- **`importScripts(script1, script2, ...)`**: Importa scripts dentro del trabajador.
-  ```js
-  self.importScripts('utils.js');
-  ```
-
 ### Eventos 
 
 - **`message`**: Se activa cuando el trabajador envía un mensaje de vuelta.

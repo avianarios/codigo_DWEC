@@ -1,29 +1,31 @@
 import mostrarMensaje from './mostrarMensajes.js';
-import contadorPorConsola from './contadorPorConsola.js';
+import tareaPesada from './tareapesada.js';
 
 
 // Ejecución de código síncrono
 document.getElementById('sincrono').addEventListener('click', () => {
     mostrarMensaje("Calculando...(la interfaz se bloquea. Este mensaje no se verá)", "mensajeSincrono");
     // Bloquea el hilo principal
-    const result = contadorPorConsola();
+    const result = tareaPesada();
     mostrarMensaje(`El resultado es: ${result}`, "mensajeSincrono");
 });
 
 // Ejecución de código con trabajador web
 document.getElementById('trabajador').addEventListener('click', () => {
-    mostrarMensaje("Calculando...(la interfaz no se bloquea)", "mensajeTrabajador");
+    mostrarMensaje("Calculando...(la interfaz no se bloquea, prueba a lanzar mouseover)", "mensajeTrabajador");
 
     // Crear el trabajador web. el argumento type: module permite importar código. Así, definimos la funcón contadorPorconsola en un módulo y la usamos para el código síncrono y el asíncrono.
-    const worker = new Worker('./worker.js', { type: 'module' });
+    // La ruta es donde encontrar al trabajador es relativa al HTML donde se carga este js
+    const worker = new Worker('../js/trabajador.js', { type: 'module' });
+//    const worker = new Worker('../js/trabajador.js');
 
     // Escuchar mensajes del trabajador
     worker.onmessage = (evento)=> {
-        if (evento.data=="terminado"){
+        if (evento.data.mensaje=="terminado"){
             worker.terminate(); // Detener el trabajador después de usarlo
-            mostrarMensaje(`Resultado de la ejecución: ${evento.data}`, "mensajeTrabajador");
+            mostrarMensaje(`Resultado de la ejecución: ${evento.data.resultado}`, "mensajeTrabajador");
         }else{
-            mostrarMensaje(`${evento.data}`, "mensajeTrabajador");
+            mostrarMensaje(`${evento.data.mensaje}`, "mensajeTrabajador");
         }
     };
 
