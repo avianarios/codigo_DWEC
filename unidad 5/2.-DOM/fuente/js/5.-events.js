@@ -2,21 +2,29 @@
 ////Attaching event handlers////
 ////////////////////////////////
 
-//Example 1: Attaching one event handler
-//node.addEventListener(event, callback); 
+//Example 1: using properties to attach event handlers
 let cambiaColor = document.getElementById("cambiaClase");
 const toggle = () => cambiaColor.classList.toggle("fondo-rojo");
-cambiaColor.addEventListener("click", toggle);
+cambiaColor.onclick=()=>{
+    toggle();
+}
 
 
-//Example 2: Attaching two event handlers to the same element
+//Example 2: Attaching one event handler
+//node.addEventListener(event, callback); 
+let cambiaColor2 = document.getElementById("cambiaClase2");
+const toggle2 = () => cambiaColor2.classList.toggle("fondo-rojo");
+cambiaColor2.addEventListener("click", toggle2);
+
+
+//Example 3: Attaching two event handlers to the same element
 let cambiaTxt=document.getElementById("cambiaTexto");
 let contador=0;
 cambiaTxt.addEventListener("click", ()=>{contador++});
 cambiaTxt.addEventListener("click", ()=>{cambiaTxt.innerText="Veces pulsado:"+contador;});
 
 
-// Example 3: Attaching an event handler to the document wich will be triggered when clicking at any button (thanks to bubbling) because of the CSS selector used in the condition: evento.target.matches("button")
+// Example 4: Attaching an event handler to the document wich will be triggered when clicking at any button (thanks to bubbling) because of the CSS selector used in the condition: evento.target.matches("button")
 document.addEventListener("click", evento=> {
     if (evento.target.matches("button")) {   //CSS selector
       console.log("Clicked Button")
@@ -31,7 +39,7 @@ let lugar_insercion=document.getElementById("lista_botones1");
 lugar_insercion.insertAdjacentElement("beforeend", newButton);
 
 
-//Example 4: Defining an event handler as an object
+//Example 5: Defining an event handler as an object
 class EventManager {
     constructor(element) {
         if (!element){
@@ -53,7 +61,7 @@ try{
 }
 
 
-//Example 5: Defining an event handler as an object
+//Example 6: Defining an event handler as an object
 class Manejador {
     handleEvent(event) {
         this[event.type]();
@@ -175,7 +183,7 @@ document.getElementById("atributos-eventos").addEventListener("click", function(
 });
 
 // Evento de teclado
-document.getElementById("input1").addEventListener("keydown", function(event) {
+document.getElementById("introduccion_texto").addEventListener("keydown", function(event) {
     console.log("Tipo de evento:", event.type); // "keydown"
     console.log("¿Es de confianza?", event.isTrusted); // true o false
     console.log("Timestamp del evento:", event.timeStamp); // tiempo en milisegundos desde carga
