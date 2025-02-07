@@ -3,6 +3,7 @@
 ////////////////////////////////
 
 //Example 1: using properties to attach event handlers
+//Property that handles every event starts by "on"
 let cambiaColor = document.getElementById("cambiaClase");
 const toggle = () => cambiaColor.classList.toggle("fondo-rojo");
 cambiaColor.onclick=()=>{
