@@ -136,10 +136,10 @@ document.body.append(img);
 //resto de instrucciones
 ```
 
-La segunda instrucción hace una petición a un recurso externo para descargar una imagen. Esa instrucción hace la petición, pero el mensaje tiene que recorrer el camino que separa al cliente del servidor, y el servidor tiene que recibirlo, procesarlo y enviar el recurso de vuelva al cliente. Éste tiene que recorrer el camino que los separa, llegar al cliente y éste procesarlo. Y todo eso antes de que la tercera instrucción se ejecute. Lo más seguro es que cuando el mensaje llegue, la tercera instrucción ya se habrá ejecutado y se habrá insertado una imagen vacía en el DOM.
+La segunda instrucción hace una petición a un recurso externo para descargar una imagen. Esa instrucción hace la petición Y SALE DE LA PILA, pero la petición de imagen tiene que recorrer el camino que separa al cliente del servidor y el servidor tiene que recibirlo, procesarlo y enviar el recurso de vuelva al cliente. Éste tiene que recorrer el camino que los separa, llegar al cliente y éste procesarlo. Y todo eso antes de que la tercera instrucción se ejecute. Lo más seguro es que cuando el mensaje llegue, la tercera instrucción ya se habrá ejecutado y se habrá insertado una imagen vacía en el DOM.
 
 ¿Por qué el código síncrono no funciona bien en este caso?
-El problema aquí es que las instrucciones se ejecutan de manera secuencial por lo que, cuando acaba una instrucción, sale de la pila y entra la siguiente. En ejecución síncrona, las instrucciones no esperan a que las anteriores terminen.
+El problema aquí es que las instrucciones se ejecutan de manera síncrona por lo que una instrucción se ejecuta cuando la anterior ha terminado, pero para las instrucciones que realizan una petición de recursos, terminar significa realizar la petición, no recibir la respuesta. La ejecución del resto de instrucciones continúa sin esperar la respuesta, lo que puede generar problemas si el siguiente código depende de ella. 
 
 Solución: hacer que la tercera instrucción espere a que la segunda instrucción, de la que depende, termine de ejecutarse y reciba el recurso que ha solicitado. Esto haría que el hilo principal se bloqueara y el resto de instrucciones no se ejecutase. Para evitar eso, se usa la asincronía. 
 
@@ -438,7 +438,7 @@ document.getElementById("cargarGatos").addEventListener("click", () => {
 
 ## 3.5- Promesas async/await
 La sintaxis de ES2015 (ES6) maneja bien la asincronía, pero permite encadenar varios .then y .catch, lo que puede resultar confuso en ocasiones. ES2017 (ES8) sigue gestionando la asincronía con promesas, pero introduce una nueva sintaxis para manejarlas de manera más legible y estructurada permitiendo escribir código asíncrono con una apariencia más similar al código síncrono. Para ello usa dos elementos que sustituyen a `.then()` y `.catch()`:
-  - `async` se usa a la hora de declarar la función y hace que ésta devuelva una promesa. Si dentro de la función se devuelve un valor, este se envuelve automáticamente en una promesa resuelta.
+  - `async` se antepone a la declaración de la función y hace que ésta devuelva una promesa. Si dentro de la función se devuelve un valor, este se envuelve automáticamente en una promesa resuelta.
   - `await` sólo puede usarse dentro de funciones `async` y permite esperar el resultado de una promesa antes de continuar con la ejecución.
   
   ```javascript
@@ -529,11 +529,11 @@ El motor de JavaScript en la mayoría de los entornos (como el navegador o Node.
 - Ejecutar código síncrono (instrucciones que van directamente a la pila de ejecución).
 - Procesar las tareas asíncronas (moviéndolas de la cola de microtareas y de la cola de tareas a la pila de ejecución).
 
-El ciclo de eventos y la cola de tareas permiten que el hilo único maneje la asincronía de manera eficiente, sin bloquear el hilo principal, pero aún así con un solo hilo, sólo se puede ejecutar una instrucción a la vez. 
+El ciclo de eventos y las estructuras se usan permiten que el motor de JavaScript maneje la asincronía de manera eficiente, sin bloquear el hilo principal. Sin embargo, aún así, con un solo hilo sólo se puede ejecutar una instrucción a la vez. 
 
-Sin embargo, en situaciones donde se necesitan realizar tareas que podrían bloquear el hilo principal (como procesamiento de grandes volúmenes de datos o tareas de cálculo complejas), JavaScript ofrece una forma de delegar trabajo a otros hilos mediante los `trabajadores web (web workers)`.
+¿Qué pasa cuando el código necesita hacer tareas intensivas como, por ejemplo, procesamiento de grandes volúmenes de datos o tareas de cálculo complejas que, normalmente, son síncronas? Que el hilo principal se bloquea. Para solucionar esto, JavaScript ofrece una forma de delegar trabajo a otros hilos mediante los `trabajadores web (web workers)`.
 
-Por tanto, los `trabajadores web` son una característica de JavaScript que permite ejecutar scripts en segundo plano, en un hilo separado del hilo principal de ejecución para evitar bloquear la interfaz de usuario en situacinoes como, por ejemplo:
+Por tanto, los `trabajadores web` son una característica de JavaScript que permite ejecutar código en segundo plano, en un hilo separado del hilo principal de ejecución para evitar bloquear la interfaz de usuario en situaciones como, por ejemplo:
   - Procesamiento de tareas muy intensivas.
   - Manipulación de grandes cantidades de datos.
   - Operaciones que no requieren interacción con la interfaz de usuario.
@@ -554,6 +554,11 @@ Se puede usar para escuchar mensajes (con onmessage), enviar mensajes (con postM
 
 - **`postMessage(message)`**: Envía un mensaje al trabajador web.
   ```js
+  //Para enviar varios mensajes, es mejor hacerlo como un mensaje compuesto en forma de objeto
+  //  Evita posibles condiciones de carrera: Si los mensajes se procesan en distinto orden, podrías recibir "terminado" antes de "El resultado es: ...".
+  //  Mejora la claridad: Se entiende mejor la estructura del mensaje sin depender del orden de llegada.
+  //  Facilita la ampliación: Puedes incluir más información sin necesidad de enviar múltiples mensajes.
+  
   // En el hilo principal
   worker.postMessage({ action: 'start', data: 'Hola, trabajador' });
 
@@ -578,15 +583,15 @@ Se puede usar para escuchar mensajes (con onmessage), enviar mensajes (con postM
 
 ### Eventos 
 
-- **`onmessage`**: Se activa cuando el trabajador envía un mensaje de vuelta.
+- **`message`**: Se activa cuando el trabajador envía un mensaje de vuelta.
   ```js
   worker.onmessage = function(event) {
       console.log('Mensaje del trabajador:', event.data);
   };
   ```
-- **`onmessageerror`**: Se activa cuando ocurre un error al convertir de un formato serializado,como JSON, a objeto, un mensaje recibido por el trabajador web o el hilo principal.
+- **`messageerror`**: Se activa cuando ocurre un error al convertir de un formato serializado,como JSON, a objeto, un mensaje recibido por el trabajador web o el hilo principal.
 
-- **`onerror`**: Se activa si ocurre un error dentro del trabajador.
+- **`error`**: Se activa si ocurre un error dentro del trabajador.
   ```js
   worker.onerror = function(event) {
       console.error('Error en el trabajador:', event.message);
@@ -601,18 +606,21 @@ const worker = new Worker('worker.js');
 ```
 
 #### Opción 1: Creación de trabajadores usando ficheros separados
-  1. **Crear el archivo del trabajador** (por ejemplo, worker.js), que contendrá el archivo que se ejecutará en el hilo separado.
+  1. **Crear el archivo del trabajador** (por ejemplo, worker.js), que contendrá el código que se ejecutará en el hilo separado y el código para gestionar los mensajes que se mandarán al principal y que se recibirán de éste.
   ```js
   // worker.js
+  //El tabajador recibe el mensaje del hilo principal
   self.onmessage = function(event) {
-      // Código que ejecutará el trabajador
-      console.log('Mensaje recibido del hilo principal:', event.data);
-      self.postMessage('Tarea terminada');
+      if (event.data=="trabajar"){
+        const resultado=hacerCalculos();
+        self.postMessage(resultado);
+      }else{
+        console.log('Mensaje recibido del hilo principal:', event.data);
+      }
   };
   ```
 
-  2. **Crear un trabajador en el hilo principal (en `main.js`)**
-  En el hilo principal, se crea el trabajador pasando el archivo JavaScript que debe ejecutarse como argumento al constructor `Worker`.
+  2. **Crear un objeto `worker` en el hilo principal (en `main.js`)** pasándole como argumento al constructor el archivo JavaScript que contiene el trabajador
 
   ```js
   // main.js
@@ -694,9 +702,8 @@ tareaPesada().then((resultado) => {
 console.log("Tarea en proceso...");
 ```
 
-
 #### Opción 2: Usar la función Blob
-Cuando el código del trabajador es pequeño, quizás no merece la pena crear un fichero separado y  definir el trabajador directamente dentro del archivo principal usando el método `Blob`. 
+**No recomendado**. Cuando el código del trabajador es pequeño se puede definir el trabajador directamente dentro del archivo principal usando el método `Blob`. 
   ```js
   const blob = new Blob([`
       self.onmessage = function(event) {

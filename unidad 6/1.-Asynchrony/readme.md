@@ -137,7 +137,7 @@ document.body.append(img);
 The second instruction makes a request to an external resource to download an image. That instruction makes the request, but the message has to travel the path between the client and the server, and the server has to receive it, process it and send the resource back to the client. The client has to travel the path that separates them, reach the client, and the client has to process it. And all this before the third instruction is executed. Most likely, by the time the message arrives, the third instruction will have already been executed and an empty image will have been inserted into the DOM.
 
 Why doesn't synchronous code work well in this case?
-The problem here is that instructions are executed sequentially, so when one instruction finishes, it exits the stack and the next one enters. In synchronous execution, instructions do not wait for previous instructions to finish.
+The problem here is that instructions execute synchronously so one instruction executes when the previous one has finished, but for instructions that make a request for resources, finishing means making the request, not receiving the response. The execution of the rest of the instructions continues without waiting for the response, which can cause problems if the next code depends on it. 
 
 Solution: make the third instruction wait for the second instruction, on which it depends, to finish executing and receive the resource it has requested. This would cause the main thread to block and the rest of the instructions would not be executed. To avoid this, asynchrony is used. 
 
@@ -525,9 +525,9 @@ The JavaScript engine in most environments (such as the browser or Node.js) uses
 - Executing synchronous code (instructions that go directly to the execution stack).
 - Processing asynchronous tasks (moving them from the microtask queue and the task queue to the execution stack).
 
-The event loop and task queue allow the single thread to handle asynchrony efficiently without blocking the main thread. However, with only one thread, only one instruction can be executed at a time.
+The event loop and structures used allow the JavaScript engine to handle asynchrony efficiently, without blocking the main thread. However, even so, with a single thread, only one instruction can be executed at a time. 
 
-Nevertheless, in situations where tasks that could block the main thread are required (such as processing large volumes of data or complex calculations), JavaScript provides a way to delegate work to other threads using **web workers**.
+What happens when the code needs to do intensive tasks, such as processing large volumes of data or complex computational tasks that are normally synchronous? The main thread crashes. To solve this, JavaScript provides a way to delegate work to other threads via web workers.
 
 Therefore, **web workers** are a JavaScript feature that allows scripts to run in the background, on a separate thread from the main execution thread, to avoid blocking the user interface in situations such as:
   - Processing highly intensive tasks.
@@ -554,6 +554,11 @@ It can be used to:
 
 - **`postMessage(message)`**: Sends a message to the web worker.
   ```javascript
+  // To send multiple messages, it is better to do it as a composite message in object form.
+  // Avoids possible race conditions: If the messages are processed in different order, you might receive ‘finished’ before ‘The result is: ...’.
+  // Improves clarity: The structure of the message is better understood without depending on the order of arrival.
+  // Makes it easier to expand: You can include more information without having to send multiple messages.
+
   // In the main thread
   worker.postMessage({ action: 'start', data: 'Hello, worker' });
 
@@ -578,15 +583,15 @@ It can be used to:
 
 ### Events
 
-- **`onmessage`**: Triggered when the worker sends a message back.
+- **`message`**: Triggered when the worker sends a message back.
     ```javascript
     worker.onmessage = function(event) {
         console.log('Message from worker:', event.data);
     };
 
-- **`onmessageerror`**: Triggered when an error occurs while deserializing a message (e.g., from JSON to an object) received by the worker or the main thread.
+- **`messageerror`**: Triggered when an error occurs while deserializing a message (e.g., from JSON to an object) received by the worker or the main thread.
 
-- **`onerror`**: Triggered if an error occurs inside the worker.
+- **`error`**: Triggered if an error occurs inside the worker.
   ```javascript
   worker.onerror = function(event) {
       console.error('Error in worker:', event.message);
@@ -601,7 +606,7 @@ Web workers are created using the Worker constructor, which takes the URL of a J
 ```
 
 #### Option 1: Creating Workers Using Separate Files
-  1. Create the worker file (e.g., worker.js), which contains the code to be executed in the separate thread.
+  1. **Create the worker file** (e.g., worker.js), which will contain the code to be executed in the separate thread and the code to handle the messages to be sent to and received from the main thread.
     ```javascript
     // worker.js
     self.onmessage = function(event) {
@@ -610,8 +615,7 @@ Web workers are created using the Worker constructor, which takes the URL of a J
         self.postMessage('Task completed');
     };
     ```
-  2. **Create a worker in the main thread (in `main.js`)**
-    In the main thread, create the worker by passing the JavaScript file to be executed as an argument to the Worker constructor.
+  2. **Create a worker in the main thread (in `main.js`)** by passing as an argument to the constructor the JavaScript file containing the worker
 
     ```javascript
     // main.js
@@ -694,7 +698,7 @@ Web workers are created using the Worker constructor, which takes the URL of a J
     ```
 
 #### Option 2: Using the Blob Function
-When the worker code is small, it may not be worth creating a separate file. Instead, you can define the worker directly within the main file using the Blob method.
+**Not recommended**. When the worker code is small you can define the worker directly within the main file using the `Blob` method. 
 
   ```javascript
   const blob = new Blob([`
