@@ -1,14 +1,18 @@
 # Index
 
-1. [Synchronous and Asynchronous Programming](#1--synchronous-and-asynchronous-programming)
-2. [The Event Loop in JavaScript](#2--the-event-loop-in-javascript)
-3. [Mechanisms to Achieve Asynchrony](#3--mechanisms-to-achieve-asynchrony)
-   1. [Global Functions](#31--global-functions)
-   2. [Events](#32--events)
-   3. [Callbacks and Events](#33--callbacks-and-events)
-   4. [Promises then/catch](#34--promises-thencatch)
-   5. [Promises async/await](#35--promises-asyncawait)
-   6. [Web Workers](#36--web-workers)
+1. [Synchronous and asynchronous programming](#1--synchronous-and-asynchronous-programming)
+2. [JavaScript code execution](#2--javascript-code-execution)
+  1. [The event cycle](#21--the-event-loop)
+  2. [Management of Asynchronous Operations](#22--management-of-asynchronous-operations)
+  3. [Why is asynchrony necessary on the web](#23--why-is-asynchronous-programming-necessary-on-the-web)
+  4. [Strategies to improve interactivity](#24--strategies-to-improve-interactivity)
+3. [Mechanisms to achieve asynchronysm](#3--mechanisms-for-achieving-asynchronysm)
+  1. [Global functions](#31--global-functions)
+  2. [Events](#32--events)
+  3. [Callbacks and Events](#33--callbacks-and-events)
+  4. [Then/Catch Promises](#34--promises-thencatch)
+  5. [Async/await-promises](#35-promises-with-asyncawait)
+  6. [Web workers](#36-web-workers)
 
 ----
 
@@ -76,7 +80,9 @@ Here, `setTimeout` allows "End" to be printed before the heavy process finishes,
 
 ---
 
-# 2- The Event Loop in JavaScript
+# 2- Execution of JavaScript code
+
+## 2.1- The event loop
 
 The **event loop** defines how JavaScript handles code execution. To run a program, the JavaScript engine has three data structures that determine when each instruction is processed: the **call stack**, the **microtask queue**, and the **task queue**.
 
@@ -95,7 +101,7 @@ The **event loop** moves tasks from the task queue to the call stack following t
 3. If no microtasks are pending, it moves a task from the task queue.
 4. The process repeats continuously.
 
-## How Are Asynchronous Operations Managed?
+## 2.2- Management of asynchronous operations
 
 Asynchronous operations are placed in the task queue and do not execute immediately. They execute once the call stack is empty (i.e., all synchronous code has run). This mechanism makes JavaScript non-blocking.
 
@@ -117,9 +123,28 @@ Execution order:
 4. Once the call stack is empty, the event loop moves `setTimeout`'s callback to the stack.
 5. **'Timeout'** is printed after all synchronous code has finished.
 
-## Strategies to Improve Responsiveness
 
-If a script is performing complex calculations or DOM manipulations, asynchronous operations prevent blocking the execution of synchronous code, allowing the main thread to respond quickly to other tasks. However, complex operations using significant CPU time may delay asynchronous tasks.
+## 2.3- Why is asynchronous programming necessary on the web?
+Let's imagine three synchronous instructions:
+```javascript
+const img = new Image();
+img.src = ‘https://cataas.com/cat’;
+document.body.append(img);
+
+//rest of instructions
+```
+
+The second instruction makes a request to an external resource to download an image. That instruction makes the request, but the message has to arrive, the server has to receive it, process it, send the resource and arrive. By then the third instruction will have been executed and an empty image will probably have been inserted into the DOM.
+
+Why doesn't synchronous code work well in this case?
+The key here is that the instructions are executed sequentially and the code does not wait until the server has responded and the image is available.
+
+Solution: make the second instruction wait for the resource to arrive BEFORE executing the third, which depends on it, i.e. hold the third instruction until the second one is resolved. In order not to block the main thread while the resource arrives, this instruction is made asynchronous. Thus, the rest of the code can continue to execute.
+
+
+## 2.4- Strategies to improve interactivity
+
+If a script is performing complex calculations or DOM manipulations, asynchronous operations do not block the execution of synchronous code, allowing the main thread to respond quickly to other tasks but allowing asynchronous operations to take a few milliseconds to process. The problem comes when you are doing more complex operations that take up a lot of CPU time, in which case the asynchronous operations may take longer to respond.
 
 To enhance asynchronous response times, consider the following strategies:
 - **Break large tasks into smaller ones**: If a heavy task must run synchronously, divide it into smaller synchronous tasks and use asynchronous functions to "pause" between fragments. This allows the event loop to process other events (like user interactions) while smaller tasks complete.
@@ -128,9 +153,9 @@ To enhance asynchronous response times, consider the following strategies:
 
 ----
 
-# 3- Mechanisms for Achieving Asynchronicity
+# 3- Mechanisms for achieving asynchronysm
 
-## 3.1- Global Functions
+## 3.1- Global functions
 
 The global functions `setTimeout` and `setInterval` allow executing code asynchronously after a specified time.
 - `setTimeout` executes a function after a period of time.
@@ -191,7 +216,7 @@ Complex calculation finished
 Complex operation requested
 ```
 
-## 3.3- Callback Functions and Events
+## 3.3- Callbacks and events
 
 Until ES6 (2015), asynchronicity was handled through callback functions and events. A **callback** is a response function passed as an argument to another function and executed once the latter has finished.
 
@@ -269,3 +294,424 @@ loadScript('1.js', function(error, script) {
 ```
 
 To address this, modern JavaScript uses **promises** and `async/await`, making it easier to manage asynchronicity in a more structured way.
+
+---
+
+## 3.4- Promises then/catch
+
+Promises were introduced in ES6 (ES2015) to simplify the management of asynchronous code and error handling, as well as the chaining of operations. They are objects that represent the current state of an asynchronous operation. A promise can be in one of three states:
+- `Pending`: The asynchronous operation has not finished yet.
+- `Fulfilled`: The asynchronous operation has completed successfully.
+- `Rejected`: The asynchronous operation failed.
+
+The promise object provides the following methods:
+- `then()`: Handles the result when the promise is resolved (when successful).
+- `catch()`: Handles errors when the promise is rejected.
+- `finally()`: Executes after the promise is resolved or rejected, regardless of what happened.
+- `all()`: Allows you to wait for multiple promises to resolve in parallel and return a promise when all promises in the array are resolved. If any promise is rejected, `.all()` rejects all of them.
+- `race()`: Takes an array of promises and returns a new promise that resolves or rejects as soon as the first promise resolves or rejects.
+- `allSettled()`: Allows you to wait for all promises to settle, regardless of whether they were resolved successfully or rejected. Returns an array of objects containing the state and value (or rejection reason) of each promise.
+- `any()`: Works similarly to `Promise.race()`, but instead of resolving with the first promise that resolves, it resolves with the first promise that does not reject.
+
+To illustrate how promises work, we will use the fetch API, which allows handling HTTP connections using:
+- `Request`: Represents an HTTP request. You can use it to customize request details before passing it to fetch().
+- A `fetch(URL)` function, which returns a promise to a Response object.
+- `Response`: Represents the response to an HTTP request made with fetch(). It includes the following properties and methods to work with the response body:
+    - `ok`: Indicates if the response was successful (status code 200-299).
+    - `status`: HTTP status code of the response.
+    - `statusText`: Message associated with the HTTP status code.
+    - `headers`: HTTP headers of the response.
+    - `url`: URL of the response.
+    - `type`: Response type (e.g., "basic", "cors", etc.).
+    - `body`: The body stream of the response.
+    - `json()`: A method to read the response as JSON.
+    - `blob()`: A method to read the response as a blob (binary large object). Commonly used for handling files, such as images, videos, audio, or even document files.
+    - `text()`: A method to read the response as text.
+- `Headers`: Represents the HTTP headers you can add to requests or responses. It allows you to configure request headers or inspect response headers.
+- `FormData`: Although not an object exclusive to the Fetch API, it is used with fetch() to send form data (e.g., for file uploads).
+
+Workflow:
+- An HTTP request is made with fetch, which returns a promise.
+- The methods of the `promise` object are used to interact with the promise:
+  - `.then` when resolved
+  - `.catch` when rejected
+- The promise resolves with a `Response` object, which represents the HTTP response.
+- You check what the server responded with (200, 403, 404, etc.). You can use `response.ok`, which checks for a 200 status, or `response.status`.
+- If the response is 200, you access the response data using the methods of the `response` object, such as `.json()`, `.text()`, or `.blob()`, depending on the type of expected response.
+
+
+```javascript
+// Handling asynchrony using fetch, which returns a promise. Here, it is managed by chaining .then (ES6)
+function getJoke() {
+  fetch('https://api.chucknorris.io/jokes/random')
+    .then(response => {
+      // Check if the response is successful
+      if (!response.ok) {
+        throw new Error('There was a problem with the request');
+      }
+      return response.json(); // Convert the response to JSON
+    })
+    .then(data => {
+      // Work with the data once the promise is resolved
+      console.log(data);
+    })
+    .catch(error => {
+      // If there was an error (in the request or while processing the data)
+      console.error('Error:', error);
+    });
+}
+```
+
+```javascript
+// Using blob to load an image
+function getPhoto() {
+  fetch('https://picsum.photos/300')
+    .then(response => response.blob())
+    .then(blob => {
+      const imageURL = URL.createObjectURL(blob);
+      const img = `<img src="${imageURL}" alt="Random Image"/>`;
+      showMessage(img, "messagePromises", false);
+    })
+    .catch(error => console.error('Error loading the image:', error));
+}
+```
+
+```javascript
+// Example of Promise.all
+const promise1 = Promise.resolve(3); // Resolves immediately with the value 3
+const promise2 = Promise.resolve(5); // Resolves immediately with the value 5
+const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 100, 10)); // Resolves after 100 ms with the value 10
+
+Promise.all([promise1, promise2, promise3])
+  .then(values => {
+    console.log(values); // [3, 5, 10]
+  })
+  .catch(error => {
+    console.error(error); // If any promise is rejected, it is handled here.
+});
+```
+
+```javascript
+// Example: Loading Images with Cache Avoidance
+// The API call is https://cataas.com/cat, but if three calls are made, the browser downloads the first one, caches it, and serves the same image for the other two requests instead of making additional API calls.
+// Solution: Many APIs ignore extra parameters in the URL. Therefore, you can add the request timestamp or a random number as a parameter. The browser will detect it as a different request and won't serve the same image from the cache.
+function generateURL() {
+  return `https://cataas.com/cat?${Date.now()}_${Math.random()}`;
+}
+
+// Function to load an image asynchronously
+function loadImage(url) {
+  // The Promise object accepts two arguments: a function to execute if the promise is resolved and a function to execute if it is rejected.
+  return new Promise((resolve, reject) => {
+    // new Image() creates a JavaScript object that can be used more freely for background tasks like preloading images, manipulating them with a canvas, or working with them without immediately displaying them in the DOM (which is also possible).
+    const image = new Image();
+    image.src = url;
+
+    // When the image loads successfully (the image has been downloaded successfully), we mark the promise as resolved (success) to continue. This allows the code waiting for the promise (using .then()) to continue execution, now that the image is loaded.
+    image.onload = () => resolve(image);
+
+    // If an error occurs while loading the image, we mark the promise as rejected so that the code waiting for .catch can continue execution.
+    image.onerror = () => reject(`Error loading the image: ${url}`);
+  });
+}
+
+document.getElementById("loadCats").addEventListener("click", () => {
+  const promise1 = loadImage(generateURL());
+  const promise2 = loadImage(generateURL());
+  const promise3 = loadImage(generateURL());
+
+  Promise.all([promise1, promise2, promise3])
+    .then(images => {
+      images.forEach(image => {
+        document.body.append(image);
+      });
+    })
+    .catch(error => {
+      console.error(error);
+    });
+});
+```
+-----
+# Handling Asynchrony with `async/await`
+
+## 3.5 Promises with `async/await`
+
+The ES2015 (ES6) syntax handles asynchrony well but allows chaining multiple `.then` and `.catch`, which can sometimes be confusing. ES2017 (ES8) continues to manage asynchrony with promises but introduces a new syntax to handle them in a more readable and structured way, allowing asynchronous code to look more like synchronous code. To achieve this, it uses two elements that replace `.then()` and `.catch()`:
+  - `async` is used when declaring a function and makes it return a promise. If a value is returned inside the function, it is automatically wrapped in a resolved promise.
+  - `await` can only be used inside `async` functions and allows waiting for the result of a promise before continuing execution.
+
+  ```javascript
+  // Example of an independent asynchronous function with error handling
+  async function fetchData() {
+    try {
+      let response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+      if (!response.ok) {
+          throw new Error(`Request error: ${response.status} ${response.statusText}`);
+      }
+      let data = await response.json();
+      console.log(data);
+    } catch (error) {
+        console.error("There was a problem fetching the data:", error);
+    }
+  }
+
+  fetchData();
+  ```
+
+```javascript
+  // Handling asynchrony using fetch, which returns a promise. Here, it is managed with `await` (ES8).
+  document.querySelector("botonChiste").addEventlistener("click", async()=>{
+    try {
+      const response = await fetch('https://api.chucknorris.io/jokes/random');  // Execution pauses at `await fetch(...)` until the promise is resolved, avoiding nested `.then()` calls.
+      if (!response.ok) throw new Error('There was a problem with the request');   // Check if the response is successful
+      const data = await response.json(); // Convert the response to JSON
+      console.log(data);  // Now you can work with the received data
+    } catch (error) {
+      console.error('Error:', error);   // If there was an error (in the request or while processing the data)
+    }
+  });
+  ```
+
+  ```javascript
+  // Function to load an image, returns a promise
+  function loadImage(url) {
+    // The Promise object accepts two arguments: a function to execute if the promise is resolved and a function to execute if it is rejected.
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.src = url;
+
+      // When the image loads, resolve the promise
+      image.onload = () => resolve(image);
+
+      // If an error occurs, reject the promise
+      image.onerror = () => reject(`Error loading the image: ${url}`);
+    });
+  }
+
+  // Main function to load multiple images using `async/await`
+  document.querySelector("botonImagenes").addEventListener("click", async()=>{
+    try {
+      // `await` waits until the promise is resolved (or rejected)
+      // `Promise.all` will return a resolved promise when all promises are resolved or reject if any promise is rejected
+      const images = await Promise.all([
+        loadImage('https://via.placeholder.com/150'),
+        loadImage('https://via.placeholder.com/200'),
+        loadImage('https://via.placeholder.com/250')
+      ]);
+
+      // If all images load successfully, append them to the DOM
+      images.forEach(image => {
+        document.body.append(image);
+      });
+    } catch (error) {
+      // If any promise is rejected (error loading an image)
+      console.error(error);
+    }
+  });
+  ```
+
+Differences Between .then() and async/await
+| Feature      |  `.then()` | `async/await` |
+|--------------------|----------------|------------|
+| Code Readability | Harder to read with multiple chained promises | More readable, it looks like synchronous code |
+| Error handling | `.catch()` | `try/catch` |
+
+----
+
+## 3.6 Web Workers
+
+### Execution Threads
+
+The JavaScript engine in most environments (such as the browser or Node.js) uses a single execution thread to handle JavaScript code. This thread is responsible for:
+- Executing synchronous code (instructions that go directly to the execution stack).
+- Processing asynchronous tasks (moving them from the microtask queue and the task queue to the execution stack).
+
+The event loop and task queue allow the single thread to handle asynchrony efficiently without blocking the main thread. However, with only one thread, only one instruction can be executed at a time.
+
+Nevertheless, in situations where tasks that could block the main thread are required (such as processing large volumes of data or complex calculations), JavaScript provides a way to delegate work to other threads using **web workers**.
+
+Therefore, **web workers** are a JavaScript feature that allows scripts to run in the background, on a separate thread from the main execution thread, to avoid blocking the user interface in situations such as:
+  - Processing highly intensive tasks.
+  - Manipulating large amounts of data.
+  - Operations that do not require interaction with the user interface.
+
+
+### Features:
+  - **Separate Threads**: They run on a separate thread, enabling multitasking.
+  - **No Access to the DOM**: They do not have direct access to the DOM (Document Object Model) or global variables from the main thread.
+  - **Message-Based Communication**: Communication between the main thread and the worker is done through messages (using `postMessage` and listening to `message` events).
+
+
+### `self`
+In the context of a web worker, `self` refers to the worker itself, i.e., the execution thread running in the background. It is the equivalent of `this` in a normal execution environment.
+
+It can be used to:
+- Listen for messages (with `onmessage`).
+- Send messages (with `postMessage()`).
+- Import scripts (with `importScripts()`).
+
+
+### Methods
+
+- **`postMessage(message)`**: Sends a message to the web worker.
+  ```javascript
+  // In the main thread
+  worker.postMessage({ action: 'start', data: 'Hello, worker' });
+
+  // In the web worker
+  self.postMessage({ result: 'Task completed' });
+  ```
+
+- **terminate()**: Stops the worker and releases resources.
+  ```javascript
+  worker.terminate();
+  ```
+
+- **close()**: Similar to terminate, but called inside the worker.
+  ```javascript
+  self.close();
+  ```
+
+- **importScripts(script1, script2, ...)**: Imports scripts into the worker.
+  ```javascript
+  self.importScripts('utils.js');
+  ```
+
+### Events
+
+- **`onmessage`**: Triggered when the worker sends a message back.
+    ```javascript
+    worker.onmessage = function(event) {
+        console.log('Message from worker:', event.data);
+    };
+
+- **`onmessageerror`**: Triggered when an error occurs while deserializing a message (e.g., from JSON to an object) received by the worker or the main thread.
+
+- **`onerror`**: Triggered if an error occurs inside the worker.
+  ```javascript
+  worker.onerror = function(event) {
+      console.error('Error in worker:', event.message);
+  };
+  ```
+
+### Creating Workers
+
+Web workers are created using the Worker constructor, which takes the URL of a JavaScript file containing the code to be executed in a separate thread.
+```javascript
+  const worker = new Worker('worker.js');
+```
+
+#### Option 1: Creating Workers Using Separate Files
+  1. Create the worker file (e.g., worker.js), which contains the code to be executed in the separate thread.
+    ```javascript
+    // worker.js
+    self.onmessage = function(event) {
+        // Code executed by the worker
+        console.log('Message received from main thread:', event.data);
+        self.postMessage('Task completed');
+    };
+    ```
+  2. **Create a worker in the main thread (in `main.js`)**
+    In the main thread, create the worker by passing the JavaScript file to be executed as an argument to the Worker constructor.
+
+    ```javascript
+    // main.js
+    const worker = new Worker('worker.js');
+
+    // Send a message to the worker
+    worker.postMessage('Start task');
+
+    // Listen for messages from the worker
+    worker.onmessage = function(event) {
+        console.log('Message from worker:', event.data);
+    };
+    ```
+
+  3. **Handle communication between the main thread and the worker**
+    The main thread and the worker communicate using the `postMessage` method:
+      - The main thread uses `worker.postMessage()`.
+      - The worker uses `self.postMessage()`.
+
+    ```javascript
+    Complete Example of Web Worker Usage
+    main.js (Main Thread):
+
+    // Create the worker
+    const worker = new Worker('worker.js');
+
+    // Send a message to the worker
+    worker.postMessage('Start task');
+
+    // Listen for messages from the worker
+    worker.onmessage = function(event) {
+        console.log('Response from worker:', event.data);
+    };
+
+    // Handle worker errors
+    worker.onerror = function(error) {
+        console.error('Error in worker:', error.message);
+    };
+
+    worker.js (Worker):
+    javascript
+
+    // Listen for messages from the main thread
+    self.onmessage = function(event) {
+        console.log('Message received:', event.data);
+
+        // Perform a task (simulating a heavy task)
+        let result = 0;
+        for (let i = 0; i < 1e6; i++) {
+            result += i;
+        }
+
+        // Send the result back to the main thread
+        self.postMessage('Result: ' + result);
+    };
+    ```
+
+    ```javascript    
+    // Example of what workers do but by using promises
+    // Difference:
+    //     The promise is placed in the microtask queue. Once the queue is empty, it enters the call stack and monopolizes the main thread until it finishes.
+    //     The worker runs in a separate thread and never blocks the main thread.
+    function heavyTask() {
+        return new Promise((resolve) => {
+            let result = 0;
+            for (let i = 0; i < 1e9; i++) { // Heavy loop
+                result += i;
+            }
+            resolve(result);
+        });
+    }
+
+    console.log("Task started");
+
+    heavyTask().then((result) => {
+        console.log("Result:", result);
+    });
+
+    console.log("Task in progress...");
+    ```
+
+#### Option 2: Using the Blob Function
+When the worker code is small, it may not be worth creating a separate file. Instead, you can define the worker directly within the main file using the Blob method.
+
+  ```javascript
+  const blob = new Blob([`
+      self.onmessage = function(event) {
+          let result = 0;
+          for (let i = 0; i < 1e6; i++) {
+              result += i;
+          }
+          self.postMessage(result);
+      };
+  `], { type: 'application/javascript' });
+
+  const worker = new Worker(URL.createObjectURL(blob));
+
+  worker.postMessage('Start');
+  worker.onmessage = function(event) {
+      console.log('Worker result:', event.data);
+  };
+  ```
