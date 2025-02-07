@@ -285,18 +285,21 @@ Cuatro formas de trabajar con eventos:
   1. **Manejadores de eventos en línea**  
     **No recomendado.** Mezclar HTML y JavaScript dificulta el mantenimiento y no permite asociar múltiples manejadores al mismo evento.
 
-   ```javascript
-    let boton = document.querySelector("button");
-    boton.onclick = function () { console.log("¡Saludos, criatura!"); };
-   ```
+   ```html
+    <button onClick="console.log('¡Saludos, criatura!')">Saludar</button>
+    <button id="enviar" onclick="saludar()">Enviar</button>
+    <script>
+        let saludar = () => console.log ("¡Saludos, criatura!");
+    </script>
+  ```
 
   2. **Manejador como propiedad del evento**
     **No recomendado.** Las funciones se asignan a eventos a través de propiedades como onclick.
     **Problemas:** Solo se puede asociar un manejador por evento, lo que limita la flexibilidad. Además, este enfoque no permite agregar múltiples oyentes ni un control detallado sobre el manejo del evento.
   
   ```javascript
-    let boton=document.querySelector("button");
-    boton.setAttribute("onclick", "console.log('saludos, criatura')");  //arrow functions doesn't work
+    let boton = document.querySelector("button");
+    boton.onclick = function () { console.log("¡Saludos, criatura!"); };
    ```
 
   3. **Asignación de eventos tipo en línea mediante atributos**
