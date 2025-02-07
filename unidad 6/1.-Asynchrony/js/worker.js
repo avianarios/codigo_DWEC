@@ -3,7 +3,9 @@ import contadorPorConsola from './contadorPorConsola.js';
 
 // Escuchar mensajes del hilo principal
 //self.onmessage = function(event) {
-self.addEventListener("message", (event)=>{
-    const resultado = contadorPorConsola();
-    self.postMessage("El resultado es: "+resultado);
+self.addEventListener("message", evento=>{
+    if (evento.data=="comienza"){
+        const resultado = contadorPorConsola();
+        self.postMessage({ estado: "terminado", resultado });
+    }
 });
