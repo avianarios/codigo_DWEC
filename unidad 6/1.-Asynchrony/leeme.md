@@ -4,7 +4,7 @@
 2. [Ejecución de código JavaScript](#2--ejecución-de-código-javascript)
   1. [El ciclo de eventos](#21--el-ciclo-de-eventos)
   2. [Gestión de las operaciones asíncronas](#22--gestión-de-las-operaciones-asíncronas)
-  3. [¿Por qué es necesaria la asincronía en la web](#23--por-qué-es-necesaria-la-programación-asíncrona-en-la-web)
+  3. [¿Por qué es necesaria la asincronía en la web?](#23--por-qué-es-necesaria-la-programación-asíncrona-en-la-web)
   4. [Estrategias para mejorar la interactividad](#24--estrategias-para-mejorar-la-interactividad)
 3. [Mecanismos para conseguir asincronía](#3--mecanismos-para-conseguir-asincronía)
   1. [Funciones globales](#31--funciones-globales)
@@ -127,7 +127,7 @@ El orden de ejecución será:
 
 
 ## 2.3- ¿Por qué es necesaria la programación asíncrona en la web?
-Imaginemos tres instrucciones síncronas:
+Imaginemos que las siguientes instrucciones fueran síncronas:
 ```javascript
 const img = new Image();
 img.src = "https://cataas.com/cat";
@@ -136,12 +136,12 @@ document.body.append(img);
 //resto de instrucciones
 ```
 
-La segunda instrucción hace una petición a un recurso externo para descargar una imagen. Esa instrucción hace la petición, pero el mensaje tiene que llegar, el servidor recibirlo, procesarlo, enviar el recurso y llegar. Para entonces la tercera instrucción ya se habrá ejecutado y seguramente se habrá insertado una imagen vacía en el DOM.
+La segunda instrucción hace una petición a un recurso externo para descargar una imagen. Esa instrucción hace la petición, pero el mensaje tiene que recorrer el camino que separa al cliente del servidor, y el servidor tiene que recibirlo, procesarlo y enviar el recurso de vuelva al cliente. Éste tiene que recorrer el camino que los separa, llegar al cliente y éste procesarlo. Y todo eso antes de que la tercera instrucción se ejecute. Lo más seguro es que cuando el mensaje llegue, la tercera instrucción ya se habrá ejecutado y se habrá insertado una imagen vacía en el DOM.
 
 ¿Por qué el código síncrono no funciona bien en este caso?
-La clave aquí es que las instrucciones se ejecutan de manera secuencial y que el código no espera a que el servidor haya respondido y la imagen esté disponible.
+El problema aquí es que las instrucciones se ejecutan de manera secuencial por lo que, cuando acaba una instrucción, sale de la pila y entra la siguiente. En ejecución síncrona, las instrucciones no esperan a que las anteriores terminen.
 
-Solución: hacer que la segunda instrucción espere a que el recurso llegue ANTES de ejecutar la tercera, que depende de ella, es decir, retener a la tercera instrucción hasta que la segunda se resuelva. Para no bloquear el hilo principal mientras el recurso llega, esta instrucción se hace asíncrona. Así, el resto del código puede seguir ejecutándose.
+Solución: hacer que la tercera instrucción espere a que la segunda instrucción, de la que depende, termine de ejecutarse y reciba el recurso que ha solicitado. Esto haría que el hilo principal se bloqueara y el resto de instrucciones no se ejecutase. Para evitar eso, se usa la asincronía. 
 
 
 ## 2.4- Estrategias para mejorar la interactividad

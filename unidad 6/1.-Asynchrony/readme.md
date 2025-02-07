@@ -4,7 +4,7 @@
 2. [JavaScript code execution](#2--javascript-code-execution)
   1. [The event cycle](#21--the-event-loop)
   2. [Management of Asynchronous Operations](#22--management-of-asynchronous-operations)
-  3. [Why is asynchrony necessary on the web](#23--why-is-asynchronous-programming-necessary-on-the-web)
+  3. [Why is asynchrony necessary on the web?](#23--why-is-asynchronous-programming-necessary-on-the-web)
   4. [Strategies to improve interactivity](#24--strategies-to-improve-interactivity)
 3. [Mechanisms to achieve asynchronysm](#3--mechanisms-for-achieving-asynchronysm)
   1. [Global functions](#31--global-functions)
@@ -134,13 +134,12 @@ document.body.append(img);
 //rest of instructions
 ```
 
-The second instruction makes a request to an external resource to download an image. That instruction makes the request, but the message has to arrive, the server has to receive it, process it, send the resource and arrive. By then the third instruction will have been executed and an empty image will probably have been inserted into the DOM.
+The second instruction makes a request to an external resource to download an image. That instruction makes the request, but the message has to travel the path between the client and the server, and the server has to receive it, process it and send the resource back to the client. The client has to travel the path that separates them, reach the client, and the client has to process it. And all this before the third instruction is executed. Most likely, by the time the message arrives, the third instruction will have already been executed and an empty image will have been inserted into the DOM.
 
 Why doesn't synchronous code work well in this case?
-The key here is that the instructions are executed sequentially and the code does not wait until the server has responded and the image is available.
+The problem here is that instructions are executed sequentially, so when one instruction finishes, it exits the stack and the next one enters. In synchronous execution, instructions do not wait for previous instructions to finish.
 
-Solution: make the second instruction wait for the resource to arrive BEFORE executing the third, which depends on it, i.e. hold the third instruction until the second one is resolved. In order not to block the main thread while the resource arrives, this instruction is made asynchronous. Thus, the rest of the code can continue to execute.
-
+Solution: make the third instruction wait for the second instruction, on which it depends, to finish executing and receive the resource it has requested. This would cause the main thread to block and the rest of the instructions would not be executed. To avoid this, asynchrony is used. 
 
 ## 2.4- Strategies to improve interactivity
 
