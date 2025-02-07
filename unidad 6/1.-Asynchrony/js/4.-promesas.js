@@ -1,4 +1,4 @@
-import mostrarMensaje from '../mostrarMensajes.js';
+import mostrarMensaje from './mostrarMensajes.js';
 
 /////////////////////////////////
 //// nomenclatura then/catch ////
