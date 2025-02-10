@@ -5,11 +5,11 @@
 3. [Element Selection](#3--element-selection)
 4. [Modifying Attributes and Properties](#4--modifying-attributes-and-properties)
 5. [Events](#5--events)
-6. DOM Manipulation
-7. DOM Traversal
-8. Filtering
-9. Effects
-10. Asynchrony (AJAX)
+6. [DOM Manipulation](#6--dom-modification)
+7. [DOM Traversal](#7--dom-navigation)
+8. [Filtering](#8--filtering)
+9. [Effects](#9--effects)
+10. [Asynchrony (AJAX)](#10--asynchrony-ajax)
 
 ---
 
@@ -511,4 +511,435 @@ In jQuery, **events** are mechanisms that allow developers to perform an action 
   ```
 
   ----
+
+# 6- DOM Modification
+
+## Addition
+
+- **.append()**: Adds content at the end of each selected element.
+    ```javascript
+    // This adds a new <p> at the end of #miElemento content.
+    $('#miElemento').append('<p>New paragraph at the end</p>');
+    
+    // Although uncommon, and therefore not discussed further, elements can also be inserted this way:
+    $('#miElemento').append(function() {
+      const newElement = $('<p></p>').text("This is a new paragraph created with jQuery");
+      return newElement;
+    });
+    ```
+
+- **.prepend()**: Adds content at the beginning of each selected element.
+    ```javascript
+    // This adds a new <p> at the beginning of #miElemento content.
+    $('#miElemento').prepend('<p>New paragraph at the beginning</p>');
+    ```
+
+- **.before()**: Inserts content before the selected elements.
+    ```javascript
+    // Inserts a new paragraph just before #miElemento.
+    $('#miElemento').before('<p>This paragraph is before miElemento</p>');
+    ```
+
+- **.after()**: Inserts content after the selected elements.
+    ```javascript
+    // Inserts a new paragraph just after #miElemento.
+    $('#miElemento').after('<p>This paragraph is after miElemento</p>');
+    ```
+
+- **.wrap()**: Wraps each selected element with the specified HTML.
+    ```javascript
+    // This wraps the #miElemento element with a div of class wrapper.
+    $('#miElemento').wrap('<div class="wrapper"></div>');
+    ```
+
+- **.wrapAll()**: Wraps all selected elements within a single container.
+    ```html
+    <p>Text 1</p>
+    <p>Text 2</p>
+
+    <script>
+        $("p").wrapAll("<div class='wrapper'></div>");
+    </script>
+
+    <!-- Results in:
+    <div class="wrapper">
+      <p>Text 1</p>
+      <p>Text 2</p>
+    </div> -->
+    ```
+
+## Removal
+
+- **.unwrap()**: Removes the wrapper of an element, keeping the element itself in the DOM.
+    ```javascript
+    // This removes the wrapper of #miElemento but keeps #miElemento in the DOM.
+    $('#miElemento').unwrap();
+    ```
+
+- **.remove()**: Completely removes the selected elements from the DOM.
+    ```javascript
+    // Removes #miElemento from the DOM along with its children and associated events.
+    $('#miElemento').remove();
+    ```
+
+- **.empty()**: Removes all children of the selected elements but keeps the container element.
+    ```javascript
+    // This removes all content (children) of #miElemento, but #miElemento still exists.
+    $('#miElemento').empty();
+    ```
+
+- **.detach()**: Removes the selected elements from the DOM but keeps them in memory for later reinsertion.
+    ```javascript
+    const element = $('#miElemento').detach();
+    $('body').append(element);  // Reinsert the element elsewhere
+    ```
+
+## Cloning
+
+- **.clone()**: Creates a shallow copy of the selected elements, including attributes but not events or associated data (unless true is passed as an argument).
+    ```javascript
+    var clone = $('#miElemento').clone();
+    $('#miElemento').after(clone);  // Inserts the clone after #miElemento
+    ```
+
+## Replacement
+
+- **.replaceWith()**: Replaces the selected elements with the specified content.
+    ```javascript
+    // Replaces #miElemento with a new div with id nuevoElemento.
+    $('#miElemento').replaceWith('<div id="nuevoElemento">New content</div>');
+    ```
+
+- **.replaceAll()**: Replaces all selected elements with the specified content. This content can be a set of elements or a single element inserted in place of the selected elements.
+    ```javascript
+    // Replaces all .elemento elements with #nuevoElemento
+    $('#nuevoElemento').replaceAll('.elemento');
+    ```
+
+----
+
+## 7- DOM Navigation
+
+The following methods allow you to navigate through the DOM to efficiently select and manipulate elements.
+
+## Parents
+- `.parent()` Returns the **parent element** of the selected element.
+  ```javascript
+  //Returns the **direct parent** of `#miElemento`.
+  $('#miElemento').parent();
+  ```
+
+- `.parents()` Returns all **ancestors** of the selected element, not just the direct parent, but all elements above in the hierarchy.
+  ```javascript
+  //Returns all ancestor elements of `#miElemento`.
+  $('#miElemento').parents();
+  
+  //Filtering ancestors
+  $('#miElemento').parents('.container');
+  ```
+
+- `.parentsUntil(selector)` Finds all ancestors of an element, but stops at the specified selector (without including it). Useful when traversing the DOM without reaching <html>.
+  ```javascript
+  //Selects all ancestors of #elemento up to .contenedor, but does not include .contenedor.
+  $("#elemento").parentsUntil(".contenedor");
+  ```
+
+## Children
+- `.children()` Returns all **children** of the selected element.
+  ```javascript
+  //Returns all direct child elements of `#miElemento`.
+  $('#miElemento').children();
+
+  //Returns all direct children of #miElemento of type p
+  $('#miElemento').children('p');
+  ```
+
+- `.find()` Returns all descendant nodes of an element that match a condition.
+  ```javascript
+  //Returns all descendants of #miElemento of type p, even if nested
+  $('#miElemento').find('p');
+  ```
+
+## Siblings
+- `.siblings()` Returns all **siblings** of the selected element. These are elements that share the same parent.
+  ```javascript
+  $('#miElemento').siblings();
+
+  //Search for only certain types of sibling elements:
+  $('#miElemento').siblings('div');
+  ```
+
+- `.next()` Returns the **next sibling** of the selected element.
+  ```javascript
+  $('#miElemento').next();
+  ```
+
+- `.prev()` Returns the **previous sibling** of the selected element.
+  ```javascript
+  $('#miElemento').prev();
+  ```
+
+- `.nextAll()` Returns all **next siblings** of the selected element.
+  ```javascript
+  $('#miElemento').nextAll();
+  ```
+
+- `.prevAll()` Returns all **previous siblings** of the selected element.
+  ```javascript
+  $('#miElemento').prevAll();
+  ```
+  
+- `.nextUntil(selector)` Finds all next sibling elements of an element, stopping at the specified selector.
+  ```javascript
+  //Selects elements following #elemento up to ".limite", without including ".limite".
+  $("#elemento").nextUntil(".limite");
+  ```
+
+- `.prevUntil(selector)` Finds all previous sibling elements of an element, stopping at the specified selector.
+  ```javascript
+  //Selects elements before #elemento up to ".limite", without including ".limite".
+  $("#elemento").prevUntil(".limite");
+  ```
+
+## Others
+- `.first()` Selects the **first** element in a set of elements.
+  ```javascript
+  $('#miElemento').parent().children().first();
+  ```
+
+- `.last()` Selects the **last** element in a set of elements.
+  ```javascript
+  $('#miElemento').parent().children().last();
+  ```
+
+- `.eq()` Returns the **element at the specified index** within a set of elements.
+  ```javascript
+  $('#miElemento').siblings().eq(2);
+  ```
+
+- `.closest()` Finds the **nearest ancestor** that matches the specified selector.
+  ```javascript
+  $('#miElemento').closest('.container');
+  ```
+
+----
+
+# 8- Filtering
+
+- `.hasClass()` → Checks if an element has a specific class.
+
+- `.filter()` Allows filtering a set of selected elements based on a given condition.
+  ```javascript
+  $('#myElement').parent().children().filter('.active');
+  ```
+
+- `.is()` Checks if an element matches a specific selector.
+  ```javascript
+  if ($('#myElement').is(':visible')) {
+      console.log('The element is visible');
+  }
+  ```
+
+- `.not()` → Excludes elements from a selection.
+
+---
+
+# 9- Effects
+
+jQuery **effects** methods allow adding interactivity to web page elements through animations, visibility changes, transitions, and other visual effects. These methods are easy to use and can significantly enhance user experience.
+
+## Effects Methods
+
+- **Show/Hide**. These methods make elements disappear by changing their `display` property. They can include an optional **duration** parameter (in milliseconds or using the words "slow" and "fast") or a **callback function** for smoother animations. The method modifies the `display` property and gradually adjusts the height and width.
+  - **`.hide()`**: Hides the selected element by setting its `display` to `none`.
+    ```javascript
+    $('#element').hide();
+    $("#element").hide(2000, ()=>{
+        console.log("element hidden");
+    });
+    $("#element").hide("slow");
+    ```
+  - **`.show()`**: Displays the selected element by restoring its `display` property to its original value.
+    ```javascript
+    $('#element').show();
+    $("#element").show(2000, ()=>{
+        console.log("element shown");
+    });
+    $("#element").show("slow");
+    ```
+  - `.toggle()` toggles the visibility of an element. If it's visible, it hides it; if it's hidden, it shows it.
+    ```javascript
+    $('#element').toggle();
+    $("#element").toggle(2000, ()=>{
+        console.log("element toggled");
+    });
+    $("#element").toggle("slow");    
+    ```
+
+- **Fading Effects**. These methods make the element disappear by adjusting opacity. They can include an optional **duration** parameter (in milliseconds or using "slow" and "fast") or a **callback function**.
+    - **`.fadeIn()`**: Gradually increases the element's opacity from `0` to `1`.
+      ```javascript
+      $('#element').fadeIn();
+      $("#element").fadeIn(2000, ()=>{
+          console.log("element faded in");
+      });
+      $("#element").fadeIn("slow");
+      ```
+    - **`.fadeOut()`**: Gradually decreases the element's opacity from `1` to `0`.
+      ```javascript
+      $('#element').fadeOut();
+      $("#element").fadeOut(2000, ()=>{
+          console.log("element faded out");
+      });
+      $("#element").fadeOut("slow");
+      ```
+
+    - `.fadeTo()` changes an element's opacity to a specific value (between `0` and `1`).
+      ```javascript
+      $('#element').fadeTo(1000, 0.5); // 1 second to reduce opacity to 50%
+      ```
+
+    - `.fadeToggle()` combines fade and toggle effects. If the element is visible, it fades out; if it's hidden, it fades in.
+      ```javascript
+      $('#element').fadeToggle();
+      $("#element").fadeToggle(2000, ()=>{
+          console.log("element toggled with fade");
+      });
+      $("#element").fadeToggle("slow");
+      ```
+
+- **Sliding Effects**
+  - **`.slideUp()`**: Slides the element up, reducing its height until it disappears.
+    ```javascript
+    $('#element').slideUp();
+    ```
+  - **`.slideDown()`**: Slides the element down, increasing its height until fully visible.
+    ```javascript
+    $('#element').slideDown();
+    ```
+  - `.slideToggle()` toggles between `slideUp()` and `slideDown()` effects.
+    ```javascript
+    $('#element').slideToggle();
+    ```
+
+- **Animations**
+  - `.animate()` allows creating custom animations by modifying CSS properties over time.
+    ```javascript
+    $('#element').animate({
+        opacity: 0.5,
+        left: '250px'
+    }, 1000); // Change opacity and move element in 1 second
+    ```
+    Multiple CSS properties can be animated simultaneously (e.g., `width`, `height`, `left`, `top`, `opacity`, etc.) with an optional callback function executed after the animation ends.
+
+  - `.stop()` Stops an ongoing animation. Useful for preventing overlapping animations.
+    ```javascript
+    $('#element').stop();
+    ```
+
+  - `.delay()` Delays the execution of an animation or effect for a specified time (in milliseconds or using "slow" and "fast").
+    ```javascript
+    $('#element').delay(500).fadeOut(); // Waits 500ms before fading out
+    ```
+
+- **Function Sequencing**
+  - **`.queue()`**: Allows queueing functions to be executed in sequence.
+    ```javascript
+    $('#element').queue(function(next) {
+        $(this).css('background-color', 'red');
+        next(); // Calls the next function in the queue
+    });
+    ```
+
+  - **`.dequeue()`**: Executes the next function in the queue.
+    ```javascript
+    $('#element').dequeue(); // Executes the next function in the queue
+    ```
+
+## Important Features of jQuery Effects
+
+- **Duration**: Effects can have a duration specified in milliseconds or using keywords like `slow` or `fast`.
+- **Callback Function**: A function can be executed after an effect finishes. This is useful for chaining multiple effects.
+  ```javascript
+  $('#element').fadeOut(1000, function() {
+      console.log('Animation completed');
+  });
+  ```
+
+----
+
+# 10- Asynchrony (AJAX)
+
+AJAX (Asynchronous JavaScript and XML) is a technique used to make HTTP requests asynchronously without needing to reload the page. jQuery provides an easy way to perform AJAX requests using the `$.ajax()` method, along with other shorthand methods. Below, we explain two main ways to handle AJAX requests in jQuery: with **implicit callbacks** and using **promises**.
+
+## 10.1. AJAX with Implicit Callbacks
+
+The `$.ajax()` method in jQuery uses **implicit callbacks** to handle request responses. Callbacks are functions passed as arguments that execute when a response is received from the server.
+
+### Example of an AJAX request with implicit callbacks using the Chuck Norris API:
+
+```javascript
+$(() => {
+    const remoteUrl = "https://api.chucknorris.io/jokes/random";
+
+    $("#ajax").click((event) => {
+        switch (event.target.id) {
+            case "btn-get":
+                $.ajax({
+                    url: remoteUrl,
+                    method: "GET",
+                    success: function(data) {
+                        console.log("Joke of the day:", data.value);
+                        $("#joke").text(data.value); // Display the joke in the HTML
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("AJAX request error:", textStatus, errorThrown);
+                    }
+                });
+                break;
+        }
+    });
+});
+```
+
+- `success`: This callback executes when the request is successfully completed.
+- `error`: This callback executes if the request fails.
+
+
+## 10.2. AJAX with Promises
+
+jQuery also allows working with promises when using the `$.ajax()` method. Promises provide a cleaner and more flexible way to handle asynchronous responses through the `.done()`, `.fail()`, and `.always()` methods.
+
+### Example of an AJAX request with promises using the Chuck Norris API:
+
+```javascript
+$(() => {
+    const remoteUrl = "https://api.chucknorris.io/jokes/random";
+
+    $("#ajax").click((event) => {
+        switch (event.target.id) {
+            case "btn-get":
+                $.ajax({
+                    url: remoteUrl,
+                    method: "GET",
+                })
+                .done((data) => {
+                    console.log("Joke of the day:", data.value);
+                    $("#joke").text(data.value); // Display the joke in the HTML
+                })
+                .fail((jqXHR, textStatus, errorThrown) => {
+                    console.log("AJAX request error:", textStatus, errorThrown);
+                })
+                .always(() => {
+                    console.log("The AJAX request has completed.");
+                });
+                break;
+        }
+    });
+});
+```
+
+  - `done()`: Executes when the request is successfully completed. It receives the response data as an argument.
+  - `fail()`: Executes if the request fails. It receives details about the error.
+  - `always()`: Executes always, regardless of whether the request was successful or failed.
 
