@@ -92,23 +92,23 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button[type="submit"] {
+button.azul {
     background-color: #007bff;
     color: white;
 }
 
-button[type="submit"]:hover {
+button.azul:hover {
     background-color: white;
     color: #007bff;
     border: 2px solid #007bff;
 }
 
-button[type="button"] {
+button.verde {
     background-color: #28a745;
     color: white;
 }
 
-button[type="button"]:hover {
+button.verde:hover {
     background-color: white;
     color: #28a745;
     border: 2px solid #28a745;
@@ -137,7 +137,7 @@ output.informacion {
     display: none; /* Oculto inicialmente */
 }
 
-output.mostrar {
+output.mostrar-msj {
     display: flex; /* Visible cuando hay contenido */
     justify-content: center;
 }
@@ -169,12 +169,12 @@ output.mostrar {
 
 
 /*Efecto de desvanecimiento de los mensajes al irse*/
-.mostrar {
+.mostrar-msj {
     opacity: 1;
     transition: opacity 1s ease-in-out;
 }
 
-.oculto {
+.ocultar-msj {
     opacity: 0;
 }
 
