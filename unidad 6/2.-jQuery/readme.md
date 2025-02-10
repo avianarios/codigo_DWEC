@@ -82,13 +82,27 @@ You can use jQuery by including a link to a CDN (Content Delivery Network) or in
         npm install jquery
         ```
     
-    4. **Install and configure the packer** to include CSS, prefixing, minimizing and packaging
-
-
-    5. **Import jquery into the main file**. The packager will take the jquery js file from node_modules and package it. 
-        ````javascript
-        import $ from ‘jquery’; // Using ES6 imports
+    4. **Install and configure the bundler** to include CSS, prefixing, minimizing and packaging
+        ```bash
+        npm install --save-dev parcel
         ```
+
+    5. **Configure parcel to use jQuery as a module** in `package.json`
+        ```json
+        "type": "module",
+        ```
+
+    6. **Import jquery at the main js file**. Module bundler will take jquery js from node_modules. 
+        ```javascript
+        //Using ES6
+        import $ from 'jquery';
+        ```
+
+    7. **configure the html to import js as a module** by using `type="module"`
+        ```html
+        <script type="module" src="../js/1.-seleccion-elementos-dom.js" defer></script>
+        ```
+
 ----
 
 # 3- Element selection

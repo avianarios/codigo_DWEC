@@ -82,11 +82,24 @@ Se puede usar jQuery mediante la inclusión de un enlace a un CDN (Content Deliv
         ```
     
     4. **Instalar y configurar el empaquetador** para incluir el CSS, prefijar, minimizar y empaquetar
+        ```bash
+        npm install --save-dev parcel
+        ```
 
+    5. **Configurar parcel para que use jQuery como un módulo** en `package.json`
+        ```json
+        "type": "module",
+        ```
 
-    5. **Importar jquery en el archivo principal**. El empaquetador se ocupará de coger el fichero js de jquery de node_modules y empaquetarlo. 
+    5. **Importar jquery en el archivo principal js**. El empaquetador se ocupará de coger el fichero js de jquery de node_modules y empaquetarlo. 
         ```javascript
-        import $ from 'jquery';  // Usando ES6 imports
+        //Usando ES6
+        import $ from 'jquery';
+        ```
+
+    6. **Configurar el html para que importe js como un módulo** con `type="module"`
+        ```html
+        <script type="module" src="../js/1.-seleccion-elementos-dom.js" defer></script>
         ```
 
 ----
