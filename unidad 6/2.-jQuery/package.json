@@ -2,9 +2,10 @@
   "name": "jquery",
   "version": "1.0.0",
   "description": "jquery-example",
+  "type": "module",
   "scripts": {
-    "parcel:desarrollo": "parcel serve fuente/html/*.html --dist-dir compilado/desarrollo",
-    "parcel:produccion": "parcel build fuente/html/*.html --public-url './' --dist-dir compilado/produccion",
+    "parcel:desarrollo": "parcel serve fuente/index.html --dist-dir compilado/desarrollo",
+    "parcel:produccion": "parcel build fuente/index.html --public-url './' --dist-dir compilado/produccion",
     "limpia": "rimraf desarrollo produccion .parcel-cache",
     "des": "run-s limpia parcel:desarrollo",
     "prod": "run-s limpia parcel:produccion"
