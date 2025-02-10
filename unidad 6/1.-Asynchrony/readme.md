@@ -430,8 +430,90 @@ document.getElementById("loadCats").addEventListener("click", () => {
     });
 });
 ```
+
+### About connecting to APIs
+Some APIs require the user to register in order to provide a key (API-KEY) with which to make requests. Without this, requests are not accepted. It is a way to know the origin of the requests, to protect against abusive uses or to bill if the API is paid.
+
+```javascript
+//API that needs a key to work. This key is no longer active
+const apiKey = live_CPJRXuair6Xd5DZBqUFF1ISr97GQL1Lrl5fxxE5gLqalbTHn0AnGZWGs6aSbU20o;
+async function getQuotes() {
+    const url = ‘https://api.api-ninjas.com/v1/quotes’;
+    const response = await fetch(url, {
+        method: ‘GET’,
+        headers: {
+            ‘X-Api-Key’: apiKey
+        }
+    });
+    if (!response.ok) {
+        throw new Error('Error getting quotes: ’ + response.statusText);
+    }
+    return response.json();
+}
+```
+
+Since it is personal, it is crucial not to expose these keys in publicly shared source code, such as in GitHub repositories. If they are accidentally uploaded, anyone could use them, which could lead to misuse of resources, unexpected costs or even compromise the security of the application.
+
+To avoid exposing API keys, there are several best practices to follow:
+  - **Review the security of API keys**: It is always advisable to review the permissions associated with API keys, limiting them to only necessary actions and to specific IP addresses or IP ranges. This reduces the risk in case a key is accidentally exposed.
+
+  - Use of secrets management tools: 
+    - **Remotes**: Services such as AWS Secrets Manager, Azure Key Vault or Google Secret Manager offer secure ways to store and access secrets centrally and without the need to store them locally.
+    - Local**: There are also alternatives such as **dotenv** in combination with local development environments such as **Parcel** or Webpack to load these values automatically into applications. The latter is what will be used here.
+  
+
+### Configuring dotenv
+
+dotenv is a popular tool in the software development world that allows you to manage environment variables in a simple and safe way. It is commonly used in Node.js projects and other JavaScript environments to load sensitive settings, such as API keys, passwords or database credentials, without having to write them directly into the source code.
+
+dotenv is a package for node that works with a `.env` file, which contains a list of environment variables in key=value format. This file **must be placed in the root of the project, and must be out of version control** (i.e. it must be added to the `.gitignore` file to prevent it from being uploaded to GitHub).
+  ```bash
+  # Install dotenv on node
+  npm install dotenv
+  ```
+
+  ```json
+  // Contents of .env
+  API_KEY=your_key_here
+  DB_PASSWORD=my_secure_password
+  PORT=3000
+  ```
+
+After loading the `.env` file with `dotenv.config()` into the javascript file, all variables defined in it are stored in `process.env` and can be used like any other environment variable.
+
+
+Usage in the JavaScript file:
+  ```javascript
+  // Import dotenv
+  import dotenv from `dotenv`;
+
+  // Load the environment variables from the .env file
+  dotenv.config();
+
+  // Access an environment variable
+  const apiKey = process.env.API_KEY;
+  //When characters are not allowed or intermediate variables are used, square brackets are used.
+  //const apiKey = process.env[‘API-KEY-NINJAS’];
+
+  async function getQuotes() {
+    const url = ‘https://api.api-ninjas.com/v1/quotes’;
+    const response = await fetch(url, {
+      method: ‘GET’,
+      headers: {
+        ‘X-Api-Key’: apiKey
+      }
+      ...
+  ```
+  
+### Benefits of using dotenv:
+
+  - **Security**: Keeping keys and credentials out of source code helps prevent them from leaking into public or private repositories. This is especially important for projects that have sensitive configurations such as API keys, access tokens or passwords.
+
+  - **Ease of configuration: Allows configurations to be changed without modifying the code. This is useful when having different configurations for development, test and production environments, without having to change the application code.
+
+  - **Portability**: Developers can share code without having to share sensitive credentials. They simply need to ensure that the .env file is present and configured correctly in each environment.
+
 -----
-# Handling Asynchrony with `async/await`
 
 ## 3.5 Promises with `async/await`
 

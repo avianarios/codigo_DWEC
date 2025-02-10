@@ -305,6 +305,7 @@ Las promesas surgen en con ES6 (ES2015) para simplificar la gestión del código
 - `Cumplida (fulfilled)`: La operación asíncrona se completó con éxito.
 - `Rechazada (rejected)`: La operación asíncrona falló.
 
+### Objeto promise
 El objeto promise proporciona los siguientes métodos:
 - `then()`: Maneja el resultado cuando la promesa se resuelve (cuando tiene éxito).
 - `catch()`: Maneja los errores cuando la promesa es rechazada.
@@ -314,6 +315,7 @@ El objeto promise proporciona los siguientes métodos:
 - `allSettled()`: permite esperar que todas las promesas se resuelvan, independientemente de si se resolvieron con éxito o fueron rechazadas. Devuelve un array con objetos que contienen el estado y el valor (o el motivo del rechazo) de cada promesa.
 - `any()`: funciona de manera similar a `Promise.race()`, pero en lugar de resolver con la primera promesa que se resuelva, any() resuelve con la primera promesa que no se rechace.
 
+### API Fetch
 Para ilustrar cómo funcionan las promesas, vamos a usar la API fetch, que es una API que permite manejar conexiones HTTP mediante el uso de: 
 - `Request`: Representa una solicitud HTTP. Puedes usarla para personalizar detalles de la solicitud antes de pasarla a fetch().
 - Una función `fetch(URL)`, que devuelve una promesa a un objeto Response
@@ -331,7 +333,8 @@ Para ilustrar cómo funcionan las promesas, vamos a usar la API fetch, que es un
 - `Headers`: Representa las cabeceras HTTP que puedes agregar a las solicitudes o respuestas. Permite configurar las cabeceras de la solicitud o inspeccionar las cabeceras de la respuesta.
 - `FormData`: Aunque no es un objeto exclusivo de la Fetch API, se usa junto con fetch() para enviar datos de formularios (por ejemplo, para realizar una carga de archivos).
  
-Flujo de trabajo:
+### Flujo de trabajo:
+El flujo de trabajo que sigue una aplicación asíncrona es:
 - Se hace una solicitud HTTP con fetch, que devuelve una promesa.
 - Se usan los métodos del objeto `promise` para interactuar con dicha promesa
   - `.then` para cuando se resuelve
@@ -434,6 +437,89 @@ document.getElementById("cargarGatos").addEventListener("click", () => {
         });
 });
 ```
+
+### Sobre la conexión a las API
+Algunas API necesitan que el usuario se registre para proporcionarle una clave (API-KEY) con la que realizar las peticiones. Sin ésta, las peticiones no se aceptan. Es una forma de conocer el origen de las peticiones, protegerse contra usos abusivos o facturar si la API es de pago.
+
+```javascript
+//API que necesita de una clave para funcionar. Esta clave ya no está activa
+const apiKey = live_CPJRXuair6Xd5DZBqUFF1ISr97GQL1Lrl5fxxE5gLqalbTHn0AnGZWGs6aSbU20o;
+async function obtenerCitas() {
+    const url = 'https://api.api-ninjas.com/v1/quotes';
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'X-Api-Key': apiKey
+        }
+    });
+    if (!response.ok) {
+        throw new Error('Error al obtener citas: ' + response.statusText);
+    }
+    return response.json();
+}
+```
+
+Dado que es algo personal, es crucial no exponer estas claves en el código fuente que se comparte públicamente, como en repositorios de GitHub. Si se suben accidentalmente, cualquiera podría utilizarlas, lo que podría llevar a un mal uso de los recursos, generar costos inesperados o incluso comprometer la seguridad de la aplicación.
+
+Para evitar exponer las claves de API, hay varias buenas prácticas que se deben seguir:
+  - **Revisar la seguridad de las API keys**: Siempre es recomendable revisar los permisos asociados a las claves de API, limitándolas a solo las acciones necesarias y a direcciones IP o rangos de IP específicos. Esto reduce el riesgo en caso de que una clave sea expuesta accidentalmente.
+
+  - **Uso de herramientas de gestión de secretos**: 
+    - **Remotos**: Servicios como AWS Secrets Manager, Azure Key Vault o Google Secret Manager ofrecen formas seguras de almacenar y acceder a secretos de manera centralizada y sin necesidad de almacenarlos localmente.
+    - **Locales**: También existen alternativas como **dotenv** en combinación con entornos de desarrollo local como **Parcel** o Webpack para cargar estos valores de forma automática en las aplicaciones. Esto último es lo que se va a usar aquí.
+  
+
+### Configuración de dotenv
+
+`dotenv` es una herramienta popular en el mundo del desarrollo de software que permite gestionar las variables de entorno de manera sencilla y segura. Se utiliza comúnmente en proyectos de Node.js y otros entornos JavaScript para cargar configuraciones sensibles, como claves de API, contraseñas o credenciales de base de datos, sin tener que escribirlas directamente en el código fuente.
+
+dotenv es un paquete para node que funciona gracias a un fichero `.env`, que contiene una lista de variables de entorno en formato clave=valor. Este archivo **debe colocarse en la raíz del proyecto, y debe estar fuera del control de versiones** (es decir, se debe agregar al archivo `.gitignore` para evitar que se suba a GitHub).
+  ```bash
+  # Instalación de dotenv en node
+  npm install dotenv
+  ```
+
+  ```json
+  // Contenido de .env
+  API_KEY=tu_clave_aqui
+  DB_PASSWORD=mi_contraseña_segura
+  PORT=3000
+  ```
+
+Después de cargar el archivo `.env` con `dotenv.config()` en el fichero javascript, todas las variables definidas en él se almacenan en `process.env` y pueden usarse como cualquier otra variable de entorno.
+
+
+Uso en el archivo JavaScript:
+  ```javascript
+  // Importamos dotenv
+  import dotenv from 'dotenv';
+
+  // Cargamos las variables de entorno desde el archivo .env
+  dotenv.config();
+
+  // Accedemos a una variable de entorno
+  const apiKey = process.env.API_KEY;
+  //Cuando hay caracteres no permitidos o se usan variables intermedias se usan corchetes
+  //const apiKey = process.env["API-KEY-NINJAS"];
+
+  async function obtenerCitas() {
+    const url = 'https://api.api-ninjas.com/v1/quotes';
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'X-Api-Key': apiKey
+      }
+      ...
+  ```
+  
+### Beneficios de usar dotenv:
+
+  - **Seguridad**: Mantener las claves y credenciales fuera del código fuente ayuda a prevenir que se filtren en repositorios públicos o privados. Esto es especialmente importante para proyectos que tienen configuraciones sensibles como claves de API, tokens de acceso o contraseñas.
+
+  - **Facilidad de configuración**: Permite que las configuraciones puedan ser cambiadas sin modificar el código. Esto es útil cuando se tienen diferentes configuraciones para entornos de desarrollo, pruebas y producción, sin tener que cambiar el código de la aplicación.
+
+  - **Portabilidad**: Los desarrolladores pueden compartir el código sin tener que compartir las credenciales sensibles. Simplemente deben asegurarse de que el archivo .env esté presente y configurado correctamente en cada entorno.
+
 ----
 
 ## 3.5- Promesas async/await
