@@ -13,7 +13,7 @@
   4. [Then/Catch Promises](#34--promises-thencatch)
   5. [Async/await-promises](#35-promises-with-asyncawait)
   6. [Web workers](#36-web-workers)
-
+4. [AJAX (ASynchronous JavaScript and XML)](#4--ajax-asynchronous-javascript-and-xml)
 ----
 
 # 1- Synchronous and Asynchronous Programming
@@ -708,3 +708,24 @@ Web workers are created using the Worker constructor, which takes the URL of a J
       console.log('Worker result:', event.data);
   };
   ```
+
+----
+
+# 4- AJAX (ASynchronous JavaScript and XML)
+AJAX is a web development technique that allows web applications to send and receive data from a server asynchronously **without the need to reload the entire page, reloading only the affected parts**. This improves the user experience by making applications faster and more dynamic.
+
+Although the name includes ‘XML’, AJAX is not limited to this format. Nowadays, it is more common to use JSON (JavaScript Object Notation) as a data exchange format due to its lightness and ease of use.
+
+AJAX, therefore, is not a development technique that combines several technologies which, in modern practice, are usually JavaScript + Fetch for asynchronous requests. However, they are not the only ones
+  - **JavaScript and fetch**
+  - **Axios with async/await**, a JavaScript library for handling HTTP requests
+  - **jQuery with $.ajax()**, which is a JavaScript library that simplifies DOM (Document Object Model) manipulation, event handling, animation, and HTTP requests 
+  - **Websockets**, which allows two-way communication between client and server over a single persistent channel. It is especially useful for real-time applications, such as chat or live monitoring applications.
+  - **GraphQL with fetch**, which is a query language for APIs and a runtime environment for APIs.
+
+
+## How does AJAX work?
+1. The user performs an action on the page (e.g. clicking a button or submitting a form).
+2. An HTTP request is sent to the server in the background.
+3. The server processes the request and returns a response (usually in JSON or XML format).
+4. The program receives the response and updates the affected parts of the page without completely reloading it.

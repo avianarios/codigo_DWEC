@@ -13,7 +13,7 @@
   4. [Promesas then/catch](#34--promesas-thencatch)
   5. [Promesas async/await](#35--promesas-asyncawait)
   6. [Trabajadores web](#36--trabajadores-web-web-workers)
-
+4. [AJAX (ASynchronous JavaScript and XML)](#4--ajax-asynchronous-javascript-and-xml)
 ----
 
 # 1- Programación síncrona y asíncrona
@@ -717,3 +717,24 @@ console.log("Tarea en proceso...");
       console.log('Resultado del trabajador:', event.data);
   };
   ```
+
+----
+
+# 4- AJAX (ASynchronous JavaScript and XML)
+AJAX es una técnica de desarrollo web que permite a las aplicaciones web enviar y recibir datos de un servidor de manera asíncrona **sin necesidad de recargar la página completa, recargando sólo las partes afectadas**. Esto mejora la experiencia del usuario al hacer que las aplicaciones sean más rápidas y dinámicas.
+
+Aunque el nombre incluye "XML", AJAX no está limitado a este formato. Hoy en día, es más común usar JSON (JavaScript Object Notation) como formato de intercambio de datos debido a su ligereza y facilidad de uso.
+
+AJAX, por tanto, no es técnica de desarrollo que combina varias tecnologías que, en la práctica moderna, suelen ser JavaScript + Fetch para realizar solicitudes asíncronas. No obstante, no son las únicas
+  - **JavaScript y fetch**
+  - **Axios con async/await**, una biblioteca de JavaScript para gestionar solicitues HTTP
+  - **jQuery con $.ajax()**, que es una biblioteca de JavaScript que simplifica la manipulación del DOM (Modelo de Objetos del Documento), el manejo de eventos, la animación, y las solicitudes HTTP 
+  - **Websockets**, que permite una comunicación bidireccional entre el cliente y el servidor a través de un único canal persistente. Es especialmente útil para aplicaciones en tiempo real, como chats o aplicaciones de monitoreo en vivo.
+  - **GraphQL con fetch** que es un lenguaje de consulta para APIs y un entorno de ejecución para realizarlas.
+
+
+## ¿Cómo funciona AJAX?
+1. El usuario realiza una acción en la página (por ejemplo, hacer clic en un botón o enviar un formulario).
+2. Se envía una solicitud HTTP al servidor en segundo plano.
+3. El servidor procesa la solicitud y devuelve una respuesta (generalmente en formato JSON o XML).
+4. El programa recibe la respuesta y actualiza las partes de la página afectadas sin recargarla completamente.
