@@ -2,13 +2,13 @@ import $ from 'jquery';  // Usando ES6 imports
 import dotenv from 'dotenv';
 dotenv.config();
 
+
 $(()=>{
     const urlRemota1 = "https://fakestoreapi.com/products/";
     
     $("#ajax").on("click",(evento)=>{
         switch (evento.target.id){
             case "btn-get":
-                console.log("aa");
                 $.ajax({
                     url: urlRemota1,
                     method: "GET",
@@ -43,7 +43,12 @@ $(()=>{
 
 
     const urlRemota2 = "https://api.thecatapi.com/v1/images/search?limit=5";
-    const apiKeyUrlRemota2 = process.env.API_KEY;
+
+// const apiKey = process.env.API_KEY_NINJAS;
+//Cuando hay caracteres no permitidos o se usan variables intermedias se usan corchetes
+// const apiKey = process.env["API-KEY-NINJAS"];
+
+    const apiKeyUrlRemota2 = process.env["API-KEY-CAT"];
 
     $("#ajax").on("click", (evento)=>{
         switch (evento.target.id){
