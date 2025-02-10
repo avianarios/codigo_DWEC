@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "jquery-example",
   "type": "module",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "parcel:desarrollo": "parcel serve fuente/index.html --dist-dir compilado/desarrollo",
     "parcel:produccion": "parcel build fuente/index.html --public-url './' --dist-dir compilado/produccion",
