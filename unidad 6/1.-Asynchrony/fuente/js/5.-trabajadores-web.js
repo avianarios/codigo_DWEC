@@ -16,7 +16,9 @@ document.getElementById('trabajador').addEventListener('click', () => {
 
     // Crear el trabajador web. el argumento type: module permite importar código. Así, definimos la funcón contadorPorconsola en un módulo y la usamos para el código síncrono y el asíncrono.
     // La ruta es donde encontrar al trabajador es relativa al HTML donde se carga este js
-    const worker = new Worker('../js/trabajador.js', { type: 'module' });
+    const worker = new Worker(new URL('../js/trabajador.js', import.meta.url), { type: 'module' });     //parcel no permite crear Worker con rutas relativas cuando se usa una cadena de texto como parámetro. Para solucionarlo, se crea un objeto URL
+
+    //const worker = new Worker('../js/trabajador.js', { type: 'module' });
 //    const worker = new Worker('../js/trabajador.js');
 
     // Escuchar mensajes del trabajador

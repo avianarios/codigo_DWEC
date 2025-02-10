@@ -1,4 +1,6 @@
 import mostrarMensaje from './mostrarMensajes.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 /////////////////////////////////
 //// nomenclatura then/catch ////
@@ -141,7 +143,9 @@ document.getElementById('cargarReceta').addEventListener('click', async () => {
 //Clave de la API api-ninjas.com
 
 //Código común a .all y .any
-const apiKey = 'K9P7ybYHefJidGFgDM0u4g==0mKSBGC0BZSU0Eem';
+const apiKey = process.env.API_KEY_NINJAS;
+//Cuando hay caracteres no permitidos o se usan variables intermedias se usan corchetes
+// const apiKey = process.env["API-KEY-NINJAS"];
 
 // Función para obtener citas
 async function obtenerCitas() {

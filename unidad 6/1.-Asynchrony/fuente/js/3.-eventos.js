@@ -1,5 +1,11 @@
 import mostrarMensaje from './mostrarMensajes.js';
 
+document.getElementById("boton-tarea").addEventListener("click", ()=>{
+// Ejecutar la operación larga, que bloquea el hilo
+    calcularOperacionLarga();
+    calcularOperacionCorta();
+});
+
 
 // Simulación de una operación síncrona larga
 function calcularOperacionLarga() {
@@ -21,14 +27,12 @@ function calcularOperacionCorta(){
 }
 
 // Agregar un manejador de evento al botón
-document.getElementById('boton').addEventListener('click', () => {
+document.getElementById('boton-click').addEventListener('click', () => {
     console.log('¡Clic detectado!');
     setTimeout(() => {  // Usar setTimeout para simular una acción asíncrona
         mostrarMensaje("botón pinchado", "mensajeEvento");
     }, 0);
 });
 
-// Ejecutar la operación larga, que bloquea el hilo
-calcularOperacionLarga();
-calcularOperacionCorta();
+
 
