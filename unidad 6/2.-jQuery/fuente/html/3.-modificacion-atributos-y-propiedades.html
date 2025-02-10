@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificación de Atributos y Propiedades</title>
+    <link rel="stylesheet" href="../css/estilos.css" type="text/css">
+    <link rel="stylesheet" href="../css/estilos-barra-navegacion.css" type="text/css">
+    <script type="module" src="../js/3.modificacion-atributos-y-propiedades.js" defer></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
+</head>
+<body class="contenedor-flex-vertical">
+    <nav class="navbar">
+        <ul>
+            <li><a href="1.-seleccion-elementos-dom.html">Selección de Elementos</a></li>
+            <li><a href="2.-eventos.html">Eventos</a></li>
+            <li><a href="3.-modificacion-atributos-y-propiedades.html">Modificación de Atributos</a></li>
+            <li><a href="4.-manipulacion-dom.html">Manipulación del DOM</a></li>
+            <li><a href="5.-filtrado.html">Filtrado</a></li>
+            <li><a href="6.-navegacion-dom.html">Navegación por el DOM</a></li>
+            <li><a href="7.-efectos.html">Efectos</a></li>
+            <li><a href="8.-ajax.html">AJAX</a></li>
+        </ul>
+    </nav>  
+    <main>
+        <h1>Modificación de atributos y propiedades en jQuery</h1>
+
+        <!-- Sección para modificar Atributos -->
+        <section>
+            <h2>Modificar Atributo (src)</h2>
+            <img src="https://cataas.com/cat?width=450" alt="Imagen original">
+            <menu class="grupo-botones">
+                <button class="azul" id="modificarAtributo">Cambiar Atributo alt</button>
+            </menu>
+        </section>
+
+        <!-- Sección para eliminar Atributos -->
+        <section>
+            <h2>Eliminar Atributo (disabled)</h2>
+            <input type="text" disabled placeholder="Campo deshabilitado">
+            <menu class="grupo-botones">
+                <button class="azul" id="eliminarAtributo">Habilitar Campo</button>
+            </menu>
+        </section>
+
+        <!-- Sección para modificar Propiedad -->
+        <section>
+            <h2>Modificar Propiedad (checked)</h2>
+            <input type="checkbox">
+            <menu class="grupo-botones">
+                <button class="azul" id="modificarPropiedad">Marcar Checkbox</button>
+            </menu>
+        </section>
+
+        <!-- Sección para modificar Valor -->
+        <section>
+            <h2>Modificar Valor</h2>
+            <input type="text" id="miInput" value="Valor original">
+            <menu class="grupo-botones">
+                <button class="azul" id="modificarValor">Modificar Valor</button>
+            </menu>
+        </section>
+
+        <section>
+            <h1>Cambio del valor de un campo</h1>
+            <form>
+                <select>
+                    <option>Elija un valor</option>
+                    <option>Granada</option>
+                    <option>Córdoba</option>
+                    <option>Sevilla</option>
+                </select>
+                <input type="text" id="ciudadElegida" name="ciudadElegida" placeholder="Ciudad elegida">
+            </form>
+        </section>
+
+        <!-- Sección para modificar Atributo data-* -->
+        <section>
+            <h2>Modificar Atributo data-*</h2>
+            <div id="elemento" data-info="123">Elemento con data-info. Usando data(), no cambia el atributo, sino la representación interna de jQuery del elemento. Para que cambie hay que usar .attr</div>
+            <menu class="grupo-botones">
+                <button class="azul" id="modificarData">Modificar atributo data-info</button>
+                <button class="azul" id="modificarData2">Modificar propiedad data-info</button>
+            </menu>
+        </section>
+
+        <!-- Sección para modificar Texto -->
+        <section>
+            <h2>Modificar Texto</h2>
+            <div id="miElementoTexto">Texto original</div>
+            <menu class="grupo-botones">
+                <button class="azul" id="modificarTexto">Modificar Texto</button>
+            </menu>
+        </section>
+
+        <!-- Sección para modificar HTML -->
+        <section>
+            <h2>Modificar HTML</h2>
+            <div id="miElementoHTML">Texto original</div>
+            <menu class="grupo-botones">
+                <button class="azul" id="modificarHTML">Modificar HTML</button>
+            </menu>
+        </section>
+
+        <!-- Sección para modificar Ancho -->
+        <section>
+            <h2>Modificar Ancho</h2>
+            <div id="miElementoAncho" style="background-color: lightblue; height: 100px;">Caja</div>
+            <menu class="grupo-botones">
+                <button class="azul" id="modificarAncho">Modificar Ancho</button>
+            </menu>
+        </section>
+
+        <!-- Sección para modificar Altura -->
+        <section>
+            <h2>Modificar Altura</h2>
+            <div id="miElementoAlto" style="background-color: lightgreen; width: 100px;">Caja</div>
+            <menu class="grupo-botones">
+                <button class="azul" id="modificarAltura">Modificar Altura</button>
+            </menu>
+        </section>
+
+        <!-- Sección para modificar Clases -->
+        <section>
+            <h2>Modificar Clases</h2>
+            <div id="miElementoClase" class="original">Elemento con clase</div>
+            <menu class="grupo-botones">
+                <button class="azul" id="addClass">Agregar Clase</button>
+                <button class="azul" id="removeClass">Eliminar Clase</button>
+                <button class="azul" id="toggleClass">Alternar Clase</button>
+            </menu>
+        </section>
+
+        <!-- Sección para eliminar Propiedad -->
+        <section>
+            <h2>Eliminar Propiedad (disabled)</h2>
+            <input type="text" id="campoDeshabilitado" disabled placeholder="Campo deshabilitado">
+            <menu class="grupo-botones">
+                <button class="azul" id="addProp">Añadir propiedad "miProp"</button>
+                <button class="azul" id="removeProp1">Eliminar propiedad "disabled"</button>
+                <button class="azul" id="removeProp2">Eliminar propiedad "miProp"</button>
+            </menu>
+        </section>
+
+        <!-- Sección para modificar Propiedad CSS -->
+        <section>
+            <h2>Modificar Propiedad CSS (color)</h2>
+            <div id="miElemento" style="width: 100px; height: 100px; background-color: blue;">Caja</div>
+            <menu class="grupo-botones">
+                <button class="azul" id="modificarCSS">Cambiar color</button>
+            </menu>
+        </section>
+                
+    </main>
+
+</body>
+</html>

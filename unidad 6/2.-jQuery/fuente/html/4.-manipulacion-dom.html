@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulación del DOM con jQuery</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estilos-barra-navegacion.css" type="text/css">
+    <script type="module" src="../js/4.-manipulacion-dom.js" defer></script>
+    <!-- <script src="../js/jquery-3.7.1.min.js"></script> -->
+</head>
+<body class="contenedor-flex-vertical">
+    <nav class="navbar">
+        <ul>
+            <li><a href="1.-seleccion-elementos-dom.html">Selección de Elementos</a></li>
+            <li><a href="2.-eventos.html">Eventos</a></li>
+            <li><a href="3.-modificacion-atributos-y-propiedades.html">Modificación de Atributos</a></li>
+            <li><a href="4.-manipulacion-dom.html">Manipulación del DOM</a></li>
+            <li><a href="5.-filtrado.html">Filtrado</a></li>
+            <li><a href="6.-navegacion-dom.html">Navegación por el DOM</a></li>
+            <li><a href="7.-efectos.html">Efectos</a></li>
+            <li><a href="8.-ajax.html">AJAX</a></li>
+        </ul>
+    </nav>  
+    <section>
+        <h2>Manipulación del DOM con jQuery</h2>
+        <article id="miElemento">
+            <output class="informacion mostrar">Contenido inicial de miElemento.</output>
+        </article>
+
+        <fieldset>
+            <legend>Adición de elementos</legend>
+            <menu class="grupo-botones">
+                <button class="azul" id="append">.append()</button>
+                <button class="azul" id="prepend">.prepend()</button>
+                <button class="azul" id="before">.before()</button>
+                <button class="azul" id="after">.after()</button>
+            </menu>
+        </fieldset>
+
+        <fieldset>
+            <legend>Envolvimiento de elementos</legend>
+            <menu class="grupo-botones">
+                <button class="azul" id="wrap">.wrap()</button>
+                <button class="azul" id="wrapAll">.wrapAll()</button>
+            </menu>
+        </fieldset>
+
+        <fieldset>
+            <legend>Eliminación de elementos</legend>
+            <menu class="grupo-botones">
+                <button class="azul" id="unwrap">.unwrap()</button>
+                <button class="azul" id="remove">.remove()</button>
+                <button class="azul" id="empty">.empty()</button>
+                <button class="azul" id="detach">.detach()</button>
+            </menu>
+        </fieldset>
+
+        <fieldset>
+            <legend>Clonación y reemplazo</legend>
+            <menu class="grupo-botones">
+                <button class="azul" id="clone">.clone()</button>
+                <button class="azul" id="replaceWith">.replaceWith()</button>
+                <button class="azul" id="replaceAll">.replaceAll()</button>
+            </menu>
+        </fieldset>
+    </section>
+</body>
+</html>

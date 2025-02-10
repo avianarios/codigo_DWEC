@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Eventos en jQuery</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estilos-barra-navegacion.css" type="text/css">
+    <script type="module" src="../js/2.-eventos.js" defer></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
+</head>
+<body class="contenedor-flex-vertical">
+    <nav class="navbar">
+        <ul>
+            <li><a href="1.-seleccion-elementos-dom.html">Selección de Elementos</a></li>
+            <li><a href="2.-eventos.html">Eventos</a></li>
+            <li><a href="3.-modificacion-atributos-y-propiedades.html">Modificación de Atributos</a></li>
+            <li><a href="4.-manipulacion-dom.html">Manipulación del DOM</a></li>
+            <li><a href="5.-filtrado.html">Filtrado</a></li>
+            <li><a href="6.-navegacion-dom.html">Navegación por el DOM</a></li>
+            <li><a href="7.-efectos.html">Efectos</a></li>
+            <li><a href="8.-ajax.html">AJAX</a></li>
+        </ul>
+    </nav>  
+    <main>
+        <h1>Gestión de Eventos en jQuery</h1>
+
+        <!-- Sección Evento click -->
+        <section>
+            <h2>Evento Click</h2>
+            <menu class="grupo-botones">
+                <button id="eventoClick" class="azul">Hacer clic aquí</button>
+            </menu>
+            <p id="resultadoClick">Esperando clic...</p>
+        </section>
+
+        <!-- Sección Evento change -->
+        <section>
+            <h2>Evento Change</h2>
+            <input type="text" id="eventoChange" placeholder="Escribe algo">
+            <p id="resultadoChange">Esperando cambio...</p>
+        </section>
+
+        <!-- Sección Evento focusin -->
+        <section>
+            <h2>Evento Focusin</h2>
+            <input type="text" id="eventoFocus" placeholder="Foca este campo">
+            <p id="resultadoFocus">Esperando foco...</p>
+        </section>
+
+        <!-- Sección Evento focusout -->
+        <section>
+            <h2>Evento Focusout</h2>
+            <input type="text" id="eventoBlur" placeholder="Saca el foco de este campo">
+            <p id="resultadoBlur">Esperando foco fuera...</p>
+        </section>
+
+        <!-- Sección Evento hover -->
+        <section>
+            <h2>Evento Hover</h2>
+            <div id="eventoHover" style="width: 200px; height: 200px; background-color: lightblue; text-align: center; line-height: 200px;">Pasa el ratón aquí</div>
+            <p id="resultadoHover">Esperando hover...</p>
+        </section>
+
+        <!-- Sección Evento keyup y keydown -->
+        <section>
+            <h2>Evento Keyup y Keydown</h2>
+            <input type="text" id="eventoTeclado" placeholder="Escribe algo">
+            <p id="resultadoTeclado">Esperando tecla presionada...</p>
+        </section>
+
+        <!-- Sección varios eventos -->
+        <section>
+            <h2>Varios eventos: click, mouseenter, mouseleave, dblclick</h2>
+            <menu class="grupo-botones">
+                <button class="azul" id="variosEventos">Interacciona</button>
+            </menu>
+            <p id="resultadoVariosEventos">Esperando un evento click, mouseenter, mouseleave o dblclick...</p>
+        </section>
+
+        <!-- Sección Evento submit -->
+        <section>
+            <h2>Evento Submit</h2>
+            <form id="formulario">
+                <input type="text" placeholder="Escribe algo aquí">
+                <menu class="grupo-botones">
+                    <button type="submit" class="azul">Enviar</button>
+                </menu>
+            </form>
+            <p id="resultadoSubmit">Esperando envío...</p>
+        </section>
+
+        <!-- Sección Evento resize -->
+        <section>
+            <h2>Evento Resize</h2>
+            <p id="resultadoResize">Esperando redimensionamiento...</p>
+        </section>
+    </main>
+</body>
+</html>

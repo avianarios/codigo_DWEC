@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selección de Elementos con jQuery</title>
+    <link rel="stylesheet" href="../css/estilos.css" type="text/css">
+    <link rel="stylesheet" href="../css/estilos-barra-navegacion.css" type="text/css">
+    <script type="module" src="../js/1.-seleccion-elementos-dom.js" defer></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
+</head>
+<body class="contenedor-flex-vertical">
+    <nav class="navbar">
+        <ul>
+            <li><a href="1.-seleccion-elementos-dom.html">Selección de Elementos</a></li>
+            <li><a href="2.-eventos.html">Eventos</a></li>
+            <li><a href="3.-modificacion-atributos-y-propiedades.html">Modificación de Atributos</a></li>
+            <li><a href="4.-manipulacion-dom.html">Manipulación del DOM</a></li>
+            <li><a href="5.-filtrado.html">Filtrado</a></li>
+            <li><a href="6.-navegacion-dom.html">Navegación por el DOM</a></li>
+            <li><a href="7.-efectos.html">Efectos</a></li>
+            <li><a href="8.-ajax.html">AJAX</a></li>
+        </ul>
+    </nav>    
+    <main>
+        <h1>Selección de Elementos con jQuery</h1>
+
+        <!-- Selección por ID -->
+        <section>
+            <h2>Selección por ID</h2>
+            <p id="#miParrafo">Este es un encabezado con ID "miEncabezado".</p>
+            <pre><code>$('#miParrafo');</code></pre>
+        </section>
+
+        <!-- Selección por Clase -->
+        <section>
+            <h2>Selección por clase</h2>
+            <p class="miClase">Elemento 1 con clase "miClase".</p>
+            <p class="miClase">Elemento 2 con clase "miClase".</p>
+            <pre><code>$('.miClase');</code></pre>
+        </section>
+
+        <!-- Selección por Etiqueta -->
+        <section>
+            <h2>Selección por etiqueta</h2>
+            <p>Este es un párrafo.</p>
+            <p>Otro párrafo.</p>
+            <pre><code>$('p');</code></pre>
+        </section>
+
+        <!-- Selección Múltiple -->
+        <section>
+            <h2>Selección múltiple</h2>
+            <p>Párrafo</p>
+            <h3>Encabezado h3</h3>
+            <pre><code>$('p, h3');</code></pre>
+        </section>
+
+        <!-- Selección de un elemento dentro de otro -->
+        <section>
+            <h2>Selección de un elemento dentro de otro</h2>
+            <section id="contenedor">
+                <p>Un párrafo dentro del contenedor</p>
+                <p>Otro párrafo dentro del contenedor</p>
+            </section>
+            <pre><code>$('#contenedor p');</code></pre>
+        </section>
+
+        <!-- Selección primer y último elemento -->
+        <section>
+            <h2>Selección del primer y último elemento</h2>
+            <ul>
+                <li>Elemento 1</li>
+                <li>Elemento 2</li>
+                <li>Elemento 3</li>
+            </ul>
+            <pre><code>$('li:first');</code></pre>
+            <pre><code>$('li:last');</code></pre>
+        </section>
+
+        <!-- Selección por atributo -->
+        <section>
+            <h2>Selección por atributo</h2>
+            <input type="text" id="inputText" placeholder="Escribe algo aquí">
+            <input type="checkbox" id="checkbox" checked>
+            <a href="https://www.ejemplo.com" id="exampleLink">Enlace</a>
+            <pre><code>$('input[type="text"]');</code></pre>
+            <pre><code>$('input[type="checkbox"]');</code></pre>
+            <pre><code>$('a[href^="https://"]');</code></pre>
+        </section>
+
+        <!-- Selección de elementos visibles e invisibles -->
+        <section>
+            <h2>Selección de elementos visibles e invisibles</h2>
+            <article style="display: block;">Este div es visible.</article>
+            <article style="display: none;">Este div está oculto.</article>
+            <pre><code>$('div:visible');</code></pre>
+            <pre><code>$('div:hidden');</code></pre>
+        </section>
+
+        <!-- Selección de elementos pares e impares -->
+        <section>
+            <h2>Selección de elementos pares e impares</h2>
+            <table>
+                <tr><td>Fila 1</td></tr>
+                <tr><td>Fila 2</td></tr>
+                <tr><td>Fila 3</td></tr>
+                <tr><td>Fila 4</td></tr>
+            </table>
+            <pre><code>$('tr:odd');</code></pre>
+            <pre><code>$('tr:even');</code></pre>
+        </section>
+
+        <!-- Selección de elementos con pseudoclases -->
+        <section>
+            <h2>Selección de elementos con pseudoclasee</h2>
+            <ul>
+                <li>Primer hijo</li>
+                <li>Segundo hijo</li>
+                <li>Tercer hijo</li>
+            </ul>
+            <pre><code>$('li:first-child');</code></pre>
+            <pre><code>$('li:nth-child(3)');</code></pre>
+        </section>
+
+        <menu class="grupo-botones">
+            <button id="showSelections" class="azul">Mostrar selecciones en consola</button>
+        </menu>
+    </main>
+</body>
+</html>

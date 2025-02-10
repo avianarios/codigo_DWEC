@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de AJAX con jQuery</title>
+    <link rel="stylesheet" href="../css/estilos-ajax.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estilos-barra-navegacion.css" type="text/css">
+    <script type="module" src="../js/8.-ajax.js" defer></script>
+    <!-- <script src="../js/jquery-3.7.1.min.js"></script> -->
+</head>
+<body class="contenedor-flex-vertical">
+    <nav class="navbar">
+        <ul>
+            <li><a href="1.-seleccion-elementos-dom.html">Selección de Elementos</a></li>
+            <li><a href="2.-eventos.html">Eventos</a></li>
+            <li><a href="3.-modificacion-atributos-y-propiedades.html">Modificación de Atributos</a></li>
+            <li><a href="4.-manipulacion-dom.html">Manipulación del DOM</a></li>
+            <li><a href="5.-filtrado.html">Filtrado</a></li>
+            <li><a href="6.-navegacion-dom.html">Navegación por el DOM</a></li>
+            <li><a href="7.-efectos.html">Efectos</a></li>
+            <li><a href="8.-ajax.html">AJAX</a></li>
+        </ul>
+    </nav>      
+    <main id="ajax">
+        <header>
+            <h1>AJAX</h1>
+        </header>
+
+        <section>
+            <menu class="grupo-botones">
+                <button class="azul" id="btn-get">Cargar productos</button>
+                <button class="azul" id="btn-get2">Cargar gatos</button>
+            </menu>
+            <output class="product-list oculto" id="productos"></output>
+            <output class="product-list oculto" id="gatos"></output>
+        </section>
+
+    </main>
+</body>
+</html>

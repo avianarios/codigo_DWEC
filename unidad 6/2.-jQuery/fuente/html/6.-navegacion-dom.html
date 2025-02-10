@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navegación por el DOM con jQuery</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estilos-barra-navegacion.css" type="text/css">
+    <script type="module" src="../js/6.-navegacion-dom.js" defer></script>
+    <!-- <script src="../js/jquery-3.7.1.min.js"></script> -->
+</head>
+<body class="contenedor-flex-vertical">
+    <nav class="navbar">
+        <ul>
+            <li><a href="1.-seleccion-elementos-dom.html">Selección de Elementos</a></li>
+            <li><a href="2.-eventos.html">Eventos</a></li>
+            <li><a href="3.-modificacion-atributos-y-propiedades.html">Modificación de Atributos</a></li>
+            <li><a href="4.-manipulacion-dom.html">Manipulación del DOM</a></li>
+            <li><a href="5.-filtrado.html">Filtrado</a></li>
+            <li><a href="6.-navegacion-dom.html">Navegación por el DOM</a></li>
+            <li><a href="7.-efectos.html">Efectos</a></li>
+            <li><a href="8.-ajax.html">AJAX</a></li>
+        </ul>
+    </nav>  
+    <main>
+        <h1>Navegación por el DOM con jQuery</h1>
+
+        <article id="demo-section">
+            <section id="example-container">
+                <h2>Nodos de prueba</h2>
+                <p id="parrafo1">Elemento 1 - Primer párrafo</p>
+                <p id="parrafo2">Elemento 2 - Segundo párrafo</p>
+                <p id="parrafo3">Elemento 3 - Tercer párrafo</p>
+                <section id="nested-container">
+                    <p id="parrafo4">Elemento 4 - Párrafo dentro de contenedor</p>
+                </section>
+                <p id="parrafo5">Elemento 5 - Quinto párrafo</p>
+            </section>
+        </article>
+
+        <!-- Sección padres() -->
+        <section>
+            <h2>selección de padres: parent(), parents() y parentsUntil()</h2>
+            <menu class="grupo-botones">
+                <button id="btn-parent" class="azul">Padre de #example-container</button>
+                <button id="btn-parents" class="azul">Todos los padres de #example-container</button>
+                <button id="btn-parentsUntil" class="azul">Todos los padres de #example-container hasta #demo-section</button>
+            </menu>
+            <output class="informacion" id="resultadoPadres"></output>
+        </section>
+
+        <!-- Sección navegación -->
+        <section>
+            <h2>Prueba de métodos de navegación individual</h2>
+            <menu class="grupo-botones">
+                <button id="btn-first" class="azul">Primer párrafo (first)</button>
+                <button id="btn-last" class="azul">Último párrafo (last)</button>
+                <button id="btn-eq" class="azul">Elemento en índice 2 (eq)</button>
+                <button id="btn-closest" class="azul">Buscar ancestro más cercano (closest)</button>
+            </menu>
+            <output class="informacion" id="resultadoNav"></output>
+        </section>      
+
+        <!-- Sección children() -->
+        <section>
+            <h2>hijos: children()</h2>
+            <menu class="grupo-botones">
+                <button id="btn-children" class="azul">Hijos de #example-container</button>
+            </menu>
+            <output class="informacion" id="resultadoChildren"></output>
+        </section>
+
+        <!-- Sección siblings() -->
+        <section>
+            <h2>hermanos: siblings()</h2>
+            <p>Párrafo de referencia: primer párrafo</p>
+            <menu class="grupo-botones">
+                <button id="btn-siblings" class="azul">Hermanos</button>
+            </menu>
+            <output class="informacion" id="resultadoSiblings"></output>
+        </section>
+
+        <!-- Sección next() -->
+        <section>
+            <h2>hermanos posteriores: next(), nextAll() y nextUntil()</h2>
+            <p>Párrafo de referencia: primer párrafo</p>
+            <menu class="grupo-botones">
+                <button id="btn-next" class="azul">Hermanos posteriores</button>
+                <button id="btn-nextAll" class="azul">Todos los hermanos posteriores</button>
+                <button id="btn-nextUntil" class="azul">Hermanos posteriores hasta #nested-container</button>
+            </menu>
+            <output class="informacion" id="resultadoNext"></output>
+        </section>
+
+        <!-- Sección prev() -->
+        <section>
+            <h2>hermanos anteriores: prev(), prevAll() y prevUntil()</h2>
+            <p>Párrafo de referencia: último párrafo</p>
+            <menu class="grupo-botones">
+                <button id="btn-prev" class="azul">Hermanos anteriores</button>
+                <button id="btn-prevAll" class="azul">Todos los hermanos anteriores</button>
+                <button id="btn-prevUntil" class="azul">Hemranos anteriores hasta el primero</button>
+            </menu>
+            <output class="informacion" id="resultadoPrev"></output>
+        </section>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery Effects</title>
+    <link rel="stylesheet" href="../css/estilos.css" type="text/css">
+    <link rel="stylesheet" href="../css/estilos-barra-navegacion.css" type="text/css">
+    <script type="module" src="../js/7.-efectos.js" defer></script>
+    <!-- <script src="../js/jquery-3.7.1.min.js"></script> -->
+</head>
+<body class="contenedor-flex-vertical">
+    <nav class="navbar">
+        <ul>
+            <li><a href="1.-seleccion-elementos-dom.html">Selección de Elementos</a></li>
+            <li><a href="2.-eventos.html">Eventos</a></li>
+            <li><a href="3.-modificacion-atributos-y-propiedades.html">Modificación de Atributos</a></li>
+            <li><a href="4.-manipulacion-dom.html">Manipulación del DOM</a></li>
+            <li><a href="5.-filtrado.html">Filtrado</a></li>
+            <li><a href="6.-navegacion-dom.html">Navegación por el DOM</a></li>
+            <li><a href="7.-efectos.html">Efectos</a></li>
+            <li><a href="8.-ajax.html">AJAX</a></li>
+        </ul>
+    </nav>      
+        <main id="effects">
+            <header>
+                <h1>Efectos</h1>
+            </header>
+
+            <section id="show-hide-toggle">
+                <h2>Aparecer/Desaparecer: show, hide and toggle</h2>
+                <menu class="grupo-botones">
+                    <button class="azul" id="show-btn">Click to show</button>
+                    <button class="azul" id="hide-btn">Click to hide</button>
+                    <button class="azul" id="toggle-btn">Click to toggle</button>
+                </menu>
+                <article class="parrafos-efectos">
+                    <p class="very-slow">this paragrah will hide/show very slow</p>
+                    <p class="slow">this paragrah will hide/show slow</p>
+                    <p class="normal">this paragrah will hide/show normal</p>
+                    <p class="fast">this paragrah will hide/show fast</p>
+                    <p class="very-fast">this paragrah will hide/show very fast</p>
+                </article>
+                <output id="resultadoAparecer" class="informacion oculto"></output>
+            </section>
+
+
+            <section id="fadeIn-fadeOut-fadeToggle">
+                <h2>Aparecer/Desvanecer: fadeIn, fadeOut and fadeToggle</h2>
+                <menu class="grupo-botones">
+                    <button class="azul" id="fadeIn-btn">Click to fadeIn</button>
+                    <button class="azul" id="fadeOut-btn">Click to fadeOut</button>
+                    <button class="azul" id="fadeToggle-btn">Click to fadeToggle</button>
+                </menu>
+                <article class="parrafos-efectos">
+                    <p class="very-slow">this paragrah will fadeIn/fadeOut very slow</p>
+                    <p class="slow">this paragrah will fadeIn/fadeOut slow</p>
+                    <p class="normal">this paragrah will fadeIn/fadeOut normal</p>
+                    <p class="fast">this paragrah will fadeIn/fadeOut fast</p>
+                    <p class="very-fast">this paragrah will fadeIn/fadeOut very fast</p>
+                </article>
+                <output id="resultadoDesvanecer" class="informacion oculto"></output>
+            </section>
+
+
+            <section id="fadeTo">
+                <h2>fadeTo</h2>
+                <menu class="grupo-botones">
+                    <input type="number" name="opacidad" placeholder="opacidad" min="0" max="1" step="0.1">
+                    <button class="azul" id="fadeTo-btn">Click to fadeTo</button>
+                </menu>
+                <article class="parrafos-efectos">
+                    <p class="very-slow">this paragrah will fadeTo very slow</p>
+                    <p class="slow">this paragrah will fadeTo slow</p>
+                    <p class="normal">this paragrah will fadeTo normal</p>
+                    <p class="fast">this paragrah will fadeTo fast</p>
+                    <p class="very-fast">this paragrah will fadeTo very fast</p>
+                </article>
+                <output id="resultadofadeTo" class="informacion oculto"></output>
+            </section>
+
+
+            <section id="deslizar">
+                <h2>Deslizar: slideUp, slideDown and slideToggle</h2>
+                <menu class="grupo-botones">
+                    <button class="azul" id="slideUp-btn">Click to slideUp</button>
+                    <button class="azul" id="slideDown-btn">Click to slideDown</button>
+                    <button class="azul" id="slideToggle-btn">Click to slideToggle</button>
+                </menu>
+                <article class="parrafos-efectos">
+                    <p class="very-slow">this paragrah will hide/show very slow</p>
+                    <p class="slow">this paragrah will hide/show slow</p>
+                    <p class="normal">this paragrah will hide/show normal</p>
+                    <p class="fast">this paragrah will hide/show fast</p>
+                    <p class="very-fast">this paragrah will hide/show very fast</p>
+                </article>
+                <output id="resultadoDeslizar" class="informacion oculto"></output>
+            </section>
+        </section>
+
+
+        <section id="animations" class="contenedor-flex-columna gap fondo-bisque borde">
+            <h2>Animaciones</h2>
+            <div id="caja1" class="caja">Desplazamiento</div>
+            <div id="caja2" class="caja">Desvanecimiento</div>
+            <div id="caja3" class="caja">Acercamiento</div>
+            <div id="caja4" class="caja">Rotación</div>
+            <menu class="grupo-botones">
+                <button class="azul" id="start-animate">Desplazar</button>
+                <button class="azul" id="start-fade">Desvanecer</button>
+                <button class="azul" id="start-zoom">Acercar</button>
+                <button class="azul" id="start-rotate">Rotar</button>
+                <button class="azul" id="start-chained">Encadenar animación</button>
+            </menu>
+        </section>
+</body>
+</html>

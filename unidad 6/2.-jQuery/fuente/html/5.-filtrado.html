@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navegación por el DOM con jQuery</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estilos-barra-navegacion.css" type="text/css">
+    <script type="module" src="../js/5.-filtrado.js" defer></script>
+    <!-- <script src="../js/jquery-3.7.1.min.js"></script> -->
+</head>
+<body class="contenedor-flex-vertical">
+    <nav class="navbar">
+        <ul>
+            <li><a href="1.-seleccion-elementos-dom.html">Selección de Elementos</a></li>
+            <li><a href="2.-eventos.html">Eventos</a></li>
+            <li><a href="3.-modificacion-atributos-y-propiedades.html">Modificación de Atributos</a></li>
+            <li><a href="4.-manipulacion-dom.html">Manipulación del DOM</a></li>
+            <li><a href="5.-filtrado.html">Filtrado</a></li>
+            <li><a href="6.-navegacion-dom.html">Navegación por el DOM</a></li>
+            <li><a href="7.-efectos.html">Efectos</a></li>
+            <li><a href="8.-ajax.html">AJAX</a></li>
+        </ul>
+    </nav>  
+    <main>
+        <h1>Filtrado</h1>
+
+        <article id="demo-section">
+            <section id="example-container">
+                <h2>Nodos de prueba</h2>
+                <p id="parrafo1">Elemento 1 - Primer párrafo</p>
+                <p id="parrafo2">Elemento 2 - Segundo párrafo</p>
+                <p id="parrafo3">Elemento 3 - Tercer párrafo</p>
+                <section id="nested-container">
+                    <p id="parrafo4">Elemento 4 - Párrafo dentro de contenedor</p>
+                </section>
+                <p id="parrafo5">Elemento 5 - Quinto párrafo</p>
+            </section>
+        </article>
+
+        <!-- Sección filtrado -->
+        <section>
+            <h2>Prueba de Métodos de Selección y Navegación</h2>
+            <menu class="grupo-botones">
+                <button id="btn-not" class="azul">Excluir el primer párrafo (not)</button>
+                <button id="btn-hasClass" class="azul">Filtrar por clase (hasClass)</button>
+                <button id="btn-filter" class="azul">Filtrar párrafos con texto "Elemento 1" (filter)</button>
+            </menu>
+            <output class="informacion" id="resultadoNav"></output>
+        </section>
+
+        <!-- Sección find() -->
+        <section>
+            <h2>find()</h2>
+            <menu class="grupo-botones">
+                <button id="btn-find" class="azul">Todos los párrafos</button>
+            </menu>
+            <output class="informacion" id="resultadoFind"></output>
+        </section>
+
+    </main>
+</body>
+</html>
