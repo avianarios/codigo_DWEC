@@ -1,0 +1,33 @@
+{
+  "name": "jquery",
+  "version": "1.0.0",
+  "description": "jquery-example",
+  "scripts": {
+    "parcel:desarrollo": "parcel serve fuente/html/*.html --dist-dir compilado/desarrollo",
+    "parcel:produccion": "parcel build fuente/html/*.html --public-url './' --dist-dir compilado/produccion",
+    "limpia": "rimraf desarrollo produccion .parcel-cache",
+    "des": "run-s limpia parcel:desarrollo",
+    "prod": "run-s limpia parcel:produccion"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avianarios/codigo_DWEC.git"
+  },
+  "keywords": [
+    "jquery"
+  ],
+  "author": "Alejandro Viana Ríos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avianarios/codigo_DWEC/issues"
+  },
+  "homepage": "https://github.com/avianarios/codigo_DWEC#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.13.3",
+    "rimraf": "^6.0.1"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1"
+  }
+}
