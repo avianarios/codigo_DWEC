@@ -1,0 +1,202 @@
+/* Reinicio de estilos */
+menu {
+    margin: 10px;
+    padding: 0px;
+    list-style: none; /* Elimina los estilos de lista */
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.contenedor-flex-vertical{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main {
+    max-width: 800px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 2rem;
+    padding-top: 0px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    margin-top: 0;
+    color: #555;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 0.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: bold;
+}
+
+select, input {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.grupo-botones {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button.azul {
+    background-color: #007bff;
+    color: white;
+}
+
+button.azul:hover {
+    background-color: white;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+button.verde {
+    background-color: #28a745;
+    color: white;
+}
+
+button.verde:hover {
+    background-color: white;
+    color: #28a745;
+    border: 2px solid #28a745;
+}
+
+output.informacion {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #ffeb3b; /* Amarillo llamativo*/
+    border: 1px solid #ffc107;
+    border-radius: 5px;
+    color: #333;
+    font-size: 1rem;
+    text-align: center;
+    display: none; /* Oculto inicialmente */
+}
+
+output.mostrar-msj {
+    display: flex; /* Visible cuando hay contenido */
+    justify-content: center;
+}
+
+
+/*Efecto de desvanecimiento de los mensajes al irse*/
+.mostrar-msj {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.ocultar-msj, .oculto {
+    display: none;
+}
+
+
+fieldset{
+    display: flex;
+    flex-direction: column;
+}
+
+.texto-rojo{
+    color: red;
+}
+
+
+.parrafos-efectos > p {
+    width: 100%;
+    background-color: #c3dffd; /* Un tono más suave de lightcoral */
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    color: #000; /* Blanco para el texto */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid #007bff
+}
+
+
+.caja {
+    width: 200px;
+    height: 100px;
+    background-color: #4CAF50;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    text-align: center;
+    position: relative;
+    border-radius: 10px;
+    border: 2px solid;
+}
+
+#caja2 {
+    background-color: #ffc5bb;
+    border-color: red;
+
+}
+
+#caja3 {
+    background-color: #b4daff;
+    border-color: blue;
+}
+
+#caja4 {
+    background-color: #fff4b6;
+    border-color: #FFD700;
+}
