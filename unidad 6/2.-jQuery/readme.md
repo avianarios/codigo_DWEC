@@ -1,15 +1,16 @@
 # jQuery
 
 1. [Introduction to jQuery](#1--introduction-to-jquery)
-2. [Using jQuery](#2--using-jquery)
-3. [Element Selection](#3--element-selection)
-4. [Modifying Attributes and Properties](#4--modifying-attributes-and-properties)
-5. [Events](#5--events)
-6. [DOM Manipulation](#6--dom-modification)
-7. [DOM Traversal](#7--dom-navigation)
-8. [Filtering](#8--filtering)
-9. [Effects](#9--effects)
-10. [Asynchrony (AJAX)](#10--asynchrony-ajax)
+2. [Installing and using jQuery](#2--installing-and-using-jquery)
+3. [First steps with jQuery](#3--first-steps-with-jquery)
+4. [Element Selection](#4--element-selection)
+5. [Modifying Attributes and Properties](#5--modifying-attributes-and-properties)
+6. [Events](#6--events)
+7. [DOM Manipulation](#7--dom-modification)
+8. [DOM Traversal](#8--dom-navigation)
+9. [Filtering](#9--filtering)
+10. [Effects](#10--effects)
+11. [Asynchrony (AJAX)](#11--asynchrony-ajax)
 
 ---
 
@@ -43,7 +44,7 @@ Although jQuery is still widely used, especially in older projects, many develop
 ---
 
 
-# 2- Using jQuery
+# 2- Installing and using jQuery
 
 You can use jQuery by including a link to a CDN (Content Delivery Network) or installing it using node
 
@@ -105,7 +106,33 @@ You can use jQuery by including a link to a CDN (Content Delivery Network) or in
 
 ----
 
-# 3- Element selection
+# 3- First steps with jQuery
+Every jQuery script used to start with the following:
+```javascript
+$(document).ready((()=>{
+  // jquery code 
+});
+```
+which essentially means, ‘execute the code when the DOM is loaded and the document is ready’. Its javascript equivalent would be:
+```javascript
+document.addEventListener(‘DOMContentLoaded’, ()=>{ 
+  // rest of code
+});
+```
+
+This ensured that the code was only executed when the DOM was loaded, but since defer is used in the header, it is no longer necessary to use it in JavaScript. However, it is still required in jQuery. However, the previous syntax is deprecated and the following is the modern syntax:
+```javascript
+$(() => {
+   // jQuery code here
+});
+```
+
+ **`$()`**, which is a fundamental jQuery global function. It is the core of jQuery, the entry point to the library and returns a `jQuery` object, which allows you to select and manipulate DOM elements, handle events, perform AJAX requests and execute code when the document is ready.
+
+
+-----
+
+# 4- Element selection
 
 **`$()`** is a fundamental jQuery global function. It is the core of jQuery, the entry point to the library and returns a `jQuery` object, which allows you to select and manipulate DOM elements, handle events, perform AJAX requests and execute code when the document is ready.
 
@@ -170,7 +197,7 @@ Element selection is one of the most important features of jQuery, as it allows 
 ----
 
 
-# 4- Modifying attributes and properties
+# 5- Modifying attributes and properties
 
 In jQuery it is possible to modify attributes and parameters of HTML elements in a simple way using specific methods.
 
@@ -369,7 +396,7 @@ In jQuery it is possible to modify attributes and parameters of HTML elements in
   -----
 
 
-# 5- Events
+# 6- Events
 
 In jQuery, **events** are mechanisms that allow developers to perform an action when an event occurs, such as a click, a keystroke, or a change to a form. jQuery makes it easy to assign events using a simple syntax.
 
@@ -512,7 +539,7 @@ In jQuery, **events** are mechanisms that allow developers to perform an action 
 
   ----
 
-# 6- DOM Modification
+# 7- DOM Modification
 
 ## Addition
 
@@ -618,7 +645,7 @@ In jQuery, **events** are mechanisms that allow developers to perform an action 
 
 ----
 
-## 7- DOM Navigation
+# 8- DOM Navigation
 
 The following methods allow you to navigate through the DOM to efficiently select and manipulate elements.
 
@@ -724,7 +751,7 @@ The following methods allow you to navigate through the DOM to efficiently selec
 
 ----
 
-# 8- Filtering
+# 9- Filtering
 
 - `.hasClass()` → Checks if an element has a specific class.
 
@@ -744,7 +771,7 @@ The following methods allow you to navigate through the DOM to efficiently selec
 
 ---
 
-# 9- Effects
+# 10- Effects
 
 jQuery **effects** methods allow adding interactivity to web page elements through animations, visibility changes, transitions, and other visual effects. These methods are easy to use and can significantly enhance user experience.
 
@@ -868,11 +895,11 @@ jQuery **effects** methods allow adding interactivity to web page elements throu
 
 ----
 
-# 10- Asynchrony (AJAX)
+# 11- Asynchrony (AJAX)
 
 AJAX (Asynchronous JavaScript and XML) is a technique used to make HTTP requests asynchronously without needing to reload the page. jQuery provides an easy way to perform AJAX requests using the `$.ajax()` method, along with other shorthand methods. Below, we explain two main ways to handle AJAX requests in jQuery: with **implicit callbacks** and using **promises**.
 
-## 10.1. AJAX with Implicit Callbacks
+## 11.1. AJAX with Implicit Callbacks
 
 The `$.ajax()` method in jQuery uses **implicit callbacks** to handle request responses. Callbacks are functions passed as arguments that execute when a response is received from the server.
 
@@ -906,7 +933,7 @@ $(() => {
 - `error`: This callback executes if the request fails.
 
 
-## 10.2. AJAX with Promises
+## 11.2. AJAX with Promises
 
 jQuery also allows working with promises when using the `$.ajax()` method. Promises provide a cleaner and more flexible way to handle asynchronous responses through the `.done()`, `.fail()`, and `.always()` methods.
 

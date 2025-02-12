@@ -1,15 +1,16 @@
 # jQuery
 
 1. [Introducción a jQuery](#1--introducción-a-jquery)
-2. [Uso de jQuery](#2--uso-de-jquery)
-3. [Selección de elementos](#3--selección-de-elementos)
-4. [Modificación de atributos y propiedades](#4--modificación-de-atributos-y-propiedades)
-5. [Eventos](#5--eventos)
-6. [Modificación del DOM](#6--modificación-del-dom)
-7. [Navegación por el DOM](#7--navegación-por-el-dom)
-8. [Filtrado](#8--filtrado)
-9. [Efectos](#9--efectos)
-10. [Asincronía (AJAX)](#10--asincronía-ajax)
+2. [Instalación y uso de jQuery](#2--instalación-y-uso-de-jquery)
+3. [Primeros pasos con jQuery](#3--primeros-pasos-con-jquery)
+4. [Selección de elementos](#4--selección-de-elementos)
+5. [Modificación de atributos y propiedades](#5--modificación-de-atributos-y-propiedades)
+6. [Eventos](#6--eventos)
+7. [Modificación del DOM](#7--modificación-del-dom)
+8. [Navegación por el DOM](#8--navegación-por-el-dom)
+9. [Filtrado](#9--filtrado)
+10. [Efectos](#10--efectos)
+11. [Asincronía (AJAX)](#11--asincronía-ajax)
 
 ---
 
@@ -42,7 +43,7 @@ Aunque jQuery sigue siendo ampliamente utilizado, especialmente en proyectos má
 
 ----
 
-# 2- Uso de jQuery
+# 2- Instalación y uso de jQuery
 
 Se puede usar jQuery mediante la inclusión de un enlace a un CDN (Content Delivery Network) o instalándolo mediante node
 
@@ -104,9 +105,35 @@ Se puede usar jQuery mediante la inclusión de un enlace a un CDN (Content Deliv
 
 ----
 
-# 3- Selección de elementos
+# 3- Primeros pasos con jQuery
+Todo script de jQuery solía empezar con lo siguiente:
+ ```javascript
+$(document).ready(()=>{
+  // código jquery 
+});
+ ```
+que en esencia significa, "ejecuta el código cuando se haya cargado el DOM y el documento esté listo". Su equivalente en javascript sería:
+```javascript
+document.addEventListener("DOMContentLoaded", ()=>{ 
+  // resto de código
+});
+```
 
-**`$()`** es una función global de jQuery fundamental. Es el núcleo de jQuery, el punto de entrada a la biblioteca y devuelve un objeto `jQuery`, que permite seleccionar y manipular elementos del DOM, manejar eventos, realizar peticiones AJAX y ejecutar código cuando el documento está listo.
+Esto aseguraba que el código sólo se ejecutaba cuando el DOM estuviera cargado, pero desde que se usa defer en el encabezado, ya no es necesario usarlo en JavaScript. Sin embargo, en jQuery sigue siendo necesario ponerlo. No obstante, la sintaxis anterior está obsoleta siendo la siguiente la moderna:
+```javascript
+$(() => {
+   // Código jQuery aquí
+});
+```
+
+
+ **`$()`**, que es una función global de jQuery fundamental. Es el núcleo de jQuery, el punto de entrada a la biblioteca y devuelve un objeto `jQuery`, que permite seleccionar y manipular elementos del DOM, manejar eventos, realizar peticiones AJAX y ejecutar código cuando el documento está listo.
+
+
+----
+
+# 4- Selección de elementos
+
 
 La selección de elementos es una de las características más importantes de jQuery, ya que permite manipular el DOM de manera eficiente. jQuery utiliza selectores similares a los de CSS, lo que facilita la búsqueda y manipulación de elementos en la página.
 
@@ -168,7 +195,7 @@ La selección de elementos es una de las características más importantes de jQ
 
 ----
 
-# 4- Modificación de atributos y propiedades
+# 5- Modificación de atributos y propiedades
 
 En jQuery es posible modificar atributos y parámetros de elementos HTML de manera sencilla usando métodos específicos.
 
@@ -366,7 +393,7 @@ En jQuery es posible modificar atributos y parámetros de elementos HTML de mane
 
 ----
 
-# 5- Eventos
+# 6- Eventos
 
 En jQuery, los **eventos** son mecanismos que permiten a los desarrolladores ejecutar una acción cuando ocurre un evento, como un clic, una pulsación de tecla o un cambio en un formulario. jQuery facilita la asignación de eventos mediante una sintaxis simple.
 
@@ -509,7 +536,7 @@ En jQuery, los **eventos** son mecanismos que permiten a los desarrolladores eje
 
 ----
 
-# 6- Modificación del DOM
+# 7- Modificación del DOM
 
 ## Adición
 
@@ -612,7 +639,7 @@ En jQuery, los **eventos** son mecanismos que permiten a los desarrolladores eje
 
 ----
 
-# 7- Navegación por el DOM
+# 8- Navegación por el DOM
 
 Los siguientes métodos te permiten navegar a través del DOM para seleccionar y manipular elementos de manera eficiente.
 
@@ -718,7 +745,7 @@ Los siguientes métodos te permiten navegar a través del DOM para seleccionar y
 
 -----
 
-# 8- Filtrado
+# 9- Filtrado
 
 - `.hasClass()` → Verifica si un elemento tiene una clase específica.
 
@@ -738,7 +765,7 @@ Los siguientes métodos te permiten navegar a través del DOM para seleccionar y
 
 ---
 
-# 9- Efectos
+# 10- Efectos
 
 Los métodos de **efectos** en jQuery permiten agregar interactividad a los elementos de una página web mediante animaciones, cambios de visibilidad, desplazamientos y otros efectos visuales. Estos métodos son fáciles de usar y pueden ser muy efectivos para mejorar la experiencia del usuario.
 
@@ -867,11 +894,11 @@ Los métodos de **efectos** en jQuery permiten agregar interactividad a los elem
 
 -----
 
-# 10- Asincronía (AJAX)
+# 11- Asincronía (AJAX)
 
 AJAX (Asynchronous JavaScript and XML) es una técnica utilizada para hacer solicitudes HTTP de manera asíncrona sin necesidad de recargar la página. jQuery proporciona una manera sencilla de realizar solicitudes AJAX usando el método `$.ajax()`, así como otros métodos abreviados. A continuación, se explican dos formas principales de manejar las solicitudes AJAX en jQuery: con **callbacks implícitos** y usando **promesas**.
 
-## 10.1. AJAX con Callbacks Implícitos
+## 11.1. AJAX con Callbacks Implícitos
 
 El método `$.ajax()` en jQuery utiliza **callbacks implícitos** para manejar las respuestas de las solicitudes. Los callbacks son funciones que se pasan como argumentos y que se ejecutan cuando se recibe una respuesta del servidor.
 
@@ -905,7 +932,7 @@ $(() => {
 - `error`: Este callback se ejecuta si la solicitud falla.
 
 
-## 10.2. AJAX con Promesas
+## 11.2. AJAX con Promesas
 
 jQuery también permite trabajar con promesas al usar el método `$.ajax()`. Las promesas proporcionan una forma más limpia y flexible de manejar las respuestas asíncronas mediante los métodos `.done()`, `.fail()`, y `.always()` para manejar los resultados.
 
