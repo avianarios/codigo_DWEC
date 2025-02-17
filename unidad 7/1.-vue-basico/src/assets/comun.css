@@ -1,0 +1,55 @@
+h1{
+    text-align: center;
+    font-size: 1.75rem;
+}
+
+main{
+    width: 100%;
+}
+  
+.flex-columna{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gap{
+    gap: 15px;
+}
+
+.flex-fila{
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4c77af;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.5s;
+  }
+  
+button:hover {
+    background-color: white;
+    color: #4c77af;
+    border: 2px solid #4c77af;
+}
+
+.borde{
+    border: 1px solid rgb(88, 142, 249);
+    border-radius: 5px;
+    background-color: rgb(237, 243, 255);
+    padding: 10px;
+}
+
+.mini{
+    font-size: 0.75rem;
+}
+
+.destacado{
+    color: red;
+}
