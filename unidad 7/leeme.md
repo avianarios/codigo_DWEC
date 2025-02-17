@@ -22,12 +22,18 @@
   2. Convenciones sobre los componentes
   3. El componente principal
   4. Gestión del estado
-6. Reactividad
-7. Comunicación entre componentes
+6. Directivas
+  1. Vinculación (v-bind)
+  2. Renderización condicional (v-if, v-else y v-else-if)
+  3. Renderización dinámica de listas (v-for)
+  4. Creación de vínculos bidireccionales (v-model)
+  5. Eventos (v-on)
+7. Reactividad
+8. Comunicación entre componentes
   1. Propiedades y eventos
   2. v-model y eventos
   3. defineModel
-8. Propiedades computadas
+9. Propiedades computadas
   
 
 <!-- Componentes de un solo archivo (SFC, single-file component)
@@ -453,6 +459,7 @@ En esta sección se define la estructura del componente. En versiones anteriores
 - **Etiquetas HTML**.
 - **Componentes Vue**, usando etiquetas personalizadas.
 - **Interpolación de texto**, mediante la doble llave {{}} para insertar dinámicamente valores de JavaScript dentro de etiquetas HTML.
+- **Directivas**. Permiten controlar el comportamiento del DOM. Dada su extensión y su importancia, se tratará más adelante, en un apartado distinto.
   ```vue
   <!-- Ejemplo de etiquetas HTML, componentes Vue e interpolación -->
   <template>
@@ -534,255 +541,6 @@ En esta sección se define la estructura del componente. En versiones anteriores
       };
     </script>
     ```
-
-
-- **Directivas**. Permiten controlar el comportamiento del DOM. Las siguientes directivas son mucho más poderosas si se las combina con la reactividad, que veremos más adelante.
-
-  - **v-bind**: Permite enlazar dinámicamente atributos de un elemento HTML con propiedades del componente. Así, si el valor del atributo del elemento HTML cambia en la sección script del componente, que se ejecuta antes de renderizar el DOM, el atributo tomará el valor de la propiedad en el componente. Si el valor de la propiedad es cambiado más adelante por otro componente, el valor del atributo cambiará automáticamente SÓLO SI se define la propiedad como reactiva (lo veremos más adelante).
-   
-    La sintaxis es `<article v-bind:<nombre-atributo>="propiedad">` o, de forma abreviada, `<article :<nombre-atributo>="propiedad">`. Desde Vue 3.4, si el nombre del atributo coincide con del de la propiedad del componente, se abreviar aún más con `<article :id>`
-    ```vue
-    <template>
-      <!-- Sintaxis completa. Enlaza el atributo id con la propiedad id del componente -->
-      <article v-bind:id="miID"></article>
-      <!-- Sintaxis abreviada -->
-      <article :id="miID"></article>
-    </template>
-    <script setup>
-      let miID="IDInicial";
-      miID="otroID";
-    </script>
-    ```
-
-    ```vue
-    <!-- Sintaxis desde Vue 3.4: Si el atributo y la propiedad tienen el mismo nombre, se puede poner :id -->
-    <template>
-      <article :id></article>
-    </template>
-    <script setup>
-      let miID="IDInicial";
-    </script>
-    ```
-
-    En el caso de atributos booleanos como `disabled`, `checked` o `readonly`, si el valor de la propiedad es `true`, Vue incluirá el atributo en el elemento. Si es `false` o `null`, el atributo se eliminará automáticamente. Ejemplo:
-    ```vue
-    <!-- Si esDeshabilitado se evalua a true en el código del componente, el botón tendrá el campo disabled -->
-    <button :disabled="esDeshabilitado">Enviar</button>
-    ```
-
-    También se pueden vincular objetos. En este caso se usa el '=' en vez de ':''
-    ```vue
-    <!-- Sería equivalente a <a :href="atributosEnlace.href" :target="atributosEnlace.target" :title="atributosEnlace.title">Enlace dinámico</a> -->
-    <template>
-      <article v-bind="atributosArticle">
-        <a v-bind="atributosEnlace">Enlace dinámico</a>
-      </article>
-    </template>
-
-    <script setup>
-      const atributosEnlace = {
-        href: 'https://vuejs.org',
-        target: '_blank',
-        title: 'Ir a Vue.js'
-      };
-
-      const atributosArticle={
-        id: 'container',
-        class: 'wrapper',
-        style: 'background-color:green'
-      };
-    </script>
-    ```
-
-
-    También se pueden vincular clases. Si la variable se evalúa a false, no aparecerá en el elemento
-    ```vue
-    <!-- En este ejemplo las clases se insertan siempre. Lo interesante es que, si cambian más adelante, eso se refleje en las clases de p. Eso se consigue con reactividad, que veremos más adelante -->
-    <template>
-      <p :class="{ activo: esActivo, resaltado: esResaltado }">Texto con clases dinámicas</p>
-    </template>
-
-    <script setup>
-      const esActivo = true;
-      const esResaltado = false;
-    </script>
-
-    <style>
-      .activo { color: green; }
-      .resaltado { font-weight: bold; }
-    </style>
-    ```
-
-    ```vue
-    <!-- En este ejemplo, importante y extra siempre serán insertadas -->
-    <template>
-      <p :class="[clasePrincipal, 'extra']">Texto con clases dinámicas</p>
-    </template>
-
-    <script setup>
-      const clasePrincipal = 'importante';
-    </script>
-
-    <style>
-      .importante { font-size: 20px; }
-      .extra { text-decoration: underline; }
-    </style>
-    ```
-
-    ```vue
-    <!-- En este ejemplo, se insertan estilos en línea -->
-    <template>
-      <p :style="{ color: colorTexto, fontSize: tamañoFuente + 'px' }">Texto con estilos dinámicos</p>
-    </template>
-
-    <script setup>
-      const colorTexto = 'blue';
-      const tamañoFuente = 18;
-    </script>
-    ```
-
-    ```vue
-    <!-- En este ejemplo se insertan estilos en línea como objetos -->
-    <template>
-      <p :style="[estilosBase, estilosExtra]">Texto con múltiples estilos</p>
-    </template>
-
-    <script setup>
-      const estilosBase = { color: 'red', fontWeight: 'bold' };
-      const estilosExtra = { textDecoration: 'underline' };
-    </script>
-    ```
-
-
-    ```vue
-    <!-- En este ejemplo se ejecuta una función en :title. No es recomedable porque las funciones en v-bind se ejecutan en cada actualización del componente, les afecten los cambios o no, lo cual puede ser muy costoso. Se recomienda usar propiedades computadas (se verán más adelante)-->
-    <template>
-      <time :title="toTitleDate(date)" :datetime="date">
-        {{ formatDate(date) }}
-      </time>
-    </template>
-
-    <script setup>
-      function toTitleDate(date) {
-        console.log('Ejecutando toTitleDate'); // Se ejecuta en cada actualización del componente
-        return new Date(date).toLocaleDateString();
-      }
-
-      function formatDate(date) {
-        return new Date(date).toDateString();
-      }
-    </script>
-    ```
-
-  - **v-on**: Permite escuchar eventos del DOM. Su sintaxis es `<button v-on:evento="miMetodo">Haz clic</button>` aunque tiene una forma abreviada `<button @evento="miMetodo">Haz clic</button>`. Se usan los típicos eventos: `click`, `dblclick`, `contextmenu`, `mouseover`, `mouseleave`, `focusin`, `focusout`, `input`, `change`, `keyup`, `keydown`, etc. Los eventos de teclado se pueden usar con teclas específicas como, por ejemplo: `@keyup.enter`, `@keydown.tab`, `@keyup.delete`, etc.
-    
-   Esta directiva permite usar algunos modificadores para cambiar el comportamiento del evento como, por ejemplo, 
-    - `prevent`, que evita el comportamiento por defecto del evento.
-    - `stop`, que detiene la propagación del evento.
-    - `self`, que sólo lanza el evento para este elemento, no para sus hijos.
-    - `once`, que captura el evento sólo una vez.
-    ```vue
-    <!-- Ejemplo de directiva v-on para escuchar el evento click y llamar al método "mostrarAlerta" -->
-    <template>
-      <button @click="mostrarAlerta">Haz clic</button>
-    </template>
-
-    <script setup>
-    const mostrarAlerta = () => {
-      alert('Botón pulsado');
-    };
-    </script>
-  ```
-
-  ```vue
-  <!-- Ejemplo de paso de argumentos a función de respuesta a evento -->
-  <template>
-    <button @click.left="saludar('Procopio')" @contextmenu.prevent @click.right="despedir('Procopio')">Pulsa</button>
-  </template>
-
-  <script setup>
-  const saludar = (nombre) => {
-    alert(`Hola, ${nombre}`);
-  };
-  
-  const despedir = (nombre) => {
-    alert(`Adiós, ${nombre}`);
-  };
-  </script>
-  ```
-
-  ```vue
-  <!-- Ejemplo de uso del objeto evento dentro del manejador de eventos -->
-  <template>
-    <input type="text" @input="mostrarTexto($event)">
-  </template>
-
-  <script setup>
-  const mostrarTexto = (evento) => {
-    console.log('Texto ingresado:', evento.target.value);
-  };
-  </script>
-  ```
-
-  ```vue
-  <!-- Ejemplo del uso de expresiones en línea -->
-  <button @click="contador++">Incrementar</button>
-  <p>Contador: {{ contador }}</p>
-  ```
-
-  ```vue
-  <!-- Ejemplo de uso del modificador .prevent para evitar que el evento haga su función tradicional -->
-  <template>
-    <form @submit.prevent="miFuncion">
-      <button type="submit">Enviar</button>
-    </form>
-  </template>
-  ```
-
-  ```vue
-  <!-- Ejemplo de uso del modificador.stop para evitar que el evento se propague (burbujeo) -->
-  <template>
-    <article @click="miFuncion">
-      <button @click.stop>Haz clic</button>
-    </article>
-  </template>
-  ```
-
-  ```vue
-  <!-- Ejemplo de uso del modificador .once para que la función asociada al evento sólo se ejecute una vez -->
-  <template>
-    <button @click.once="miFuncion">Haz clic una vez</button>
-  </template>
-  ```
-
-  - **v-if, v-else, v-else-if**: Permiten renderizar elementos condicionalmente.
-
-  ```vue
-  <template>
-    <p v-if="mostrarMensaje">Este mensaje solo se muestra si mostrarMensaje es true.</p>
-    <p v-else>Este mensaje sólo se muestra si mostrarMensaje es false</p>
-  </template>
-
-  <script setup>
-    const mostrarMensaje=true;
-  </script>
-  ```
-
-  - **v-for**: Permite iterar sobre una lista de elementos y renderizarlos dinámicamente.
-  ```vue
-  <template>
-    <ul>
-      <li v-for="(fruta, indice) in frutas" :key="indice">{{ indice }} - {{ fruta }}</li>
-    </ul>
-  </template>
-
-  <script setup>
-    const frutas = ["Manzana", "Plátano", "Uva"];
-  </script>
-  ```
-
-  - **v-model**: Permite crear un vínculo bidireccional entre el componente padre y el hijo. Este concepto está estrechamente relacionado con la reactividad, que exploraremos más adelante. Por ahora, es importante saber que v-model facilita la sincronización automática de datos entre componentes.
-  
 
 ### 5.1.3.- **`<style>`:**  
 En la sección `style`, que se suele colocar al final del fichero, se definen los estilos CSS para el componente. Esta etiqueta permite usar varias propiedades:
@@ -1064,8 +822,328 @@ function updateMessage() {
 
 -----
 
+# 6.- Directivas
+Las **directivas** se utilizan en la sección `template` de un componente y permiten controlar el comportamiento del DOM. Las directivas son mucho más poderosas si se las combina con la [reactividad](#7--reactividad), que veremos en la sección 7.
 
-# 6- Reactividad
+## 6.1.- Vinculación (v-bind)
+**v-bind** permite enlazar dinámicamente atributos de un elemento HTML con propiedades del componente. Así, si el valor del atributo del elemento HTML cambia en la sección script del componente, que se ejecuta antes de renderizar el DOM, el atributo tomará el valor de la propiedad en el componente. Si el valor de la propiedad es cambiado más adelante por otro componente, el valor del atributo cambiará automáticamente SÓLO SI se define la propiedad como reactiva (lo veremos más adelante).
+   
+La sintaxis es `<article v-bind:<nombre-atributo>="propiedad">` o, de forma abreviada, `<article :<nombre-atributo>="propiedad">`. Desde Vue 3.4, si el nombre del atributo coincide con del de la propiedad del componente, se abreviar aún más con `<article :id>`
+
+### Ejemplo 1: vinculación  tradicional y abreviada
+  ```vue
+  <template>
+    <!-- Sintaxis completa. Enlaza el atributo id con la propiedad id del componente -->
+    <article v-bind:id="miID"></article>
+    <!-- Sintaxis abreviada -->
+    <article :id="miID"></article>
+  </template>
+  <script setup>
+    let miID="IDInicial";
+    miID="otroID";
+  </script>
+  ```
+
+### Ejemplo 2: vinculación súper abreviada
+  ```vue
+  <!-- Sintaxis desde Vue 3.4: Si el atributo y la propiedad tienen el mismo nombre, se puede poner :id -->
+  <template>
+    <article :id></article>
+  </template>
+  <script setup>
+    let miID="IDInicial";
+  </script>
+  ```
+
+### Ejemplo 3: vinculación de atributos booleanos
+
+En el caso de atributos **booleanos** como `disabled`, `checked` o `readonly`, si el valor de la propiedad es `true`, Vue incluirá el atributo en el elemento. Si es `false` o `null`, el atributo se eliminará automáticamente. Ejemplo:
+
+  ```vue
+  <!-- Si esDeshabilitado se evalua a true en el código del componente, el botón tendrá el campo disabled -->
+  <button :disabled="esDeshabilitado">Enviar</button>
+  ```
+
+### Ejemplo 4: vinculación de objetos
+
+También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':''
+  ```vue
+  <!-- Sería equivalente a <a :href="atributosEnlace.href" :target="atributosEnlace.target" :title="atributosEnlace.title">Enlace dinámico</a> -->
+  <template>
+    <article v-bind="atributosArticle">
+      <a v-bind="atributosEnlace">Enlace dinámico</a>
+    </article>
+  </template>
+
+  <script setup>
+    const atributosEnlace = {
+      href: 'https://vuejs.org',
+      target: '_blank',
+      title: 'Ir a Vue.js'
+    };
+
+    const atributosArticle={
+      id: 'container',
+      class: 'wrapper',
+      style: 'background-color:green'
+    };
+  </script>
+  ```
+
+### Ejemplo 5: vinculación de clases
+
+  También se pueden vincular clases. Si la variable se evalúa a false, no aparecerá en el elemento
+  ```vue
+  <!-- En este ejemplo las clases se insertan siempre. Lo interesante es que, si cambian más adelante, eso se refleje en las clases de p. Eso se consigue con reactividad, que veremos más adelante -->
+  <template>
+    <p :class="{ activo: esActivo, resaltado: esResaltado }">Texto con clases dinámicas</p>
+  </template>
+
+  <script setup>
+    const esActivo = true;
+    const esResaltado = false;
+  </script>
+
+  <style>
+    .activo { color: green; }
+    .resaltado { font-weight: bold; }
+  </style>
+  ```
+
+  ```vue
+  <!-- En este ejemplo, importante y extra siempre serán insertadas -->
+  <template>
+    <p :class="[clasePrincipal, 'extra']">Texto con clases dinámicas</p>
+  </template>
+
+  <script setup>
+    const clasePrincipal = 'importante';
+  </script>
+
+  <style>
+    .importante { font-size: 20px; }
+    .extra { text-decoration: underline; }
+  </style>
+  ```
+
+### Ejemplo 6: vinculación de estilos
+  ```vue
+  <!-- En este ejemplo, se insertan estilos en línea -->
+  <template>
+    <p :style="{ color: colorTexto, fontSize: tamañoFuente + 'px' }">Texto con estilos dinámicos</p>
+  </template>
+
+  <script setup>
+    const colorTexto = 'blue';
+    const tamañoFuente = 18;
+  </script>
+  ```
+
+  ```vue
+  <!-- En este ejemplo se insertan estilos en línea como objetos -->
+  <template>
+    <p :style="[estilosBase, estilosExtra]">Texto con múltiples estilos</p>
+  </template>
+
+  <script setup>
+    const estilosBase = { color: 'red', fontWeight: 'bold' };
+    const estilosExtra = { textDecoration: 'underline' };
+  </script>
+  ```
+
+### Ejemplo 7: vinculación de funciones
+  ```vue
+  <!-- En este ejemplo se ejecuta una función en :title. No es recomedable porque las funciones en v-bind se ejecutan en cada actualización del componente, les afecten los cambios o no, lo cual puede ser muy costoso. Se recomienda usar propiedades computadas (se verán más adelante)-->
+  <template>
+    <time :title="toTitleDate(date)" :datetime="date">
+      {{ formatDate(date) }}
+    </time>
+  </template>
+
+  <script setup>
+    function toTitleDate(date) {
+      console.log('Ejecutando toTitleDate'); // Se ejecuta en cada actualización del componente
+      return new Date(date).toLocaleDateString();
+    }
+
+    function formatDate(date) {
+      return new Date(date).toDateString();
+    }
+  </script>
+  ```
+
+## 6.2.- Renderización condicional (v-if, v-else, v-else-if)
+
+**v-if, v-else** y **v-else-if** permiten renderizar elementos condicionalmente. Si la condición evaluada es false, el elemento no se renderiza en absoluto.
+
+### Ejemplo: Renderización condicional
+```vue
+<template>
+  <p v-if="mostrarMensaje">Este mensaje solo se muestra si mostrarMensaje es true.</p>
+  <p v-else>Este mensaje sólo se muestra si mostrarMensaje es false</p>
+</template>
+
+<script setup>
+  const mostrarMensaje=true;
+</script>
+```
+
+  
+## 6.3.- Renderización dinámica de listas (v-for)
+**v-for** permite iterar sobre una lista de elementos y renderizarlos dinámicamente.
+
+### Ejemplo: Renderización de una matriz sencilla
+  ```vue
+  <template>
+    <ul>
+      <li v-for="(fruta, indice) in frutas" :key="indice">{{ indice }} - {{ fruta }}</li>
+    </ul>
+  </template>
+
+  <script setup>
+    const frutas = ["Manzana", "Plátano", "Uva"];
+  </script>
+  ```
+
+### Ejemplo: Renderización de una matriz de matrices
+  ```vue
+  <template>
+    <article>
+      <h1>Lista de Productos</h1>
+      <ul>
+        <li v-for="product in products" :key="product.id">
+          {{ product.name }} - ${{ product.price }}
+        </li>
+      </ul>
+    </article>
+  </template>
+
+  <script setup>
+    const products = [
+      { id: 1, name: 'Producto 1', price: 10 },
+      { id: 2, name: 'Producto 2', price: 20 },
+      { id: 3, name: 'Producto 3', price: 30 },
+    ];
+  </script>
+  ```
+
+## 6.4.- Creación de vínculos bidireccionales (v-model)
+**v-model** permite crear un vínculo bidireccional entre el componente padre y el hijo. Este concepto está estrechamente relacionado con la reactividad, que exploraremos más adelante. Por ahora, es importante saber que v-model facilita la sincronización automática de datos entre componentes.
+  
+### Ejemplo zzzzz
+
+  ```vue
+  <template>
+    <fieldset>
+      <legend>Formulario</legend>
+      <label>
+        Nombre:
+        <input type="text" :value="nombre" @input="updateNombre" />
+      </label>
+      <p>Tu nombre es: {{ nombre }}</p>
+    </fieldset>
+  </template>
+
+  <script setup>
+    let nombre = '';
+
+    function updateNombre(event) {
+      nombre = event.target.value;
+    }
+  </script>
+  ```
+
+
+## 6.4.- v-on (eventos)
+
+**v-on** permite escuchar eventos del DOM. Su sintaxis es `<button v-on:evento="miMetodo">Haz clic</button>` aunque tiene una forma abreviada `<button @evento="miMetodo">Haz clic</button>`. 
+
+Se pueden usar los típicos eventos: `click`, `dblclick`, `contextmenu`, `mouseover`, `mouseleave`, `focusin`, `focusout`, `input`, `change`, `keyup`, `keydown`, etc. Los eventos de teclado se pueden usar con teclas específicas como, por ejemplo: `@keyup.enter`, `@keydown.tab`, `@keyup.delete`, etc.
+    
+Esta directiva permite usar algunos modificadores para cambiar el comportamiento del evento como, por ejemplo, 
+  - `prevent`, que evita el comportamiento por defecto del evento.
+  - `stop`, que detiene la propagación del evento.
+  - `self`, que sólo lanza el evento para este elemento, no para sus hijos.
+  - `once`, que captura el evento sólo una vez.
+
+### Ejemplo 1: escucha del evento click y llamada al método que lo gestiona
+  ```vue
+  <!-- Ejemplo de directiva v-on para escuchar el evento click y llamar al método "mostrarAlerta" -->
+  <template>
+    <button @click="mostrarAlerta">Haz clic</button>
+  </template>
+
+  <script setup>
+  const mostrarAlerta = () => {
+    alert('Botón pulsado');
+  };
+  </script>
+  ```
+
+### Ejemplo 2: escucha del evento click y llamada al método que lo gestiona
+  ```vue
+  <!-- Ejemplo de paso de argumentos a función de respuesta a evento -->
+  <template>
+    <button @click.left="saludar('Procopio')" @contextmenu.prevent @click.right="despedir('Procopio')">Pulsa</button>
+  </template>
+
+  <script setup>
+  const saludar = (nombre) => {
+    alert(`Hola, ${nombre}`);
+  };
+  
+  const despedir = (nombre) => {
+    alert(`Adiós, ${nombre}`);
+  };
+  </script>
+  ```
+
+```vue
+<!-- Ejemplo de uso del objeto evento dentro del manejador de eventos -->
+<template>
+  <input type="text" @input="mostrarTexto($event)">
+</template>
+
+<script setup>
+const mostrarTexto = (evento) => {
+  console.log('Texto ingresado:', evento.target.value);
+};
+</script>
+```
+
+```vue
+<!-- Ejemplo del uso de expresiones en línea -->
+<button @click="contador++">Incrementar</button>
+<p>Contador: {{ contador }}</p>
+```
+
+```vue
+<!-- Ejemplo de uso del modificador .prevent para evitar que el evento haga su función tradicional -->
+<template>
+  <form @submit.prevent="miFuncion">
+    <button type="submit">Enviar</button>
+  </form>
+</template>
+```
+
+```vue
+<!-- Ejemplo de uso del modificador.stop para evitar que el evento se propague (burbujeo) -->
+<template>
+  <article @click="miFuncion">
+    <button @click.stop>Haz clic</button>
+  </article>
+</template>
+```
+
+```vue
+<!-- Ejemplo de uso del modificador .once para que la función asociada al evento sólo se ejecute una vez -->
+<template>
+  <button @click.once="miFuncion">Haz clic una vez</button>
+</template>
+```
+
+
+# 7- Reactividad
 
 La reactividad es el mecanismo que permite a Vue actualizar automáticamente la interfaz de usuario cuando los datos cambian, sin tener que manipular el DOM manualmente.
 
@@ -1097,10 +1175,10 @@ Ejemplo: Vinculación dinámica de clases
 
 -----
 
-# 7.- Comunicación entre componentes
+# 8.- Comunicación entre componentes
 Los componentes pueden comunicarse entre sí de varias maneras:
 
-## 7.1.- Propiedades + eventos
+## 8.1.- Propiedades + eventos
 - Los **Props** (propiedades) permiten que un **padre pase datos a un hijo**. Para eso, se definen en el hijo qué propiedades acepta y en el padre se le pasan como propiedades de la etiqueta que lleva el nombre del hijo. El flujo es el siguiente:
   - El padre pasa datos al hijo usando las `props`.
   - El hijo recibe las `props` definidas y las usa para mostrar o procesar los datos.
@@ -1236,7 +1314,7 @@ El flujo, por tanto es:
   ```
 
 
-## 7.2.- v-model y eventos
+## 8.2.- v-model y eventos
 Otro método para comunicar padres e hijos es usar `v-model` y eventos. `v-model` se utiliza comúnmente para la comunicación bidireccional entre componentes, especialmente en formularios.
 - **v-model**: Permite la sincronización bidireccional de datos entre el componente padre y el hijo. Es una sintaxis que simplifica el uso de `props` y eventos de la siguiente forma:
   - Evita tener que definir manualmente el evento y el método de actualización en el componente padre.
@@ -1334,7 +1412,7 @@ function updateAge(event) {
 
 ```
 
-## 7.3.- defineModel
+## 8.3.- defineModel
 Vue 3.4 introdujo `defineModel` como una forma más cómoda de trabajar con `v-model` en componentes hijos, especialmente cuando se utiliza la sintaxis `<script setup>`. Es una función que se encarga de hacer lo siguiente:
 - **Enlace de propiedades**: la función `defineModel()` permite acceder a las propiedades vinculadas con `v-model` en el componente hijo. Esto facilita la lectura y escritura de valores que se sincronizan con el padre.
 - **Manejo de eventos**: **Cuando se usa con argumentos**, `defineModel` no solo enlaza las propiedades, sino que también se encarga de emitir automáticamente los eventos necesarios para notificar al padre sobre los cambios. Esto elimina la necesidad de definir manualmente los eventos `update:modelValue`.
@@ -1446,7 +1524,7 @@ const mensaje = ref('Hola desde el padre');
 
 ----
 
-# 8.- Propiedades computadas
+# 9.- Propiedades computadas
 Cuando se usa v-bind para enlazar un atributo a una función, esa **función se ejecuta cada vez que el componente se actualiza**. Esto significa que, independientemente de si los datos que afectan a la función han cambiado o no, la función se ejecutará en cada ciclo de actualización. Si la función realiza cálculos costosos o accede a datos que no han cambiado, esto puede resultar en un rendimiento ineficiente, ya que se está haciendo trabajo innecesario.
 
 Un componente puede actualizarse por varias razones:
