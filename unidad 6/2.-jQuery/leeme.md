@@ -47,61 +47,64 @@ Aunque jQuery sigue siendo ampliamente utilizado, especialmente en proyectos má
 
 Se puede usar jQuery mediante la inclusión de un enlace a un CDN (Content Delivery Network) o instalándolo mediante node
 
-1. **Uso como recurso remoto**. Para probar jQuery o para proyectos pequeños, se puede usar un CDN:
-    ```html
-      <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    ```
+## 1. Uso como recurso remoto (CDN)
+Para probar jQuery o para proyectos pequeños, se puede usar un CDN:
+  ```html
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  ```
 
-   Esto es cómodo porque no hay que configurar nada, sólo incluir el enlace al CDN
+  Esto es cómodo porque no hay que configurar nada, sólo incluir el enlace al CDN
 
-2. **Uso como fichero local**. Se descarga el fichero, se almacena en un directorio y se enlaza en la cabecera
-    ```html
-      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    ```
+## 2. Uso como fichero local
+Se descarga el fichero, se almacena en un directorio y se enlaza en la cabecera
+  ```html
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  ```
   
-3. **Uso como recurso local**. Ideal para para proyectos más complejos y avanzados, donde se necesita poder cambiar la configuración.
+## 3. Uso como recurso local
+Ideal para para proyectos más complejos y avanzados, donde se necesita poder cambiar la configuración.
 
-    Instalarlo en local mediante node tiene una serie de ventajas:
-      - La **actualización es más sencilla**, ya que sólo hay que hacer `npm update` para actualizar los paquetes a la versión más alta sin pasar al siguiente número (por ejemplo, actualiza de la 3.6 a la 3.9, pero no a la 4.0) o `npm update paquete@latest` o `npx npm-check-updates -u` para actualizar un paquete concreto o todos los paquetes, respectivamente, a la última versión, aunque implique un cambio mayor. Con un CDN hay que conectarse de vez en cuando, descargar el fichero cuando cambie la versión y ponerlo en el directorio correcto.
-      - **Control de versiones**: Con npm, se puede especificar la versión exacta a usar en el proyecto, o incluso se puede fijar un rango de versiones compatibles para evitar sorpresas cuando se actualicen las dependencias.
-      - **Empaquetado y optimización**: Al usar un empaquetador como Webpack o Parcel el empaquetador se encargará de optimizar el código (minificarlo, dividirlo en trozos, etc.). Esto permite gestionar mejor el tamaño y la estructura del proyecto.
-      - **No depender de un CDN**: Los CDNs pueden fallar y dejar a la web sin el recurso.
+Instalarlo en local mediante node tiene una serie de ventajas:
+  - La **actualización es más sencilla**, ya que sólo hay que hacer `npm update` para actualizar los paquetes a la versión más alta sin pasar al siguiente número (por ejemplo, actualiza de la 3.6 a la 3.9, pero no a la 4.0) o `npm update paquete@latest` o `npx npm-check-updates -u` para actualizar un paquete concreto o todos los paquetes, respectivamente, a la última versión, aunque implique un cambio mayor. Con un CDN hay que conectarse de vez en cuando, descargar el fichero cuando cambie la versión y ponerlo en el directorio correcto.
+  - **Control de versiones**: Con npm, se puede especificar la versión exacta a usar en el proyecto, o incluso se puede fijar un rango de versiones compatibles para evitar sorpresas cuando se actualicen las dependencias.
+  - **Empaquetado y optimización**: Al usar un empaquetador como Webpack o Parcel el empaquetador se encargará de optimizar el código (minificarlo, dividirlo en trozos, etc.). Esto permite gestionar mejor el tamaño y la estructura del proyecto.
+  - **No depender de un CDN**: Los CDNs pueden fallar y dejar a la web sin el recurso.
 
-    Con esta opción, el fichero de clases de tailwindcss que se usa es el menor posible, porque no incluye las clases que no se utilizan y, además, si se usa un empaquetadaor, el código estará minimizado. Como desventaja, está que hay que **configurar el entorno** y **compilar el código tailwindcss** para que se genere un fichero sólo con las clases necesarias.
+  Con esta opción, el fichero de clases de tailwindcss que se usa es el menor posible, porque no incluye las clases que no se utilizan y, además, si se usa un empaquetadaor, el código estará minimizado. Como desventaja, está que hay que **configurar el entorno** y **compilar el código tailwindcss** para que se genere un fichero sólo con las clases necesarias.
 
-    Los pasos para instalar tailwindcss en node son:
+  Los pasos para instalar tailwindcss en node son:
 
-    1. **Instalar Node.js**.
+  1. **Instalar Node.js**.
 
-    2. **Iniciar el proyecto desde su directorio con `npm init`**.  
-      Responde a las preguntas para generar el archivo `package.json`, que es el archivo de configuración para Node.js.  
-      No uses mayúsculas, espacios o caracteres especiales en el campo «name».
+  2. **Iniciar el proyecto desde su directorio con `npm init`**.  
+    Responde a las preguntas para generar el archivo `package.json`, que es el archivo de configuración para Node.js.  
+    No uses mayúsculas, espacios o caracteres especiales en el campo «name».
 
-    3. **Instalar jQuery** para node como una dependencia necesaria para producción
-        ```bash
-        npm install jquery
-        ```
-    
-    4. **Instalar y configurar el empaquetador** para incluir el CSS, prefijar, minimizar y empaquetar
-        ```bash
-        npm install --save-dev parcel
-        ```
+  3. **Instalar jQuery** para node como una dependencia necesaria para producción
+      ```bash
+      npm install jquery
+      ```
+  
+  4. **Instalar y configurar el empaquetador** para incluir el CSS, prefijar, minimizar y empaquetar. En este caso parcel también se ocupará de tomar el código js de jquery en node_modules e incluirlo en nuestro proyecto
+      ```bash
+      npm install --save-dev parcel
+      ```
 
-    5. **Configurar parcel para que use jQuery como un módulo** en `package.json`
-        ```json
-        "type": "module",
-        ```
+  5. **Configurar parcel para que use jQuery como un módulo** en `package.json`
+      ```json
+      "type": "module",
+      ```
 
-    5. **Importar jquery en el archivo principal js**. El empaquetador se ocupará de coger el fichero js de jquery de node_modules y empaquetarlo. 
-        ```javascript
-        //Usando ES6
-        import $ from 'jquery';
-        ```
+  5. **Importar jquery en el archivo principal js**. El empaquetador se ocupará de coger el fichero js de jquery de node_modules y empaquetarlo. 
+      ```javascript
+      //Usando ES6
+      import $ from 'jquery';
+      ```
 
-    6. **Configurar el html para que importe js como un módulo** con `type="module"`
-        ```html
-        <script type="module" src="../js/1.-seleccion-elementos-dom.js" defer></script>
-        ```
+  6. **Configurar el html para que importe js como un módulo** con `type="module"`
+      ```html
+      <script type="module" src="../js/1.-seleccion-elementos-dom.js" defer></script>
+      ```
 
 ----
 

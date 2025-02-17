@@ -83,7 +83,7 @@ You can use jQuery by including a link to a CDN (Content Delivery Network) or in
         npm install jquery
         ```
     
-    4. **Install and configure the bundler** to include CSS, prefixing, minimizing and packaging
+    4. **Install and configure the bundler** to include CSS, prefixing, minimizing and packaging.  In this case parcel will also take the jquery js code in node_modules and include it in our project.
         ```bash
         npm install --save-dev parcel
         ```
