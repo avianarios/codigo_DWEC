@@ -911,22 +911,18 @@ El método `$.ajax()` en jQuery utiliza **callbacks implícitos** para manejar l
 $(() => {
     const urlRemota = "https://api.chucknorris.io/jokes/random";
 
-    $("#ajax").on ("click", (evento) => {
-        switch (evento.target.id) {
-            case "btn-get":
-                $.ajax({
-                    url: urlRemota,
-                    method: "GET",
-                    success: function(data) {
-                        console.log("Chiste del día:", data.value);
-                        $("#joke").text(data.value); // Mostrar el chiste en el HTML
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log("Error en la solicitud AJAX:", textStatus, errorThrown);
-                    }
-                });
-                break;
-        }
+    $("#ajax").on ("click", () => {
+      $.ajax({
+          url: urlRemota,
+          method: "GET",
+          success: function(data) {
+              console.log("Chiste del día:", data.value);
+              $("#joke").text(data.value); // Mostrar el chiste en el HTML
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              console.log("Error en la solicitud AJAX:", textStatus, errorThrown);
+          }
+      });
     });
 });
 ```
@@ -945,25 +941,21 @@ jQuery también permite trabajar con promesas al usar el método `$.ajax()`. Las
 $(() => {
     const urlRemota = "https://api.chucknorris.io/jokes/random";
 
-    $("#ajax").on ("click",(evento) => {
-        switch (evento.target.id) {
-            case "btn-get":
-                $.ajax({
-                    url: urlRemota,
-                    method: "GET",
-                })
-                .done((data) => {
-                    console.log("Chiste del día:", data.value);
-                    $("#joke").text(data.value); // Mostrar el chiste en el HTML
-                })
-                .fail((jqXHR, textStatus, errorThrown) => {
-                    console.log("Error en la solicitud AJAX:", textStatus, errorThrown);
-                })
-                .always(() => {
-                    console.log("La solicitud AJAX se ha completado.");
-                });
-                break;
-        }
+    $("#ajax").on ("click",() => {
+      $.ajax({
+          url: urlRemota,
+          method: "GET",
+      })
+      .done((data) => {
+          console.log("Chiste del día:", data.value);
+          $("#joke").text(data.value); // Mostrar el chiste en el HTML
+      })
+      .fail((jqXHR, textStatus, errorThrown) => {
+          console.log("Error en la solicitud AJAX:", textStatus, errorThrown);
+      })
+      .always(() => {
+          console.log("La solicitud AJAX se ha completado.");
+      });
     });
 });
 ```
