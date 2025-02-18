@@ -935,7 +935,7 @@ $(() => {
 
 jQuery también permite trabajar con promesas al usar el método `$.ajax()`. Las promesas proporcionan una forma más limpia y flexible de manejar las respuestas asíncronas mediante los métodos `.done()`, `.fail()`, y `.always()` para manejar los resultados.
 
-### Ejemplo de solicitud AJAX con promesas usando la API de Chuck Norris y los métodos done y fail:
+### Ejemplo de solicitud AJAX con promesas usando la API de Chuck Norris, que devuelve una cadena de texto, y los métodos done y fail
 
 ```javascript
 $(() => {
@@ -947,6 +947,7 @@ $(() => {
           method: "GET",
       })
       .done((data) => {
+          // El servidor devuelve una cadena de texto (en formato JSON) y jQuery automáticamente la convierte en un objeto JavaScript
           console.log("Chiste del día:", data.value);
           $("#joke").text(data.value); // Mostrar el chiste en el HTML
       })
@@ -963,3 +964,60 @@ $(() => {
   - `done()`: Se ejecuta cuando la solicitud se completa con éxito. Recibe los datos de la respuesta como argumento.
   - `fail()`: Se ejecuta si la solicitud falla. Recibe detalles sobre el error.
   - `always()`: Se ejecuta siempre, independientemente de si la solicitud fue exitosa o falló.
+
+
+
+### Ejemplo de solicitud AJAX con promesas usando la API de dog, que devuelve una cadena de texto que contiene la URL de la imagen, y los métodos done y fail
+
+    ```javascript
+    $.ajax({
+        url: "https://dog.ceo/api/breeds/image/random",
+        method: "GET",
+        success: function (data) {
+            $('#contenedor').empty();
+            const dogImage = data.message;
+            $('#contenedor').append(`<img src="${dogImage}" alt="Imagen de un perro" class="cat-image">`);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Error en la solicitud AJAX:", textStatus, errorThrown);
+        }
+    });
+    ```
+
+
+### Ejemplo de solicitud AJAX con promesas usando la API cataas, que devuelve una imagen como un objeto binario, y los métodos done y fail
+
+Cuando el servidor no devuelve texto, en formato json o no, sino un objeto binario (blob), es decir, una imagen, fichero o similar, hay que gestionarlo mediante el objeto XMLHttpRequest de la siguiente manera:
+
+  ```javascript
+  const direccionURL = "https://cataas.com/cat?width=100";
+
+  // Crear una solicitud AJAX manualmente con XMLHttpRequest
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", direccionURL, true);
+  xhr.responseType = "blob";  // Especificar que la respuesta es binaria
+
+  xhr.onload = function () {
+      if (xhr.status === 200) {
+          // Convertir la respuesta en un blob
+          const blob = xhr.response;
+          const imageUrl = URL.createObjectURL(blob); // Crear URL a partir del blob
+
+          // Crear la imagen y agregarla al DOM
+          const imagen = $("<img>", {
+              src: imageUrl,
+              alt: "Gato adorable",
+          });
+
+          $("#contenedor").empty().append(imagen);
+      } else {
+          console.error("Error en la solicitud: ", xhr.status);
+      }
+  };
+
+  xhr.onerror = function () {
+      console.error("Error en la solicitud AJAX");
+  };
+
+  xhr.send();
+  ```

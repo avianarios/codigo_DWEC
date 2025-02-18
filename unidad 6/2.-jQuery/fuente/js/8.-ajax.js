@@ -4,55 +4,33 @@ dotenv.config();
 
 
 $(()=>{
-    const urlRemota1 = "https://fakestoreapi.com/products/";
-    
     $("#ajax").on("click",(evento)=>{
         switch (evento.target.id){
-            case "btn-get":
+            case "btn-perro":
+                // El servidor envía una cadena de texto con la URL de la imagen
                 $.ajax({
-                    url: urlRemota1,
+                    url: "https://dog.ceo/api/breeds/image/random",
                     method: "GET",
                     success: function (data) {
-                        console.log("Server response:", data);
-                        data.forEach(product => {
-                            console.log(product.id, product.title, product.price);
-                        });
-                        // Recorrer los productos y mostrarlos en la página
-                        data.forEach(product => {
-                            let productHTML = `
-                                <article class="product">
-                                    <img src="${product.image}" alt="${product.title}">
-                                    <h3>${product.title}</h3>
-                                    <p>${product.description.substring(0, 100)}...</p>
-                                    <p class="destacado">Precio: $${product.price}</p>
-                                </article>
-                            `;
-                            $('#productos').append(productHTML);
-                            $('#productos').removeClass("oculto");
-                            $('#gatos').addClass("oculto");
-
-                        });
+                        $('#contenedor').empty();
+                        const dogImage = data.message;
+                        $('#contenedor').append(`<img src="${dogImage}" alt="Imagen de un perro" class="cat-image">`);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log("Error en la solicitud AJAX:", textStatus, errorThrown);
                     }
                 });
                 break;
-        }
-    });
+            case "btn-gatos":
+                //El servidor envía una cadena de texto con muchas URL de imágenes
+                const urlRemota2 = "https://api.thecatapi.com/v1/images/search?limit=10";
 
+                // const apiKey = process.env.API_KEY_NINJAS;
+                //Cuando hay caracteres no permitidos o se usan variables intermedias se usan corchetes
+                // const apiKey = process.env["API-KEY-NINJAS"];
+                
+                const apiKeyUrlRemota2 = process.env["API-KEY-CAT"];
 
-    const urlRemota2 = "https://api.thecatapi.com/v1/images/search?limit=5";
-
-// const apiKey = process.env.API_KEY_NINJAS;
-//Cuando hay caracteres no permitidos o se usan variables intermedias se usan corchetes
-// const apiKey = process.env["API-KEY-NINJAS"];
-
-    const apiKeyUrlRemota2 = process.env["API-KEY-CAT"];
-
-    $("#ajax").on("click", (evento)=>{
-        switch (evento.target.id){
-            case "btn-get2":
                 // Usamos una promesa con $.ajax() para obtener una imagen de un gato
                 $.ajax({
                     url: urlRemota2,
@@ -63,23 +41,57 @@ $(()=>{
                 }).done((data) => {
                     console.log("Server response:", data);
                     // Mostrar la imagen del gato
+                    $('#contenedor').empty();
                     data.forEach(cat => {
                         const catImage = cat.url;
-                        console.log("Imagen del gato:", catImage);
-                        $('#gatos').append(`<img src="${catImage}" alt="Imagen de un gato" class="cat-image">`);
-                        $('#gatos').removeClass("oculto");
-                        $('#productos').addClass("oculto");
+                        $('#contenedor').append(`<img src="${catImage}" alt="Imagen de un gato" class="cat-image">`);
                     });
-                }).fail((error) => {
-                    console.log("Error en la solicitud AJAX:", error);
+                }).fail((jqXHR, textStatus, errorThrown) => {
+                    console.log("Error en la solicitud AJAX:");
+                    console.log("Estado:", jqXHR.status); // Código HTTP (ej. 404, 500)
+                    console.log("Texto del estado:", textStatus); // Texto del error
+                    console.log("Descripción del error:", errorThrown); // Detalle del error
+                    console.log("Respuesta del servidor:", jqXHR.responseText); // Respuesta (si la hay)
                 }).always(() => {
                     console.log("La solicitud AJAX se ha completado.");
                 });
                 break;
+        
+            case "btn-gato":
+                //El servidor envía una imagen. No su URL, sino una imagen
+                const direccionURL = "https://cataas.com/cat?width=300";
+
+                // Crear una solicitud AJAX manualmente con XMLHttpRequest
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", direccionURL, true);
+                xhr.responseType = "blob";  // Especificar que la respuesta es binaria
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // Convertir la respuesta en un blob
+                        const blob = xhr.response;
+                        const imageUrl = URL.createObjectURL(blob); // Crear URL a partir del blob
+
+                        // Crear la imagen y agregarla al DOM
+                        const imagen = $("<img>", {
+                            src: imageUrl,
+                            alt: "Gato adorable",
+                        });
+                        $("#contenedor").empty().append(imagen);                        
+                    } else {
+                        console.error("Error en la solicitud: ", xhr.status);
+                    }
+                };
+
+                xhr.onerror = function () {
+                    console.error("Error en la solicitud AJAX");
+                };
+
+                xhr.send();
+                break;                
+        
         }
     });
-    
-
 });
 
 
