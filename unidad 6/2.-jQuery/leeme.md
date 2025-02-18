@@ -901,7 +901,7 @@ Los métodos de **efectos** en jQuery permiten agregar interactividad a los elem
 
 AJAX (Asynchronous JavaScript and XML) es una técnica utilizada para hacer solicitudes HTTP de manera asíncrona sin necesidad de recargar la página. jQuery proporciona una manera sencilla de realizar solicitudes AJAX usando el método `$.ajax()`, así como otros métodos abreviados. A continuación, se explican dos formas principales de manejar las solicitudes AJAX en jQuery: con **callbacks implícitos** y usando **promesas**.
 
-## 11.1. AJAX con Callbacks Implícitos
+## 11.1. AJAX con callbacks implícitos
 
 El método `$.ajax()` en jQuery utiliza **callbacks implícitos** para manejar las respuestas de las solicitudes. Los callbacks son funciones que se pasan como argumentos y que se ejecutan cuando se recibe una respuesta del servidor.
 
@@ -911,7 +911,7 @@ El método `$.ajax()` en jQuery utiliza **callbacks implícitos** para manejar l
 $(() => {
     const urlRemota = "https://api.chucknorris.io/jokes/random";
 
-    $("#ajax").click((evento) => {
+    $("#ajax").on ("click", (evento) => {
         switch (evento.target.id) {
             case "btn-get":
                 $.ajax({
@@ -945,7 +945,7 @@ jQuery también permite trabajar con promesas al usar el método `$.ajax()`. Las
 $(() => {
     const urlRemota = "https://api.chucknorris.io/jokes/random";
 
-    $("#ajax").click((evento) => {
+    $("#ajax").on ("click",(evento) => {
         switch (evento.target.id) {
             case "btn-get":
                 $.ajax({
