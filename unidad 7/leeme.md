@@ -1,6 +1,6 @@
  # Índice
 
-1. Entornos de trabajo (Frameworks)]
+1. Entornos de trabajo (Frameworks)
   1. ¿Por qué se necesita un entorno de trabajo?
   2. Entornos de trabajo populares
 2. Introducción a vue
@@ -23,11 +23,12 @@
   3. El componente principal
   4. Gestión del estado
 6. Directivas
-  1. Vinculación (v-bind)
+  1. Vinculación entre atributos y propiedades (v-bind)
   2. Renderización condicional (v-if, v-else y v-else-if)
   3. Renderización dinámica de listas (v-for)
-  4. Creación de vínculos bidireccionales (v-model)
-  5. Eventos (v-on)
+  4. Gestionar eventos (v-on)
+  5. Creación de vínculos bidireccionales (v-model)
+  6. Mostrar u ocultar dinámicamente un elemento (v-show)
 7. Reactividad
 8. Comunicación entre componentes
   1. Propiedades y eventos
@@ -35,18 +36,6 @@
   3. defineModel
 9. Propiedades computadas
   
-
-<!-- Componentes de un solo archivo (SFC, single-file component)
-Estructura de un componente
-1. script
-2. template
-3. style
-Directivas
-1. v-for
-2. v-if
-3. v-bind
-4. v-on -->
-
 -----
 
 # 1.- Entornos de trabajo (frameworks)
@@ -825,7 +814,7 @@ function updateMessage() {
 # 6.- Directivas
 Las **directivas** se utilizan en la sección `template` de un componente y permiten controlar el comportamiento del DOM. Las directivas son mucho más poderosas si se las combina con la [reactividad](#7--reactividad), que veremos en la sección 7.
 
-## 6.1.- Vinculación (v-bind)
+## 6.1.- Vinculación entre atributos y propiedades (v-bind)
 **v-bind** permite enlazar dinámicamente atributos de un elemento HTML con propiedades del componente. Así, si el valor del atributo del elemento HTML cambia en la sección script del componente, que se ejecuta antes de renderizar el DOM, el atributo tomará el valor de la propiedad en el componente. Si el valor de la propiedad es cambiado más adelante por otro componente, el valor del atributo cambiará automáticamente SÓLO SI se define la propiedad como reactiva (lo veremos más adelante).
    
 La sintaxis es `<article v-bind:<nombre-atributo>="propiedad">` o, de forma abreviada, `<article :<nombre-atributo>="propiedad">`. Desde Vue 3.4, si el nombre del atributo coincide con del de la propiedad del componente, se abreviar aún más con `<article :id>`
@@ -1027,34 +1016,7 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   </script>
   ```
 
-## 6.4.- Creación de vínculos bidireccionales (v-model)
-**v-model** permite crear un vínculo bidireccional entre el componente padre y el hijo. Este concepto está estrechamente relacionado con la reactividad, que exploraremos más adelante. Por ahora, es importante saber que v-model facilita la sincronización automática de datos entre componentes.
-  
-### Ejemplo zzzzz
-
-  ```vue
-  <template>
-    <fieldset>
-      <legend>Formulario</legend>
-      <label>
-        Nombre:
-        <input type="text" :value="nombre" @input="updateNombre" />
-      </label>
-      <p>Tu nombre es: {{ nombre }}</p>
-    </fieldset>
-  </template>
-
-  <script setup>
-    let nombre = '';
-
-    function updateNombre(event) {
-      nombre = event.target.value;
-    }
-  </script>
-  ```
-
-
-## 6.4.- v-on (eventos)
+## 6.4.- Gestionar eventos (v-on)
 
 **v-on** permite escuchar eventos del DOM. Su sintaxis es `<button v-on:evento="miMetodo">Haz clic</button>` aunque tiene una forma abreviada `<button @evento="miMetodo">Haz clic</button>`. 
 
@@ -1142,6 +1104,54 @@ const mostrarTexto = (evento) => {
 </template>
 ```
 
+## 6.5.- Creación de vínculos bidireccionales (v-model)
+Como se ha visto anteriormente `v-bind` permite crear un vínculo unidireccional entre dos elementos/componentes. Para que sea bidireccional, hace falta usar `v-bind` para vincular en un sentido y un evento para notificar de cambios en el otro sentido. Aunque **v-model** se puede usar también  para crear un vínculo unidireccional, tiene más sentido usarlo para la comunicación bidireaccional, ya que simplifica el mecanismo evitando que el programador tenga que ocuparse de la gestión del evento (definirlo, llamarlo y crear la función que lo gestiona). Sin embargo, para que la comunicación sea bidireccional, es necesario que la [reactividad](#7--reactividad) esté presente, concepto que exploraremos más adelante. Por ahora, es suficiente con saber que v-model facilita la sincronización automática de datos entre componentes.
+  
+### Ejemplo de enlace bidireccional entre un input y un p
+
+  ```vue
+  <template>
+    <fieldset>
+      <legend>Formulario</legend>
+      <label>
+        Nombre:
+        <input type="text" :value="nombre" @input="updateNombre" />
+      </label>
+      <p>Tu nombre es: {{ nombre }}</p>
+    </fieldset>
+  </template>
+
+  <script setup>
+  import { ref } from 'vue';
+
+  let nombre = ref('');
+
+  function updateNombre(event) {
+    nombre.value = event.target.value;
+  }
+  </script>
+  ```
+
+
+## 6.6.- Mostrar u ocultar dinámicamente un elemento (v-show)
+
+`v-show` permite mostrar u ocultar un elemento dinámicamente, pero sin eliminarlo del DOM. Funciona estableciendo la propiedad `display:none` cuando la condición es false. No hay que confundirlo con `v-if`, que agrega, o no, el elemento al DOM. Al igual que con `v-model`, la [reactividad](#7--reactividad) es necesaria para que el contenido se oculte o se muestre dinámicamente. Esto es porque `v-show` depende de una condición reactiva para modificar el valor de display.
+
+### Ejemplo: Mostrar u ocultar un mensaje
+  ```vue
+  <template>
+    <p v-show="mostrarMensaje">Este mensaje se puede ocultar.</p>
+    <button @click="mostrarMensaje = !mostrarMensaje">Cambiar</button>
+  </template>
+
+  <script setup>
+    import { ref } from 'vue';
+    const mostrarMensaje = ref(true);
+  </script>
+  ```
+
+
+------
 
 # 7- Reactividad
 
