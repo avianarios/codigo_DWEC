@@ -935,7 +935,7 @@ $(() => {
 
 jQuery también permite trabajar con promesas al usar el método `$.ajax()`. Las promesas proporcionan una forma más limpia y flexible de manejar las respuestas asíncronas mediante los métodos `.done()`, `.fail()`, y `.always()` para manejar los resultados.
 
-### Ejemplo de solicitud AJAX con promesas usando la API de Chuck Norris:
+### Ejemplo de solicitud AJAX con promesas usando la API de Chuck Norris y los métodos done y fail:
 
 ```javascript
 $(() => {
@@ -963,3 +963,28 @@ $(() => {
   - `done()`: Se ejecuta cuando la solicitud se completa con éxito. Recibe los datos de la respuesta como argumento.
   - `fail()`: Se ejecuta si la solicitud falla. Recibe detalles sobre el error.
   - `always()`: Se ejecuta siempre, independientemente de si la solicitud fue exitosa o falló.
+
+### Ejemplo de solicitud AJAX con promesas  usando la API de Chuck Norris y los métodos then y catch:
+
+  ```javascript
+  $(() => {
+      const urlRemota = "https://api.chucknorris.io/jokes/random";
+
+      $("#ajax").on("click", () => {
+          $.ajax({
+              url: urlRemota,
+              method: "GET",
+          })
+          .then((data) => {
+              console.log("Chiste del día:", data.value);
+              $("#joke").text(data.value); // Mostrar el chiste en el HTML
+          })
+          .catch((error) => {
+              console.log("Error en la solicitud AJAX:", error);
+          })
+          .finally(() => {
+              console.log("La solicitud AJAX se ha completado.");
+          });
+      });
+  });
+  ```
