@@ -1,7 +1,7 @@
 import $ from 'jquery';  // Usando ES6 imports
 
 $(()=>{
-    $("#effects").click((evento)=>{
+    $("#effects").on("click", (evento)=>{
          switch (evento.target.id){
             case "hide-btn":
                 $("#show-hide-toggle p.very-slow").hide(2000, ()=>{
@@ -110,7 +110,7 @@ $(()=>{
     });
 
     // Animación de Movimiento (animate)
-    $('#start-animate').click(() => {
+    $('#start-animate').on("click", () => {
         $('#caja')
             .animate({
                 left: '500px', // Mover el cuadro a la derecha
@@ -121,7 +121,7 @@ $(()=>{
     });
 
     // Animación Fade (fadeIn y fadeOut)
-    $('#start-fade').click(() => {
+    $('#start-fade').on("click", () => {
         $('#caja2')
             .fadeOut(1000, () => { // Desvanecer con un retraso
                 $('#caja2').fadeIn(1000); // Aparecer de nuevo
@@ -129,7 +129,7 @@ $(()=>{
     });
 
     // Animación de Zoom (scale)
-    $('#start-zoom').click(() => {
+    $('#start-zoom').on("click", () => {
         $('#caja3')
             .animate({
                 width: '400px',
@@ -144,7 +144,7 @@ $(()=>{
     });
 
     // Animación de Rotación (rotate)
-    $('#start-rotate').click(() => {
+    $('#start-rotate').on("click", () => {
         $('#caja4')
             .animate(
                 { borderSpacing: 90 }, 
@@ -157,7 +157,7 @@ $(()=>{
     });
 
     // Animación Encadenada
-    $('#start-chained').click(() => {
+    $('#start-chained').on("click", () => {
         $('#caja')
             .animate({
                 left: '500px', // Mover el cuadro a la derecha
