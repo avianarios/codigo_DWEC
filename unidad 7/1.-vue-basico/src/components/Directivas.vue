@@ -1,7 +1,7 @@
 <template>
     <article class="borde flex-columna">
         <h1>Directivas v-if, v-else y v-for</h1>
-        <p v-if="mostrarMensaje">Si ves este mensaje es porque mostrarMensaje es true.</p>
+        <p v-if="condicion1">Si ves este mensaje es porque mostrarMensaje es true.</p>
         <p v-else>Si ves este mensaje es porque mostrarMensaje es false</p>
         <ul>
             <li v-for="(fruta, indice) in frutasEscasas" :key="indice">{{ fruta.nombre }}: quedan {{ fruta.cantidad }} unidades</li>
@@ -12,11 +12,18 @@
                 <p>{{ tarea.descripcion }}</p>
             </li>
         </ul>
+
+        <p v-show="mostrarMensaje">Este mensaje se puede ocultar.</p>
+        <button @click="mostrarMensaje = !mostrarMensaje">Cambiar</button>
+
     </article>
 </template>
 
 <script setup>
-    const mostrarMensaje=true;
+    import { ref } from 'vue';
+    const mostrarMensaje = ref(true);
+
+    const condicion1=true;
     const frutas = [
         { nombre: 'Manzana', cantidad: 5 },
         { nombre: 'Plátano', cantidad: 2 },
