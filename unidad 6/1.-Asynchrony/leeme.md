@@ -2,18 +2,19 @@
 
 1. [Programación síncrona y asíncrona](#1--programación-síncrona-y-asíncrona)
 2. [Ejecución de código JavaScript](#2--ejecución-de-código-javascript)
-  1. [El ciclo de eventos](#21--el-ciclo-de-eventos)
-  2. [Gestión de las operaciones asíncronas](#22--gestión-de-las-operaciones-asíncronas)
-  3. [¿Por qué es necesaria la asincronía en la web?](#23--por-qué-es-necesaria-la-programación-asíncrona-en-la-web)
-  4. [Estrategias para mejorar la interactividad](#24--estrategias-para-mejorar-la-interactividad)
+    1. [El ciclo de eventos](#21--el-ciclo-de-eventos)
+    2. [Gestión de las operaciones asíncronas](#22--gestión-de-las-operaciones-asíncronas)
+    3. [¿Por qué es necesaria la asincronía en la web?](#23--por-qué-es-necesaria-la-programación-asíncrona-en-la-web)
+    4. [Estrategias para mejorar la interactividad](#24--estrategias-para-mejorar-la-interactividad)
 3. [Mecanismos para conseguir asincronía](#3--mecanismos-para-conseguir-asincronía)
-  1. [Funciones globales](#31--funciones-globales)
-  2. [Eventos](#32--eventos)
-  3. [Funciones de retorno (callbacks) y eventos](#33--funciones-de-retorno-callbacks-y-eventos)
-  4. [Promesas then/catch](#34--promesas-thencatch)
-  5. [Promesas async/await](#35--promesas-asyncawait)
-  6. [Trabajadores web](#36--trabajadores-web-web-workers)
+    1. [Funciones globales](#31--funciones-globales)
+    2. [Eventos](#32--eventos)
+    3. [Funciones de retorno (callbacks) y eventos](#33--funciones-de-retorno-callbacks-y-eventos)
+    4. [Promesas then/catch](#34--promesas-thencatch)
+    5. [Promesas async/await](#35--promesas-asyncawait)
+    6. [Trabajadores web](#36--trabajadores-web-web-workers)
 4. [AJAX (ASynchronous JavaScript and XML)](#4--ajax-asynchronous-javascript-and-xml)
+
 ----
 
 # 1- Programación síncrona y asíncrona

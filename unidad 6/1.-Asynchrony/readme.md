@@ -1,19 +1,20 @@
-# Index
+## Index
 
 1. [Synchronous and asynchronous programming](#1--synchronous-and-asynchronous-programming)
 2. [JavaScript code execution](#2--javascript-code-execution)
-  1. [The event cycle](#21--the-event-loop)
-  2. [Management of Asynchronous Operations](#22--management-of-asynchronous-operations)
-  3. [Why is asynchrony necessary on the web?](#23--why-is-asynchronous-programming-necessary-on-the-web)
-  4. [Strategies to improve interactivity](#24--strategies-to-improve-interactivity)
+    1. [The event cycle](#21--the-event-loop)
+    2. [Management of Asynchronous Operations](#22--management-of-asynchronous-operations)
+    3. [Why is asynchrony necessary on the web?](#23--why-is-asynchronous-programming-necessary-on-the-web)
+    4. [Strategies to improve interactivity](#24--strategies-to-improve-interactivity)
 3. [Mechanisms to achieve asynchronysm](#3--mechanisms-for-achieving-asynchronysm)
-  1. [Global functions](#31--global-functions)
-  2. [Events](#32--events)
-  3. [Callbacks and Events](#33--callbacks-and-events)
-  4. [Then/Catch Promises](#34--promises-thencatch)
-  5. [Async/await-promises](#35-promises-with-asyncawait)
-  6. [Web workers](#36-web-workers)
+    1. [Global functions](#31--global-functions)
+    2. [Events](#32--events)
+    3. [Callbacks and Events](#33--callbacks-and-events)
+    4. [Then/Catch Promises](#34--promises-thencatch)
+    5. [Async/await-promises](#35-promises-with-asyncawait)
+    6. [Web workers](#36-web-workers)
 4. [AJAX (ASynchronous JavaScript and XML)](#4--ajax-asynchronous-javascript-and-xml)
+
 ----
 
 # 1- Synchronous and Asynchronous Programming
