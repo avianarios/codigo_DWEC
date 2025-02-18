@@ -60,7 +60,7 @@ $(()=>{
                     headers: {
                         "x-api-key": apiKeyUrlRemota2
                     }
-                }).then((data) => {
+                }).done((data) => {
                     console.log("Server response:", data);
                     // Mostrar la imagen del gato
                     data.forEach(cat => {
@@ -70,9 +70,9 @@ $(()=>{
                         $('#gatos').removeClass("oculto");
                         $('#productos').addClass("oculto");
                     });
-                }).catch((error) => {
+                }).fail((error) => {
                     console.log("Error en la solicitud AJAX:", error);
-                }).finally(() => {
+                }).always(() => {
                     console.log("La solicitud AJAX se ha completado.");
                 });
                 break;
