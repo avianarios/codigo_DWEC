@@ -1,48 +1,48 @@
  # Índice
 
-1. Entornos de trabajo (Frameworks)
-    1. ¿Por qué se necesita un entorno de trabajo?
-    2. Entornos de trabajo populares
-2. Introducción a vue
-    1. Características
-    2. Ventajas
-3. Instalación y uso de vue
-    1. Uso como recurso remoto (CDN)
-        1. Compilación global
-        2. Compilación de módulos
-    2. Uso como recurso local (node)
-4. Estilo de codificación
-    1. Options API
-    2. Compositions API
-5. Estructura de una aplicación Vue
-    1. Inicialización de un proyecto Vue
-    2. Organización del código
-    3. Jerarquía y ensamblaje de componentes
-        1. `App.vue` El contenedor principal
-        2. Componentes padres e hijos
-        3. Componentes dináimcos
-6. Componentes de un solo archivo (SFC, single-file component)
-    1. Estructura de un componente
-        1. script
-        2. template
-        3. style
-    2. Convenciones sobre los componentes
-7. Directivas
-    1. Vinculación entre atributos y propiedades (v-bind)
-    2. Renderización condicional (v-if, v-else y v-else-if)
-    3. Renderización dinámica de listas (v-for)
-    4. Gestión de eventos (v-on)
-    5. Creación de vínculos bidireccionales (v-model)
-    6. Mostrar u ocultar dinámicamente un elemento (v-show)
-    7. Establecer contenido de un elemento (v-text y v-html)
-8. Reactividad
-9. Interacción entre componentes
-    1. Inserción de contenido
-    2. Comunicación
-        1. Propiedades y eventos
-        2. v-model y eventos
-        3. defineModel
-10. Propiedades computadas
+1. [Entornos de trabajo (Frameworks)](#1-entornos-de-trabajo-frameworks)
+    1. [¿Por qué se necesita un entorno de trabajo?](#11-por-qué-se-necesita-un-entorno-de-trabajo-framework)
+    2. [Entornos de trabajo populares](#12-entornos-de-trabajo-populares)
+2. [Introducción a vue](#2-introducción-a-vue)
+    1. [Características](#21-características)
+    2. [Ventajas](#22-ventajas)
+3. [Instalación y uso de vue](#3-instalación-y-uso-de-vue)
+    1. [Uso como recurso remoto (CDN)](#31-uso-como-recurso-remoto-cdn)
+        1. [Compilación global](#311-compilación-global-o-versión-global-global-build)
+        2. [Compilación de módulos](#312-compilación-de-módulos-es-o-versión-de-módulos-es-es-module-build)
+    2. [Uso como recurso local (node)](#32-uso-como-recurso-local-node)
+4. [Estilo de codificación](#4-estilo-de-codificación)
+    1. [Options API](#41-options-api)
+    2. [Compositions API](#42-composition-api)
+5. [Estructura de una aplicación Vue](#5-estructura-de-una-aplicación-vue)
+    1. [Inicialización de un proyecto Vue](#51-inicialización-de-un-proyecto-vue)
+    2. [Organización del código](#52-organización-del-código)
+    3. [Jerarquía y ensamblaje de componentes](#53-jerarquía-y-ensamblaje-de-componentes)
+        1. [`App.vue` El contenedor principal](#531-appvue-el-contenedor-principal)
+        2. [Componentes padres e hijos](#532-componentes-padres-e-hijos)
+        3. [Componentes dináimcos](#533-componentes-dinámicos)
+6. [Componentes de un solo archivo (SFC, single-file component)](#6-componentes-de-un-solo-archivo-single-file-components)
+    1. [Estructura de un componente](#61-estructura-de-un-componente)
+        1. [script](#611-script-setup)
+        2. [template](#612-template)
+        3. [style](#613-style)
+    2. [Convenciones sobre los componentes](#612-template)
+7. [Directivas](#7-directivas)
+    1. [Vinculación dinámica de atributos (v-bind)](#71-vinculación-dinámica-de-atributos-v-bind)
+    2. [Renderización condicional (v-if, v-else y v-else-if)](#72-renderización-condicional-v-if-v-else-v-else-if)
+    3. [Renderización dinámica de listas (v-for)](#73-renderización-dinámica-de-listas-v-for)
+    4. [Gestión de eventos (v-on)](#74-gestión-de-eventos-v-on)
+    5. [Creación de vínculos bidireccionales (v-model)](#75-creación-de-vínculos-bidireccionales-v-model)
+    6. [Mostrar u ocultar dinámicamente un elemento (v-show)](#76-mostrar-u-ocultar-dinámicamente-un-elemento-v-show)
+    7. [Establecer contenido de un elemento (v-text y v-html)](#77-establecer-contenido-de-un-elemento-v-text-y-v-html)
+8. [Reactividad](#8-reactividad)
+9. [Interacción entre componentes](#9-interacción-entre-componentes)
+    1. [Inserción de contenido](#91-inserción-de-contenido)
+    2. [Comunicación](#92-comunicación)
+        1. [Propiedades y eventos](#921-propiedades--eventos)
+        2. [v-model y eventos](#922-v-model-y-eventos)
+        3. [defineModel](#923-definemodel)
+10. [Propiedades computadas](#10-propiedades-computadas)
   
 -----
 
@@ -82,51 +82,17 @@ En resumen, los frameworks y librerías frontend son herramientas esenciales par
 
 ## 1.2. Entornos de trabajo populares
 
- Algunos de los frameworks más populares son:
+| Framework  | Desarrollado por           | Características                                                                                                                                                 | Popularidad                                                                                       | Uso                                                                |
+|------------|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| **React**  | Facebook                   | Librería de JavaScript para interfaces de usuario basadas en componentes. Usa un DOM virtual para optimizar el rendimiento.                                         | Ampliamente adoptado con gran comunidad y ecosistema de herramientas como Next.js y Gatsby.       | Ideal para aplicaciones dinámicas y de una sola página (SPA).      |
+| **Angular**| Google                     | Framework completo basado en TypeScript que incluye herramientas para enrutamiento, gestión de estado y pruebas integradas. Sigue el patrón MVC.                  | Muy utilizado en aplicaciones empresariales y proyectos grandes debido a su estructura robusta.   | Perfecto para aplicaciones complejas y de gran escala.             |
+| **Vue.js** | Evan You (ex-Google)       | Framework progresivo que puede adoptarse gradualmente, combinando lo mejor de React y Angular. Ofrece un sistema reactivo y un enfoque basado en componentes.       | Ha ganado popularidad por su facilidad de uso y flexibilidad.                                      | Ideal para proyectos pequeños y medianos, escalable para grandes.  |
+| **Svelte** | Rich Harris                | Traslada el trabajo del navegador al momento de compilación, generando código optimizado. No utiliza un DOM virtual.                                              | Está ganando popularidad por su simplicidad y rendimiento.                                        | Perfecto para aplicaciones que requieren alto rendimiento.        |
+| **Ember.js**| Yehuda Katz y otros      | Framework opinado con convenciones sobre configuraciones. Ofrece una estructura sólida y herramientas integradas para aplicaciones ambiciosas.                  | Menos popular que React o Angular, pero aún utilizado en ciertos nichos y proyectos grandes.       | Ideal para aplicaciones complejas y de larga duración.            |
+| **Preact** | Jason Miller               | Alternativa ligera a React con una API compatible, pero mucho más pequeña (3KB). Ideal para proyectos con rendimiento y tamaño críticos.                         | Popular en proyectos que necesitan optimización extrema.                                          | Perfecto para aplicaciones que requieren carga rápida y eficiencia.|
+| **Solid.js**| Ryan Carniato            | Framework reactivo enfocado en simplicidad y rendimiento. Usa reactividad granular para actualizar solo las partes necesarias de la interfaz.                    | Relativamente nuevo, pero ganando atención por su enfoque innovador.                               | Ideal para aplicaciones que necesitan alta reactividad y rendimiento. |
 
-## 1. **React**
-   - **Desarrollado por:** Facebook.
-   - **Características:** Es una librería de JavaScript para construir interfaces de usuario basadas en componentes. Utiliza un enfoque declarativo y un DOM virtual para optimizar el rendimiento.
-   - **Popularidad:** Ampliamente adoptado en la industria, con una gran comunidad y ecosistema de herramientas (como Next.js para SSR y Gatsby para sitios estáticos).
-   - **Uso:** Ideal para aplicaciones dinámicas y de una sola página (SPA).
-
-## 2. **Angular**
-   - **Desarrollado por:** Google.
-   - **Características:** Es un framework completo basado en TypeScript que incluye herramientas para manejar el enrutamiento, gestión de estado, y pruebas integradas. Sigue el patrón MVC (Modelo-Vista-Controlador).
-   - **Popularidad:** Muy utilizado en aplicaciones empresariales y proyectos grandes debido a su estructura robusta.
-   - **Uso:** Perfecto para aplicaciones complejas y de gran escala.
-
-## 3. **Vue.js**
-   - **Desarrollado por:** Evan You (ex-desarrollador de Google).
-   - **Características:** Es un framework progresivo que puede ser adoptado gradualmente. Combina lo mejor de React y Angular, ofreciendo un sistema reactivo y un enfoque basado en componentes.
-   - **Popularidad:** Ha ganado mucha popularidad por su facilidad de uso y flexibilidad.
-   - **Uso:** Ideal para proyectos pequeños y medianos, pero también escalable para aplicaciones más grandes.
-
-## 4. **Svelte**
-   - **Desarrollado por:** Rich Harris.
-   - **Características:** A diferencia de otros frameworks, Svelte traslada el trabajo del navegador al momento de compilación, generando código JavaScript altamente optimizado. No utiliza un DOM virtual.
-   - **Popularidad:** Está ganando popularidad rápidamente debido a su simplicidad y rendimiento.
-   - **Uso:** Perfecto para aplicaciones que requieren alto rendimiento y un enfoque minimalista.
-
-## 5. **Ember.js**
-   - **Desarrollado por:** Yehuda Katz y otros colaboradores.
-   - **Características:** Es un framework opinado que sigue convenciones sobre configuraciones. Ofrece una estructura sólida y herramientas integradas para el desarrollo de aplicaciones ambiciosas.
-   - **Popularidad:** Menos popular que React o Angular, pero aún muy utilizado en ciertos nichos y proyectos grandes.
-   - **Uso:** Ideal para aplicaciones complejas y de larga duración.
-
-## 6. **Preact**
-   - **Desarrollado por:** Jason Miller.
-   - **Características:** Es una alternativa ligera a React, con una API compatible pero mucho más pequeña en tamaño (alrededor de 3KB). Es ideal para proyectos donde el rendimiento y el tamaño son críticos.
-   - **Popularidad:** Popular en proyectos que necesitan optimización extrema.
-   - **Uso:** Perfecto para aplicaciones que requieren carga rápida y eficiencia.
-
-## 7. **Solid.js**
-   - **Desarrollado por:** Ryan Carniato.
-   - **Características:** Es un framework reactivo que se enfoca en la simplicidad y el rendimiento. Utiliza un sistema de reactividad granular para actualizar solo las partes necesarias de la interfaz.
-   - **Popularidad:** Aunque relativamente nuevo, está ganando atención por su enfoque innovador.
-   - **Uso:** Ideal para aplicaciones que necesitan alta reactividad y rendimiento.
-
-Cada uno de estos entornos de trabajo tiene sus propias fortalezas y casos de uso específicos. La elección del framework o librería adecuada dependerá de las necesidades del proyecto, la experiencia del equipo y los objetivos a largo plazo.
+Cada uno de estos entornos de trabajo tiene sus propias fortalezas y casos de uso específicos. La elección del framework  adecuado dependerá de las necesidades del proyecto, la experiencia del equipo y los objetivos a largo plazo.
 
 ------
 
@@ -271,7 +237,7 @@ En este caso, Vue se importa explícitamente usando la sintaxis de módulos ES (
 
 El uso de módulos ES facilita la migración a un entorno de desarrollo con herramientas como Vite o Webpack en el futuro y el uso de modularidad.
 
-## 2. Uso como recurso local (node)
+## 3.2. Uso como recurso local (node)
 
 ### Ventajas
 - Se puede usar archivos .vue (Single-File Components (SFC)), que encapsulan la plantilla, lógica y estilos en un solo archivo.
@@ -827,7 +793,7 @@ Hay más directivas, pero no las considero fundamentales como, por ejemplo
 - **`v-memo`** para la optimización del renderizado
 
 
-## 7.1. Vinculación entre atributos y propiedades (v-bind)
+## 7.1. Vinculación dinámica de atributos (v-bind)
 **v-bind** permite enlazar dinámicamente atributos de un elemento HTML con propiedades del componente. Así, si el valor del atributo del elemento HTML cambia en la sección script del componente, que se ejecuta antes de renderizar el DOM, el atributo tomará el valor de la propiedad en el componente. Si el valor de la propiedad es cambiado más adelante por otro componente, el valor del atributo cambiará automáticamente SÓLO SI se define la propiedad como reactiva (lo veremos más adelante).
    
 La sintaxis es `<article v-bind:<nombre-atributo>="propiedad">` o, de forma abreviada, `<article :<nombre-atributo>="propiedad">`. Desde Vue 3.4, si el nombre del atributo coincide con del de la propiedad del componente, se abreviar aún más con `<article :id>`
@@ -1887,6 +1853,8 @@ Un componente puede actualizarse por varias razones:
 
 Por contra, las **propiedades computadas** se almacenan en caché y **sólo se recalculan cuando alguna de sus dependencias reactivas cambia**. Esto significa que si los datos subyacentes no han cambiado, Vue.js no volverá a ejecutar el cálculo, lo que puede mejorar significativamente el rendimiento. Son ideales para valores derivados que dependen de otros datos reactivos y que no necesitan recalcularse en cada actualización del componente.
 
+
+## Ejemplo 1: Uso de una función tradicional dentro de los mostachos
 ```vue
 <!-- Ejemplo de uso de una función -->
 <!-- Problema: calculateTotal se ejecutará en cada actualización del componente, incluso si items no ha cambiado. -->
@@ -1907,6 +1875,7 @@ function calculateTotal() {
 </script>
 ```
 
+## Ejemplo 2: Uso de una propiedad computada dentro de los mostachos
 ```vue
 <!-- Ejemplo de propiedad conmutada que sólo se recalcula cuando una de sus dependencias cambia -->
 <template>
@@ -1927,7 +1896,7 @@ const total = computed(() => {
 </script>
 ```
 
-
+## Ejemplo 3: Uso de una propiedad computada dentro de los mostachos
 ```vue
 <!-- Ejemplo complejo de propiedad computada -->
 <template>
