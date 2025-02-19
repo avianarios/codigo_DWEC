@@ -10,7 +10,7 @@
   import { defineModel } from 'vue';
   
   // Define modelos para cada propiedad
-  // Cuando se pasa un parámetro a defineModel, se crea automáticamente el manejador de eventos para avisar al padre
+  // Al usar un parámetro en defineModel, Vue automáticamente maneja el evento, evitando tener que definirlo, asociarlo a la etiqueta y definir lo que hace para avisar al padre de cambios en la propiedad.
   const firstName = defineModel('firstName');
   const lastName = defineModel('lastName');
 </script>

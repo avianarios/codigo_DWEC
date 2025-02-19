@@ -1,9 +1,9 @@
 <!-- Boton.vue -->
 <template>
     <button @click="handleClick">{{ texto }}</button>
-  </template>
+</template>
   
-  <script setup>
+<script setup>
     // Propiedades del componente
   const props = defineProps({
     texto: {
@@ -11,15 +11,15 @@
       default: 'Haz clic aquí'
     }
   });
-  
+
   // Emitir evento cuando se haga clic en el botón
   const emit = defineEmits(['clickButton']);
   function handleClick() {
     emit('clickButton', 'El botón ha sido pulsado');
   }
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
 
-  </style>
+</style>
   

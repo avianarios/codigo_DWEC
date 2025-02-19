@@ -11,5 +11,6 @@
     import { defineModel } from 'vue';
   
     // defineModel proporciona acceso al valor vinculado con v-model
+    // Al usar un parámetro en defineModel, Vue automáticamente maneja el evento, evitando tener que definirlo, asociarlo a la etiqueta y definir lo que hace para avisar al padre de cambios en la propiedad.
     const mensaje = defineModel('mensajeDelPadre');
 </script>

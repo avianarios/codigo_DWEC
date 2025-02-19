@@ -27,8 +27,7 @@ function disminuirCantidad(index) {
         v-for="(fruta, index) in frutas" 
         :key="index"
         :class="{ 'pocas': fruta.cantidad < 3, 'agotado': fruta.cantidad === 0 }"
-        @click="disminuirCantidad(index)"
-      >
+        @click="disminuirCantidad(index)">
         {{ fruta.nombre }} - {{ fruta.cantidad }} unidades
       </li>
     </ul>

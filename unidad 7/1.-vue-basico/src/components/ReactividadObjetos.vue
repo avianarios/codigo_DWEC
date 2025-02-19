@@ -3,7 +3,7 @@
     <section class="justify-center flex-columna borde">
       <h1>Reactividad con objetos</h1>
       <h2>Componente padre</h2>
-      <ObjetoPerfilUsuario :user="user" @update-user="updateUser" />
+      <ObjetoPerfilUsuario :user @update-user="updateUser" />
       <p class="mini">ReactividadObjetos.vue</p>
     </section>
   </template>

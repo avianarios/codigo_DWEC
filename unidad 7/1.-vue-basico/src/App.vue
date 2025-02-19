@@ -1,8 +1,10 @@
 <script setup>
 import Interpolacion from './components/Interpolacion.vue';
-import ReactividadPrimitiva from './components/ReactividadPrimitiva.vue';
+import ReactividadSencilla2 from './components/ReactividadSencilla2.vue';
+import ReactividadVmodelFormularios from './components/ReactividadVmodelFormularios.vue';
 import ReactividadObjetos from './components/ReactividadObjetos.vue';
 import ReactividadObjetos2 from './components/ReactividadObjetos2.vue';
+import ReactividadDirectivas from './components/ReactividadDirectivas.vue';
 import Vinculacion from './components/Vinculacion.vue';
 import Eventos from './components/Eventos.vue';
 import Directivas from './components/Directivas.vue';
@@ -13,8 +15,7 @@ import ComDefineModelReactPadre from './components/ComDefineModelReactPadre.vue'
 import ComDefineModelReactPadre2 from './components/ComDefineModelReactPadre2.vue';
 import ComDefineModelReactPadre3 from './components/ComDefineModelReactPadre3.vue';
 import PropComputada from './components/PropComputada.vue';
-
-import Padre from './components/ComDefineModelReactPadre3.vue';
+import Ranuras from './components/Ranuras.vue';
 </script>
 
 <template>
@@ -33,9 +34,12 @@ import Padre from './components/ComDefineModelReactPadre3.vue';
         <Eventos />
         <Directivas />
         <Vinculacion />
-        <ReactividadPrimitiva />
+        <ReactividadDirectivas />
+        <ReactividadSencilla2 />
+        <ReactividadVmodelFormularios />
         <ReactividadObjetos />
         <ReactividadObjetos2 />
+        <Ranuras />
         <ComunicacionPadrePropsEventos />
         <ComVinculacionReactPadre />
         <ComVmodelReactPadre.vue />
