@@ -1,49 +1,57 @@
  # Índice
 
 1. Entornos de trabajo (Frameworks)
-  1. ¿Por qué se necesita un entorno de trabajo?
-  2. Entornos de trabajo populares
+    1. ¿Por qué se necesita un entorno de trabajo?
+    2. Entornos de trabajo populares
 2. Introducción a vue
-  1. Características
-  2. Ventajas
+    1. Características
+    2. Ventajas
 3. Instalación y uso de vue
-  1. Uso como recurso remoto (CDN)
-    1. Compilación global
-    2. Compilación de módulos
-  2. Uso como recurso local (node)
+    1. Uso como recurso remoto (CDN)
+        1. Compilación global
+        2. Compilación de módulos
+    2. Uso como recurso local (node)
 4. Estilo de codificación
-  1. Options API
-  2. Compositions API
-5. Componentes de un solo archivo (SFC, single-file component)
-  1. Estructura de un componente
-    1. script
-    2. template
-    3. style
-  2. Convenciones sobre los componentes
-  3. El componente principal
-  4. Gestión del estado
-6. Directivas
-  1. Vinculación entre atributos y propiedades (v-bind)
-  2. Renderización condicional (v-if, v-else y v-else-if)
-  3. Renderización dinámica de listas (v-for)
-  4. Gestionar eventos (v-on)
-  5. Creación de vínculos bidireccionales (v-model)
-  6. Mostrar u ocultar dinámicamente un elemento (v-show)
-7. Reactividad
-8. Comunicación entre componentes
-  1. Propiedades y eventos
-  2. v-model y eventos
-  3. defineModel
-9. Propiedades computadas
+    1. Options API
+    2. Compositions API
+5. Estructura de una aplicación Vue
+    1. Inicialización de un proyecto Vue
+    2. Organización del código
+    3. Jerarquía y ensamblaje de componentes
+        1. `App.vue` El contenedor principal
+        2. Componentes padres e hijos
+        3. Componentes dináimcos
+6. Componentes de un solo archivo (SFC, single-file component)
+    1. Estructura de un componente
+        1. script
+        2. template
+        3. style
+    2. Convenciones sobre los componentes
+7. Directivas
+    1. Vinculación entre atributos y propiedades (v-bind)
+    2. Renderización condicional (v-if, v-else y v-else-if)
+    3. Renderización dinámica de listas (v-for)
+    4. Gestión de eventos (v-on)
+    5. Creación de vínculos bidireccionales (v-model)
+    6. Mostrar u ocultar dinámicamente un elemento (v-show)
+    7. Establecer contenido de un elemento (v-text y v-html)
+8. Reactividad
+9. Interacción entre componentes
+    1. Inserción de contenido
+    2. Comunicación
+        1. Propiedades y eventos
+        2. v-model y eventos
+        3. defineModel
+10. Propiedades computadas
   
 -----
 
-# 1.- Entornos de trabajo (frameworks)
+# 1. Entornos de trabajo (frameworks)
 
 Los entornos de trabajo en el lado del cliente (frameworks frontend) son herramientas y bibliotecas que facilitan el desarrollo de la parte de una aplicación web que interactúa directamente con el usuario. Éstos proporcionan estructuras y componentes reutilizables que ayudan a los desarrolladores a crear interfaces de usuario dinámicas y atractivas de manera más eficiente.
 
 
-## 1.1.- ¿Por qué se necesita un entorno de trabajo (Framework)?
+## 1.1. ¿Por qué se necesita un entorno de trabajo (Framework)?
 
 En el desarrollo web moderno, construir aplicaciones complejas y dinámicas desde cero utilizando solo JavaScript, HTML y CSS puede volverse complicado y repetitivo. Los frameworks y librerías frontend surgen para simplificar este proceso, ofreciendo herramientas y estructuras que permiten a los desarrolladores trabajar de manera más eficiente. Aquí las razones principales por las que son necesarios:
 
@@ -72,7 +80,7 @@ En el desarrollo web moderno, construir aplicaciones complejas y dinámicas desd
 En resumen, los frameworks y librerías frontend son herramientas esenciales para agilizar el desarrollo, mejorar la calidad del código y crear aplicaciones modernas, dinámicas y eficientes. Su uso no es obligatorio, pero en la mayoría de los casos, son una gran ayuda para enfrentar los desafíos del desarrollo web actual.
 
 
-## 1.2.- Entornos de trabajo populares
+## 1.2. Entornos de trabajo populares
 
  Algunos de los frameworks más populares son:
 
@@ -126,9 +134,9 @@ Cada uno de estos entornos de trabajo tiene sus propias fortalezas y casos de us
 
 Vue.js es un entorno de trabajo (framework) progresivo de JavaScript diseñado para construir interfaces de usuario interactivas y dinámicas. Fue creado por Evan You y se lanzó por primera vez en 2014. Vue se destaca por su simplicidad y flexibilidad, lo que lo hace accesible tanto para desarrolladores principiantes como experimentados.
 
-## 2.1.- Características
+## 2.1. Características
 
-1. **Componentes Reutilizables**:
+1. **Componentes reutilizables**:
    - Vue se basa en un sistema de componentes que permite a los desarrolladores crear elementos de interfaz de usuario reutilizables. Cada componente encapsula su propio HTML, CSS y JavaScript, facilitando la organización y el mantenimiento del código.
 
 2. **Reactividad**:
@@ -137,49 +145,51 @@ Vue.js es un entorno de trabajo (framework) progresivo de JavaScript diseñado p
 3. **Directivas**:
    - Vue proporciona directivas (atributos especiales en el HTML) que permiten manipular el DOM de manera sencilla. Por ejemplo, `v-bind` se utiliza para enlazar atributos y `v-if` para renderizar elementos condicionalmente.
 
-4. **Transiciones y Animaciones**:
+4. **Transiciones y animaciones**:
    - Vue facilita la implementación de transiciones y animaciones en las aplicaciones, proporcionando una API integrada para manejar efectos visuales de manera sencilla.
 
 5. **Enrutamiento**:
    - Con Vue Router, los desarrolladores pueden gestionar la navegación entre diferentes vistas de una aplicación de manera eficiente, permitiendo la creación de aplicaciones de una sola página (SPA) con rutas definidas.
 
-6. **Ecosistema y Comunidad**:
+6. **Ecosistema y comunidad**:
    - Vue tiene un ecosistema en crecimiento con herramientas como Vue CLI para la configuración de proyectos, Vuex para la gestión del estado de la aplicación y una comunidad activa que contribuye con plugins y bibliotecas.
 
-## 2.2.- Ventajas
+## 2.2. Ventajas
 
-- **Curva de Aprendizaje Suave**: Vue es fácil de aprender y usar, especialmente para aquellos que ya están familiarizados con HTML, CSS y JavaScript.
+- **Curva de aprendizaje suave**: Vue es fácil de aprender y usar, especialmente para aquellos que ya están familiarizados con HTML, CSS y JavaScript.
 - **Flexibilidad**: Puede ser utilizado tanto para proyectos pequeños como para aplicaciones grandes y complejas.
-- **Documentación Clara**: Vue cuenta con una documentación extensa y bien organizada, lo que facilita el aprendizaje y la resolución de problemas.
+- **Documentación clara**: Vue cuenta con una documentación extensa y bien organizada, lo que facilita el aprendizaje y la resolución de problemas.
 
 Vue.js es una excelente opción para desarrolladores que buscan una solución ligera y flexible para construir aplicaciones web modernas. Su enfoque progresivo permite a los desarrolladores adoptarlo de manera incremental, integrándolo en proyectos existentes o utilizándolo como la base para nuevas aplicaciones.
 
 ---
 
-# 3.- Instalación y uso de vue
+# 3. Instalación y uso de vue
 
 Se puede usar jQuery mediante la inclusión de un enlace a un CDN (Content Delivery Network) o instalándolo mediante node
 
-## 3.1.- Uso como recurso remoto (CDN)
+## 3.1. Uso como recurso remoto (CDN)
 Se puede usar un CDN, pero no se podrán usar la sintaxis de componentes de fichero único (SFC)
 
     ```html
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     ```
 
-Esta forma de usarlo tiene una serie de ventajas e inconvenientes:
-- No es necesario usar de Node.js
-- Fácil de empezar, ideal para proyectos pequeños, prototipos o para aprender Vue rápidamente.
-- Se pueden usar dos versiones de vue: Global Build (que expone Vue como una variable global) o el ES Module Build (que usa módulos ES).
-- No se puede usar Single-File Components (SFC) o archivos .vue.
-- No tienes acceso a herramientas modernas como hot-reloading, optimizaciones de construcción, o articleisión de código.
-- Es más difícil organizar y escalar el código en proyectos grandes.
-- No está optimizado para producción, ya que no se pueden aplicar técnicas como minificación, tree-shaking, o compresión.
+### Ventajas
+- Es **rápido** empezar un proyecto Vue así, porque no es necesario usar Node.js
+- Es **fácil**, ideal para proyectos pequeños, prototipos o para aprender Vue rápidamente.
 
 
-Al usar un CDN, se pueden usar dos versiones de vue:
+### Inconvenientes
+- **No se puede usar componentes o Single-File Components (SFC)** (archivos .vue)
+- No se puede usar herramientas modernas como carga en caliente (hot-reloading), optimizaciones de construcción, o división de código.
+- Es más **difícil organizar y escalar el código en proyectos grandes**.
+- **No está optimizado para producción**, ya que no se pueden aplicar técnicas como minificación, sacudida de árbol (tree-shaking), o compresión.
 
-### 3.1.1.- Compilación global o versión global ("global build")
+Con esta forma de incorporar Vue al proyecto, se pueden utilizar dos versiones de vue: Compilación global (Global Build, que expone Vue como una variable global) o Compilación de módulos ES (ES Module Build, que usa módulos ES).
+
+
+### 3.1.1. Compilación global o versión global ("global build")
 
 Esto implica:
     - Vue se carga como una variable global del objeto `window`, por lo que se puede usar desde el código JavaScript, sin importarlo.
@@ -220,7 +230,7 @@ Ejemplo:
 </html>
 ```
 
-### 3.1.2.- Compilación de módulos o versión de módulos (ES module build)
+### 3.1.2. Compilación de módulos ES o versión de módulos ES (ES module build)
 Es una forma moderna de usar Vue.js directamente en el navegador, pero sin depender de la variable global (window.Vue). En su lugar, se utiliza la sintaxis de módulos ES (import/export) para cargar Vue.
 
 Hay que usar `type="module"` en el HTML al importarlo 
@@ -263,15 +273,18 @@ El uso de módulos ES facilita la migración a un entorno de desarrollo con herr
 
 ## 2. Uso como recurso local (node)
 
-Otra opción es usar el paquete vue de node, lo cual tiene una serie de ventajas:
+### Ventajas
 - Se puede usar archivos .vue (Single-File Components (SFC)), que encapsulan la plantilla, lógica y estilos en un solo archivo.
 - Se pueden usar herramientas modernas como 
-    - Hot-reloading: Los cambios en el código se reflejan automáticamente en el navegador sin necesidad de recargar la página.
-    - Optimizaciones: Minificación, tree-shaking, y articleisión de código para mejorar el rendimiento.
+    - Recarga en caliente (Hot-reloading): Los cambios en el código se reflejan automáticamente en el navegador sin necesidad de recargar la página.
+    - Optimizaciones: Minificación, sacudida de árbol (tree-shaking), y división de código para mejorar el rendimiento.
     - Soporte para TypeScript, SCSS, etc.
 - Escalabilidad mucho mayor.
 - Rendimiento mayor en producción.
 - Se pueden integrar otras herramientas y bibliotecas.
+
+### Inconvenientes
+- Hay que instalar y configurar node. Se tarda un poco más en empezar.
 
 ### Pasos para instalarlo
 
@@ -321,11 +334,11 @@ Otra opción es usar el paquete vue de node, lo cual tiene una serie de ventajas
 
 ----
 
-# 4.- Estilo de codificación
+# 4. Estilo de codificación
 
 En Vue.js, hay dos estilos principales para definir la lógica de los componentes: la **Options API** y la **Composition API**. Ambas permiten lograr los mismos resultados, pero difieren en su enfoque y estilo de escritura. Aquí se van a ver brevemente las dos con el objetivo de reconocer las aplicaciones Vue más antiguas, pero de aquí en adelante **se usara exclusivamente Compositions API**.
 
-## 4.1.- Options API
+## 4.1. Options API
 
 La Options API es el estilo tradicional y original de Vue.js para definir componentes. En este enfoque, la lógica del componente se organiza en diferentes "opciones" o propiedades dentro de un objeto, como data, methods, computed, watch, props, lifecycle hooks, etc.
 
@@ -356,9 +369,9 @@ Características:
 - **Ideal para componentes simples**: Funciona bien en componentes pequeños o medianos donde la lógica no es demasiado compleja.
 
 
-## 4.2.- Composition API
+## 4.2. Composition API
 
-La Composition API es un enfoque más moderno y flexible introducido en Vue 3. En lugar de organizar la lógica por opciones, la Composition API permite agrupar la lógica por funcionalidad, lo que facilita la reutilización y organización del código en componentes más grandes y complejos.
+La Composition API es un enfoque **más moderno y flexible introducido en Vue 3**. En lugar de organizar la lógica por opciones, la Composition API permite agrupar la lógica por funcionalidad, lo que facilita la reutilización y organización del código en componentes más grandes y complejos. **Para usarla con componentes vue es necesario usar node y el atributo `setup` en la etiqueta `script`**.
 
 ```vue
 <template>
@@ -400,7 +413,153 @@ Características:
 
 -----
 
-# 5.- Componentes de un solo archivo (Single-file components)
+# 5. Estructura de una aplicación Vue
+
+Antes de profundizar en los componentes de un solo archivo (SFC), es importante entender la estructura de una aplicación Vue y cómo sus componentes se organizan y ensamblan para formar la interfaz final.
+
+## 5.1. Inicialización de un proyecto Vue
+
+Como se ha comentado anteriormente, la forma recomendada de comenzar un proyecto Vue es como un módulo de node. Se puede crear toda la estructura de directorios y ficheros de configuración a mano  o se puede usar una herramienta de andamiaje como **vite@latest** o **vue@latest** (recomendado) que generan una estructura de carpetas y archivos predefinida. 
+
+- **Creación del proyecto**
+  ```sh
+  <!-- con vite -->
+  npm create vite@latest mi-proyecto --template vue
+  cd mi-proyecto
+  npm install
+  npm run dev
+  ```
+
+  ```bash
+  <!-- con vue -->
+  npm create vue@latest
+  cd nombr-proyecto
+  npm install
+  ```
+
+- **Estructura de carpetas y archivos principales:**
+  - `src/` Contiene todos los archivos con código fuente de la aplicación, es decir, aquellos que el empaquetador va a procesar, optimizar y transformar de alguna forma.
+  - `public/` Almacena archivos estáticos, es decir, aquellos que no van a ser procesador como, por ejemplo, imágenes o tipografías.
+  - `node_modules/` Carpeta donde se instalan las dependencias del proyecto.
+  - `vite.config.js` Configuración de Vite.
+  - `package.json` Lista de dependencias y configuraciones del proyecto.
+
+- **Archivo `main.js` o `main.ts`:**
+  Es el punto de entrada de la aplicación, donde Vue se inicializa y se monta el componente principal `App.vue`. La aplicación vue se montará en el elemento con `id="app"` en el `index.html`.
+  
+  ```js
+  import { createApp } from 'vue';
+  import App from './App.vue';
+  
+  createApp(App).mount('#app');
+  ```
+
+## 5.2. Organización del código
+
+Dentro de `src/`, la organización de archivos sigue un patrón que facilita la escalabilidad:
+
+- `components/` Contiene componentes reutilizables.
+- `assets/` contiene hojas de estilo globales y otros recursos.
+- `views/` Cuando se usa Vue Router, almacena vistas principales.
+- `store/` cuando se usa Vuex o Pinia, contiene la gestión del estado de la aplicación.
+
+Ejemplo de estructura de `src/`:
+```
+mi-proyecto/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── Header.vue
+│   │   ├── Footer.vue
+│   ├── views/
+│   │   ├── Home.vue
+│   │   ├── About.vue
+│   ├── store/
+│   ├── App.vue
+│   ├── main.js
+```
+
+## 5.3. Jerarquía y ensamblaje de componentes
+
+Vue funciona creando componentes, que tienen todo el aspecto, estructura y funcionalidad encapsulados e incluyéndolos dentro de otros mayores a modo de **piezas de Lego**, ensamblándose en una jerarquía para construir la aplicación.
+
+Cada componente tiene tres secciones, que veremos con profundidad un poco más adelante: `script`, `template` y `style`, pero que nos harán falta para saber cómo se incluyen unos componentes en otros.
+
+### 5.3.1. `App.vue`: El contenedor principal
+El componente principal, llamado `App.vue`, es creado por la herramienta de andamiaje `create-vue`, llamada con `npm create vue@latest` y es el primero que se monta en el DOM cuando se inicializa la aplicación Vue. En él se insertan algunos o todos los componentes de la aplicación.
+
+`App.vue` actúa como el componente raíz que contiene otros componentes secundarios.
+
+```vue
+<!-- Ejemplo de App.vue -->
+<!-- Importo los componentes que voy a usar -->
+<script setup>
+  import Encabezado from './components/Encabezado.vue';
+  import Cuerpo from './components/Cuerpo.vue';
+  import Pie from './components/Pie.vue';
+</script>
+
+<template>
+  <!-- Incluyo los componentes importados en mi componente (en este caso el principal, App.vue)-->
+  <Encabezado />
+  <router-view />
+  <Cuerpo />
+  <Pie />
+</template>
+```
+
+Sus funciones son:
+
+1. **Punto de entrada**: El componente principal es el primer componente que se monta en el DOM cuando se inicia una aplicación Vue.
+
+2. **Contenedor de componentes**: Actúa como un contenedor donde se insertan otros componentes. Esto facilita la organización de la interfaz de usuario en bloques de construcción más pequeños y manejables, cada uno con su propia lógica y estilo.
+
+3. **Gestión del estado global**: El componente principal a menudo se utiliza para inicializar y gestionar el estado global de la aplicación mediante herramientas como Vuex. Esto permite que los datos se compartan y se sincronicen entre diferentes componentes de la aplicación.
+
+4. **Configuración inicial**: Es el lugar ideal para realizar configuraciones iniciales, como la configuración de enrutadores (usando Vue Router), la inicialización de servicios y la configuración de opciones globales de Vue.
+
+### 5.3.2. Componentes padres e hijos
+
+Los componentes pueden (y suelen) incluir otros dentro. Para usar un componente dentro de otro, hay que importarlo. En ese momento, el importado pasa a ser el hijo y el importador, el padre.
+
+```vue
+<!-- Ejemplo de componente padre Producto.vue -->
+<script setup>
+  // Importo los componentes que voy a usar en Producto.vue
+  import Boton from './Boton.vue';
+  import Tarjeta from './Tarjeta.vue';
+</script>
+
+<template>
+  <article>
+    <h1>Bienvenido</h1>
+    <!-- Incluyo los componentes Tarjeta.vue y Boton.vue -->
+    <Tarjeta />
+    <Boton />
+  </article>
+</template>
+```
+
+### 5.3.3. Componentes dinámicos
+Se pueden renderizar componentes de forma dinámica usando `:is`: (no te preocupes si no entiendes el código aún, esamos viendo qué se puede hacer, por encima)
+
+```vue
+<template>
+  <component :is="componenteActual" />
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+  import ComponenteA from './ComponenteA.vue';
+  import ComponenteB from './ComponenteB.vue';
+
+  const componenteActual = ref('ComponenteA');
+</script>
+```
+
+-----
+
+# 6. Componentes de un solo archivo (Single-file components)
 
 Una aplicación web construida con vite está formada por una serie de componentes (componentes de un solo archivo, Single-file components, SFC) interaccionando entre sí. Un componente es un **bloque reutilizable y autónomo de la interfaz de usuario que encapsula, en un fichero .vue, el HTML, JavaScript y CSS** necesario para el funcionamiento de dicho componente:
 - Estructura (HTML): Define cómo se ve el componente.
@@ -420,10 +579,10 @@ Los componentes, gracias a su enfoque modular, facilitan lo siguiente:
 - La colaboración con otros equipos.
 
 
-## 5.1.- Estructura de un componente
+## 6.1. Estructura de un componente
 Un componente, empaquetado en un archivo `.vue`, tiene tres secciones principales: **script, template y style**
 
-### 5.1.1.- **`<script setup>`:**  
+### 6.1.1. **`<script setup>`:**  
 En esta sección se define la lógica y el comportamiento del componente, utilizando JavaScript (o TypeScript). Esta sección generalmente **importa otros componentes** para trabajar con ellos y, usando setup en vue 3, **exporta auotmáticamente un objeto** que define el comportamiento del componente Vue. 
 
 Además, Vue 3 también importa automáticamente componentes comunes como defineProps o defineEmits cuando detecta que se están usando, evitando que el programador lo tenga que hacer explícitamente.
@@ -441,7 +600,7 @@ Además, Vue 3 también importa automáticamente componentes comunes como define
   </script>
    ```
 
-### 5.1.2.- **`<template>`:**  
+### 6.1.2. **`<template>`:**  
 
 En esta sección se define la estructura del componente. En versiones anteriores a Vue 3, sólo podría haber una etiqueta como hijo directo de template, así que había que crear un contenedor para el resto de componentes. En esta sección se pueden encontrar los siguientes elementos:
 
@@ -531,7 +690,7 @@ En esta sección se define la estructura del componente. En versiones anteriores
     </script>
     ```
 
-### 5.1.3.- **`<style>`:**  
+### 6.1.3. **`<style>`:**  
 En la sección `style`, que se suele colocar al final del fichero, se definen los estilos CSS para el componente. Esta etiqueta permite usar varias propiedades:
 - **scoped**. Los estilos definidos en style sólo se aplican al componente actual. Si no se usa scoped, los estilos se aplican globalmente.
 - **lang="scss"**. Permite trabajar directamente con lenguajes como SASS, LESS y Stylus.
@@ -615,7 +774,7 @@ En la sección `style`, que se suele colocar al final del fichero, se definen lo
   </script>
   ```
 
-## 5.2.- Convenciones sobre los componentes
+## 6.2. Convenciones sobre los componentes
 A pesar de que en HTML la convención estándar es usar kebab-case y cierre manual de etiquetas, Vue hace la traducción automáticamente, por lo que la recomendación de **cómo nombrar los componentes Vue y cómo cerrar las etiquetas** de dichos componentes es usar **PascalCase** para identificar los componentes y diferenciarlos de los elementos HTML nativos y **cierre automático (/>)** para las etiquetas
   
   Ejemplo: Sintaxis recomendada
@@ -647,174 +806,28 @@ Respecto a la colocación del código, aunque no hay un orden obligatorio para l
   - `<script>`: Luego se define la lógica del componente, donde se manejan los datos y la funcionalidad.
   - `<style>`: Finalmente, se aplican los estilos específicos del componente.
 
-
-## 5.3.- El componente principal
-
-El componente principal, llamado `App.vue`, es creado por la herramienta de andamiaje `create-vue`, llamada con `npm create vue@latest` y es el primero que se monta en el DOM cuando se inicializa la aplicación Vue. En él se insertan algunos o todos los componentes de la aplicación.
-
-Un ejemplo de comopnente principal podría ser: 
-  ```vue
-  <!-- App.vue -->
-  <script setup>
-    import HeaderComponent from './components/HeaderComponent.vue';
-    import FooterComponent from './components/FooterComponent.vue';
-  </script>
-
-
-  <template>
-    <HeaderComponent />
-    <FooterComponent />
-  </template>
-
-
-  <style scoped>
-    header {
-      line-height: 1.5;
-    }
-
-    .logo {
-      display: block;
-      margin: 0 auto 2rem;
-    }
-
-    @media (min-width: 1024px) {
-      header {
-        display: flex;
-        place-items: center;
-        padding-right: calc(var(--section-gap) / 2);
-      }
-
-      .logo {
-        margin: 0 2rem 0 0;
-      }
-
-      header .wrapper {
-        display: flex;
-        place-items: flex-start;
-        flex-wrap: wrap;
-      }
-    }
-  </style>
-  ```
-
-Sus funciones son:
-
-1. **Punto de entrada**: El componente principal es el primer componente que se monta en el DOM cuando se inicia una aplicación Vue.
-
-2. **Contenedor de componentes**: Actúa como un contenedor donde se insertan otros componentes. Esto facilita la organización de la interfaz de usuario en bloques de construcción más pequeños y manejables, cada uno con su propia lógica y estilo.
-
-3. **Gestión del estado global**: El componente principal a menudo se utiliza para inicializar y gestionar el estado global de la aplicación mediante herramientas como Vuex. Esto permite que los datos se compartan y se sincronicen entre diferentes componentes de la aplicación.
-
-4. **Configuración inicial**: Es el lugar ideal para realizar configuraciones iniciales, como la configuración de enrutadores (usando Vue Router), la inicialización de servicios y la configuración de opciones globales de Vue.
-
-
-## 5.4.- Creación y uso de componentes
-Para usar un componente dentro de otro, hay que importarlo. En ese momento, el importado pasa a ser el hijo y el importador, el padre.
-
-  #### Ejemplo 1: Se inserta un botón en otro componente
-
-  ```vue
-  <!-- fichero SimpleButton.vue -->
-  <template>
-    <!-- Botón con estilo -->
-    <button class="counter-button">Haz clic aquí</button>
-  </template>
-
-  <style scoped>
-  .counter-button {
-    background-color: #4CAF50; /* Verde */
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .counter-button:hover {
-    background-color: #45a049; /* Un verde más oscuro al pasar el ratón */
-  }
-  </style>
-  ```
-
-  ```vue
-  <!-- Fichero componentePadre.vue -->
-  <script setup>
-    import SimpleButton from './SimpleButton.vue'
-  </script>
-
-  <template>
-    <h1>Here is a child component!</h1>
-    <!-- El componente hijo se puede usar insertando una etiqueta con su nombre -->
-    <SimpleButton />
-  </template>
-  ```
-
-  #### Ejemplo 2: Inserción de componentes en el componente raíz
-
-    ```vue
-    <!-- Componente padre: App.vue -->
-    <template>
-      <article>
-        <Header />
-        <MainContent />
-        <Footer />
-      </article>
-    </template>
-
-    <script setup>
-      import Header from './Header.vue';
-      import MainContent from './MainContent.vue';
-      import Footer from './Footer.vue';
-    </script>
-    ```
-
-### 5.4.- Gestión del estado
-En aplicaciones más grandes, los componentes pueden compartir estado usando una biblioteca de gestión de estado como Pinia (recomendado en Vue 3) o Vuex. Esto evita tener que pasar props y emitir eventos en exceso.
-
-```js
-// store.js (Pinia)
-import { defineStore } from 'pinia';
-
-export const useMessageStore = defineStore('message', {
-  state: () => ({
-    message: 'Hola desde Pinia',
-  }),
-  actions: {
-    updateMessage(newMessage) {
-      this.message = newMessage;
-    },
-  },
-});
-```
-
-```vue
-<!-- Componente que usa Pinia -->
-<template>
-  <article>
-    <p>{{ messageStore.message }}</p>
-    <button @click="updateMessage">Actualizar mensaje</button>
-  </article>
-</template>
-
-<script setup>
-import { useMessageStore } from './store';
-
-const messageStore = useMessageStore();
-
-function updateMessage() {
-  messageStore.updateMessage('Nuevo mensaje desde Pinia');
-}
-</script>
-```
-
 -----
 
-# 6.- Directivas
+# 7. Directivas
 Las **directivas** se utilizan en la sección `template` de un componente y permiten controlar el comportamiento del DOM. Las directivas son mucho más poderosas si se las combina con la [reactividad](#7--reactividad), que veremos en la sección 7.
 
-## 6.1.- Vinculación entre atributos y propiedades (v-bind)
+Las directivas que aquí se van a tratar son:
+- **`v-bind`**, para la vinculación entre variables y atributos
+- **`v-if`, `v-else` y `v-else-if`**, para la renderización condicional de contenido
+- **`v-for`**, para la renderización de listas
+- **`v-on`**, para la gestión de eventos
+- **`v-model`**, para la creación de vínculos bidireccionales
+- **`v-show`** para mostrar u ocultar un elemento
+- **`v-text` y `v-html`** para insertar contenido textual o HTML sustituyendo al que haya (aunque no funcionan en la versión 3.5)
+
+Hay más directivas, pero no las considero fundamentales como, por ejemplo 
+- **`v-pre`** para evitar interpolación
+- **`v-cloack`** para ocultar contenido hasta que Vue lo procese
+- **`v-once`** para renderización única
+- **`v-memo`** para la optimización del renderizado
+
+
+## 7.1. Vinculación entre atributos y propiedades (v-bind)
 **v-bind** permite enlazar dinámicamente atributos de un elemento HTML con propiedades del componente. Así, si el valor del atributo del elemento HTML cambia en la sección script del componente, que se ejecuta antes de renderizar el DOM, el atributo tomará el valor de la propiedad en el componente. Si el valor de la propiedad es cambiado más adelante por otro componente, el valor del atributo cambiará automáticamente SÓLO SI se define la propiedad como reactiva (lo veremos más adelante).
    
 La sintaxis es `<article v-bind:<nombre-atributo>="propiedad">` o, de forma abreviada, `<article :<nombre-atributo>="propiedad">`. Desde Vue 3.4, si el nombre del atributo coincide con del de la propiedad del componente, se abreviar aún más con `<article :id>`
@@ -850,14 +863,93 @@ En el caso de atributos **booleanos** como `disabled`, `checked` o `readonly`, s
 
   ```vue
   <!-- Si esDeshabilitado se evalua a true en el código del componente, el botón tendrá el campo disabled -->
-  <button :disabled="esDeshabilitado">Enviar</button>
+  <template>
+    <button :disabled="esDeshabilitado">Enviar</button>
+  </template>
+  <script setup>
+    import { ref } from 'Vue';
+    let esDeshabilitado = ref(false);
+  </script>
   ```
 
-### Ejemplo 4: vinculación de objetos
+### Ejemplo 4: Vinculación entre un input y un párrafo
+
+Se vincula la variable nombre al atributo value y se define una función que gestionará el evento @input (actualizaNombre) que actualizará el valor de la variable cuando el usuario cambie el input. Se muestra su valor en pantalla con el mostacho.
+
+  ```vue
+  <template>
+    <fieldset>
+      <legend>Formulario</legend>
+      <label>
+        Nombre:
+        <input type="text" :value="nombre" @input="actualizaNombre" />
+      </label>
+      <p>Tu nombre es: {{ nombre }}</p>
+    </fieldset>
+  </template>
+
+  <script setup>
+  import { ref } from 'vue';
+  let nombre = ref('');
+
+  function actualizaNombre(event) {
+    nombre.value = event.target.value;
+  }
+  </script>
+  ```
+
+### Ejemplo 5: Vinculación entre un select y un párrafo
+  ```vue
+  <template>
+    <p>Selecciona tus intereses:</p>
+    <label>
+      <input 
+        type="checkbox" 
+        :checked="intereses.includes('Deporte')" 
+        @change="toggleInteres('Deporte')" 
+      /> Deporte
+    </label>
+    <label>
+      <input 
+        type="checkbox" 
+        :checked="intereses.includes('Música')" 
+        @change="toggleInteres('Música')" 
+      /> Música
+    </label>
+    <label>
+      <input 
+        type="checkbox" 
+        :checked="intereses.includes('Cine')" 
+        @change="toggleInteres('Cine')" 
+      /> Cine
+    </label>
+    <p>Intereses seleccionados: {{ intereses }}</p>
+  </template>
+
+  <script setup>
+  import { ref } from 'vue';
+
+  const intereses = ref([]);
+
+  function toggleInteres(interes) {
+    if (intereses.value.includes(interes)) {
+      // Si ya está seleccionado, lo quitamos
+      intereses.value = intereses.value.filter(item => item !== interes);
+    } else {
+      // Si no está seleccionado, lo agregamos
+      intereses.value.push(interes);
+    }
+  }
+  </script>
+  ```
+
+### Ejemplo 6: vinculación de objetos
 
 También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':''
   ```vue
-  <!-- Sería equivalente a <a :href="atributosEnlace.href" :target="atributosEnlace.target" :title="atributosEnlace.title">Enlace dinámico</a> -->
+  <!-- Sería equivalente a <a :href="atributosEnlace.href" :target="atributosEnlace.target" :title="atributosEnlace.title">Enlace dinámico</a> 
+  En este caso no se puede usar la nomenclatura abreviada
+  -->
   <template>
     <article v-bind="atributosArticle">
       <a v-bind="atributosEnlace">Enlace dinámico</a>
@@ -879,7 +971,7 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   </script>
   ```
 
-### Ejemplo 5: vinculación de clases
+### Ejemplo 7: vinculación de clases
 
   También se pueden vincular clases. Si la variable se evalúa a false, no aparecerá en el elemento
   ```vue
@@ -915,7 +1007,7 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   </style>
   ```
 
-### Ejemplo 6: vinculación de estilos
+### Ejemplo 8: vinculación de estilos
   ```vue
   <!-- En este ejemplo, se insertan estilos en línea -->
   <template>
@@ -940,9 +1032,11 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   </script>
   ```
 
-### Ejemplo 7: vinculación de funciones
+### Ejemplo 9: vinculación de funciones
+Se puede ejecutar una función en un atributo de una etiqueta vinculándola con v-bind. Sin embargo, no es recomedable porque las funciones en v-bind se ejecutan en cada actualización del componente, les afecten los cambios o no, lo cual puede ser muy costoso. Se recomienda usar [propiedades computadas](#10-propiedades-computadas) (se verán más adelante)
+
   ```vue
-  <!-- En este ejemplo se ejecuta una función en :title. No es recomedable porque las funciones en v-bind se ejecutan en cada actualización del componente, les afecten los cambios o no, lo cual puede ser muy costoso. Se recomienda usar propiedades computadas (se verán más adelante)-->
+  <!--En este ejemplo se ejecuta una función en :title. -->
   <template>
     <time :title="toTitleDate(date)" :datetime="date">
       {{ formatDate(date) }}
@@ -961,9 +1055,9 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   </script>
   ```
 
-## 6.2.- Renderización condicional (v-if, v-else, v-else-if)
+## 7.2. Renderización condicional (v-if, v-else, v-else-if)
 
-**v-if, v-else** y **v-else-if** permiten renderizar elementos condicionalmente. Si la condición evaluada es false, el elemento no se renderiza en absoluto.
+**v-if, v-else** y **v-else-if** permiten renderizar elementos condicionalmente. Si la condición evaluada es falsa, el elemento no se renderiza.
 
 ### Ejemplo: Renderización condicional
 ```vue
@@ -973,12 +1067,13 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
 </template>
 
 <script setup>
-  const mostrarMensaje=true;
+  import { ref } from 'Vue';
+  const mostrarMensaje=ref (true);
 </script>
 ```
 
   
-## 6.3.- Renderización dinámica de listas (v-for)
+## 7.3. Renderización dinámica de listas (v-for)
 **v-for** permite iterar sobre una lista de elementos y renderizarlos dinámicamente.
 
 ### Ejemplo: Renderización de una matriz sencilla
@@ -1016,7 +1111,7 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   </script>
   ```
 
-## 6.4.- Gestionar eventos (v-on)
+## 7.4. Gestión de eventos (v-on)
 
 **v-on** permite escuchar eventos del DOM. Su sintaxis es `<button v-on:evento="miMetodo">Haz clic</button>` aunque tiene una forma abreviada `<button @evento="miMetodo">Haz clic</button>`. 
 
@@ -1068,15 +1163,16 @@ Esta directiva permite usar algunos modificadores para cambiar el comportamiento
 
 <script setup>
 const mostrarTexto = (evento) => {
-  console.log('Texto ingresado:', evento.target.value);
+  console.log('Texto introducido:', evento.target.value);
 };
 </script>
 ```
 
 ```vue
 <!-- Ejemplo del uso de expresiones en línea -->
-<button @click="contador++">Incrementar</button>
-<p>Contador: {{ contador }}</p>
+<template>
+  <button @click="console.log(++contador)">Incrementar</button>
+</template>
 ```
 
 ```vue
@@ -1091,8 +1187,8 @@ const mostrarTexto = (evento) => {
 ```vue
 <!-- Ejemplo de uso del modificador.stop para evitar que el evento se propague (burbujeo) -->
 <template>
-  <article @click="miFuncion">
-    <button @click.stop>Haz clic</button>
+  <article @click="estoNoSeEjecutara">
+    <button @click.stop="miFuncion">Haz clic</button>
   </article>
 </template>
 ```
@@ -1104,11 +1200,212 @@ const mostrarTexto = (evento) => {
 </template>
 ```
 
-## 6.5.- Creación de vínculos bidireccionales (v-model)
-Como se ha visto anteriormente `v-bind` permite crear un vínculo unidireccional entre dos elementos/componentes. Para que sea bidireccional, hace falta usar `v-bind` para vincular en un sentido y un evento para notificar de cambios en el otro sentido. Aunque **v-model** se puede usar también  para crear un vínculo unidireccional, tiene más sentido usarlo para la comunicación bidireaccional, ya que simplifica el mecanismo evitando que el programador tenga que ocuparse de la gestión del evento (definirlo, llamarlo y crear la función que lo gestiona). Sin embargo, para que la comunicación sea bidireccional, es necesario que la [reactividad](#7--reactividad) esté presente, concepto que exploraremos más adelante. Por ahora, es suficiente con saber que v-model facilita la sincronización automática de datos entre componentes.
-  
-### Ejemplo de enlace bidireccional entre un input y un p
+## 7.5. Creación de vínculos bidireccionales (v-model)
+Como se ha visto anteriormente `v-bind` permite crear un vínculo unidireccional entre dos elementos/componentes. Para que sea bidireccional, hace falta usar `v-bind` para vincular en un sentido y un evento para notificar de cambios en el otro sentido.
 
+Aunque se puede usar para crear un vínculo unidireccional (tiene poco sentido esto porque para eso ya está v-bind), **`v-model` se usa para crear un vínculo bidireaccional**. La **ventaja sobre v-bind es que evita que el programador tenga que ocuparse de la gestión del evento** (definirlo, llamarlo y crear la función que lo gestiona). 
+
+Sin embargo, al igual que con `v-bind`, para que la comunicación sea bidireccional, es necesario hacer uso de la [reactividad](#8-reactividad), concepto que exploraremos más adelante. Por ahora, es suficiente con saber que `v-model` facilita la sincronización automática de datos entre componentes.
+
+Con `v-bind`, hay que indicar a qué atributo asociar la variable, pero con `v-model`, la mayoría de los casos, Vue **decide automáticamente a qué atributo se enlaza la variable**:
+- Para un `<input>`...
+  - ...de tipo **text**, `v-model` enlaza con el atributo **`value`**.
+  - ...de tipo **radio**, se enlaza con el atributo **`value`** y se gestionan los valores seleccionados.
+
+- En un **`checkbox`**, `v-model` no se vincula a un solo atributo, sino que maneja el estado general de los checkboxes.
+- En un **`<textarea>`**, enlaza también con el atributo `value`, ya que el valor del campo de texto es el contenido que se introduce dentro del área de texto.
+- En un **`<select>`**, la variable asociada con `v-model` contiene los valores seleccionados de las opciones, pero no se vincula directamente a un solo atributo de cada `<option>`.
+
+En componentes personalizados `v-model` por defecto se enlaza a la propiedad **`modelValue`** del componente, pero se puede usar un atributo distinto para enlazar, configurándolo con una `prop` personalizada.
+  
+### Ejemplo 1: Vinculación entre un input y un párrafo
+
+Este es igual que el ejemplo 4 de `v-bind`, pero usando `v-model`. En este caso, v-model evita tener que declarar el evento y definir la función que lo gestionará, ya que lo hace automáticamente.
+
+  ```vue
+    <template>
+      <fieldset>
+        <legend>Formulario</legend>
+        <label>
+          Nombre:
+          <!-- v-model asocia la variabla "nombre" al atributo "value" -->
+          <input type="text" v-model="nombre" />
+          <!-- Con v-bind sería así
+          <input type="text" :value="nombre" @input="actualizaNombre" /> -->
+        </label>
+        <p>Tu nombre es: {{ nombre }}</p>
+      </fieldset>
+    </template>
+
+    <script setup>
+      import { ref } from 'vue';
+
+      const nombre = ref('');
+      const intereses = ref([]);
+
+      // Con v-bind sería necesario definir la función que maneja el evento
+      // function actualizaNombre(event) {
+      //   nombre.value = event.target.value;
+      // }
+    </script>
+  ```
+
+
+### Ejemplo 2: Vinculación entre un select y un párrafo
+
+Este es igual que el ejemplo 5 de `v-bind`, pero usando `v-model`. En este caso, v-model evita tener que declarar el evento y definir la función que lo gestionará, ya que lo hace automáticamente
+
+  <template>
+    <p>Selecciona tus intereses:</p>
+    <label><input type="checkbox" v-model="intereses" value="Deporte" /> Deporte</label>
+    <label><input type="checkbox" v-model="intereses" value="Música" /> Música</label>
+    <label><input type="checkbox" v-model="intereses" value="Cine" /> Cine</label>
+    <p>Intereses seleccionados: {{ intereses }}</p>
+  </template>
+  
+  <script setup>
+    import { ref } from 'vue';
+    const intereses = ref([]);
+  </script>
+    
+
+## 7.6. Mostrar u ocultar dinámicamente un elemento (v-show)
+
+`v-show` permite mostrar u ocultar un elemento dinámicamente, pero sin eliminarlo del DOM. Funciona estableciendo la propiedad `display:none` cuando la condición es false. No hay que confundirlo con `v-if`, que agrega, o no, el elemento al DOM. Al igual que con `v-model`, la [reactividad](#8--reactividad) es necesaria para que el contenido se oculte o se muestre dinámicamente. Esto es porque `v-show` depende de una condición reactiva para modificar el valor de display.
+
+### Ejemplo: Mostrar u ocultar un mensaje
+  ```vue
+  <template>
+    <p v-show="mostrarMensaje">Este mensaje se puede ocultar.</p>
+    <button @click="mostrarMensaje = !mostrarMensaje">Cambiar</button>
+  </template>
+
+  <script setup>
+    import { ref } from 'vue';
+    const mostrarMensaje = ref(true);
+  </script>
+  ```
+
+## 7.7. Establecer contenido de un elemento (v-text y v-html)
+
+`v-text` es una directiva de Vue que se usa para establecer el contenido textual de un elemento, interpretando las etiquetas HTML como texto plano. Funciona de manera similar a la interpolación {{ }}, pero con una diferencia clave: `v-text` reemplaza todo el contenido dentro del elemento, mientras que {{ }} permite mezclar texto con otros elementos o contenido HTML. 
+
+v-html es una directiva en Vue que se usa para insertar contenido HTML dentro de un elemento. A diferencia de v-text, que muestra el HTML como texto plano, v-html interpreta las etiquetas y las renderiza en el DOM, así que hay que tener precaución con insertar contenido sin comprobar o de fuentes no fiables.
+
+**(en la versión 3.5.13 estas directivas no funcionan cuando se intenta sustituir contenido, vite da un error)**
+
+### Ejemplo: Sobreescritura de todo el contenido interno con v-text y v-html
+
+Si tiene contenido interno NO FUNCIONA (aunque vue dice que lo reemplaza). El compilador da un error y no es posible evitarlo.
+
+  ```vue
+  <template>
+    <!-- Esto no funciona -->
+    <!-- <p v-text="mensaje">Este texto va ser totalmente machacado</p>
+    <p v-html="mensaje">Este texto va ser totalmente machacado</p>-->
+
+    <p v-text="mensaje"></p>
+    <p v-html="mensaje"></p>
+    
+  </template>
+
+  <script setup>
+    const mensaje = '<p>¡Vue te va a encantar!<p>';
+  </script>
+  ```
+
+------
+
+# 8. Reactividad
+
+La reactividad es el mecanismo que permite a Vue actualizar automáticamente la interfaz de usuario cuando los datos cambian, sin tener que manipular el DOM manualmente.
+
+Hay dos conceptos clave de la reactividad en Vue:
+- **ref**: Es una función que se utiliza para crear una referencia reactiva a una variable de un tipo primitivo (número, cadena de texto, etc.)o a un objeto. `ref()` envuelve su argumento en un objeto `ref` con una propiedad `.value` que contiene el valor de la variable.
+- **reactive**: Se usa para crear una referencia reactiva para objetos y matrices. En lugar de tener que acceder a un valor mediante `.value`, como con ref, `reactive` automáticamente hace que las propiedades del objeto sean reactivas.
+
+
+## Ejemplo 1: Vinculación dinámica de clases
+  ```vue
+  <template>
+    <button
+      :class="{
+        'bg-blue-500': isBlue,
+        'bg-red-500': !isBlue,
+        'text-white': true,
+        'px-4': true,
+        'py-2': true
+      }"
+      @click="alternarColor">
+      Cambiar color
+    </button>
+  </template>
+  
+
+  <script setup>
+    import { ref } from 'vue'
+
+    // Al ser una variable reactiva, es en la que Vue está escuchando cambios, si en algún momento se hiciera .value=false, la clase activo desaparecería de p
+    const isBlue = ref(true)  // Controla el color de fondo del botón
+
+    // Función que cambia el valor de `isBlue`
+    const alternarColor = () => {
+      isBlue.value = !isBlue.value  // Cambia el valor de isBlue, alternando el color de fondo
+    }
+  </script>
+
+  <style>
+    .activo { color: green; }
+    .resaltado { font-weight: bold; }
+  </style>
+  ```
+
+## Ejemplo 2: Vinculación dinámica de clases
+
+  ```vue
+  <template>
+    <div>
+      <p :class="{ activo: esActivo, resaltado: esResaltado }">
+        Texto con clases dinámicas
+      </p>
+      <button @click="toggleActivo">Alternar Activo</button>
+      <button @click="toggleResaltado">Alternar Resaltado</button>
+    </div>
+  </template>
+
+  <script setup>
+    import { ref } from 'vue'
+
+    // Variables reactivas para controlar las clases
+    const esActivo = ref(false)
+    const esResaltado = ref(false)
+
+    // Métodos para alternar los valores
+    const toggleActivo = () => {
+      esActivo.value = !esActivo.value
+    }
+
+    const toggleResaltado = () => {
+      esResaltado.value = !esResaltado.value
+    }
+  </script>
+
+  <style scoped>
+    /* Estilos para las clases */
+    .activo {
+      color: green;
+      font-weight: bold;
+    }
+
+    .resaltado {
+      background-color: yellow;
+    }
+  </style>
+  ```
+
+### Ejemplo 3: Enlace bidireccional entre un input y un p suando v-bind
+
+  <!-- Muestra en el campo p, lo que el usuario introduzca en el input -->
   ```vue
   <template>
     <fieldset>
@@ -1132,69 +1429,112 @@ Como se ha visto anteriormente `v-bind` permite crear un vínculo unidireccional
   </script>
   ```
 
+### Ejemplo 4: Enlace bidireccional entre un input y un p usando v-model
 
-## 6.6.- Mostrar u ocultar dinámicamente un elemento (v-show)
-
-`v-show` permite mostrar u ocultar un elemento dinámicamente, pero sin eliminarlo del DOM. Funciona estableciendo la propiedad `display:none` cuando la condición es false. No hay que confundirlo con `v-if`, que agrega, o no, el elemento al DOM. Al igual que con `v-model`, la [reactividad](#7--reactividad) es necesaria para que el contenido se oculte o se muestre dinámicamente. Esto es porque `v-show` depende de una condición reactiva para modificar el valor de display.
-
-### Ejemplo: Mostrar u ocultar un mensaje
+  <!-- Muestra en el campo p, lo que el usuario introduzca en el input -->
   ```vue
   <template>
-    <p v-show="mostrarMensaje">Este mensaje se puede ocultar.</p>
-    <button @click="mostrarMensaje = !mostrarMensaje">Cambiar</button>
+    <fieldset>
+      <legend>Formulario</legend>
+      <label>
+        Nombre:
+        <input type="text" v-model="nombre" />
+      </label>
+      <p>Tu nombre es: {{ nombre }}</p>
+    </fieldset>
   </template>
 
   <script setup>
-    import { ref } from 'vue';
-    const mostrarMensaje = ref(true);
+  import { ref } from 'vue';
+
+  let nombre = ref('');
+
   </script>
   ```
 
+### Ejemplo 5:  Renderización condicional usando directivas y reactividad
 
-------
-
-# 7- Reactividad
-
-La reactividad es el mecanismo que permite a Vue actualizar automáticamente la interfaz de usuario cuando los datos cambian, sin tener que manipular el DOM manualmente.
-
-Hay dos conceptos clave de la reactividad en Vue:
-- **ref**: Es una función que se utiliza para crear una referencia reactiva a una variable de un tipo primitivo (número, cadena de texto, etc.)o a un objeto. `ref()` envuelve su argumento en un objeto `ref` con una propiedad `.value` que contiene el valor de la variable.
-- **reactive**: Se usa para crear una referencia reactiva para objetos y matrices. En lugar de tener que acceder a un valor mediante `.value`, como con ref, `reactive` automáticamente hace que las propiedades del objeto sean reactivas.
-
-
-Ejemplo: Vinculación dinámica de clases
   ```vue
   <template>
-    <p :class="{ activo: esActivo, resaltado: esResaltado }">Texto con clases dinámicas</p>
+      <article class="borde flex-columna">
+          <h1>Directivas v-if y v-show con reactividad</h1>
+
+          <!-- Directiva v-if -->
+          <p v-if="mostrarMensaje2">Este mensaje se puede renderizar, o no, en el DOM.</p>
+          <button @click="mostrarMensaje2 = !mostrarMensaje2">
+              {{ mostrarMensaje2 ? 'Insertar' : 'Eliminar' }} mensaje {{ mostrarMensaje2 ? 'en el' : 'del' }} DOM (v-if)
+          </button>
+
+          <!-- Directiva v-show -->
+          <p v-show="mostrarMensaje">Este mensaje se puede ocultar o mostrar, pero siempre se renderiza</p>
+          <button @click="mostrarMensaje = !mostrarMensaje">
+              {{ mostrarMensaje ? 'Ocultar' : 'Mostrar' }} mensaje (v-show)
+          </button>
+
+          <p class="mini">ReactividadDirectivas.vue</p>
+      </article>
   </template>
-  
+
   <script setup>
-    import { ref } from 'vue';
-
-    const esActivo = ref(true);
-    const esResaltado = ref(false);
-
-    // Al ser una variable reactiva, es decir, en la que Vue está escuchando cambios, si en algún momento se hiciera esActivo.value=false, la clase activo desaparecería de p
+      import { ref } from 'vue';
+      const mostrarMensaje = ref(true);
+      const mostrarMensaje2 = ref(true);
   </script>
-
-  <style>
-    .activo { color: green; }
-    .resaltado { font-weight: bold; }
-  </style>
   ```
 
 -----
 
-# 8.- Comunicación entre componentes
-Los componentes pueden comunicarse entre sí de varias maneras:
+# 9. Interacción entre componentes
+Los componentes pueden interaccionar entre sí de varias maneras:
 
-## 8.1.- Propiedades + eventos
+## 9.1. Inserción de contenido
+
+Las ranuras (slots) permiten que el **padre inserte contenido en el hijo, en un sitio determinado**.
+
+Los slots se parecen a las props, que también permiten pasar contenido al hijo, pero los primeros permiten pasar contenido completo (puede ser HTML, otros componentes, etc.), no solo datos y éste puede ser dinámico y más complejo. Sin embargo, las props pasan sólo texto, estático y más sencillo.
+
+
+```vue
+<!-- Componente Tarjeta.vue -->
+<template>
+  <article class="card">
+    <h2><slot name="titulo">Título por defecto</slot></h2>
+    <slot name="contenido">Contenido por defecto</slot>
+    <slot name="imagen"></slot>
+    <slot></slot>
+  </article>
+</template>
+
+<!-- Componente padre -->
+<template>
+  <Tarjeta>
+    <!-- Este h1 se renderizará en el slot name="titulo" del hijo -->
+    <template #titulo>
+      <h1>Un paisaje precioso</h1>
+    </template>
+    <!-- Este párrafo se renderizará en el slot name="contenido" del hijo -->
+    <template #contenido>
+      <p>Texto de "</p>
+    </template>
+    <!-- Esta imagen se renderizará en el slot name="imagen" del hijo -->
+    <template #imagen>
+      <img src="../../public/paisaje-474px.jpg" alt="un reflejo en el lago">
+    </template>
+    <!-- Este párrafo se renderizará en el slot sin nombre del hijo -->
+    <p class="mini">Este es el texto a pie de tarjeta</p>
+  </Tarjeta>
+</template>
+```
+
+## 9.2. Comunicación
+
+### 9.2.1. Propiedades + eventos
 - Los **Props** (propiedades) permiten que un **padre pase datos a un hijo**. Para eso, se definen en el hijo qué propiedades acepta y en el padre se le pasan como propiedades de la etiqueta que lleva el nombre del hijo. El flujo es el siguiente:
   - El padre pasa datos al hijo usando las `props`.
   - El hijo recibe las `props` definidas y las usa para mostrar o procesar los datos.
   - El padre puede cambiar el valor de las `props`, pero el hijo no puede modificar directamente las props. En su lugar, el hijo debe comunicar los cambios al padre mediante eventos.
 - Los **Eventos** permiten que un componente **hijo notifique al padre sobre cambios o acciones**. El flujo general es el siguiente:
-  - El hijo define los eventos que puede emitir usando `defineEmits()`.
+  - El hijo define los eventos que puede emitir y que se propagarán hacia el padre usando `defineEmits()`. Si son eventos que se van a usar en el mismo hijo, no es necesario usarlo.
   - El hijo emite un evento con `emit('nombre-del-evento', datosOpcionales)`.
   - El padre escucha el evento en la plantilla (`<ChildComponent @nombre-del-evento="manejador">`).
   - El padre maneja el evento con una función que recibe los datos enviados por el hijo y actualiza su estado si es necesario.
@@ -1324,7 +1664,7 @@ El flujo, por tanto es:
   ```
 
 
-## 8.2.- v-model y eventos
+### 9.2.2. v-model y eventos
 Otro método para comunicar padres e hijos es usar `v-model` y eventos. `v-model` se utiliza comúnmente para la comunicación bidireccional entre componentes, especialmente en formularios.
 - **v-model**: Permite la sincronización bidireccional de datos entre el componente padre y el hijo. Es una sintaxis que simplifica el uso de `props` y eventos de la siguiente forma:
   - Evita tener que definir manualmente el evento y el método de actualización en el componente padre.
@@ -1422,7 +1762,7 @@ function updateAge(event) {
 
 ```
 
-## 8.3.- defineModel
+### 9.2.3. defineModel
 Vue 3.4 introdujo `defineModel` como una forma más cómoda de trabajar con `v-model` en componentes hijos, especialmente cuando se utiliza la sintaxis `<script setup>`. Es una función que se encarga de hacer lo siguiente:
 - **Enlace de propiedades**: la función `defineModel()` permite acceder a las propiedades vinculadas con `v-model` en el componente hijo. Esto facilita la lectura y escritura de valores que se sincronizan con el padre.
 - **Manejo de eventos**: **Cuando se usa con argumentos**, `defineModel` no solo enlaza las propiedades, sino que también se encarga de emitir automáticamente los eventos necesarios para notificar al padre sobre los cambios. Esto elimina la necesidad de definir manualmente los eventos `update:modelValue`.
@@ -1534,7 +1874,8 @@ const mensaje = ref('Hola desde el padre');
 
 ----
 
-# 9.- Propiedades computadas
+# 10. Propiedades computadas
+
 Cuando se usa v-bind para enlazar un atributo a una función, esa **función se ejecuta cada vez que el componente se actualiza**. Esto significa que, independientemente de si los datos que afectan a la función han cambiado o no, la función se ejecutará en cada ciclo de actualización. Si la función realiza cálculos costosos o accede a datos que no han cambiado, esto puede resultar en un rendimiento ineficiente, ya que se está haciendo trabajo innecesario.
 
 Un componente puede actualizarse por varias razones:
