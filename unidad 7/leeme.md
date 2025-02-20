@@ -28,10 +28,10 @@
         3. [style](#613-style)
     2. [Convenciones sobre los componentes](#612-template)
 7. [Directivas](#7-directivas)
-    1. [Vinculación dinámica de atributos (v-bind)](#71-vinculación-dinámica-de-atributos-v-bind)
-    2. [Renderización condicional (v-if, v-else y v-else-if)](#72-renderización-condicional-v-if-v-else-v-else-if)
-    3. [Renderización dinámica de listas (v-for)](#73-renderización-dinámica-de-listas-v-for)
-    4. [Gestión de eventos (v-on)](#74-gestión-de-eventos-v-on)
+    1. [Renderización condicional (v-if, v-else y v-else-if)](#71-renderización-condicional-v-if-v-else-v-else-if)
+    2. [Renderización dinámica de listas (v-for)](#72-renderización-dinámica-de-listas-v-for)
+    3. [Gestión de eventos (v-on)](#73-gestión-de-eventos-v-on)
+    4. [Vinculación dinámica de atributos (v-bind)](#74-vinculación-dinámica-de-atributos-v-bind)
     5. [Creación de vínculos bidireccionales (v-model)](#75-creación-de-vínculos-bidireccionales-v-model)
     6. [Mostrar u ocultar dinámicamente un elemento (v-show)](#76-mostrar-u-ocultar-dinámicamente-un-elemento-v-show)
     7. [Establecer contenido de un elemento (v-text y v-html)](#77-establecer-contenido-de-un-elemento-v-text-y-v-html)
@@ -42,7 +42,14 @@
         1. [Propiedades y eventos](#921-propiedades--eventos)
         2. [v-model y eventos](#922-v-model-y-eventos)
         3. [defineModel](#923-definemodel)
+        4. [Comunicación entre componentes distantes (provide e inject) (AVANZADO)](#924-comunicación-entre-componentes-distantes-provide-e-inject-avanzado)
+    3. [Gestión del estado](#93-gestión-del-estado)
+        1. [Local (ref y reactive)](#931-local-ref-y-reactive)
+        2. [Pinia](#932-pinia)
 10. [Propiedades computadas](#10-propiedades-computadas)
+11. [Enrutamiento(AVANZADO)](#11-enrutamiento)
+    1. [Navegación en la Web: Hipervínculos y SPA](#111-navegación-en-la-web-hipervínculos-y-spa)
+    2. [Configuración](#112-configuración)
   
 -----
 
@@ -778,10 +785,10 @@ Respecto a la colocación del código, aunque no hay un orden obligatorio para l
 Las **directivas** se utilizan en la sección `template` de un componente y permiten controlar el comportamiento del DOM. Las directivas son mucho más poderosas si se las combina con la [reactividad](#7--reactividad), que veremos en la sección 7.
 
 Las directivas que aquí se van a tratar son:
-- **`v-bind`**, para la vinculación entre variables y atributos
 - **`v-if`, `v-else` y `v-else-if`**, para la renderización condicional de contenido
 - **`v-for`**, para la renderización de listas
 - **`v-on`**, para la gestión de eventos
+- **`v-bind`**, para la vinculación entre variables y atributos
 - **`v-model`**, para la creación de vínculos bidireccionales
 - **`v-show`** para mostrar u ocultar un elemento
 - **`v-text` y `v-html`** para insertar contenido textual o HTML sustituyendo al que haya (aunque no funcionan en la versión 3.5)
@@ -793,7 +800,169 @@ Hay más directivas, pero no las considero fundamentales como, por ejemplo
 - **`v-memo`** para la optimización del renderizado
 
 
-## 7.1. Vinculación dinámica de atributos (v-bind)
+## 7.1. Renderización condicional (v-if, v-else, v-else-if)
+
+**v-if, v-else** y **v-else-if** permiten renderizar elementos condicionalmente. El elemento sólo se renderiza si la condición evaluada es cierta. Si luego la condición cambia a false y a true de nuevo, el elemento se destruye y se crea de nuevo. Por tanto, su estado no se conserva entre renderizaciones.
+
+### Ejemplo 1: Renderización condicional
+```vue
+<template>
+  <p v-if="mostrarMensaje">Este mensaje solo se muestra si mostrarMensaje es true.</p>
+  <p v-else>Este mensaje sólo se muestra si mostrarMensaje es false</p>
+</template>
+
+<script setup>
+  import { ref } from 'Vue';
+  const mostrarMensaje=ref (true);
+</script>
+```
+
+### Ejemplo 2: Renderización condicional de dos componentes
+```vue
+<template>
+  <!-- Al comparar componentes o variables que representen componentes, es importante que las comparaciones sean estrictas -->
+  <ComponenteA v-if="componenteActual === ComponenteA" />
+  <ComponenteB v-if="componenteActual === ComponenteB" />
+</template>
+
+<script setup>
+  import ComponenteA from './ComponenteA.vue';
+  import ComponenteB from './ComponenteB.vue';
+  const componenteActual = ref(ComponenteA);
+</script>
+```
+
+  
+## 7.2. Renderización dinámica de listas (v-for)
+**v-for** permite iterar sobre una lista de elementos y renderizarlos dinámicamente.
+
+### Ejemplo: Renderización de una matriz sencilla
+  ```vue
+  <template>
+    <ul>
+      <li v-for="(fruta, indice) in frutas" :key="indice">{{ indice }} - {{ fruta }}</li>
+    </ul>
+  </template>
+
+  <script setup>
+    const frutas = ["Manzana", "Plátano", "Uva"];
+  </script>
+  ```
+
+### Ejemplo: Renderización de una matriz de matrices
+  ```vue
+  <template>
+    <article>
+      <h1>Lista de Productos</h1>
+      <ul>
+        <li v-for="product in products" :key="product.id">
+          {{ product.name }} - ${{ product.price }}
+        </li>
+      </ul>
+    </article>
+  </template>
+
+  <script setup>
+    const products = [
+      { id: 1, name: 'Producto 1', price: 10 },
+      { id: 2, name: 'Producto 2', price: 20 },
+      { id: 3, name: 'Producto 3', price: 30 },
+    ];
+  </script>
+  ```
+
+
+## 7.3. Gestión de eventos (v-on)
+
+**v-on** permite escuchar eventos del DOM. Su sintaxis es `<button v-on:evento="miMetodo">Haz clic</button>` aunque tiene una forma abreviada `<button @evento="miMetodo">Haz clic</button>`. 
+
+Se pueden usar los típicos eventos: `click`, `dblclick`, `contextmenu`, `mouseover`, `mouseleave`, `focusin`, `focusout`, `input`, `change`, `keyup`, `keydown`, etc. Los eventos de teclado se pueden usar con teclas específicas como, por ejemplo: `@keyup.enter`, `@keydown.tab`, `@keyup.delete`, etc.
+    
+Esta directiva permite usar algunos modificadores para cambiar el comportamiento del evento como, por ejemplo, 
+  - `prevent`, que evita el comportamiento por defecto del evento.
+  - `stop`, que detiene la propagación del evento.
+  - `self`, que sólo lanza el evento para este elemento, no para sus hijos.
+  - `once`, que captura el evento sólo una vez.
+
+### Ejemplo 1: escucha del evento click y llamada al método que lo gestiona
+  ```vue
+  <!-- Ejemplo de directiva v-on para escuchar el evento click y llamar al método "mostrarAlerta" -->
+  <template>
+    <button @click="mostrarAlerta">Haz clic</button>
+  </template>
+
+  <script setup>
+  const mostrarAlerta = () => {
+    alert('Botón pulsado');
+  };
+  </script>
+  ```
+
+### Ejemplo 2: escucha del evento click y llamada al método que lo gestiona
+  ```vue
+  <!-- Ejemplo de paso de argumentos a función de respuesta a evento -->
+  <template>
+    <button @click.left="saludar('Procopio')" @contextmenu.prevent @click.right="despedir('Procopio')">Pulsa</button>
+  </template>
+
+  <script setup>
+  const saludar = (nombre) => {
+    alert(`Hola, ${nombre}`);
+  };
+  
+  const despedir = (nombre) => {
+    alert(`Adiós, ${nombre}`);
+  };
+  </script>
+  ```
+
+```vue
+<!-- Ejemplo de uso del objeto evento dentro del manejador de eventos -->
+<template>
+  <input type="text" @input="mostrarTexto($event)">
+</template>
+
+<script setup>
+const mostrarTexto = (evento) => {
+  console.log('Texto introducido:', evento.target.value);
+};
+</script>
+```
+
+```vue
+<!-- Ejemplo del uso de expresiones en línea -->
+<template>
+  <button @click="console.log(++contador)">Incrementar</button>
+</template>
+```
+
+```vue
+<!-- Ejemplo de uso del modificador .prevent para evitar que el evento haga su función tradicional -->
+<template>
+  <form @submit.prevent="miFuncion">
+    <button type="submit">Enviar</button>
+  </form>
+</template>
+```
+
+```vue
+<!-- Ejemplo de uso del modificador.stop para evitar que el evento se propague (burbujeo) -->
+<template>
+  <article @click="estoNoSeEjecutara">
+    <button @click.stop="miFuncion">Haz clic</button>
+  </article>
+</template>
+```
+
+```vue
+<!-- Ejemplo de uso del modificador .once para que la función asociada al evento sólo se ejecute una vez -->
+<template>
+  <button @click.once="miFuncion">Haz clic una vez</button>
+</template>
+```  
+
+
+## 7.4. Vinculación dinámica de atributos (v-bind)
 **v-bind** permite enlazar dinámicamente atributos de un elemento HTML con propiedades del componente. Así, si el valor del atributo del elemento HTML cambia en la sección script del componente, que se ejecuta antes de renderizar el DOM, el atributo tomará el valor de la propiedad en el componente. Si el valor de la propiedad es cambiado más adelante por otro componente, el valor del atributo cambiará automáticamente SÓLO SI se define la propiedad como reactiva (lo veremos más adelante).
    
 La sintaxis es `<article v-bind:<nombre-atributo>="propiedad">` o, de forma abreviada, `<article :<nombre-atributo>="propiedad">`. Desde Vue 3.4, si el nombre del atributo coincide con del de la propiedad del componente, se abreviar aún más con `<article :id>`
@@ -937,64 +1106,51 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   </script>
   ```
 
-### Ejemplo 7: vinculación de clases
-
+### Ejemplo 7: vinculación dinámica de clases
   También se pueden vincular clases. Si la variable se evalúa a false, no aparecerá en el elemento
   ```vue
   <!-- En este ejemplo las clases se insertan siempre. Lo interesante es que, si cambian más adelante, eso se refleje en las clases de p. Eso se consigue con reactividad, que veremos más adelante -->
   <template>
     <p :class="{ activo: esActivo, resaltado: esResaltado }">Texto con clases dinámicas</p>
+
+  <!-- importante y extra siempre serán insertadas -->
+  <p :class="[clasePrincipal, 'extra']">Texto con clases dinámicas</p>
   </template>
 
   <script setup>
     const esActivo = true;
     const esResaltado = false;
+
+    const clasePrincipal = 'importante';
   </script>
 
   <style>
     .activo { color: green; }
     .resaltado { font-weight: bold; }
-  </style>
-  ```
 
-  ```vue
-  <!-- En este ejemplo, importante y extra siempre serán insertadas -->
-  <template>
-    <p :class="[clasePrincipal, 'extra']">Texto con clases dinámicas</p>
-  </template>
-
-  <script setup>
-    const clasePrincipal = 'importante';
-  </script>
-
-  <style>
     .importante { font-size: 20px; }
     .extra { text-decoration: underline; }
+
   </style>
   ```
 
-### Ejemplo 8: vinculación de estilos
+### Ejemplo 8: vinculación dinámica de estilos
   ```vue
-  <!-- En este ejemplo, se insertan estilos en línea -->
   <template>
+    <!-- Se insertan estilos en línea -->
     <p :style="{ color: colorTexto, fontSize: tamañoFuente + 'px' }">Texto con estilos dinámicos</p>
+  
+    <!-- Se insertan estilos en línea como objetos -->
+    <p :style="[estilosBase, estilosExtra]">Texto con múltiples estilos</p>
   </template>
 
   <script setup>
     const colorTexto = 'blue';
     const tamañoFuente = 18;
-  </script>
-  ```
 
-  ```vue
-  <!-- En este ejemplo se insertan estilos en línea como objetos -->
-  <template>
-    <p :style="[estilosBase, estilosExtra]">Texto con múltiples estilos</p>
-  </template>
-
-  <script setup>
     const estilosBase = { color: 'red', fontWeight: 'bold' };
     const estilosExtra = { textDecoration: 'underline' };
+
   </script>
   ```
 
@@ -1021,150 +1177,63 @@ Se puede ejecutar una función en un atributo de una etiqueta vinculándola con 
   </script>
   ```
 
-## 7.2. Renderización condicional (v-if, v-else, v-else-if)
+### Ejemplo 10: Vinculación dinámica de componentes con :is
 
-**v-if, v-else** y **v-else-if** permiten renderizar elementos condicionalmente. Si la condición evaluada es falsa, el elemento no se renderiza.
+`v-if` permite renderizar un componente o elemento sólo si una condición es verdadera. Esto destruye y vuelve a crear el componente cada vez que la condición cambia, lo que impide mantener su estado entre renderizaciones.
 
-### Ejemplo: Renderización condicional
-```vue
-<template>
-  <p v-if="mostrarMensaje">Este mensaje solo se muestra si mostrarMensaje es true.</p>
-  <p v-else>Este mensaje sólo se muestra si mostrarMensaje es false</p>
-</template>
+Al usar `:is` para renderizar un componente dinámicamente, Vue no destruye el componente cada vez que cambia el estado. En lugar de destruirlo y crear uno nuevo (como lo haría con v-if), simplemente cambia el componente que se está mostrando, pero mantiene el mismo componente en memoria.
 
-<script setup>
-  import { ref } from 'Vue';
-  const mostrarMensaje=ref (true);
-</script>
-```
+  ```vue
+  <template>
+    <component :is="elemento">Contenido dinámico</component>
+  </template>
+
+  <script setup>
+    import { ref } from 'vue';
+
+    const elemento = ref('h1'); // Puede ser 'p', 'div', 'span', etc.
+  </script>
+  ```
+
+### Ejemplo 11: Carga dinámica de componentes manteniendo su estado anterior y ejecutando una acción cuando se cargan con `:is`, `keep-alive` y `onActivated` y `onDeactivated`
+
+Vue proporciona, además, los siguientes mecanismos relativos a los componentes que se pueden usar con `:is`:
+- envolver el componente en la etiqueta **`<keep-alive></keep-alive>` para mantener su estado previo** hace que cuando se vuelva a cargar no se pierda su estado. Se puede definir qué componentes deben mantener su estado previo `<keep-alive include="componenteA, componenteC">`
+- usar eventos `activated` y `deactivated` para detectar cuando un componente dentro de `<keep-alive>` se activa o se desactiva y hacer alguna acción en respuesta.
 
   
-## 7.3. Renderización dinámica de listas (v-for)
-**v-for** permite iterar sobre una lista de elementos y renderizarlos dinámicamente.
-
-### Ejemplo: Renderización de una matriz sencilla
   ```vue
   <template>
-    <ul>
-      <li v-for="(fruta, indice) in frutas" :key="indice">{{ indice }} - {{ fruta }}</li>
-    </ul>
+    <!-- Si el componente tiene estado, es recomendable usar `keep-alive` para no perderlo. Así, cuando el usuario cambia entre ComponenteA y ComponenteB, el estado de cada uno se mantiene en memoria en lugar de reiniciarse. -->
+    <keep-alive include="ComponenteA, ComponenteB">
+      <component :is="componenteActual"></component>
+    </keep-alive>
+
+    <button @click="componenteActual = ComponenteA">Cargar A</button>
+    <button @click="componenteActual = ComponenteB">Cargar B</button>
+    <button @click="componenteActual = ComponenteC">Cargar C</button>
   </template>
 
   <script setup>
-    const frutas = ["Manzana", "Plátano", "Uva"];
+    import { ref } from 'vue';
+    import ComponenteA from './ComponenteA.vue';
+    import ComponenteB from './ComponenteB.vue';
+    import ComponenteC from './ComponenteC.vue';
+    import { onActivated, onDeactivated } from 'vue';
+
+    const componenteActual = ref(ComponenteA);
+
+    // Eventos que determinan qué hacer cuando los componentes se cargan
+    onActivated(() => {
+      console.log('El componente fue activado nuevamente');
+    });
+
+    onDeactivated(() => {
+      console.log('El componente fue desactivado pero sigue en caché');
+    });
   </script>
   ```
 
-### Ejemplo: Renderización de una matriz de matrices
-  ```vue
-  <template>
-    <article>
-      <h1>Lista de Productos</h1>
-      <ul>
-        <li v-for="product in products" :key="product.id">
-          {{ product.name }} - ${{ product.price }}
-        </li>
-      </ul>
-    </article>
-  </template>
-
-  <script setup>
-    const products = [
-      { id: 1, name: 'Producto 1', price: 10 },
-      { id: 2, name: 'Producto 2', price: 20 },
-      { id: 3, name: 'Producto 3', price: 30 },
-    ];
-  </script>
-  ```
-
-## 7.4. Gestión de eventos (v-on)
-
-**v-on** permite escuchar eventos del DOM. Su sintaxis es `<button v-on:evento="miMetodo">Haz clic</button>` aunque tiene una forma abreviada `<button @evento="miMetodo">Haz clic</button>`. 
-
-Se pueden usar los típicos eventos: `click`, `dblclick`, `contextmenu`, `mouseover`, `mouseleave`, `focusin`, `focusout`, `input`, `change`, `keyup`, `keydown`, etc. Los eventos de teclado se pueden usar con teclas específicas como, por ejemplo: `@keyup.enter`, `@keydown.tab`, `@keyup.delete`, etc.
-    
-Esta directiva permite usar algunos modificadores para cambiar el comportamiento del evento como, por ejemplo, 
-  - `prevent`, que evita el comportamiento por defecto del evento.
-  - `stop`, que detiene la propagación del evento.
-  - `self`, que sólo lanza el evento para este elemento, no para sus hijos.
-  - `once`, que captura el evento sólo una vez.
-
-### Ejemplo 1: escucha del evento click y llamada al método que lo gestiona
-  ```vue
-  <!-- Ejemplo de directiva v-on para escuchar el evento click y llamar al método "mostrarAlerta" -->
-  <template>
-    <button @click="mostrarAlerta">Haz clic</button>
-  </template>
-
-  <script setup>
-  const mostrarAlerta = () => {
-    alert('Botón pulsado');
-  };
-  </script>
-  ```
-
-### Ejemplo 2: escucha del evento click y llamada al método que lo gestiona
-  ```vue
-  <!-- Ejemplo de paso de argumentos a función de respuesta a evento -->
-  <template>
-    <button @click.left="saludar('Procopio')" @contextmenu.prevent @click.right="despedir('Procopio')">Pulsa</button>
-  </template>
-
-  <script setup>
-  const saludar = (nombre) => {
-    alert(`Hola, ${nombre}`);
-  };
-  
-  const despedir = (nombre) => {
-    alert(`Adiós, ${nombre}`);
-  };
-  </script>
-  ```
-
-```vue
-<!-- Ejemplo de uso del objeto evento dentro del manejador de eventos -->
-<template>
-  <input type="text" @input="mostrarTexto($event)">
-</template>
-
-<script setup>
-const mostrarTexto = (evento) => {
-  console.log('Texto introducido:', evento.target.value);
-};
-</script>
-```
-
-```vue
-<!-- Ejemplo del uso de expresiones en línea -->
-<template>
-  <button @click="console.log(++contador)">Incrementar</button>
-</template>
-```
-
-```vue
-<!-- Ejemplo de uso del modificador .prevent para evitar que el evento haga su función tradicional -->
-<template>
-  <form @submit.prevent="miFuncion">
-    <button type="submit">Enviar</button>
-  </form>
-</template>
-```
-
-```vue
-<!-- Ejemplo de uso del modificador.stop para evitar que el evento se propague (burbujeo) -->
-<template>
-  <article @click="estoNoSeEjecutara">
-    <button @click.stop="miFuncion">Haz clic</button>
-  </article>
-</template>
-```
-
-```vue
-<!-- Ejemplo de uso del modificador .once para que la función asociada al evento sólo se ejecute una vez -->
-<template>
-  <button @click.once="miFuncion">Haz clic una vez</button>
-</template>
-```
 
 ## 7.5. Creación de vínculos bidireccionales (v-model)
 Como se ha visto anteriormente `v-bind` permite crear un vínculo unidireccional entre dos elementos/componentes. Para que sea bidireccional, hace falta usar `v-bind` para vincular en un sentido y un evento para notificar de cambios en el otro sentido.
@@ -1392,29 +1461,6 @@ Hay dos conceptos clave de la reactividad en Vue:
   function updateNombre(event) {
     nombre.value = event.target.value;
   }
-  </script>
-  ```
-
-### Ejemplo 4: Enlace bidireccional entre un input y un p usando v-model
-
-  <!-- Muestra en el campo p, lo que el usuario introduzca en el input -->
-  ```vue
-  <template>
-    <fieldset>
-      <legend>Formulario</legend>
-      <label>
-        Nombre:
-        <input type="text" v-model="nombre" />
-      </label>
-      <p>Tu nombre es: {{ nombre }}</p>
-    </fieldset>
-  </template>
-
-  <script setup>
-  import { ref } from 'vue';
-
-  let nombre = ref('');
-
   </script>
   ```
 
@@ -1733,6 +1779,8 @@ Vue 3.4 introdujo `defineModel` como una forma más cómoda de trabajar con `v-m
 - **Enlace de propiedades**: la función `defineModel()` permite acceder a las propiedades vinculadas con `v-model` en el componente hijo. Esto facilita la lectura y escritura de valores que se sincronizan con el padre.
 - **Manejo de eventos**: **Cuando se usa con argumentos**, `defineModel` no solo enlaza las propiedades, sino que también se encarga de emitir automáticamente los eventos necesarios para notificar al padre sobre los cambios. Esto elimina la necesidad de definir manualmente los eventos `update:modelValue`.
 
+### Ejemplo 1: uso de `defineModel` con un parámetro y sin darle nombre
+
 ```vue
 <!-- Padre -->
 <template>
@@ -1774,7 +1822,7 @@ const mensaje = ref('Hola desde el padre');
 </script>
 ```
 
-### Ejemplo 2: uso de defineModel con un parámetro solo, pero dándole nombre (Recomendado)
+### Ejemplo 2: uso de `defineModel` con un parámetro, pero dándole nombre (Recomendado)
 <!-- al usar defineModel con un parámetro (para enlazar la propiedad del padre con la del hijo), se crea automáticamente el evento para notificar de los cambios al padre -->
 ```vue
 <!-- Padre.vue -->
@@ -1814,7 +1862,7 @@ const mensaje = ref('Hola desde el padre');
 ```
 
 
-### Ejemplo de defineModel con varias propiedades
+### Ejemplo 3: Uso de `defineModel` con varias parámetros
   
   Esto nos ahorra tener que definir el evento en el hijo que avisará al padre de los cambios
   ```vue
@@ -1836,6 +1884,83 @@ const mensaje = ref('Hola desde el padre');
     <input type="text" v-model="firstName" />
     <input type="text" v-model="lastName" />
   </template>
+  ```
+
+#### 9.2.4 Comunicación entre componentes distantes (provide e inject) (AVANZADO)
+
+Vue tiene un mecanismo para que dos componentes que están muy alejados en la jerarquía de componentes compartan datos sin tener que mandar datos entre cada par de componentes que los separ.Se trata de `provide` e `inject`. 
+- **`provide`** es una función que usa un componente padre para poner datos a disposición de sus componentes descendientes, sin importar qué nivel ocupen en la jerarquía. Es una forma de "proveer" un valor que estará disponible para todos los componentes hijos que lo "inyecten".
+- **`inject`** es la forma en que los componentes hijos (estén al nivel que estén) pueden acceder a los datos proporcionados por su componente ancestro.
+
+
+
+
+
+
+## 9.3. Gestión del estado
+
+En una aplicación Vue, la gestión del estado se refiere a la manera en que se almacena la información relativa al estado actual de un componente.
+
+
+### 9.3.1. Local (ref y reactive)
+
+Cada componente tiene su propio estado interno usando ref() o reactive(). Se usa cuando el estado sólo afecta a dicho componente.
+
+#### Ejemplo: Almacenamiento de estado local en variables reactivas
+  ```vue
+  <script setup>
+    import { ref } from 'vue';
+
+    const contador = ref(0);
+
+    function incrementar() {
+      contador.value++;
+    }
+  </script>
+
+  <template>
+    <div>
+      <p>Contador: {{ contador }}</p>
+      <button @click="incrementar">Incrementar</button>
+    </div>
+  </template>
+  ```
+
+### 9.3.2. Pinia
+  ```js
+  // store.js (Pinia)
+  import { defineStore } from 'pinia';
+
+  export const useMessageStore = defineStore('message', {
+    state: () => ({
+      message: 'Hola desde Pinia',
+    }),
+    actions: {
+      updateMessage(newMessage) {
+        this.message = newMessage;
+      },
+    },
+  });
+  ```
+
+  ```vue
+  <!-- Componente que usa Pinia -->
+  <template>
+    <article>
+      <p>{{ messageStore.message }}</p>
+      <button @click="updateMessage">Actualizar mensaje</button>
+    </article>
+  </template>
+
+  <script setup>
+   import { useMessageStore } from './store';
+
+    const messageStore = useMessageStore();
+
+    function updateMessage() {
+      messageStore.updateMessage('Nuevo mensaje desde Pinia');
+    }
+  </script>
   ```
 
 ----
@@ -1935,3 +2060,117 @@ const total = computed(() => {
   }
 </style>
 ```
+
+-----
+
+# 11. Enrutamiento (AVANZADO)
+
+## 11.1. Navegación en la Web: Hipervínculos y SPA
+
+La forma tradicional de acceder a otra web es mediante un hipervínculo con la etiqueta HTML `<a href="URL">`. Al pinchar en esta etiqueta, se hace una solicitud a un servidor, lo que provoca la recarga de la página completa que lleva un tiempo. Esto implica la reejecución de scripts, la reobtención de estilos y la posible pérdida de estados en la página.
+
+Hay un tipo de webs, las de página única (Single Page Application, SPA), en las que no se provoca una recarga de la página, ahorrando recursos y mejorando la experiencia del usuario. En una SPA, la navegación se gestiona mediante JavaScript, actualizando dinámicamente el contenido sin necesidad de recargar toda la página.
+
+Para lograr esto, se pueden utilizar directamente las capacidades de JavaScript como el History API o el hash, o bien hacer uso de bibliotecas o frameworks como Vue, React o Angular, que facilitan la gestión del enrutamiento manteniendo el estado de la aplicación y evitando las interrupciones en la navegación.
+
+## Ejemplo de navegación tradicional que provoca la recarga completa de la página
+```html
+<a href="https://ejemplo.com">Ir a Ejemplo</a>
+```
+
+## Ejemplo de navegación en una SPA con `History API` que cambia la URL y actualiza el contenido sin recargar la página
+```html
+<button onclick="navegar('/nueva-ruta')">Ir a Nueva Ruta</button>
+
+<script>
+function navegar(ruta) {
+    history.pushState({}, '', ruta);
+    document.getElementById('contenido').innerHTML = `<h2>Estás en ${ruta}</h2>`;
+}
+</script>
+
+<div id="contenido">
+    <h2>Inicio</h2>
+</div>
+```
+
+Vue posee la biblioteca **`vue-router`** que permite manejar la navegación entre páginas en una **aplicación web de una sola página** (SPA, por sus siglas en inglés). En una SPA, en lugar de cargar una nueva página desde el servidor cada vez que se pincha en un enlace, el contenido de la página se actualiza dinámicamente sin recargar toda la aplicación, lo que ofrece una experiencia más fluida y rápida.
+
+## 11.2. Configuración
+
+Lo más sencillo es incluir el enrutamiento en la instalación que se hace al principio ejecutando la herramienta de andamiaje `npm create vue@latest`, ya que esto crea los directorios y ficheros necesarios con una configuración inicial de ejemplo. Si no, hay que hacerlo a mano y dar los siguientes pasos:
+
+1. Instalar Vue Router
+
+    ```bash
+    npm install vue-router
+    ```
+
+2. Crear el fichero **src/router/index.js** que importa componentes de `vue-router` y donde se configuran las rutas en el objeto `routes`.
+
+    ```javascript
+    import { createRouter, createWebHistory } from 'vue-router'
+    import HomeView from '../views/HomeView.vue'
+
+    // routes contiene las rutas que podrá usar la aplicación. La última parte contiene el componente que se cargará. Se puede importar antes, primer ejemplo, o en ese momento (dos últimos ejemplos)
+    const router = createRouter({
+      history: createWebHistory(import.meta.env.BASE_URL),
+      routes: [
+        {path: '/', name: 'home', component: HomeView},
+        {path: '/Interpolacion', name: 'Interpolación', component:() => import('../views/VistaInterpolacion.vue')},
+        {path: '/Directivas', name: 'Directivas', component:() => import('../views/VistaDirectivas.vue')},
+        },
+      ],
+    })
+
+    export default router
+    ```
+
+3. **Crear las vistas que se renderizarán al pinchar en los enlaces dentro del directorio `src/views`**. Una **vista es un componente que, normalmente, actúa de contenedor de otros componentes** y que será lo que se muestre mediante el enrutador.
+
+    ```vue
+    <!-- Ejemplo de vista que contiene otros componentes -->
+    <script setup>
+        import DirectivasRenderizacionCondicional from '../components/hijos/DirectivasRenderizacionCondicional.vue';
+        import DirectivasEventos from '../components/hijos/DirectivasEventos.vue';
+        import DirectivasMostrarTexto from '@/components/hijos/DirectivasMostrarTexto.vue';
+        import DirectivasVinculacion from '@/components/hijos/DirectivasVinculacion.vue';
+        import DirectivasRenderizacionMultiple from '@/components/hijos/DirectivasRenderizacionMultiple.vue';
+    </script>
+
+    <template>
+        <section class="flex-columna gap">
+            <DirectivasRenderizacionCondicional />
+            <DirectivasEventos />
+            <DirectivasMostrarTexto />
+            <DirectivasVinculacion />
+            <DirectivasRenderizacionMultiple />
+        </section>
+    </template>
+    ```
+
+4. **Usar el enrutador en `App.vue`**. Se trata de importar los componentes de vue-router e incluir la ruta que se renderizará, usando el componente `RouterLink`, y que tendrá que coincidir con el campo `path` de `src/router/index.js`
+      
+    ```vue
+    <script setup>
+      import { RouterLink, RouterView } from 'vue-router'
+    </script>
+    <template>
+      <!-- Muestra un enlace "Interpolación" que llevará a la ruta URL/Interpolacion -->
+      <RouterLink to="/Interpolacion">Interpolación</RouterLink>
+      <RouterLink to="/Directivas">Directivas</RouterLink>
+
+      <!-- Aquí es donde se renderizaá el contenido de la ruta, en este caso la vista Interpolacion.vue -->
+      <router-view />
+    </template>
+    ```
+
+5. **Importar el router en `main.js` y llamar al método use(router)**
+
+    ```javascript
+    import router from './router'
+    createApp(App)
+      .use(router)
+      .mount('#app')
+    ```
+
