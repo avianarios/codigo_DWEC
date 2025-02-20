@@ -422,9 +422,36 @@ location.assign("https://www.ejemplo.com");
 
 # 5- Objeto history
 
-El objeto `history` permite interactuar con el historial de navegación del navegador y almacenar información asociada al estado de la página actual mediante un objeto de datos, sin recargarla. Dicho objeto se puede recuperar cuando el usuario navega hacia atrás o adelante. Se trata de una forma de almacenar información asociada a la la página visitada que tiene diferencias respecto a otros dos objetos usados para almacenar información, `localStorage` y `sessionStorage`
+## Navegación en la Web: Hipervínculos y SPA
 
-Este objeto es útil para aplicaciones de una sola página (SPA) donde se necesita manipular el historial sin recargar la página.
+La forma tradicional de acceder a otra web es mediante un hipervínculo con la etiqueta HTML `<a href="URL">`. Al pinchar en esta etiqueta, se hace una solicitud a un servidor, lo que provoca la recarga de la página completa que lleva un tiempo. Esto implica la reejecución de scripts, la reobtención de estilos y la posible pérdida de estados en la página.
+
+Hay un tipo de webs, las de **página única (Single Page Application, SPA)**, en las que **no se provoca una recarga de la página**, ahorrando recursos y mejorando la experiencia del usuario. En una SPA, la navegación se gestiona mediante JavaScript, actualizando dinámicamente el contenido sin necesidad de recargar toda la página.
+
+Para lograr esto, se pueden utilizar directamente las capacidades de JavaScript como el History API o el hash, o bien hacer uso de bibliotecas o frameworks como Vue, React o Angular, que facilitan la gestión del enrutamiento manteniendo el estado de la aplicación y evitando las interrupciones en la navegación.
+
+## Ejemplo de navegación tradicional que provoca la recarga completa de la página
+```html
+<a href="https://ejemplo.com">Ir a Ejemplo</a>
+```
+
+## Ejemplo de navegación en una SPA con `History API` que cambia la URL y actualiza el contenido sin recargar la página
+```html
+<button onclick="navegar('/nueva-ruta')">Ir a Nueva Ruta</button>
+
+<script>
+function navegar(ruta) {
+    history.pushState({}, '', ruta);
+    document.getElementById('contenido').innerHTML = `<h2>Estás en ${ruta}</h2>`;
+}
+</script>
+
+<div id="contenido">
+    <h2>Inicio</h2>
+</div>
+```
+
+Por tanto, el objeto `history` permite interactuar con el historial de navegación del navegador y almacenar información asociada al estado de la página actual mediante un objeto de datos, sin recargarla. Dicho objeto se puede recuperar cuando el usuario navega hacia atrás o adelante. Se trata de una forma de almacenar información asociada a la la página visitada que tiene diferencias respecto a otros dos objetos usados para almacenar información, `localStorage` y `sessionStorage`
 
 
 ## Métodos

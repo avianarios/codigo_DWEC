@@ -417,9 +417,38 @@ The `location` object provides information about the current page URL. It also a
 
 # 5- `history` Object
 
-The `history` object allows interaction with the browser's navigation history and stores information associated with the current page state using a data object, without reloading it. This object can be retrieved when the user navigates back or forward. It provides a way to store information about the visited page, which differs from two other objects used for storing data: `localStorage` and `sessionStorage`.
+## Web browsing: Hyperlinks and SPAs
 
-This object is useful for single-page applications (SPAs) where manipulating the history without reloading the page is necessary.
+The traditional way to access another website is via a hyperlink with the HTML tag `<a href=‘URL’>`. When you click on this tag, a request is made to a server, which causes a time-consuming reload of the entire page. This involves re-executing scripts, re-obtaining styles and the possible loss of page states.
+
+There is one type of website, the **Single Page Application (SPA)**, which **does not cause a page reload**, saving resources and improving the user experience. In a SPA, navigation is handled by JavaScript, dynamically updating content without the need to reload the entire page.
+
+To achieve this, JavaScript capabilities such as the History API or hashing can be used directly, or libraries or frameworks such as Vue, React or Angular can be used, which facilitate routing management while maintaining the state of the application and avoiding interruptions in navigation.
+
+## Example of traditional navigation that causes the page to reload completely.
+```html
+<a href="https://ejemplo.com">Ir a Ejemplo</a>
+```
+
+## Example of navigation in a SPA with `History API` that changes the URL and updates the content without reloading the page.
+```html
+<button onclick="navegar('/nueva-ruta')">Ir a Nueva Ruta</button>
+
+<script>
+function navegar(ruta) {
+    history.pushState({}, '', ruta);
+    document.getElementById('contenido').innerHTML = `<h2>Estás en ${ruta}</h2>`;
+}
+</script>
+
+<div id="contenido">
+    <h2>Inicio</h2>
+</div>
+```
+
+
+Therefore, the `history` object allows interaction with the browser's navigation history and stores information associated with the current page state using a data object, without reloading it. This object can be retrieved when the user navigates back or forward. It provides a way to store information about the visited page, which differs from two other objects used for storing data: `localStorage` and `sessionStorage`.
+
 
 ## Methods
 
