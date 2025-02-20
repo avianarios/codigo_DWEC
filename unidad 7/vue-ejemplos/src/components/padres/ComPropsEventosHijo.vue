@@ -10,8 +10,8 @@
   </section>
 </template>
   
-  <script setup>
-    import Boton from './Boton.vue'; // Importamos el componente Boton
+<script setup>
+  import Boton from '../especificos/Boton.vue'; // Importamos el componente Boton
 
 
   // Se definen las propiedades que este componente acepta del padre
@@ -39,7 +39,7 @@
     console.log("Botón pulsado en el hijo");
     emit('notify', 'El botón fue pulsado');
   }
-  </script>
+</script>
 
 <style scoped>
   /* .contenedor{

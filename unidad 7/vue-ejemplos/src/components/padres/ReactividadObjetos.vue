@@ -10,7 +10,7 @@
   
   <script setup>
   import { ref } from 'vue';
-  import ObjetoPerfilUsuario from './ObjetoPerfilUsuario.vue';
+  import ObjetoPerfilUsuario from '@/components/especificos/ObjetoPerfilUsuario.vue';
   
   // Definir un objeto reactivo
   const user = ref({

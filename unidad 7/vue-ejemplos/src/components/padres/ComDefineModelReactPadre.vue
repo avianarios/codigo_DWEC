@@ -11,7 +11,7 @@
   
 <script setup>
   import { ref } from 'vue';
-  import ComDefineModelReactHijo from './ComDefineModelReactHijo.vue';
+  import ComDefineModelReactHijo from '../especificos/ComDefineModelReactHijo.vue';
   
   const mensaje = ref('Hola desde el padre');
 </script>
