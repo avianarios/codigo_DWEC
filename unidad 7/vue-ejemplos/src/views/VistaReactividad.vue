@@ -1,17 +1,15 @@
 <script setup>
-    import ReactividadDirectivas from '@/components/especificos/ReactividadDirectivas.vue';
-    import ReactividadSencilla from '@/components/especificos/ReactividadSencilla.vue';
-    import ReactividadObjetos from '@/components/padres/ReactividadObjetos.vue';
-    import ReactividadObjetos2 from '@/components/especificos/ReactividadObjetos2.vue';
-    import ReactividadVmodelFormularios from '@/components/especificos/ReactividadVmodelFormularios.vue';
+    import ReactividadDirectivas from '@/components/hojas/ReactividadDirectivas.vue';
+    import ReactividadSencilla from '@/components/hojas/ReactividadSencilla.vue';
+    import ReactividadObjetos from '@/components/nodos/ReactividadObjetos.vue';
+    import ReactividadObjetos2 from '@/components/hojas/ReactividadObjetos2.vue';
+    import ReactividadVmodelFormularios from '@/components/hojas/ReactividadVmodelFormularios.vue';
 </script>
 
 <template>
-    <section class="flex-columna gap">
-        <ReactividadDirectivas />
-        <ReactividadSencilla />
-        <ReactividadObjetos />
-        <ReactividadObjetos2 />
-        <ReactividadVmodelFormularios />
-    </section>
+    <ReactividadDirectivas />
+    <ReactividadSencilla />
+    <ReactividadObjetos />
+    <ReactividadObjetos2 />
+    <ReactividadVmodelFormularios />
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <article class="borde">
+  <article class="borde flex-columna gap">
     <h1>Reactividad con objetos y vinculación de clases</h1>
     <h2>Lista de Frutas</h2>
     <ul>

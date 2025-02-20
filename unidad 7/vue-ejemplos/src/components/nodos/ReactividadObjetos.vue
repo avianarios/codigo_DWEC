@@ -1,16 +1,16 @@
 <!-- ReactividadObjetos.vue -->
 <template>
-    <section class="justify-center flex-columna borde">
+    <section class="borde flex-columna">
       <h1>Reactividad con objetos</h1>
       <h2>Componente padre</h2>
       <ObjetoPerfilUsuario :user @update-user="updateUser" />
       <p class="mini">ReactividadObjetos.vue</p>
     </section>
-  </template>
+</template>
   
-  <script setup>
+<script setup>
   import { ref } from 'vue';
-  import ObjetoPerfilUsuario from '@/components/especificos/ObjetoPerfilUsuario.vue';
+  import ObjetoPerfilUsuario from '@/components/hojas/ObjetoPerfilUsuario.vue';
   
   // Definir un objeto reactivo
   const user = ref({
@@ -22,5 +22,4 @@
   function updateUser(newUser) {
     user.value = newUser; // Cambiar el objeto reactivo
   }
-  </script>
-  
+</script>

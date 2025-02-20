@@ -11,7 +11,7 @@
 </template>
   
 <script setup>
-  import Boton from '../especificos/Boton.vue'; // Importamos el componente Boton
+  import Boton from '../hojas/Boton.vue'; // Importamos el componente Boton
 
 
   // Se definen las propiedades que este componente acepta del padre

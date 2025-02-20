@@ -1,5 +1,5 @@
 <script setup>
-    import Interpolacion from '@/components/especificos/Interpolacion.vue';
+    import Interpolacion from '@/components/hojas/Interpolacion.vue';
 </script>
 
 <template>

@@ -54,3 +54,35 @@ button:hover {
 .destacado{
     color: red;
 }
+
+#app{
+    display:flex;
+    flex-direction: column;
+    gap:25px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}

@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-  import Boton from "../especificos/Boton.vue";
+  import Boton from "../hojas/Boton.vue";
 
   // Definir las propiedades que el componente hijo recibirá
   const props = defineProps({

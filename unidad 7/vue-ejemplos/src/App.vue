@@ -20,48 +20,46 @@
 </script>
 
 <template>
-  <section>
-    <header>
-      <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-      <div class="wrapper">
-        <HelloWorld msg="You did it!" />
-      </div>
-      <nav>
-        <RouterLink to="/Interpolacion">Interpolación</RouterLink>
-        <RouterLink to="/Directivas">Directivas</RouterLink>
-        <RouterLink to="/Reactividad">Reactividad</RouterLink>
-        <RouterLink to="/InteraccionComponentes">Interacción entre componentes</RouterLink>
-        <RouterLink to="/Ranuras">Ranuras</RouterLink>
-        <RouterLink to="/PropiedadesComputadas">Propiedades Computadas</RouterLink>
-      </nav>
-    </header>
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+    </div>
+    <nav>
+      <RouterLink to="/Interpolacion">Interpolación</RouterLink>
+      <RouterLink to="/Directivas">Directivas</RouterLink>
+      <RouterLink to="/Reactividad">Reactividad</RouterLink>
+      <RouterLink to="/InteraccionComponentes">Interacción entre componentes</RouterLink>
+      <RouterLink to="/Ranuras">Ranuras</RouterLink>
+      <RouterLink to="/PropiedadesComputadas">Propiedades Computadas</RouterLink>
+    </nav>
+  </header>
 
-    <main>
-      <router-view />
+  <main class="flex-columna gap">
+    <router-view />
 <!-- 
-      <section class="flex-columna gap">
-        <Interpolacion />
-        <Eventos />
-        <Directivas />
-        <RenderizacionMultiple />
-        <Vinculacion />
-        <ReactividadDirectivas />
-        <ReactividadSencilla2 />
-        <ReactividadVmodelFormularios />
-        <ReactividadObjetos />
-        <ReactividadObjetos2 />
-        <Ranuras />
-        <ComunicacionPadrePropsEventos />
-        <ComVinculacionReactPadre />
-        <ComVmodelReactPadre.vue />
-        <ComDefineModelReactPadre />
-        <ComDefineModelReactPadre2 />
-        <ComDefineModelReactPadre3 />
-        <PropComputada />
-      </section> -->
-    </main>
-  </section>
+    <section class="flex-columna gap">
+      <Interpolacion />
+      <Eventos />
+      <Directivas />
+      <RenderizacionMultiple />
+      <Vinculacion />
+      <ReactividadDirectivas />
+      <ReactividadSencilla2 />
+      <ReactividadVmodelFormularios />
+      <ReactividadObjetos />
+      <ReactividadObjetos2 />
+      <Ranuras />
+      <ComunicacionPadrePropsEventos />
+      <ComVinculacionReactPadre />
+      <ComVmodelReactPadre.vue />
+      <ComDefineModelReactPadre />
+      <ComDefineModelReactPadre2 />
+      <ComDefineModelReactPadre3 />
+      <PropComputada />
+    </section> -->
+  </main>
 </template>
 
 <style scoped>
@@ -95,7 +93,9 @@ header {
 nav{
   display: flex;
   gap: 1rem;
-  flex-direction: column;
+}
 
+main{
+  flex: 1;
 }
 </style>

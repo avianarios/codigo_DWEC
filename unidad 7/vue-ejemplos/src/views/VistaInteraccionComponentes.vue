@@ -1,10 +1,10 @@
 <script setup>
-    import ComDefineModelReactPadre from '@/components/padres/ComDefineModelReactPadre.vue';
-    import ComDefineModelReactPadre2 from '@/components/padres/ComDefineModelReactPadre2.vue';
-    import ComDefineModelReactPadre3 from '@/components/padres/ComDefineModelReactPadre3.vue';
-    import ComPropsEventosPadre from '@/components/padres/ComPropsEventosPadre.vue';
-    import ComVinculacionReactPadre from '@/components/padres/ComVinculacionReactPadre.vue';
-    import ComVmodelReactPadre from '@/components/padres/ComVmodelReactPadre.vue';
+    import ComDefineModelReactPadre from '@/components/nodos/ComDefineModelReactPadre.vue';
+    import ComDefineModelReactPadre2 from '@/components/nodos/ComDefineModelReactPadre2.vue';
+    import ComDefineModelReactPadre3 from '@/components/nodos/ComDefineModelReactPadre3.vue';
+    import ComPropsEventosPadre from '@/components/nodos/ComPropsEventosPadre.vue';
+    import ComVinculacionReactPadre from '@/components/nodos/ComVinculacionReactPadre.vue';
+    import ComVmodelReactPadre from '@/components/nodos/ComVmodelReactPadre.vue';
 </script>
 
 <template>

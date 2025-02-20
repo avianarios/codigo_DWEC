@@ -1,5 +1,5 @@
 <script setup>
-    import Ranuras from '@/components/padres/Ranuras.vue';
+    import Ranuras from '@/components/nodos/Ranuras.vue';
 </script>
 
 <template>

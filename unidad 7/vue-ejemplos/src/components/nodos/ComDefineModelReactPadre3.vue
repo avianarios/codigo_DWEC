@@ -12,7 +12,7 @@
 
 <script setup>
   import { ref } from 'vue';
-  import ComDefineModelReactHijo3 from '../especificos/ComDefineModelReactHijo3.vue';
+  import ComDefineModelReactHijo3 from '../hojas/ComDefineModelReactHijo3.vue';
 
   const first = ref('Juan');
   const last = ref('Pérez');

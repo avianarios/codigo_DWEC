@@ -1,9 +1,9 @@
 <script setup>
-    import DirectivasRenderizacionCondicional from '../components/especificos/DirectivasRenderizacionCondicional.vue';
-    import DirectivasEventos from '../components/especificos/DirectivasEventos.vue';
-    import DirectivasMostrarTexto from '@/components/especificos/DirectivasMostrarTexto.vue';
-    import DirectivasVinculacion from '@/components/especificos/DirectivasVinculacion.vue';
-    import DirectivasRenderizacionMultiple from '@/components/especificos/DirectivasRenderizacionMultiple.vue';
+    import DirectivasRenderizacionCondicional from '../components/hojas/DirectivasRenderizacionCondicional.vue';
+    import DirectivasEventos from '../components/hojas/DirectivasEventos.vue';
+    import DirectivasMostrarTexto from '@/components/hojas/DirectivasMostrarTexto.vue';
+    import DirectivasVinculacion from '@/components/hojas/DirectivasVinculacion.vue';
+    import DirectivasRenderizacionMultiple from '@/components/hojas/DirectivasRenderizacionMultiple.vue';
 </script>
 
 <template>

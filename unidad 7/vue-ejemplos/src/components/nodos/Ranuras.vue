@@ -1,8 +1,3 @@
-<script setup>
-    import Tarjeta from '../especificos/Tarjeta.vue';
-</script>
-
-
 <template>
   <Tarjeta>
     <template #titulo>
@@ -17,3 +12,9 @@
     <p class="mini">Un reflejo de las montañas en el lago</p>
   </Tarjeta>
 </template>
+
+<script setup>
+  import Tarjeta from '../hojas/Tarjeta.vue';
+</script>
+
+
