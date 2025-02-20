@@ -514,7 +514,7 @@ Los componentes pueden (y suelen) incluir otros dentro. Para usar un componente 
 ```
 
 ### 5.3.3. Componentes dinámicos
-Se pueden renderizar componentes de forma dinámica usando `:is`: (no te preocupes si no entiendes el código aún, esamos viendo qué se puede hacer, por encima)
+Se pueden renderizar componentes de forma dinámica usando `:is`: (no te preocupes si no entiendes el código aún, estamos viendo qué se puede hacer, por encima)
 
 ```vue
 <template>
@@ -812,26 +812,9 @@ Hay más directivas, pero no las considero fundamentales como, por ejemplo
 </template>
 
 <script setup>
-  import { ref } from 'Vue';
-  const mostrarMensaje=ref (true);
+  const mostrarMensaje=true;
 </script>
 ```
-
-### Ejemplo 2: Renderización condicional de dos componentes
-```vue
-<template>
-  <!-- Al comparar componentes o variables que representen componentes, es importante que las comparaciones sean estrictas -->
-  <ComponenteA v-if="componenteActual === ComponenteA" />
-  <ComponenteB v-if="componenteActual === ComponenteB" />
-</template>
-
-<script setup>
-  import ComponenteA from './ComponenteA.vue';
-  import ComponenteB from './ComponenteB.vue';
-  const componenteActual = ref(ComponenteA);
-</script>
-```
-
   
 ## 7.2. Renderización dinámica de listas (v-for)
 **v-for** permite iterar sobre una lista de elementos y renderizarlos dinámicamente.
@@ -1177,7 +1160,7 @@ Se puede ejecutar una función en un atributo de una etiqueta vinculándola con 
   </script>
   ```
 
-### Ejemplo 10: Vinculación dinámica de componentes con :is
+### Ejemplo 10: Vinculación de componentes con :is
 
 `v-if` permite renderizar un componente o elemento sólo si una condición es verdadera. Esto destruye y vuelve a crear el componente cada vez que la condición cambia, lo que impide mantener su estado entre renderizaciones.
 
@@ -1189,48 +1172,7 @@ Al usar `:is` para renderizar un componente dinámicamente, Vue no destruye el c
   </template>
 
   <script setup>
-    import { ref } from 'vue';
-
-    const elemento = ref('h1'); // Puede ser 'p', 'div', 'span', etc.
-  </script>
-  ```
-
-### Ejemplo 11: Carga dinámica de componentes manteniendo su estado anterior y ejecutando una acción cuando se cargan con `:is`, `keep-alive` y `onActivated` y `onDeactivated`
-
-Vue proporciona, además, los siguientes mecanismos relativos a los componentes que se pueden usar con `:is`:
-- envolver el componente en la etiqueta **`<keep-alive></keep-alive>` para mantener su estado previo** hace que cuando se vuelva a cargar no se pierda su estado. Se puede definir qué componentes deben mantener su estado previo `<keep-alive include="componenteA, componenteC">`
-- usar eventos `activated` y `deactivated` para detectar cuando un componente dentro de `<keep-alive>` se activa o se desactiva y hacer alguna acción en respuesta.
-
-  
-  ```vue
-  <template>
-    <!-- Si el componente tiene estado, es recomendable usar `keep-alive` para no perderlo. Así, cuando el usuario cambia entre ComponenteA y ComponenteB, el estado de cada uno se mantiene en memoria en lugar de reiniciarse. -->
-    <keep-alive include="ComponenteA, ComponenteB">
-      <component :is="componenteActual"></component>
-    </keep-alive>
-
-    <button @click="componenteActual = ComponenteA">Cargar A</button>
-    <button @click="componenteActual = ComponenteB">Cargar B</button>
-    <button @click="componenteActual = ComponenteC">Cargar C</button>
-  </template>
-
-  <script setup>
-    import { ref } from 'vue';
-    import ComponenteA from './ComponenteA.vue';
-    import ComponenteB from './ComponenteB.vue';
-    import ComponenteC from './ComponenteC.vue';
-    import { onActivated, onDeactivated } from 'vue';
-
-    const componenteActual = ref(ComponenteA);
-
-    // Eventos que determinan qué hacer cuando los componentes se cargan
-    onActivated(() => {
-      console.log('El componente fue activado nuevamente');
-    });
-
-    onDeactivated(() => {
-      console.log('El componente fue desactivado pero sigue en caché');
-    });
+    const elemento = 'h1'; // Podría ser cualquier etiqueta HTML'p', 'div', 'span', etc.
   </script>
   ```
 
@@ -1353,118 +1295,117 @@ Si tiene contenido interno NO FUNCIONA (aunque vue dice que lo reemplaza). El co
 
 # 8. Reactividad
 
-La reactividad es el mecanismo que permite a Vue actualizar automáticamente la interfaz de usuario cuando los datos cambian, sin tener que manipular el DOM manualmente.
+La reactividad es el mecanismo que permite a Vue **detectar los cambios y actualizar automáticamente la interfaz de usuario** cuando los datos cambian, lo que evita tener que manipular el DOM manualmente.
 
-Hay dos conceptos clave de la reactividad en Vue:
-- **ref**: Es una función que se utiliza para crear una referencia reactiva a una variable de un tipo primitivo (número, cadena de texto, etc.)o a un objeto. `ref()` envuelve su argumento en un objeto `ref` con una propiedad `.value` que contiene el valor de la variable.
-- **reactive**: Se usa para crear una referencia reactiva para objetos y matrices. En lugar de tener que acceder a un valor mediante `.value`, como con ref, `reactive` automáticamente hace que las propiedades del objeto sean reactivas.
+Hay dos métodos clave de la reactividad en Vue:
+- **`ref()`**: se utiliza para crear una referencia reactiva a una variable de un tipo primitivo (número, cadena de texto, etc.)o a un objeto. `ref()` envuelve su argumento en un objeto `ref` con una propiedad `.value` que contiene el valor de la variable.
+- **`reactive()`**: Se usa para crear una referencia reactiva para objetos y matrices (no funciona con tipos simples). En lugar de tener que acceder a un valor mediante `.value`, como se haría con `ref`, `reactive` automáticamente hace que las propiedades del objeto sean reactivas.
 
 
-## Ejemplo 1: Vinculación dinámica de clases
+### Ejemplo 1: Carga dinámica de componentes manteniendo su estado anterior y ejecutando una acción cuando se cargan con `:is`, `keep-alive` y `onActivated` y `onDeactivated`
+
+Vue proporciona, además, los siguientes mecanismos relativos a los componentes que se pueden usar con `:is`:
+- envolver el componente en la etiqueta **`<keep-alive></keep-alive>` para mantener su estado previo** hace que cuando se vuelva a cargar no se pierda su estado. Se puede definir qué componentes deben mantener su estado previo `<keep-alive include="componenteA, componenteC">`
+- usar eventos `activated` y `deactivated` para detectar cuando un componente dentro de `<keep-alive>` se activa o se desactiva y hacer alguna acción en respuesta.
+
+  
   ```vue
   <template>
-    <button
-      :class="{
-        'bg-blue-500': isBlue,
-        'bg-red-500': !isBlue,
-        'text-white': true,
-        'px-4': true,
-        'py-2': true
-      }"
-      @click="alternarColor">
-      Cambiar color
-    </button>
+    <!-- Si el componente tiene estado, es recomendable usar `keep-alive` para no perderlo. Así, cuando el usuario cambia entre ComponenteA y ComponenteB, el estado de cada uno se mantiene en memoria en lugar de reiniciarse. -->
+    <keep-alive include="ComponenteA, ComponenteB">
+      <component :is="componenteActual"></component>
+    </keep-alive>
+
+    <button @click="componenteActual = ComponenteA">Cargar A</button>
+    <button @click="componenteActual = ComponenteB">Cargar B</button>
+    <button @click="componenteActual = ComponenteC">Cargar C</button>
   </template>
-  
 
   <script setup>
-    import { ref } from 'vue'
+    import { ref } from 'vue';
+    import ComponenteA from './ComponenteA.vue';
+    import ComponenteB from './ComponenteB.vue';
+    import ComponenteC from './ComponenteC.vue';
+    import { onActivated, onDeactivated } from 'vue';
 
-    // Al ser una variable reactiva, es en la que Vue está escuchando cambios, si en algún momento se hiciera .value=false, la clase activo desaparecería de p
-    const isBlue = ref(true)  // Controla el color de fondo del botón
+    const componenteActual = ref(ComponenteA);
 
-    // Función que cambia el valor de `isBlue`
-    const alternarColor = () => {
-      isBlue.value = !isBlue.value  // Cambia el valor de isBlue, alternando el color de fondo
-    }
+    // Eventos que determinan qué hacer cuando los componentes se cargan
+    onActivated(() => {
+      console.log('El componente fue activado nuevamente');
+    });
+
+    onDeactivated(() => {
+      console.log('El componente fue desactivado pero sigue en caché');
+    });
   </script>
-
-  <style>
-    .activo { color: green; }
-    .resaltado { font-weight: bold; }
-  </style>
   ```
+
 
 ## Ejemplo 2: Vinculación dinámica de clases
 
   ```vue
   <template>
-    <div>
-      <p :class="{ activo: esActivo, resaltado: esResaltado }">
-        Texto con clases dinámicas
-      </p>
-      <button @click="toggleActivo">Alternar Activo</button>
-      <button @click="toggleResaltado">Alternar Resaltado</button>
-    </div>
+    <article>
+        <p :class="{ resaltado:esResaltado, comun:!esResaltado}">Un párrafo {{ esResaltado ? "resaltado" : "comun" }}</p>
+        <button @click="esResaltado=!esResaltado">Cambiar clase</button>
+    </article>
   </template>
 
   <script setup>
     import { ref } from 'vue'
 
-    // Variables reactivas para controlar las clases
-    const esActivo = ref(false)
+    // Variable reactiva para controlar la clase
+    // Vue usa un sistema de reactividad que permite que las variables reaccionen automáticamente a los cambios y actualicen la interfaz sin necesidad de manipular el DOM directamente.
+
     const esResaltado = ref(false)
-
-    // Métodos para alternar los valores
-    const toggleActivo = () => {
-      esActivo.value = !esActivo.value
-    }
-
-    const toggleResaltado = () => {
-      esResaltado.value = !esResaltado.value
-    }
   </script>
 
   <style scoped>
     /* Estilos para las clases */
-    .activo {
-      color: green;
-      font-weight: bold;
+    .resaltado{
+        color: #ff0000;
+        font-size: 1.5rem;
     }
 
-    .resaltado {
-      background-color: yellow;
+    .comun{
+        color: #000795;
+        font-size: 1.1rem;
     }
   </style>
   ```
 
-### Ejemplo 3: Enlace bidireccional entre un input y un p suando v-bind
+### Ejemplo 3: Enlace bidireccional entre un input y un p suando v-model
 
   <!-- Muestra en el campo p, lo que el usuario introduzca en el input -->
   ```vue
-  <template>
-    <fieldset>
-      <legend>Formulario</legend>
-      <label>
-        Nombre:
-        <input type="text" :value="nombre" @input="updateNombre" />
-      </label>
-      <p>Tu nombre es: {{ nombre }}</p>
-    </fieldset>
-  </template>
+    <template>
+      <fieldset>
+        <legend>Formulario</legend>
+        <label>
+          Nombre:
+          <!-- v-model asocia la variabla "nombre" al atributo "value" -->
+          <input type="text" v-model="nombre" />
+          <!-- Con v-bind sería así
+          <input type="text" :value="nombre" @input="actualizaNombre" /> -->
+        </label>
+        <p>Tu nombre es: {{ nombre }}</p>
+      </fieldset>
+    </template>
 
-  <script setup>
-  import { ref } from 'vue';
+    <script setup>
+      import { ref } from 'vue';
 
-  let nombre = ref('');
+      // Para que Vue detecte los cambios se producen en el input, la variable tiene que ser reactiva
+      const nombre = ref('');
 
-  function updateNombre(event) {
-    nombre.value = event.target.value;
-  }
-  </script>
+      // Con v-bind sería necesario definir la función que maneja el evento
+      // function actualizaNombre(event) {
+      //   nombre.value = event.target.value;
+      // }
+    </script>
   ```
-
-### Ejemplo 5:  Renderización condicional usando directivas y reactividad
+### Ejemplo 4: Renderización condicional usando directivas y reactividad
 
   ```vue
   <template>
