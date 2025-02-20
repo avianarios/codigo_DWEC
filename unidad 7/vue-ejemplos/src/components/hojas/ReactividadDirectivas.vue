@@ -26,6 +26,10 @@
                 <component :is="componenteActual"></component>
             </keep-alive>
         </article>
+
+        <p :class="{ resaltado:esDestacado, comun:!esDestacado}">Un párrafo {{ esDestacado ? "resaltado" : "comun" }}</p>
+        <button @click="esDestacado=!esDestacado">Cambiar clase</button>
+
         <p class="mini">ReactividadDirectivas.vue</p>
     </article>
 </template>
@@ -39,4 +43,17 @@
     import ComponenteB from './ComponenteB.vue';
   
     const componenteActual = ref(ComponenteA);
+    const esDestacado=ref(true);
 </script>
+
+<style scoped>
+    .resaltado{
+        color: #ff0000;
+        font-size: 1.5rem;
+    }
+
+    .comun{
+        color: #000795;
+        font-size: 1.1rem;
+    }
+</style>
