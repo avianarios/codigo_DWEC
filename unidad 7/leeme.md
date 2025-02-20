@@ -42,12 +42,12 @@
         1. [Propiedades y eventos](#921-propiedades--eventos)
         2. [v-model y eventos](#922-v-model-y-eventos)
         3. [defineModel](#923-definemodel)
-        4. [Comunicación entre componentes distantes (provide e inject) (AVANZADO)](#924-comunicación-entre-componentes-distantes-provide-e-inject-avanzado)
+        4. [Comunicación entre componentes distantes (provide e inject)](#924-comunicación-entre-componentes-distantes-provide-e-inject-avanzado)
     3. [Gestión del estado](#93-gestión-del-estado)
         1. [Local (ref y reactive)](#931-local-ref-y-reactive)
         2. [Pinia](#932-pinia)
 10. [Propiedades computadas](#10-propiedades-computadas)
-11. [Enrutamiento(AVANZADO)](#11-enrutamiento)
+11. [Enrutamiento](#11-enrutamiento)
     1. [Navegación en la Web: Hipervínculos y SPA](#111-navegación-en-la-web-hipervínculos-y-spa)
     2. [Configuración](#112-configuración)
   
@@ -1886,7 +1886,7 @@ const mensaje = ref('Hola desde el padre');
   </template>
   ```
 
-#### 9.2.4 Comunicación entre componentes distantes (provide e inject) (AVANZADO)
+#### 9.2.4 Comunicación entre componentes distantes (provide e inject)
 
 Vue tiene un mecanismo para que dos componentes que están muy alejados en la jerarquía de componentes compartan datos sin tener que mandar datos entre cada par de componentes que los separ.Se trata de `provide` e `inject`. 
 - **`provide`** es una función que usa un componente padre para poner datos a disposición de sus componentes descendientes, sin importar qué nivel ocupen en la jerarquía. Es una forma de "proveer" un valor que estará disponible para todos los componentes hijos que lo "inyecten".
@@ -2063,7 +2063,7 @@ const total = computed(() => {
 
 -----
 
-# 11. Enrutamiento (AVANZADO)
+# 11. Enrutamiento
 
 ## 11.1. Navegación en la Web: Hipervínculos y SPA
 
@@ -2174,3 +2174,35 @@ Lo más sencillo es incluir el enrutamiento en la instalación que se hace al pr
       .mount('#app')
     ```
 
+----
+
+
+# 12. Observadores (watchers)
+
+Los observadores (watchers) permiten **reaccionar a cambios en propiedades reactivas y ejecutar lógica en respuesta**. Son útiles cuando se necesita realizar tareas en función de cambios de datos como, por ejemplo:
+- Llamadas a una API cuando una variable cambia.
+- Validaciones en tiempo real.
+- Sincronización con localStorage o bases de datos.
+
+En composition API, se definen usando `watch` o `watchEffect`
+
+## Ejemplo 1: Creando un observador con watch
+
+  ```js
+  import { ref, watch } from 'vue';
+
+  export default {
+    setup() {
+      const message = ref('Hola, Vue!');
+
+      // Observador para la propiedad 'message'
+      watch(message, (newValue, oldValue) => {
+        console.log(`El mensaje cambió de "${oldValue}" a "${newValue}"`);
+      });
+
+      return {
+        message,
+      };
+    },
+  };
+  ```
