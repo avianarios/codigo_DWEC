@@ -993,7 +993,7 @@ En el caso de atributos **booleanos** como `disabled`, `checked` o `readonly`, s
 ### Ejemplo 4: Vinculación entre un input y un párrafo
 
 Se vincula la variable nombre al atributo value y se define una función que gestionará el evento @input (actualizaNombre) que actualizará el valor de la variable cuando el usuario cambie el input. Se muestra su valor en pantalla con el mostacho.
-
+zzzzz QUITAR REACTIVIDAD
   ```vue
   <template>
     <fieldset>
@@ -1295,14 +1295,41 @@ Si tiene contenido interno NO FUNCIONA (aunque vue dice que lo reemplaza). El co
 
 # 8. Reactividad
 
-La reactividad es el mecanismo que permite a Vue **detectar los cambios y actualizar automáticamente la interfaz de usuario** cuando los datos cambian, lo que evita tener que manipular el DOM manualmente.
+La reactividad es el mecanismo que permite a Vue **detectar los cambios en las variables u objetos reactivos y actualizar automáticamente la interfaz de usuario** cuando los datos cambian, lo que evita tener que manipular el DOM manualmente.
 
 Hay dos métodos clave de la reactividad en Vue:
-- **`ref()`**: se utiliza para crear una referencia reactiva a una variable de un tipo primitivo (número, cadena de texto, etc.)o a un objeto. `ref()` envuelve su argumento en un objeto `ref` con una propiedad `.value` que contiene el valor de la variable.
-- **`reactive()`**: Se usa para crear una referencia reactiva para objetos y matrices (no funciona con tipos simples). En lugar de tener que acceder a un valor mediante `.value`, como se haría con `ref`, `reactive` automáticamente hace que las propiedades del objeto sean reactivas.
+- **`ref()`**: se utiliza para crear una **referencia reactiva a una variable**, sea del tipo que sea, de tipo primitivo (número, cadena de texto, etc.) u objeto. `ref()` envuelve su argumento en un objeto `ref` con una propiedad `.value` que contiene el valor de la variable.
+- **`reactive()`**: Se usa para crear una **referencia reactiva a objetos y matrices** (no funciona con tipos simples). En lugar de tener que acceder a un valor mediante `.value`, como se haría con `ref`, `reactive` automáticamente hace que las propiedades del objeto sean reactivas.
 
 
-### Ejemplo 1: Carga dinámica de componentes manteniendo su estado anterior y ejecutando una acción cuando se cargan con `:is`, `keep-alive` y `onActivated` y `onDeactivated`
+### Ejemplo 1: Vinculación entre un input y un párrafo
+
+Se vincula la variable nombre al atributo value y se define una función que gestionará el evento `@input` (actualizaNombre) que actualizará el valor de la variable cuando el usuario cambie el input. Se muestra su valor en pantalla con el mostacho.
+
+  ```vue
+  <template>
+    <fieldset>
+      <legend>Formulario</legend>
+      <label>
+        Nombre:
+        <input type="text" :value="nombre" @input="actualizaNombre" />
+      </label>
+      <p>Tu nombre es: {{ nombre }}</p>
+    </fieldset>
+  </template>
+
+  <script setup>
+  import { ref } from 'vue';
+  let nombre = ref('');
+
+  function actualizaNombre(event) {
+    nombre.value = event.target.value;
+  }
+  </script>
+  ```
+
+
+### Ejemplo 2: Carga dinámica de componentes manteniendo su estado anterior y ejecutando una acción cuando se cargan con `:is`, `keep-alive` y `onActivated` y `onDeactivated`
 
 Vue proporciona, además, los siguientes mecanismos relativos a los componentes que se pueden usar con `:is`:
 - envolver el componente en la etiqueta **`<keep-alive></keep-alive>` para mantener su estado previo** hace que cuando se vuelva a cargar no se pierda su estado. Se puede definir qué componentes deben mantener su estado previo `<keep-alive include="componenteA, componenteC">`
