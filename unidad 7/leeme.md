@@ -50,6 +50,7 @@
 11. [Enrutamiento](#11-enrutamiento)
     1. [Navegación en la Web: Hipervínculos y SPA](#111-navegación-en-la-web-hipervínculos-y-spa)
     2. [Configuración](#112-configuración)
+12. [Observadores](#12-observadores-watchers)
   
 -----
 
@@ -985,83 +986,32 @@ En el caso de atributos **booleanos** como `disabled`, `checked` o `readonly`, s
     <button :disabled="esDeshabilitado">Enviar</button>
   </template>
   <script setup>
-    import { ref } from 'Vue';
-    let esDeshabilitado = ref(false);
+    let esDeshabilitado=false;
   </script>
   ```
 
-### Ejemplo 4: Vinculación entre un input y un párrafo
+### Ejemplo 4: Vinculación entre una variable y un input
 
 Se vincula la variable nombre al atributo value y se define una función que gestionará el evento @input (actualizaNombre) que actualizará el valor de la variable cuando el usuario cambie el input. Se muestra su valor en pantalla con el mostacho.
-zzzzz QUITAR REACTIVIDAD
+
   ```vue
   <template>
     <fieldset>
       <legend>Formulario</legend>
       <label>
         Nombre:
-        <input type="text" :value="nombre" @input="actualizaNombre" />
+        <input type="text" :value="nombre" @input="(event)=>{console.log(event.target.value)}" placeholder="Escribe"/>
       </label>
-      <p>Tu nombre es: {{ nombre }}</p>
     </fieldset>
   </template>
 
   <script setup>
-  import { ref } from 'vue';
-  let nombre = ref('');
-
-  function actualizaNombre(event) {
-    nombre.value = event.target.value;
-  }
+    let nombre="Procopio";
   </script>
   ```
 
-### Ejemplo 5: Vinculación entre un select y un párrafo
-  ```vue
-  <template>
-    <p>Selecciona tus intereses:</p>
-    <label>
-      <input 
-        type="checkbox" 
-        :checked="intereses.includes('Deporte')" 
-        @change="toggleInteres('Deporte')" 
-      /> Deporte
-    </label>
-    <label>
-      <input 
-        type="checkbox" 
-        :checked="intereses.includes('Música')" 
-        @change="toggleInteres('Música')" 
-      /> Música
-    </label>
-    <label>
-      <input 
-        type="checkbox" 
-        :checked="intereses.includes('Cine')" 
-        @change="toggleInteres('Cine')" 
-      /> Cine
-    </label>
-    <p>Intereses seleccionados: {{ intereses }}</p>
-  </template>
 
-  <script setup>
-  import { ref } from 'vue';
-
-  const intereses = ref([]);
-
-  function toggleInteres(interes) {
-    if (intereses.value.includes(interes)) {
-      // Si ya está seleccionado, lo quitamos
-      intereses.value = intereses.value.filter(item => item !== interes);
-    } else {
-      // Si no está seleccionado, lo agregamos
-      intereses.value.push(interes);
-    }
-  }
-  </script>
-  ```
-
-### Ejemplo 6: vinculación de objetos
+### Ejemplo 5: vinculación de objetos
 
 También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':''
   ```vue
@@ -1089,7 +1039,7 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   </script>
   ```
 
-### Ejemplo 7: vinculación dinámica de clases
+### Ejemplo 6: vinculación dinámica de clases
   También se pueden vincular clases. Si la variable se evalúa a false, no aparecerá en el elemento
   ```vue
   <!-- En este ejemplo las clases se insertan siempre. Lo interesante es que, si cambian más adelante, eso se refleje en las clases de p. Eso se consigue con reactividad, que veremos más adelante -->
@@ -1117,7 +1067,7 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   </style>
   ```
 
-### Ejemplo 8: vinculación dinámica de estilos
+### Ejemplo 7: vinculación dinámica de estilos
   ```vue
   <template>
     <!-- Se insertan estilos en línea -->
@@ -1137,7 +1087,7 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   </script>
   ```
 
-### Ejemplo 9: vinculación de funciones
+### Ejemplo 8: vinculación de funciones
 Se puede ejecutar una función en un atributo de una etiqueta vinculándola con v-bind. Sin embargo, no es recomedable porque las funciones en v-bind se ejecutan en cada actualización del componente, les afecten los cambios o no, lo cual puede ser muy costoso. Se recomienda usar [propiedades computadas](#10-propiedades-computadas) (se verán más adelante)
 
   ```vue
@@ -1160,7 +1110,7 @@ Se puede ejecutar una función en un atributo de una etiqueta vinculándola con 
   </script>
   ```
 
-### Ejemplo 10: Vinculación de componentes con :is
+### Ejemplo 9: Vinculación de componentes con :is
 
 `v-if` permite renderizar un componente o elemento sólo si una condición es verdadera. Esto destruye y vuelve a crear el componente cada vez que la condición cambia, lo que impide mantener su estado entre renderizaciones.
 
@@ -1302,9 +1252,9 @@ Hay dos métodos clave de la reactividad en Vue:
 - **`reactive()`**: Se usa para crear una **referencia reactiva a objetos y matrices** (no funciona con tipos simples). En lugar de tener que acceder a un valor mediante `.value`, como se haría con `ref`, `reactive` automáticamente hace que las propiedades del objeto sean reactivas.
 
 
-### Ejemplo 1: Vinculación entre un input y un párrafo
+### Ejemplo 1: Vinculación entre una variable y un input y reflejo de los cambios en un párrafo con los mostachos
 
-Se vincula la variable nombre al atributo value y se define una función que gestionará el evento `@input` (actualizaNombre) que actualizará el valor de la variable cuando el usuario cambie el input. Se muestra su valor en pantalla con el mostacho.
+En este ejemplo se vincula la variable `nombre` al atributo `value` y se define la función `actualizaNombre` que gestionará el evento `@input`. Ésta se llamará cada vez que ocurra el evento `input`. **Como la variable nombre es reactiva, al actualizar su valor, se muestra en el párrafo de forma automática**, sin modificar manualmente el DOM usando el mostacho.
 
   ```vue
   <template>
@@ -1329,11 +1279,92 @@ Se vincula la variable nombre al atributo value y se define una función que ges
   ```
 
 
-### Ejemplo 2: Carga dinámica de componentes manteniendo su estado anterior y ejecutando una acción cuando se cargan con `:is`, `keep-alive` y `onActivated` y `onDeactivated`
+### Ejemplo 2: Enlace bidireccional (usando `v-model`) entre una variable y un input y reflejo de los cambios  en un párrafo con los mostachos 
 
-Vue proporciona, además, los siguientes mecanismos relativos a los componentes que se pueden usar con `:is`:
-- envolver el componente en la etiqueta **`<keep-alive></keep-alive>` para mantener su estado previo** hace que cuando se vuelva a cargar no se pierda su estado. Se puede definir qué componentes deben mantener su estado previo `<keep-alive include="componenteA, componenteC">`
-- usar eventos `activated` y `deactivated` para detectar cuando un componente dentro de `<keep-alive>` se activa o se desactiva y hacer alguna acción en respuesta.
+  <!-- Muestra en el campo p, lo que el usuario introduzca en el input -->
+  ```vue
+    <template>
+      <fieldset>
+        <legend>Formulario</legend>
+        <label>
+          Nombre:
+          <!-- v-model asocia la variabla "nombre" al atributo "value" -->
+          <input type="text" v-model="nombre" />
+          <!-- Con v-bind sería así
+          <input type="text" :value="nombre" @input="actualizaNombre" /> -->
+        </label>
+        <p>Tu nombre es: {{ nombre }}</p>
+      </fieldset>
+    </template>
+
+    <script setup>
+      import { ref } from 'vue';
+
+      // Para que Vue detecte los cambios se producen en el input, la variable tiene que ser reactiva
+      const nombre = ref('');
+
+      // Con v-bind sería necesario definir la función que maneja el evento
+      // function actualizaNombre(event) {
+      //   nombre.value = event.target.value;
+      // }
+    </script>
+  ```
+
+
+### Ejemplo 3: Vinculación entre un select y una matriz y reflejo de los cambios en un párrafo con los mostachos
+
+En este ejemplo se vincula la matriz reactiva `intereses` con el atributo `checked` y se llama a la función `cambiarInteres` cuando el evento `change` ocurre. **Como es una matriz reactiva, vue detecta que cambia y muestra su valor de forma automática en el DOM**.
+
+  ```vue
+  <template>
+    <p>Selecciona tus intereses:</p>
+    <label>
+      <input 
+        type="checkbox" 
+        :checked="intereses.includes('Deporte')" 
+        @change="cambiarInteres('Deporte')" 
+      /> Deporte
+    </label>
+    <label>
+      <input 
+        type="checkbox" 
+        :checked="intereses.includes('Música')" 
+        @change="cambiarInteres('Música')" 
+      /> Música
+    </label>
+    <label>
+      <input 
+        type="checkbox" 
+        :checked="intereses.includes('Cine')" 
+        @change="cambiarInteres('Cine')" 
+      /> Cine
+    </label>
+    <p>Intereses seleccionados: {{ intereses }}</p>
+  </template>
+
+  <script setup>
+  import { ref } from 'vue';
+
+  const intereses = ref([]);
+
+  function cambiarInteres(interes) {
+    if (intereses.value.includes(interes)) {
+      // Si ya está seleccionado, lo quitamos
+      intereses.value = intereses.value.filter(item => item !== interes);
+    } else {
+      // Si no está seleccionado, lo agregamos
+      intereses.value.push(interes);
+    }
+  }
+  </script>
+  ```
+
+
+### Ejemplo 4: Carga dinámica de componentes manteniendo su estado anterior y ejecutando una acción cuando se cargan con `:is`, `keep-alive` y `onActivated` y `onDeactivated`
+
+Vue proporciona los siguientes mecanismos relativos a los componentes que se pueden usar con `:is`:
+- **`<keep-alive></keep-alive>` para mantener el estado previo**. Envolviendo al elemento en esta etiqueta, cuando se vuelva a cargar, éste no habrá perdido su estado. Se puede definir qué componentes deben mantener su estado previo `<keep-alive include="componenteA, componenteC">`
+- **eventos `activated` y `deactivated`** para detectar cuando un componente dentro de `<keep-alive>` se activa o se desactiva y hacer alguna acción en respuesta.
 
   
   ```vue
@@ -1369,8 +1400,9 @@ Vue proporciona, además, los siguientes mecanismos relativos a los componentes 
   ```
 
 
-## Ejemplo 2: Vinculación dinámica de clases
+## Ejemplo 5: Vinculación dinámica de clases
 
+En este ejemplo, al ser esResaltado una variable reactiva, si ésta cambia en respuesta a un evento, componente o acción de usuario, vue actualizará la interfaz sin tener que manipular el DOM.
   ```vue
   <template>
     <article>
@@ -1381,10 +1413,6 @@ Vue proporciona, además, los siguientes mecanismos relativos a los componentes 
 
   <script setup>
     import { ref } from 'vue'
-
-    // Variable reactiva para controlar la clase
-    // Vue usa un sistema de reactividad que permite que las variables reaccionen automáticamente a los cambios y actualicen la interfaz sin necesidad de manipular el DOM directamente.
-
     const esResaltado = ref(false)
   </script>
 
@@ -1402,37 +1430,7 @@ Vue proporciona, además, los siguientes mecanismos relativos a los componentes 
   </style>
   ```
 
-### Ejemplo 3: Enlace bidireccional entre un input y un p suando v-model
-
-  <!-- Muestra en el campo p, lo que el usuario introduzca en el input -->
-  ```vue
-    <template>
-      <fieldset>
-        <legend>Formulario</legend>
-        <label>
-          Nombre:
-          <!-- v-model asocia la variabla "nombre" al atributo "value" -->
-          <input type="text" v-model="nombre" />
-          <!-- Con v-bind sería así
-          <input type="text" :value="nombre" @input="actualizaNombre" /> -->
-        </label>
-        <p>Tu nombre es: {{ nombre }}</p>
-      </fieldset>
-    </template>
-
-    <script setup>
-      import { ref } from 'vue';
-
-      // Para que Vue detecte los cambios se producen en el input, la variable tiene que ser reactiva
-      const nombre = ref('');
-
-      // Con v-bind sería necesario definir la función que maneja el evento
-      // function actualizaNombre(event) {
-      //   nombre.value = event.target.value;
-      // }
-    </script>
-  ```
-### Ejemplo 4: Renderización condicional usando directivas y reactividad
+### Ejemplo 6: Renderización condicional usando directivas y reactividad
 
   ```vue
   <template>
@@ -2154,6 +2152,9 @@ Los observadores (watchers) permiten **reaccionar a cambios en propiedades react
 
 En composition API, se definen usando `watch` o `watchEffect`
 
+Podría parecer que se puede conseguir lo mismo con variables reactivas y los mostachos o con variables reactivas, v-bind y v-on, pero los mostachos y v-bind solo actualizan la vista, los eventos (v-on) solo reaccionan a determinadas interacciones explícitas, mientras que los observadores (watch) reaccionan a cualquier cambio, venga de donde venga.
+
+
 ## Ejemplo 1: Creando un observador con watch
 
   ```js
@@ -2173,4 +2174,41 @@ En composition API, se definen usando `watch` o `watchEffect`
       };
     },
   };
+  ```
+
+## Ejemplo 2: Observadores contra v-bind y v-on
+
+  ```vue
+  <!-- Se enlaza el campo value del input a la variable reactiva búsqueda y, cuando ocurre el evento input, se llama a la función actualizarBusqueda -->
+  <template>
+    <input :value="busqueda" @input="actualizarBusqueda" placeholder="Buscar usuario..." />
+  </template>
+
+  <script setup>
+  import { ref } from 'vue';
+
+  const busqueda = ref('');
+
+  const actualizarBusqueda = (evento) => {
+    busqueda.value = evento.target.value;
+    console.log('Nueva búsqueda:', busqueda.value);
+  };
+  </script>
+  ```
+
+  ```vue
+  <!-- En este caso, el observador reacciona a cualquier cambio -->
+  <template>
+    <input v-model="busqueda" placeholder="Buscar usuario..." />
+  </template>
+
+  <script setup>
+  import { ref, watch } from 'vue';
+
+  const busqueda = ref('');
+
+  watch(busqueda, (nuevoValor) => {
+    console.log('Nueva búsqueda:', nuevoValor);
+  });
+  </script>
   ```
