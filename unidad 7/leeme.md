@@ -32,17 +32,19 @@
     2. [Renderización dinámica de listas (v-for)](#72-renderización-dinámica-de-listas-v-for)
     3. [Gestión de eventos (v-on)](#73-gestión-de-eventos-v-on)
     4. [Vinculación dinámica de atributos (v-bind)](#74-vinculación-dinámica-de-atributos-v-bind)
-    5. [Creación de vínculos bidireccionales (v-model)](#75-creación-de-vínculos-bidireccionales-v-model)
-    6. [Mostrar u ocultar dinámicamente un elemento (v-show)](#76-mostrar-u-ocultar-dinámicamente-un-elemento-v-show)
-    7. [Establecer contenido de un elemento (v-text y v-html)](#77-establecer-contenido-de-un-elemento-v-text-y-v-html)
+    5. [Establecer contenido de un elemento (v-text y v-html)](#75-establecer-contenido-de-un-elemento-v-text-y-v-html)
 8. [Reactividad](#8-reactividad)
+    1. [Uso de reactividad con directivas que no dependen de la reactividad](#81-uso-de-reactividad-con-directivas-que-no-dependen-de-la-reactividad)
+    2. [Directivas reactivas por naturaleza](#82-directivas-reactivas-por-naturaleza)
+        1. [Creación de vínculos bidireccionales (v-model)](#811-creación-de-vínculos-bidireccionales-v-model)
+        2. [Mostrar u ocultar dinámicamente un elemento (v-show)](#812-mostrar-u-ocultar-dinámicamente-un-elemento-v-show)
 9. [Interacción entre componentes](#9-interacción-entre-componentes)
     1. [Inserción de contenido](#91-inserción-de-contenido)
     2. [Comunicación](#92-comunicación)
         1. [Propiedades y eventos](#921-propiedades--eventos)
         2. [v-model y eventos](#922-v-model-y-eventos)
         3. [defineModel](#923-definemodel)
-        4. [Comunicación entre componentes distantes (provide e inject)](#924-comunicación-entre-componentes-distantes-provide-e-inject-avanzado)
+        4. [Comunicación entre componentes distantes (provide e inject)](#924-comunicación-entre-componentes-distantes-provide-e-inject)
     3. [Gestión del estado](#93-gestión-del-estado)
         1. [Local (ref y reactive)](#931-local-ref-y-reactive)
         2. [Pinia](#932-pinia)
@@ -1044,10 +1046,10 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
   ```vue
   <!-- En este ejemplo las clases se insertan siempre. Lo interesante es que, si cambian más adelante, eso se refleje en las clases de p. Eso se consigue con reactividad, que veremos más adelante -->
   <template>
-    <p :class="{ activo: esActivo, resaltado: esResaltado }">Texto con clases dinámicas</p>
+    <p :class="{ activo: esActivo, inactivo: !esActivo, importante: esImportante, banal: !esImportante}">Texto con clases dinámicas</p>
 
-  <!-- importante y extra siempre serán insertadas -->
-  <p :class="[clasePrincipal, 'extra']">Texto con clases dinámicas</p>
+  <!-- importante e inactivo siempre serán insertadas -->
+  <p :class="[clasePrincipal, 'inactivo']">Texto con clases dinámicas</p>
   </template>
 
   <script setup>
@@ -1059,10 +1061,10 @@ También se pueden **vincular objetos**. En este caso se usa el '=' en vez de ':
 
   <style>
     .activo { color: green; }
-    .resaltado { font-weight: bold; }
+    .inactivo { color: grey; }
 
-    .importante { font-size: 20px; }
-    .extra { text-decoration: underline; }
+    .importante { font-size: 2rem; }
+    .banal { font-size:0.75rem; }
 
   </style>
   ```
@@ -1127,93 +1129,7 @@ Al usar `:is` para renderizar un componente dinámicamente, Vue no destruye el c
   ```
 
 
-## 7.5. Creación de vínculos bidireccionales (v-model)
-Como se ha visto anteriormente `v-bind` permite crear un vínculo unidireccional entre dos elementos/componentes. Para que sea bidireccional, hace falta usar `v-bind` para vincular en un sentido y un evento para notificar de cambios en el otro sentido.
-
-Aunque se puede usar para crear un vínculo unidireccional (tiene poco sentido esto porque para eso ya está v-bind), **`v-model` se usa para crear un vínculo bidireaccional**. La **ventaja sobre v-bind es que evita que el programador tenga que ocuparse de la gestión del evento** (definirlo, llamarlo y crear la función que lo gestiona). 
-
-Sin embargo, al igual que con `v-bind`, para que la comunicación sea bidireccional, es necesario hacer uso de la [reactividad](#8-reactividad), concepto que exploraremos más adelante. Por ahora, es suficiente con saber que `v-model` facilita la sincronización automática de datos entre componentes.
-
-Con `v-bind`, hay que indicar a qué atributo asociar la variable, pero con `v-model`, la mayoría de los casos, Vue **decide automáticamente a qué atributo se enlaza la variable**:
-- Para un `<input>`...
-  - ...de tipo **text**, `v-model` enlaza con el atributo **`value`**.
-  - ...de tipo **radio**, se enlaza con el atributo **`value`** y se gestionan los valores seleccionados.
-
-- En un **`checkbox`**, `v-model` no se vincula a un solo atributo, sino que maneja el estado general de los checkboxes.
-- En un **`<textarea>`**, enlaza también con el atributo `value`, ya que el valor del campo de texto es el contenido que se introduce dentro del área de texto.
-- En un **`<select>`**, la variable asociada con `v-model` contiene los valores seleccionados de las opciones, pero no se vincula directamente a un solo atributo de cada `<option>`.
-
-En componentes personalizados `v-model` por defecto se enlaza a la propiedad **`modelValue`** del componente, pero se puede usar un atributo distinto para enlazar, configurándolo con una `prop` personalizada.
-  
-### Ejemplo 1: Vinculación entre un input y un párrafo
-
-Este es igual que el ejemplo 4 de `v-bind`, pero usando `v-model`. En este caso, v-model evita tener que declarar el evento y definir la función que lo gestionará, ya que lo hace automáticamente.
-
-  ```vue
-    <template>
-      <fieldset>
-        <legend>Formulario</legend>
-        <label>
-          Nombre:
-          <!-- v-model asocia la variabla "nombre" al atributo "value" -->
-          <input type="text" v-model="nombre" />
-          <!-- Con v-bind sería así
-          <input type="text" :value="nombre" @input="actualizaNombre" /> -->
-        </label>
-        <p>Tu nombre es: {{ nombre }}</p>
-      </fieldset>
-    </template>
-
-    <script setup>
-      import { ref } from 'vue';
-
-      const nombre = ref('');
-      const intereses = ref([]);
-
-      // Con v-bind sería necesario definir la función que maneja el evento
-      // function actualizaNombre(event) {
-      //   nombre.value = event.target.value;
-      // }
-    </script>
-  ```
-
-
-### Ejemplo 2: Vinculación entre un select y un párrafo
-
-Este es igual que el ejemplo 5 de `v-bind`, pero usando `v-model`. En este caso, v-model evita tener que declarar el evento y definir la función que lo gestionará, ya que lo hace automáticamente
-
-  <template>
-    <p>Selecciona tus intereses:</p>
-    <label><input type="checkbox" v-model="intereses" value="Deporte" /> Deporte</label>
-    <label><input type="checkbox" v-model="intereses" value="Música" /> Música</label>
-    <label><input type="checkbox" v-model="intereses" value="Cine" /> Cine</label>
-    <p>Intereses seleccionados: {{ intereses }}</p>
-  </template>
-  
-  <script setup>
-    import { ref } from 'vue';
-    const intereses = ref([]);
-  </script>
-    
-
-## 7.6. Mostrar u ocultar dinámicamente un elemento (v-show)
-
-`v-show` permite mostrar u ocultar un elemento dinámicamente, pero sin eliminarlo del DOM. Funciona estableciendo la propiedad `display:none` cuando la condición es false. No hay que confundirlo con `v-if`, que agrega, o no, el elemento al DOM. Al igual que con `v-model`, la [reactividad](#8--reactividad) es necesaria para que el contenido se oculte o se muestre dinámicamente. Esto es porque `v-show` depende de una condición reactiva para modificar el valor de display.
-
-### Ejemplo: Mostrar u ocultar un mensaje
-  ```vue
-  <template>
-    <p v-show="mostrarMensaje">Este mensaje se puede ocultar.</p>
-    <button @click="mostrarMensaje = !mostrarMensaje">Cambiar</button>
-  </template>
-
-  <script setup>
-    import { ref } from 'vue';
-    const mostrarMensaje = ref(true);
-  </script>
-  ```
-
-## 7.7. Establecer contenido de un elemento (v-text y v-html)
+## 7.5. Establecer contenido de un elemento (v-text y v-html)
 
 `v-text` es una directiva de Vue que se usa para establecer el contenido textual de un elemento, interpretando las etiquetas HTML como texto plano. Funciona de manera similar a la interpolación {{ }}, pero con una diferencia clave: `v-text` reemplaza todo el contenido dentro del elemento, mientras que {{ }} permite mezclar texto con otros elementos o contenido HTML. 
 
@@ -1252,9 +1168,13 @@ Hay dos métodos clave de la reactividad en Vue:
 - **`reactive()`**: Se usa para crear una **referencia reactiva a objetos y matrices** (no funciona con tipos simples). En lugar de tener que acceder a un valor mediante `.value`, como se haría con `ref`, `reactive` automáticamente hace que las propiedades del objeto sean reactivas.
 
 
-### Ejemplo 1: Vinculación entre una variable y un input y reflejo de los cambios en un párrafo con los mostachos
+## 8.1. Uso de reactividad con directivas que no dependen de la reactividad
 
-En este ejemplo se vincula la variable `nombre` al atributo `value` y se define la función `actualizaNombre` que gestionará el evento `@input`. Ésta se llamará cada vez que ocurra el evento `input`. **Como la variable nombre es reactiva, al actualizar su valor, se muestra en el párrafo de forma automática**, sin modificar manualmente el DOM usando el mostacho.
+### Ejemplo 1: Vinculación bidireccinal, con v-bind y v-on, entre una variable y un input y reflejo de los cambios en un párrafo mediante los mostachos usando reactividad
+
+En este ejemplo se vincula la variable `nombre` al atributo `value` y se define la función `actualizaNombre` que gestionará el evento `@input`. Ésta se llamará cada vez que ocurra el evento `input`. **Como la variable nombre es reactiva, al actualizar su valor, se muestra en el párrafo de forma automática**, sin modificar manualmente el DOM usando el mostacho. 
+
+Se podría haber usado una versión no reactiva y sacar por consola los cambios.
 
   ```vue
   <template>
@@ -1269,98 +1189,16 @@ En este ejemplo se vincula la variable `nombre` al atributo `value` y se define 
   </template>
 
   <script setup>
-  import { ref } from 'vue';
-  let nombre = ref('');
+    import { ref } from 'vue';
+    let nombre = ref('');
 
-  function actualizaNombre(event) {
-    nombre.value = event.target.value;
+    function actualizaNombre(event) {
+      nombre.value = event.target.value;
   }
   </script>
   ```
 
-
-### Ejemplo 2: Enlace bidireccional (usando `v-model`) entre una variable y un input y reflejo de los cambios  en un párrafo con los mostachos 
-
-  <!-- Muestra en el campo p, lo que el usuario introduzca en el input -->
-  ```vue
-    <template>
-      <fieldset>
-        <legend>Formulario</legend>
-        <label>
-          Nombre:
-          <!-- v-model asocia la variabla "nombre" al atributo "value" -->
-          <input type="text" v-model="nombre" />
-          <!-- Con v-bind sería así
-          <input type="text" :value="nombre" @input="actualizaNombre" /> -->
-        </label>
-        <p>Tu nombre es: {{ nombre }}</p>
-      </fieldset>
-    </template>
-
-    <script setup>
-      import { ref } from 'vue';
-
-      // Para que Vue detecte los cambios se producen en el input, la variable tiene que ser reactiva
-      const nombre = ref('');
-
-      // Con v-bind sería necesario definir la función que maneja el evento
-      // function actualizaNombre(event) {
-      //   nombre.value = event.target.value;
-      // }
-    </script>
-  ```
-
-
-### Ejemplo 3: Vinculación entre un select y una matriz y reflejo de los cambios en un párrafo con los mostachos
-
-En este ejemplo se vincula la matriz reactiva `intereses` con el atributo `checked` y se llama a la función `cambiarInteres` cuando el evento `change` ocurre. **Como es una matriz reactiva, vue detecta que cambia y muestra su valor de forma automática en el DOM**.
-
-  ```vue
-  <template>
-    <p>Selecciona tus intereses:</p>
-    <label>
-      <input 
-        type="checkbox" 
-        :checked="intereses.includes('Deporte')" 
-        @change="cambiarInteres('Deporte')" 
-      /> Deporte
-    </label>
-    <label>
-      <input 
-        type="checkbox" 
-        :checked="intereses.includes('Música')" 
-        @change="cambiarInteres('Música')" 
-      /> Música
-    </label>
-    <label>
-      <input 
-        type="checkbox" 
-        :checked="intereses.includes('Cine')" 
-        @change="cambiarInteres('Cine')" 
-      /> Cine
-    </label>
-    <p>Intereses seleccionados: {{ intereses }}</p>
-  </template>
-
-  <script setup>
-  import { ref } from 'vue';
-
-  const intereses = ref([]);
-
-  function cambiarInteres(interes) {
-    if (intereses.value.includes(interes)) {
-      // Si ya está seleccionado, lo quitamos
-      intereses.value = intereses.value.filter(item => item !== interes);
-    } else {
-      // Si no está seleccionado, lo agregamos
-      intereses.value.push(interes);
-    }
-  }
-  </script>
-  ```
-
-
-### Ejemplo 4: Carga dinámica de componentes manteniendo su estado anterior y ejecutando una acción cuando se cargan con `:is`, `keep-alive` y `onActivated` y `onDeactivated`
+### Ejemplo 2: Carga dinámica de componentes manteniendo su estado anterior y ejecutando una acción cuando se cargan con `:is`, `keep-alive` y `onActivated` y `onDeactivated`
 
 Vue proporciona los siguientes mecanismos relativos a los componentes que se pueden usar con `:is`:
 - **`<keep-alive></keep-alive>` para mantener el estado previo**. Envolviendo al elemento en esta etiqueta, cuando se vuelva a cargar, éste no habrá perdido su estado. Se puede definir qué componentes deben mantener su estado previo `<keep-alive include="componenteA, componenteC">`
@@ -1400,7 +1238,7 @@ Vue proporciona los siguientes mecanismos relativos a los componentes que se pue
   ```
 
 
-## Ejemplo 5: Vinculación dinámica de clases
+### Ejemplo 3: Vinculación dinámica de clases
 
 En este ejemplo, al ser esResaltado una variable reactiva, si ésta cambia en respuesta a un evento, componente o acción de usuario, vue actualizará la interfaz sin tener que manipular el DOM.
   ```vue
@@ -1430,7 +1268,7 @@ En este ejemplo, al ser esResaltado una variable reactiva, si ésta cambia en re
   </style>
   ```
 
-### Ejemplo 6: Renderización condicional usando directivas y reactividad
+### Ejemplo 4: Renderización condicional usando directivas y reactividad
 
   ```vue
   <template>
@@ -1457,6 +1295,132 @@ En este ejemplo, al ser esResaltado una variable reactiva, si ésta cambia en re
       import { ref } from 'vue';
       const mostrarMensaje = ref(true);
       const mostrarMensaje2 = ref(true);
+  </script>
+  ```  
+
+## 8.2. Directivas reactivas por naturaleza
+
+A veces algunas directivas no necesitarán actualizar el DOM, pero muchas veces sí será necesario. La combinación de directivas con reactividad es muy interesante porque la reactividad actualiza automáticamente el DOM en respuesta a cualquier cambio. Sin embargo, **hay dos directivas que no tiene sentido que existan sin la reactividad: `v-model` y `v-show`, ya que ambas están diseñadas para actualizar el DOM**.
+
+### 8.1.1. Creación de vínculos bidireccionales (v-model)
+Como se ha visto anteriormente `v-bind` permite crear un vínculo unidireccional entre dos elementos/componentes. Para que sea bidireccional, hace falta usar `v-bind` para vincular en un sentido y un evento para notificar de cambios en el otro sentido.
+
+Aunque se puede usar para crear un vínculo unidireccional (tiene poco sentido esto porque para eso ya está v-bind), **`v-model` se usa para crear un vínculo bidireaccional**. La **ventaja sobre v-bind es que evita que el programador tenga que ocuparse de la gestión del evento** (definirlo, llamarlo y crear la función que lo gestiona). 
+
+Sin embargo, al igual que con `v-bind`, para que la comunicación sea bidireccional, es necesario hacer uso de la [reactividad](#8-reactividad), concepto que exploraremos más adelante. Por ahora, es suficiente con saber que `v-model` facilita la sincronización automática de datos entre componentes.
+
+Con `v-bind`, hay que indicar a qué atributo asociar la variable, pero con `v-model`, la mayoría de los casos, Vue **decide automáticamente a qué atributo se enlaza la variable**:
+- Para un `<input>`...
+  - ...de tipo **text**, `v-model` enlaza con el atributo **`value`**.
+  - ...de tipo **radio**, se enlaza con el atributo **`value`** y se gestionan los valores seleccionados.
+
+- En un **`checkbox`**, `v-model` no se vincula a un solo atributo, sino que maneja el estado general de los checkboxes.
+- En un **`<textarea>`**, enlaza también con el atributo `value`, ya que el valor del campo de texto es el contenido que se introduce dentro del área de texto.
+- En un **`<select>`**, la variable asociada con `v-model` contiene los valores seleccionados de las opciones, pero no se vincula directamente a un solo atributo de cada `<option>`.
+
+En componentes personalizados `v-model` por defecto se enlaza a la propiedad **`modelValue`** del componente, pero se puede usar un atributo distinto para enlazar, configurándolo con una `prop` personalizada.
+  
+#### Ejemplo 1: Diferencia entre v-bind junto con v-on contra v-model
+ 
+ ```vue
+  <!-- v-bind y v-on -->
+  <!-- Se enlaza el campo value del input a la variable reactiva búsqueda y, cuando ocurre el evento input, se llama a la función actualizarBusqueda -->
+  <template>
+    <input :value="busqueda" @input="actualizarBusqueda" placeholder="Buscar usuario..." />
+  </template>
+
+  <script setup>
+    import { ref } from 'vue';
+
+    const busqueda = ref('');
+
+    const actualizarBusqueda = (evento) => {
+      busqueda.value = evento.target.value;
+      console.log('Nueva búsqueda:', busqueda.value);
+    };
+  </script>
+  ```
+
+  ```vue
+  <!-- v-model -->
+  <!-- v-model="busqueda" reemplaza tanto el :value="busqueda" como el @input del ejemplo anterior y gestiona automáticamente la vinculación bidireccional.
+
+  v-model actualiza "busqueda" al modificar el valor del input y también emite el evento input cuando el valor cambia -->
+  <template>
+    <input v-model="busqueda" placeholder="Buscar usuario..." />
+  </template>
+
+  <script setup>
+    import { ref } from 'vue';
+
+    const busqueda = ref('');
+  </script>
+  ```
+
+#### Ejemplo 2: Enlace bidireccional (usando `v-model`) entre una variable y un input y reflejo de los cambios  en un párrafo con los mostachos 
+
+Este es igual que el ejemplo 4 de `v-bind`, pero usando `v-model`. En este caso, v-model evita tener que declarar el evento y definir la función que lo gestionará, ya que lo hace automáticamente.
+
+  ```vue
+  <template>
+    <fieldset>
+      <legend>Formulario</legend>
+      <label>
+        Nombre:
+        <!-- v-model asocia la variabla "nombre" al atributo "value" -->
+        <input type="text" v-model="nombre" />
+        <!-- Con v-bind sería así
+        <input type="text" :value="nombre" @input="actualizaNombre" /> -->
+      </label>
+      <p>Tu nombre es: {{ nombre }}</p>
+    </fieldset>
+  </template>
+
+  <script setup>
+    import { ref } from 'vue';
+
+    const nombre = ref('');
+    const intereses = ref([]);
+
+    // Con v-bind sería necesario definir la función que maneja el evento
+    // function actualizaNombre(event) {
+    //   nombre.value = event.target.value;
+    // }
+  </script>
+  ```
+
+#### Ejemplo 3: Vinculación entre un select y un párrafo
+
+Este es igual que el ejemplo 5 de `v-bind`, pero usando `v-model`. En este caso, v-model evita tener que declarar el evento y definir la función que lo gestionará, ya que lo hace automáticamente
+  ```vue
+  <template>
+    <p>Selecciona tus intereses:</p>
+    <label><input type="checkbox" v-model="intereses" value="Deporte" /> Deporte</label>
+    <label><input type="checkbox" v-model="intereses" value="Música" /> Música</label>
+    <label><input type="checkbox" v-model="intereses" value="Cine" /> Cine</label>
+    <p>Intereses seleccionados: {{ intereses }}</p>
+  </template>
+  
+  <script setup>
+    import { ref } from 'vue';
+    const intereses = ref([]);
+  </script>
+  ```
+
+### 8.1.2. Mostrar u ocultar dinámicamente un elemento (v-show)
+
+`v-show` permite mostrar u ocultar un elemento dinámicamente, pero sin eliminarlo del DOM. Funciona estableciendo la propiedad `display:none` cuando la condición es false. No hay que confundirlo con `v-if`, que agrega, o no, el elemento al DOM. Al igual que con `v-model`, la [reactividad](#8--reactividad) es necesaria para que el contenido se oculte o se muestre dinámicamente. Esto es porque `v-show` depende de una condición reactiva para modificar el valor de display.
+
+#### Ejemplo: Mostrar u ocultar un mensaje
+  ```vue
+  <template>
+    <p v-show="mostrarMensaje">Este mensaje se puede ocultar.</p>
+    <button @click="mostrarMensaje = !mostrarMensaje">Cambiar</button>
+  </template>
+
+  <script setup>
+    import { ref } from 'vue';
+    const mostrarMensaje = ref(true);
   </script>
   ```
 
@@ -1745,7 +1709,7 @@ Vue 3.4 introdujo `defineModel` como una forma más cómoda de trabajar con `v-m
 - **Enlace de propiedades**: la función `defineModel()` permite acceder a las propiedades vinculadas con `v-model` en el componente hijo. Esto facilita la lectura y escritura de valores que se sincronizan con el padre.
 - **Manejo de eventos**: **Cuando se usa con argumentos**, `defineModel` no solo enlaza las propiedades, sino que también se encarga de emitir automáticamente los eventos necesarios para notificar al padre sobre los cambios. Esto elimina la necesidad de definir manualmente los eventos `update:modelValue`.
 
-### Ejemplo 1: uso de `defineModel` con un parámetro y sin darle nombre
+#### Ejemplo 1: uso de `defineModel` con un parámetro y sin darle nombre
 
 ```vue
 <!-- Padre -->
@@ -1788,7 +1752,7 @@ const mensaje = ref('Hola desde el padre');
 </script>
 ```
 
-### Ejemplo 2: uso de `defineModel` con un parámetro, pero dándole nombre (Recomendado)
+#### Ejemplo 2: uso de `defineModel` con un parámetro, pero dándole nombre (Recomendado)
 <!-- al usar defineModel con un parámetro (para enlazar la propiedad del padre con la del hijo), se crea automáticamente el evento para notificar de los cambios al padre -->
 ```vue
 <!-- Padre.vue -->
@@ -1828,7 +1792,7 @@ const mensaje = ref('Hola desde el padre');
 ```
 
 
-### Ejemplo 3: Uso de `defineModel` con varias parámetros
+#### Ejemplo 3: Uso de `defineModel` con varias parámetros
   
   Esto nos ahorra tener que definir el evento en el hijo que avisará al padre de los cambios
   ```vue
@@ -1852,15 +1816,48 @@ const mensaje = ref('Hola desde el padre');
   </template>
   ```
 
-#### 9.2.4 Comunicación entre componentes distantes (provide e inject)
+### 9.2.4 Comunicación entre componentes distantes (provide e inject)
 
 Vue tiene un mecanismo para que dos componentes que están muy alejados en la jerarquía de componentes compartan datos sin tener que mandar datos entre cada par de componentes que los separ.Se trata de `provide` e `inject`. 
 - **`provide`** es una función que usa un componente padre para poner datos a disposición de sus componentes descendientes, sin importar qué nivel ocupen en la jerarquía. Es una forma de "proveer" un valor que estará disponible para todos los componentes hijos que lo "inyecten".
 - **`inject`** es la forma en que los componentes hijos (estén al nivel que estén) pueden acceder a los datos proporcionados por su componente ancestro.
 
+#### Ejemplo 1:  
+  ```vue
+  <template>
+    <article class="borde flex-columna">
+      <h1>Comunicación con provide e inject</h1>
+      <ComProvideInjectHijo />
+      <p class="mini">ComProvideInjectPadre.vue</p>
+    </article>
+  </template>
+    
+  <script setup>
+    import { provide } from 'vue';
+    import ComProvideInjectHijo from '../hojas/ComProvideInjectHijo.vue';
+    
+    // Usamos `provide` para compartir un valor
+    provide('mensaje', '¡Este es un mensaje desde el componente padre!');
+  </script>
 
 
-
+  <!-- ComProvideInjectHijo.vue -->
+  <template>
+    <article class="borde flex-columna">
+      <h2>Componente Hijo</h2>
+        <p>{{ mensaje }}</p>
+        <p class="mini">ComProvideInjectHijo.vue</p>
+      </article>
+  </template>
+    
+  <script setup>
+    import { inject } from 'vue';
+    
+    // Usamos `inject` para obtener el valor proporcionado por el padre
+    const mensaje = inject('mensaje');
+  </script>
+  
+  ```  
 
 
 ## 9.3. Gestión del estado
@@ -2139,9 +2136,7 @@ Lo más sencillo es incluir el enrutamiento en la instalación que se hace al pr
       .use(router)
       .mount('#app')
     ```
-
 ----
-
 
 # 12. Observadores (watchers)
 
@@ -2150,35 +2145,98 @@ Los observadores (watchers) permiten **reaccionar a cambios en propiedades react
 - Validaciones en tiempo real.
 - Sincronización con localStorage o bases de datos.
 
-En composition API, se definen usando `watch` o `watchEffect`
+En composition API, se definen usando `watch` o `watchEffect`. Las diferencias son las siguientes:
 
-Podría parecer que se puede conseguir lo mismo con variables reactivas y los mostachos o con variables reactivas, v-bind y v-on, pero los mostachos y v-bind solo actualizan la vista, los eventos (v-on) solo reaccionan a determinadas interacciones explícitas, mientras que los observadores (watch) reaccionan a cualquier cambio, venga de donde venga.
+| Característica                     | `watch`                                    | `watchEffect`                              |
+|-------------------------------------|--------------------------------------------|--------------------------------------------|
+| **Dependencias**                    | Especificas explícitamente qué observar.   | Observa automáticamente las dependencias usadas en el efecto. |
+| **Ejecución inicial**               | No se ejecuta inicialmente. Solo cuando cambia el valor observado. | Se ejecuta inmediatamente al principio y luego cada vez que cambian las dependencias. |
+| **Callback**                         | Necesitas un callback que recibe el valor anterior y el nuevo valor. | No requiere un callback, la función de efecto se ejecuta por sí sola. |
+| **Uso típico**                       | Para observar valores específicos y realizar comparaciones (por ejemplo, cambios en `ref`). | Para ejecutar efectos reactivos cuando cambian las propiedades usadas dentro de la función de efecto. |
+| **Flexibilidad**                    | Mayor control sobre qué observar y cómo manejar los cambios. | Más automático y conveniente para efectos simples sin necesidad de especificar dependencias. |
+| **Retorno**                          | Devuelve una función que puede usarse para dejar de observar. | No tiene un retorno explícito, el efecto se ejecuta automáticamente y se limpia por sí mismo cuando se desmonta. |
+
+
+
+En determinados ejemplos, podría parecer que se puede conseguir lo mismo con variables reactivas y mostachos o con variables reactivas, v-bind y v-on, pero son distintos:
+- los **mostachos y v-bind sólo actualizan el DOM, no pueden ejecutar lógica adicional**.
+- los **eventos (v-on) sólo reaccionan a determinadas interacciones** explícitas. Si ocurre otra no especificada, no reaccionan.
+- los **observadores (watch) reaccionan a cualquier cambio**, venga de donde venga.
 
 
 ## Ejemplo 1: Creando un observador con watch
 
-  ```js
-  import { ref, watch } from 'vue';
-
-  export default {
-    setup() {
-      const message = ref('Hola, Vue!');
-
-      // Observador para la propiedad 'message'
-      watch(message, (newValue, oldValue) => {
-        console.log(`El mensaje cambió de "${oldValue}" a "${newValue}"`);
-      });
-
-      return {
-        message,
-      };
-    },
-  };
+  ```vue
+  <template>
+      <article class="borde flex-columna">
+          <h1>Observador</h1>
+          <h3>Reaccionando a un botón y a cambio externo (simulado por un setTimeout) </h3>
+          <p>Valor: {{ contador }}</p>
+          <p> {{ mensaje }}</p>
+          <button @click="contador++">Incrementar</button>
+          <p class="mini">ObservadorBasico.vue</p>
+      </article>
+  </template>
+    
+  <script setup>
+    import { ref, watch } from 'vue';
+    
+    const contador = ref(0);
+    const mensaje = ref("Esperando cambios...");
+    
+    // Observador: Detecta cualquier cambio en "contador" y modifica el mensaje
+    watch(contador, (nuevoValor) => {
+      mensaje.value = `Este texto es el observador reaccionando. El valor es: ${nuevoValor}`;
+    });
+    
+    // Simula un cambio después de 3 segundos para demostrar que el observador reaccionará a dicho cambio
+    setTimeout(() => {
+      contador.value = 10; // No se hizo clic, pero watch() lo detecta
+    }, 3000);
+  </script>
   ```
 
-## Ejemplo 2: Observadores contra v-bind y v-on
+### Ejemplo 2: Creando un observador con watchEffect
+  ```vue
+  <template>
+    <article class="borde flex-columna">
+      <h1>Observador 2</h1>
+      <h2>uso de watchEffect</h2>
+      <h3>Reaccionando a un botón y a cambio externo (simulado por un setTimeout) </h3>
+      <p>Valor: {{ contador }}</p>
+      <p> {{ mensaje }}</p>
+      <button @click="contador++">Incrementar</button>
+      <p class="mini">ObservadorBasico2.vue</p>
+    </article>
+  </template>
+    
+  <script setup>
+    import { ref, watchEffect } from 'vue';
+    
+    const contador = ref(0);
+    const mensaje = ref("Esperando cambios...");
+    
+    // Observador con watchEffect: Reacciona a cualquier cambio en "contador" automáticamente
+    watchEffect(() => {
+      mensaje.value = `Este texto es el observador reaccionando. El valor es: ${contador.value}`;
+    });
+    
+    // Simula un cambio después de 3 segundos para demostrar que el observador reaccionará a dicho cambio
+    setTimeout(() => {
+      contador.value = 10; // No se hizo clic, pero watchEffect lo detecta
+    }, 3000);
+  </script>
+  ```
+
+## Ejemplo 3: Diferentes formas de reaccionar a eventos
+
+En este ejemplo se muestra la diferencia entre usar 
+  - v-bind y v-on
+  - v-model
+  - observadores 
 
   ```vue
+  <!-- v-bind y v-on -->
   <!-- Se enlaza el campo value del input a la variable reactiva búsqueda y, cuando ocurre el evento input, se llama a la función actualizarBusqueda -->
   <template>
     <input :value="busqueda" @input="actualizarBusqueda" placeholder="Buscar usuario..." />
@@ -2195,6 +2253,23 @@ Podría parecer que se puede conseguir lo mismo con variables reactivas y los mo
   };
   </script>
   ```
+
+  ```vue
+  <!-- v-model
+  v-model="busqueda": Esto reemplaza tanto el :value como el @input del ejemplo anterior y gestiona automáticamente la vinculación bidireccional.
+
+  v-model maneja la actualización de busqueda al modificar el valor del input y también se encargará de emitir el evento input cuando el valor cambie. -->
+  <template>
+    <input v-model="busqueda" placeholder="Buscar usuario..." />
+  </template>
+
+  <script setup>
+  import { ref } from 'vue';
+
+  const busqueda = ref('');
+  </script>
+  ```
+
 
   ```vue
   <!-- En este caso, el observador reacciona a cualquier cambio -->
