@@ -1,6 +1,6 @@
 <template>
   <article class="borde flex-columna">
-    <h1>Componente Padre</h1>
+    <h1>Comunicación con provide e inject</h1>
     <ComProvideInjectHijo />
     <p class="mini">ComProvideInjectPadre.vue</p>
   </article>

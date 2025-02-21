@@ -1,6 +1,6 @@
 <template>
     <section class="borde flex-columna">
-      <h1>Comunicación padre-hijo con props y eventos</h1>
+      <h1>Comunicación con props y eventos</h1>
       <h2>Padre</h2>
       <!-- El padre le manda propiedades al hijo y escucha el evento @notify -->
       <ComPropsEventosHijo textoBoton="Púlsame" titulo="Componente hijo" msj="Mira la consola al pulsar el botón" @notify="handleNotification" />

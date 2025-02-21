@@ -1,6 +1,6 @@
 <template>
   <article class="borde flex-columna">
-    <h1>Comunicación padre-hijo con defineModel (varias props) y reactividad</h1>
+    <h1>Comunicación con defineModel (varias props) y reactividad</h1>
     <h2>Padre</h2>
     <h3>Uso de varias propiedades</h3>
     <p class="destacado">Nombre: {{ first }}</p>

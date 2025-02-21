@@ -4,6 +4,7 @@
       <div class="tarjeta-contenido"><slot name="contenido">Contenido por defecto</slot></div>
       <slot name="imagen"></slot>
       <div article="tarjeta-pie"><slot></slot></div>
+      <p class="mini">Tarjeta.vue</p>
     </article>
   </template>
 

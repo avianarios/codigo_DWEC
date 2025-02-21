@@ -1,15 +1,13 @@
 <script setup>
-    import Observador from '@/components/hojas/ObservadorBasico.vue';
-    import ObservadorMostachosVinculacion from '@/components/hojas/ObservadorMostachosVinculacion.vue';
+    import ObservadorBasico from '@/components/hojas/ObservadorBasico.vue';
+    import ObservadorBasico2 from '@/components/hojas/ObservadorBasico2.vue';
     import ObservadorPregunta from '@/components/hojas/ObservadorPregunta.vue';
-    import Obser from '@/components/hojas/Obser.vue';
 </script>
 
 <template>
     <section class="flex-columna gap">
-        <Observador />
-        <ObservadorMostachosVinculacion />
+        <ObservadorBasico />
+        <ObservadorBasico2 />
         <ObservadorPregunta />
-        <Obser />
     </section>
 </template>

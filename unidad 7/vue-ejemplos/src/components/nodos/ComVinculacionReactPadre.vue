@@ -1,6 +1,6 @@
 <template>
   <section class="borde flex-columna">
-    <h1>Comunicación padre-hijo con reactividad y vinculación</h1>
+    <h1>Comunicación con reactividad y vinculación</h1>
     <h2>Padre</h2>
     <p class="rojo">{{ message }}</p>
     <!-- El padre le manda propiedades al hijo y escucha el evento @notify. Cuando este ocurra, llamará a la función handleNotificaion -->
