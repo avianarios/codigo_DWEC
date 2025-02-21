@@ -16,8 +16,6 @@
 
           <button @click="console.log(++contador)">Incrementar contador</button>
         
-        <input type="text" :value="nombre" @input="actualizaNombre" placeholder="Escribe"/>
-
         </article>
         <p class="mini">DirectivasEventos.vue</p>
     </article>
@@ -26,9 +24,9 @@
 <script setup>
   let nombre = "";
 
-function actualizaNombre(event) {
-  console.log(event.target.value);
-}
+  function actualizaNombre(event) {
+    console.log(event.target.value);
+  }
 
 
 

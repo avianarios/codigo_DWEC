@@ -5,6 +5,7 @@
     import ComPropsEventosPadre from '@/components/nodos/ComPropsEventosPadre.vue';
     import ComVinculacionReactPadre from '@/components/nodos/ComVinculacionReactPadre.vue';
     import ComVmodelReactPadre from '@/components/nodos/ComVmodelReactPadre.vue';
+    import ComProvideInjectPadre from '@/components/nodos/ComProvideInjectPadre.vue';
 </script>
 
 <template>
@@ -14,4 +15,5 @@
     <ComPropsEventosPadre />
     <ComVinculacionReactPadre />
     <ComVmodelReactPadre />
+    <ComProvideInjectPadre />
 </template>

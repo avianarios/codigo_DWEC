@@ -33,6 +33,7 @@
       <RouterLink to="/InteraccionComponentes">Interacción entre componentes</RouterLink>
       <RouterLink to="/Ranuras">Ranuras</RouterLink>
       <RouterLink to="/PropiedadesComputadas">Propiedades Computadas</RouterLink>
+      <RouterLink to="/Observadores">Observadores</RouterLink>
     </nav>
   </header>
 

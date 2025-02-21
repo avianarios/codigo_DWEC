@@ -15,7 +15,7 @@ const router = createRouter({
     {path: '/InteraccionComponentes', name: 'InteraccionComponentes', component:() => import('../views/VistaInteraccionComponentes.vue')},
     {path: '/Ranuras', name: 'Ranuras', component:() => import('../views/VistaRanuras.vue')},
     {path: '/PropiedadesComputadas', name: 'PropiedadesComputadas', component:() => import('../views/VistaPropComputada.vue')},
-
+    {path: '/Observadores', name: 'Observadores', component:() => import('../views/VistaObservadores.vue')},
   ],
 })
 
